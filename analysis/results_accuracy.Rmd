@@ -1,7 +1,7 @@
 ---
 title: "Prediction accuracy"
 author: "Fabio Morgante"
-date: "2020-03-29"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   workflowr::wflow_html:
     toc: false

@@ -8,7 +8,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-Welcome to the research website for evaluating mr.mash.
+Short assessment of mr.mash performance.
 
 + [Assessment of prediction accuracy.](results_accuracy.html)
 + [Assessment of convergence.](results_convergence.html)
