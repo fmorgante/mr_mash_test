@@ -1,0 +1,20 @@
+---
+title: "results_accuracy"
+author: "fmorgante"
+date: "2020-03-29"
+output: 
+  workflowr::wflow_html:
+    toc: false
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+```{r}
+a <- rnorm(100)
+b <- rnorm(100)
+
+plot(a, b)
+```
+
