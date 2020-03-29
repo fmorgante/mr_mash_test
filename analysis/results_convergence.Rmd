@@ -1,6 +1,6 @@
 ---
-title: "results_convergence"
-author: "fmorgante"
+title: "Convergence"
+author: "Fabio Morgante"
 date: "2020-03-29"
 output: 
   workflowr::wflow_html:
