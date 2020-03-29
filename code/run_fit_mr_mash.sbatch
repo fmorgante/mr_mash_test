@@ -3,7 +3,7 @@
 #SBATCH --job-name=fit_mr_mash
 #SBATCH --output=fit_mr_mash.%j.out
 #SBATCH --error=fit_mr_mash.%j.err
-#SBATCH --time=12:00:00
+#SBATCH --time=24:00:00
 #SBATCH --partition=broadwl
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=4
@@ -20,23 +20,23 @@ export OPENBLAS_NUM_THREADS=4
 ##Independent predictors, shared effects
 Rscript fit_mr_mash.R --n 600 --p 1000 --p_causal 50 --r 5 --pve 0.5 --sigma_offdiag 1 --sigma_scale 0.8 \
                       --gamma_offdiag 0 --gamma_scale 0.8 --V_offdiag 0.2 --V_scale 0 --prop_testset 0.2 \
-                      --update_w0 TRUE --update_w0_method EM --standardize TRUE --verbose FALSE --update_V TRUE \
-                      --outdir ./output/
+                      --update_w0 TRUE --update_w0_method mixsqp --standardize TRUE --verbose TRUE --update_V TRUE \
+                      --outdir ../output/
                       
 ##Independent predictors, independent effects
 Rscript fit_mr_mash.R --n 600 --p 1000 --p_causal 50 --r 5 --pve 0.5 --sigma_offdiag 0 --sigma_scale 0.8 \
                       --gamma_offdiag 0 --gamma_scale 0.8 --V_offdiag 0.2 --V_scale 0 --prop_testset 0.2 \
-                      --update_w0 TRUE --update_w0_method EM --standardize TRUE --verbose FALSE --update_V TRUE \
-                      --outdir ./output/
+                      --update_w0 TRUE --update_w0_method mixsqp --standardize TRUE --verbose TRUE --update_V TRUE \
+                      --outdir ../output/
 
 ##Correlated predictors, shared effects
 Rscript fit_mr_mash.R --n 600 --p 1000 --p_causal 50 --r 5 --pve 0.5 --sigma_offdiag 1 --sigma_scale 0.8 \
                       --gamma_offdiag 0.5 --gamma_scale 0.8 --V_offdiag 0.2 --V_scale 0 --prop_testset 0.2 \
-                      --update_w0 TRUE --update_w0_method EM --standardize TRUE --verbose FALSE --update_V TRUE \
-                      --outdir ./output/
+                      --update_w0 TRUE --update_w0_method mixsqp --standardize TRUE --verbose TRUE --update_V TRUE \
+                      --outdir ../output/
                       
 ##Correlated predictors, independent effects
 Rscript fit_mr_mash.R --n 600 --p 1000 --p_causal 50 --r 5 --pve 0.5 --sigma_offdiag 0 --sigma_scale 0.8 \
                       --gamma_offdiag 0.5 --gamma_scale 0.8 --V_offdiag 0.2 --V_scale 0 --prop_testset 0.2 \
-                      --update_w0 TRUE --update_w0_method EM --standardize TRUE --verbose FALSE --update_V TRUE \
-                      --outdir ./output/
+                      --update_w0 TRUE --update_w0_method mixsqp --standardize TRUE --verbose TRUE --update_V TRUE \
+                      --outdir ../output/
