@@ -8,4 +8,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-Welcome to my research website.
+Welcome to the research website for evaluating mr.mash.
+
+<!-- + [Assessment of prediction accuracy.](results_accuracy.html) -->
+<!-- + [Assessment of convergence.](results_convergence.html) -->
