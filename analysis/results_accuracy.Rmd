@@ -192,3 +192,83 @@ print(res2)
 ```
 
 
+##Simulation 3 -- Shared effects, correlated variables
+
+```{r load data 3}
+dat3 <- readRDS("output/fit_mr_mash_n600_p1000_p_caus50_r5_pve0.5_sigmaoffdiag1_sigmascale0.8_gammaoffdiag0.5_gammascale0.8_Voffdiag0.2_Vscale0_updatew0TRUE_updatew0TRUE_updatew0methodmixsqp_updateVTRUE.rds")
+n3 <- dat3$params$n
+p3 <- dat3$params$p
+p_causal3 <- dat3$params$p_causal
+r3 <- dat3$params$r
+pve3 <- dat3$params$pve
+prop_testset3 <- dat3$params$prop_testset
+B3 <- dat3$inputs$B
+V3 <- dat3$inputs$V
+Sigma3 <- dat3$inputs$Sigma
+Gamma3 <- dat3$inputs$Gamma
+Ytrain3 <- dat3$Ytrain
+Ytest3 <- dat3$Ytest
+mu13 <- dat3$fit$mu3
+fitted3 <- dat3$fit$fitted
+Yhat_test3 <- dat3$Yhat_test
+```
+
+The results below are based on simulation with `r n3` samples, `r p3` variables of which `r p_causal3` were causal, `r r3` responses with a per-response proportion of variance explained (PVE) of `r pve3`. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V).
+
+```{r disp corrs 3}
+cat("Gamma (First 5 elements)")
+Gamma3[1:5, 1:5]
+
+cat("Sigma")
+Sigma3
+
+cat("V")
+V3
+```
+
+mr.mash was fitted to the training data (`r (1-prop_testset3)*100`% of the data) updating V and updating the prior weights using mixSQP. Then, responses were predicted on the test data (`r prop_testset3*100`% of the data).
+
+In the plots below, each color/symbol defines a diffrent response.
+
+Here, we compare the estimated effects with the true effects. 
+```{r effects 3, fig.height=12, fig.width=15}
+plot(B3[, 1], mu13[, 1], xlab="True effects", ylab="Estimated effects", main="True vs Estimated Effects", pch=1, cex.lab=1.5, cex.axis=1.5)
+points(B3[, 2], mu13[, 2], col="blue", pch=2)
+points(B3[, 3], mu13[, 3], col="red", pch=3)
+points(B3[, 4], mu13[, 4], col="green", pch=4)
+points(B3[, 5], mu13[, 5], col="yellow", pch=8)
+```
+
+Then, we compare the predicted responses with the true responses in the training data (left panel) and test data (right panel).
+```{r predict 3, fig.height=12, fig.width=15}
+par(mfrow=c(1,2))
+plot(Ytrain3[, 1], fitted3[, 1], xlab="True responses", ylab="Fitted values", main="True vs Fitted values \nTraining data", pch=1, cex.lab=1.5, cex.axis=1.5)
+points(Ytrain3[, 2], fitted3[, 2], col="blue", pch=2)
+points(Ytrain3[, 3], fitted3[, 3], col="red", pch=3)
+points(Ytrain3[, 4], fitted3[, 4], col="green", pch=4)
+points(Ytrain3[, 5], fitted3[, 5], col="yellow", pch=8)
+abline(0, 1)
+
+plot(Ytrain3[, 1], fitted3[, 1], xlab="True responses", ylab="Predicted responses", main="True vs Predicted Responses \nTest data", pch=1, cex.lab=1.5, cex.axis=1.5)
+points(Ytest3[, 2], Yhat_test3[, 2], col="blue", pch=2)
+points(Ytest3[, 3], Yhat_test3[, 3], col="red", pch=3)
+points(Ytest3[, 4], Yhat_test3[, 4], col="green", pch=4)
+points(Ytest3[, 5], Yhat_test3[, 5], col="yellow", pch=8)
+abline(0, 1)
+par(mfrow=c(1,1))
+
+r2_train3 <- round(accuracy(Ytrain3, fitted3)$r2, 4)
+r2_test3 <- round(accuracy(Ytest3, Yhat_test3)$r2, 4)
+bias_train3 <- round(accuracy(Ytrain3, fitted3)$bias, 4)
+bias_test3 <- round(accuracy(Ytest3, Yhat_test3)$bias, 4)
+mse_train3 <- round(accuracy(Ytrain3, fitted3)$mse, 4)
+mse_test3 <- round(accuracy(Ytest3, Yhat_test3)$mse, 4)
+
+acc3 <- rbind(r2_train3, r2_test3, bias_train3, bias_test3, mse_train3, mse_test3)
+colnames(acc3) <- paste0("Y", seq(1, r3))
+part_metric3 <- c("Training data r2", "Test data r2", "Training data bias", "Test data bias" , "Training data MSE" , "Test data MSE")
+res3 <- data.frame(part_metric3, acc3)
+colnames(res3)[1] <- c("Partition_metric")
+rownames(res3) <- NULL
+print(res3)
+```
