@@ -14,6 +14,7 @@ options(stringsAsFactors = FALSE)
 
 mse <- function(Y, Yhat) {
     msee <- rep(NA, ncol(Y))
+    
     for(i in 1:ncol(Y)){
         msee[i] <- mean((Y[, i] - Yhat[, i])^2)
     }
@@ -21,6 +22,18 @@ mse <- function(Y, Yhat) {
     return(msee)
 }
 
+accuracy <- function(Y, Yhat) {
+  bias <- rep(NA, ncol(Y))
+  r2 <- rep(NA, ncol(Y))
+  
+  for(i in 1:ncol(Y)){
+    fit  <- lm(Y[, i] ~ Yhat[, i])
+    bias[i] <- coef(fit)[2] 
+    r2[i] <- summary(fit)$r.squared
+  }
+  
+  return(list(bias=bias, r2=r2))
+}
 ```
 
 #Simulation 1 -- Shared effects, independent variables
@@ -88,8 +101,10 @@ points(Ytest1[, 5], Yhat_test1[, 5], col="yellow", pch=8)
 abline(0, 1)
 par(mfrow=c(1,1))
 
-cat("Training data r2 =", diag(cor(Ytrain1, fitted1))^2)
-cat("Test data r2 =", diag(cor(Ytest1, Yhat_test1))^2)
+cat("Training data r2 =", accuracy(Ytrain1, fitted1)$r2)
+cat("Test data r2 =", accuracy(Ytest1, Yhat_test1)$r2)
+cat("Training data bias =", accuracy(Ytrain1, fitted1)$bias)
+cat("Test data bias =", accuracy(Ytest1, Yhat_test1)$bias)
 cat("Training data MSE =", mse(Ytrain1, fitted1))
 cat("Test data MSE =", mse(Ytest1, Yhat_test1))
 ```
