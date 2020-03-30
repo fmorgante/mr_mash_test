@@ -354,16 +354,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreef9a92832610500a862196235400da06583d3345etargetblankf9a9283a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/f9a92832610500a862196235400da06583d3345e" target="_blank">f9a9283</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreef416bb435706135a3dfefc56300cd12912842e4ftargetblankf416bb4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/f416bb435706135a3dfefc56300cd12912842e4f" target="_blank">f416bb4</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreef9a92832610500a862196235400da06583d3345etargetblankf9a9283a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreef416bb435706135a3dfefc56300cd12912842e4ftargetblankf416bb4a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/f9a92832610500a862196235400da06583d3345e" target="_blank">f9a9283</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/f416bb435706135a3dfefc56300cd12912842e4f" target="_blank">f416bb4</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -410,6 +410,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/f416bb435706135a3dfefc56300cd12912842e4f/analysis/results_accuracy.Rmd" target="_blank">f416bb4</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Tweak prediction results
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/f2c716ec77d2cfc136340bcb970ae161f557d6fd/docs/results_accuracy.html" target="_blank">f2c716e</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -708,27 +742,19 @@ Add additional pages
 </div>
 <pre class="r"><code>options(stringsAsFactors = FALSE)
 
-mse &lt;- function(Y, Yhat) {
-    msee &lt;- rep(NA, ncol(Y))
-    
-    for(i in 1:ncol(Y)){
-        msee[i] &lt;- mean((Y[, i] - Yhat[, i])^2)
-    }
-    
-    return(msee)
-}
-
 accuracy &lt;- function(Y, Yhat) {
   bias &lt;- rep(NA, ncol(Y))
   r2 &lt;- rep(NA, ncol(Y))
+  mse &lt;- rep(NA, ncol(Y))
   
   for(i in 1:ncol(Y)){
     fit  &lt;- lm(Y[, i] ~ Yhat[, i])
     bias[i] &lt;- coef(fit)[2] 
     r2[i] &lt;- summary(fit)$r.squared
+    mse[i] &lt;- mean((Y[, i] - Yhat[, i])^2)
   }
   
-  return(list(bias=bias, r2=r2))
+  return(list(bias=bias, r2=r2, mse=mse))
 }</code></pre>
 <div id="simulation-1-shared-effects-independent-variables" class="section level1">
 <h1>Simulation 1 – Shared effects, independent variables</h1>
@@ -910,12 +936,12 @@ fmorgante
 </div>
 <pre class="r"><code>par(mfrow=c(1,1))
 
-r2_train1 &lt;- accuracy(Ytrain1, fitted1)$r2
-r2_test1 &lt;- accuracy(Ytest1, Yhat_test1)$r2
-bias_train1 &lt;- accuracy(Ytrain1, fitted1)$bias
-bias_test1 &lt;- accuracy(Ytest1, Yhat_test1)$bias
-mse_train1 &lt;- mse(Ytrain1, fitted1)
-mse_test1 &lt;- mse(Ytest1, Yhat_test1)
+r2_train1 &lt;- round(accuracy(Ytrain1, fitted1)$r2, 4)
+r2_test1 &lt;- round(accuracy(Ytest1, Yhat_test1)$r2, 4)
+bias_train1 &lt;- round(accuracy(Ytrain1, fitted1)$bias, 4)
+bias_test1 &lt;- round(accuracy(Ytest1, Yhat_test1)$bias, 4)
+mse_train1 &lt;- round(accuracy(Ytrain1, fitted1)$mse, 4)
+mse_test1 &lt;- round(accuracy(Ytest1, Yhat_test1)$mse, 4)
 
 acc1 &lt;- rbind(r2_train1, r2_test1, bias_train1, bias_test1, mse_train1, mse_test1)
 colnames(acc1) &lt;- paste0(&quot;Y&quot;, seq(1, r1))
@@ -924,20 +950,13 @@ res1 &lt;- data.frame(part_metric1, acc1)
 colnames(res1)[1] &lt;- c(&quot;Partition_metric&quot;)
 rownames(res1) &lt;- NULL
 print(res1)</code></pre>
-<pre><code>    Partition_metric         Y1         Y2         Y3         Y4
-1   Training data r2  0.5337638  0.5418288  0.4904039  0.5238892
-2       Test data r2  0.4590632  0.4475933  0.4630462  0.4522742
-3 Training data bias  1.0605741  1.0585743  0.9935321  1.0012798
-4     Test data bias  0.9891530  1.0660257  1.0665580  1.0904600
-5  Training data MSE 24.6985394 23.8540429 25.3912912 22.4603256
-6      Test data MSE 24.5054076 29.4890004 27.1641594 29.6733910
-          Y5
-1  0.5620165
-2  0.4236621
-3  1.0970937
-4  0.9659183
-5 23.9105976
-6 26.7496399</code></pre>
+<pre><code>    Partition_metric      Y1      Y2      Y3      Y4      Y5
+1   Training data r2  0.5338  0.5418  0.4904  0.5239  0.5620
+2       Test data r2  0.4591  0.4476  0.4630  0.4523  0.4237
+3 Training data bias  1.0606  1.0586  0.9935  1.0013  1.0971
+4     Test data bias  0.9892  1.0660  1.0666  1.0905  0.9659
+5  Training data MSE 24.6985 23.8540 25.3913 22.4603 23.9106
+6      Test data MSE 24.5054 29.4890 27.1642 29.6734 26.7496</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
