@@ -175,20 +175,20 @@ points(Ytest2[, 5], Yhat_test2[, 5], col="yellow", pch=8)
 abline(0, 1)
 par(mfrow=c(1,1))
 
-r2_train1 <- round(accuracy(Ytrain1, fitted1)$r2, 4)
-r2_test1 <- round(accuracy(Ytest1, Yhat_test1)$r2, 4)
-bias_train1 <- round(accuracy(Ytrain1, fitted1)$bias, 4)
-bias_test1 <- round(accuracy(Ytest1, Yhat_test1)$bias, 4)
-mse_train1 <- round(accuracy(Ytrain1, fitted1)$mse, 4)
-mse_test1 <- round(accuracy(Ytest1, Yhat_test1)$mse, 4)
+r2_train2 <- round(accuracy(Ytrain2, fitted2)$r2, 4)
+r2_test2 <- round(accuracy(Ytest2, Yhat_test2)$r2, 4)
+bias_train2 <- round(accuracy(Ytrain2, fitted2)$bias, 4)
+bias_test2 <- round(accuracy(Ytest2, Yhat_test2)$bias, 4)
+mse_train2 <- round(accuracy(Ytrain2, fitted2)$mse, 4)
+mse_test2 <- round(accuracy(Ytest2, Yhat_test2)$mse, 4)
 
-acc1 <- rbind(r2_train1, r2_test1, bias_train1, bias_test1, mse_train1, mse_test1)
-colnames(acc1) <- paste0("Y", seq(1, r1))
-part_metric1 <- c("Training data r2", "Test data r2", "Training data bias", "Test data bias" , "Training data MSE" , "Test data MSE")
-res1 <- data.frame(part_metric1, acc1)
-colnames(res1)[1] <- c("Partition_metric")
-rownames(res1) <- NULL
-print(res1)
+acc2 <- rbind(r2_train2, r2_test2, bias_train2, bias_test2, mse_train2, mse_test2)
+colnames(acc2) <- paste0("Y", seq(1, r2))
+part_metric2 <- c("Training data r2", "Test data r2", "Training data bias", "Test data bias" , "Training data MSE" , "Test data MSE")
+res2 <- data.frame(part_metric2, acc2)
+colnames(res2)[1] <- c("Partition_metric")
+rownames(res2) <- NULL
+print(res2)
 ```
 
 
