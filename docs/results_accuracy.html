@@ -354,16 +354,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreef4eb72a083268a50b1e3386417a32c208998580ftargetblankf4eb72aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/f4eb72a083268a50b1e3386417a32c208998580f" target="_blank">f4eb72a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree6063335054507f45d359e6002065677aaf27564ftargetblank6063335a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/6063335054507f45d359e6002065677aaf27564f" target="_blank">6063335</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreef4eb72a083268a50b1e3386417a32c208998580ftargetblankf4eb72aa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree6063335054507f45d359e6002065677aaf27564ftargetblank6063335a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/f4eb72a083268a50b1e3386417a32c208998580f" target="_blank">f4eb72a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/6063335054507f45d359e6002065677aaf27564f" target="_blank">6063335</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -410,6 +410,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/6063335054507f45d359e6002065677aaf27564f/analysis/results_accuracy.Rmd" target="_blank">6063335</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Fix typo in simulation 2
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/4f5c29188cc0e30ca968f949eb01f9e78a6b15c1/docs/results_accuracy.html" target="_blank">4f5c291</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1120,6 +1154,43 @@ points(B2[, 3], mu12[, 3], col=&quot;red&quot;, pch=3)
 points(B2[, 4], mu12[, 4], col=&quot;green&quot;, pch=4)
 points(B2[, 5], mu12[, 5], col=&quot;yellow&quot;, pch=8)</code></pre>
 <p><img src="figure/results_accuracy.Rmd/effects%202-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-effects-2-1">
+Past versions of “effects 2-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-effects-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/4f5c29188cc0e30ca968f949eb01f9e78a6b15c1/docs/figure/results_accuracy.Rmd/effects 2-1.png" target="_blank">4f5c291</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Then, we compare the predicted responses with the true responses in the training data (left panel) and test data (right panel).</p>
 <pre class="r"><code>par(mfrow=c(1,2))
 plot(Ytrain2[, 1], fitted2[, 1], xlab=&quot;True responses&quot;, ylab=&quot;Fitted values&quot;, main=&quot;True vs Fitted values \nTraining data&quot;, pch=1, cex.lab=1.5, cex.axis=1.5)
@@ -1136,29 +1207,66 @@ points(Ytest2[, 4], Yhat_test2[, 4], col=&quot;green&quot;, pch=4)
 points(Ytest2[, 5], Yhat_test2[, 5], col=&quot;yellow&quot;, pch=8)
 abline(0, 1)</code></pre>
 <p><img src="figure/results_accuracy.Rmd/predict%202-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-predict-2-1">
+Past versions of “predict 2-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-predict-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/4f5c29188cc0e30ca968f949eb01f9e78a6b15c1/docs/figure/results_accuracy.Rmd/predict 2-1.png" target="_blank">4f5c291</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>par(mfrow=c(1,1))
 
-r2_train1 &lt;- round(accuracy(Ytrain1, fitted1)$r2, 4)
-r2_test1 &lt;- round(accuracy(Ytest1, Yhat_test1)$r2, 4)
-bias_train1 &lt;- round(accuracy(Ytrain1, fitted1)$bias, 4)
-bias_test1 &lt;- round(accuracy(Ytest1, Yhat_test1)$bias, 4)
-mse_train1 &lt;- round(accuracy(Ytrain1, fitted1)$mse, 4)
-mse_test1 &lt;- round(accuracy(Ytest1, Yhat_test1)$mse, 4)
+r2_train2 &lt;- round(accuracy(Ytrain2, fitted2)$r2, 4)
+r2_test2 &lt;- round(accuracy(Ytest2, Yhat_test2)$r2, 4)
+bias_train2 &lt;- round(accuracy(Ytrain2, fitted2)$bias, 4)
+bias_test2 &lt;- round(accuracy(Ytest2, Yhat_test2)$bias, 4)
+mse_train2 &lt;- round(accuracy(Ytrain2, fitted2)$mse, 4)
+mse_test2 &lt;- round(accuracy(Ytest2, Yhat_test2)$mse, 4)
 
-acc1 &lt;- rbind(r2_train1, r2_test1, bias_train1, bias_test1, mse_train1, mse_test1)
-colnames(acc1) &lt;- paste0(&quot;Y&quot;, seq(1, r1))
-part_metric1 &lt;- c(&quot;Training data r2&quot;, &quot;Test data r2&quot;, &quot;Training data bias&quot;, &quot;Test data bias&quot; , &quot;Training data MSE&quot; , &quot;Test data MSE&quot;)
-res1 &lt;- data.frame(part_metric1, acc1)
-colnames(res1)[1] &lt;- c(&quot;Partition_metric&quot;)
-rownames(res1) &lt;- NULL
-print(res1)</code></pre>
+acc2 &lt;- rbind(r2_train2, r2_test2, bias_train2, bias_test2, mse_train2, mse_test2)
+colnames(acc2) &lt;- paste0(&quot;Y&quot;, seq(1, r2))
+part_metric2 &lt;- c(&quot;Training data r2&quot;, &quot;Test data r2&quot;, &quot;Training data bias&quot;, &quot;Test data bias&quot; , &quot;Training data MSE&quot; , &quot;Test data MSE&quot;)
+res2 &lt;- data.frame(part_metric2, acc2)
+colnames(res2)[1] &lt;- c(&quot;Partition_metric&quot;)
+rownames(res2) &lt;- NULL
+print(res2)</code></pre>
 <pre><code>    Partition_metric      Y1      Y2      Y3      Y4      Y5
-1   Training data r2  0.5338  0.5418  0.4904  0.5239  0.5620
-2       Test data r2  0.4591  0.4476  0.4630  0.4523  0.4237
-3 Training data bias  1.0606  1.0586  0.9935  1.0013  1.0971
-4     Test data bias  0.9892  1.0660  1.0666  1.0905  0.9659
-5  Training data MSE 24.6985 23.8540 25.3913 22.4603 23.9106
-6      Test data MSE 24.5054 29.4890 27.1642 29.6734 26.7496</code></pre>
+1   Training data r2  0.5373  0.5341  0.5146  0.5716  0.5570
+2       Test data r2  0.4600  0.3854  0.4395  0.4473  0.4948
+3 Training data bias  1.1737  1.1069  1.1264  1.1019  1.1270
+4     Test data bias  0.9847  0.9370  1.1124  1.1859  0.9449
+5  Training data MSE 38.1690 22.6568 25.8972 21.0610 26.7705
+6      Test data MSE 41.8959 28.1329 34.3800 34.3338 30.6942</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
