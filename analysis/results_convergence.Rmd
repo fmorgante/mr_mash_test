@@ -28,7 +28,7 @@ Sigma1 <- dat1$inputs$Sigma
 Gamma1 <- dat1$inputs$Gamma
 ```
 
-The simulation below is based on `r n1` samples, `r p1` variables of which `r p_causal1` were causal, `r r1` responses with a per-response proportion of variance explained (PVE) of `r pve1`. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V).
+The results below are based on simulation with `r n1` samples, `r p1` variables of which `r p_causal1` were causal, `r r1` responses with a per-response proportion of variance explained (PVE) of `r pve1`. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V).
 
 ```{r disp corrs 1}
 cat("Gamma (First 5 elements)")
@@ -46,5 +46,5 @@ mr.mash was fitted to the training data (`r (1-prop_testset1)*100`% of the data)
 Here, we investigate convergence.
 
 ```{r conv 1, fig.height=12, fig.width=15}
-plot(progress_dat1$iter, progress_dat1$ELBO_diff, xlab="Iteration", ylab="log Difference in ELBO", main="ELBO vs iteration", type="b", pch=16, cex.lab=1.5, log="y")
+plot(progress_dat1$iter, progress_dat1$ELBO_diff, xlab="Iteration", ylab="log Difference in ELBO", main="ELBO vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
 ```

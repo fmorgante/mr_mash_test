@@ -49,7 +49,7 @@ fitted1 <- dat1$fit$fitted
 Yhat_test1 <- dat1$Yhat_test
 ```
 
-The simulation below is based on `r n1` samples, `r p1` variables of which `r p_causal1` were causal, `r r1` responses with a per-response proportion of variance explained (PVE) of `r pve1`. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V).
+The results below are based on simulation with `r n1` samples, `r p1` variables of which `r p_causal1` were causal, `r r1` responses with a per-response proportion of variance explained (PVE) of `r pve1`. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V).
 
 ```{r disp corrs 1}
 cat("Gamma (First 5 elements)")
@@ -68,7 +68,7 @@ In the plots below, each color/symbol defines a diffrent response.
 
 Here, we compare the estimated effects with the true effects. 
 ```{r effects 1, fig.height=12, fig.width=15}
-plot(B1[, 1], mu11[, 1], xlab="True effects", ylab="Estimated effects", main="True vs Estimated Effects", pch=1, cex.lab=1.5)
+plot(B1[, 1], mu11[, 1], xlab="True effects", ylab="Estimated effects", main="True vs Estimated Effects", pch=1, cex.lab=1.5, cex.axis=1.5)
 points(B1[, 2], mu11[, 2], col="blue", pch=2)
 points(B1[, 3], mu11[, 3], col="red", pch=3)
 points(B1[, 4], mu11[, 4], col="green", pch=4)
@@ -78,14 +78,14 @@ points(B1[, 5], mu11[, 5], col="yellow", pch=8)
 Then, we compare the predicted responses with the true responses in the training data (left panel) and test data (right panel).
 ```{r predict 1, fig.height=12, fig.width=15}
 par(mfrow=c(1,2))
-plot(Ytrain1[, 1], fitted1[, 1], xlab="True responses", ylab="Fitted values", main="True vs Fitted values \nTraining data", pch=1, cex.lab=1.5)
+plot(Ytrain1[, 1], fitted1[, 1], xlab="True responses", ylab="Fitted values", main="True vs Fitted values \nTraining data", pch=1, cex.lab=1.5, cex.axis=1.5)
 points(Ytrain1[, 2], fitted1[, 2], col="blue", pch=2)
 points(Ytrain1[, 3], fitted1[, 3], col="red", pch=3)
 points(Ytrain1[, 4], fitted1[, 4], col="green", pch=4)
 points(Ytrain1[, 5], fitted1[, 5], col="yellow", pch=8)
 abline(0, 1)
 
-plot(Ytrain1[, 1], fitted1[, 1], xlab="True responses", ylab="Predicted responses", main="True vs Predicted Responses \nTest data", pch=1, cex.lab=1.5)
+plot(Ytrain1[, 1], fitted1[, 1], xlab="True responses", ylab="Predicted responses", main="True vs Predicted Responses \nTest data", pch=1, cex.lab=1.5, cex.axis=1.5)
 points(Ytest1[, 2], Yhat_test1[, 2], col="blue", pch=2)
 points(Ytest1[, 3], Yhat_test1[, 3], col="red", pch=3)
 points(Ytest1[, 4], Yhat_test1[, 4], col="green", pch=4)
