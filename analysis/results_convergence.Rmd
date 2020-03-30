@@ -99,10 +99,10 @@ plot(progress_dat2$iter, progress_dat2$mu1_max.diff, xlab="Iteration", ylab="log
 ```
 
 
-##Simulation 3 -- Independent effects, correlated variables
+##Simulation 3 -- Shared effects, correlated variables
 
 ```{r load data 3}
-dat3 <- readRDS("output/fit_mr_mash_n600_p1000_p_caus50_r5_pve0.5_sigmaoffdiag0_sigmascale0.8_gammaoffdiag0_gammascale0.8_Voffdiag0.2_Vscale0_updatew0TRUE_updatew0TRUE_updatew0methodmixsqp_updateVTRUE.rds")
+dat3 <- readRDS("output/fit_mr_mash_n600_p1000_p_caus50_r5_pve0.5_sigmaoffdiag1_sigmascale0.8_gammaoffdiag0.5_gammascale0.8_Voffdiag0.2_Vscale0_updatew0TRUE_updatew0TRUE_updatew0methodmixsqp_updateVTRUE.rds")
 n3 <- dat3$params$n
 p3 <- dat3$params$p
 p_causal3 <- dat3$params$p_causal
@@ -139,4 +139,47 @@ plot(progress_dat3$iter, progress_dat3$ELBO_diff, xlab="Iteration", ylab="log Di
 
 ```{r mu1 3, fig.height=12, fig.width=15}
 plot(progress_dat3$iter, progress_dat3$mu1_max.diff, xlab="Iteration", ylab="log Difference in max(mu1)", main="mu1 vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
+```
+
+
+##Simulation 4 -- Independent effects, correlated variables
+
+```{r load data 4}
+dat4 <- readRDS("output/fit_mr_mash_n600_p1000_p_caus50_r5_pve0.5_sigmaoffdiag0_sigmascale0.8_gammaoffdiag0.5_gammascale0.8_Voffdiag0.2_Vscale0_updatew0TRUE_updatew0TRUE_updatew0methodmixsqp_updateVTRUE.rds")
+n4 <- dat4$params$n
+p4 <- dat4$params$p
+p_causal4 <- dat4$params$p_causal
+r4 <- dat4$params$r
+k4 <- length(dat4$fit$w0)
+pve4 <- dat4$params$pve
+prop_testset4 <- dat4$params$prop_testset
+progress_dat4 <- dat4$fit$progress
+V4 <- dat4$inputs$V
+Sigma4 <- dat4$inputs$Sigma
+Gamma4 <- dat4$inputs$Gamma
+```
+
+The results below are based on simulation with `r n4` samples, `r p4` variables of which `r p_causal4` were causal, `r r4` responses with a per-response proportion of variance explained (PVE) of `r pve4`. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V).
+
+```{r disp corrs 4}
+cat("Gamma (First 5 elements)")
+Gamma4[1:5, 1:5]
+
+cat("Sigma")
+Sigma4
+
+cat("V")
+V4
+```
+
+mr.mash was fitted to the training data (`r (1-prop_testset4)*100`% of the data) updating V and updating the prior weights using mixSQP. The mixture prior consisted of `r k4` components.
+
+Here, we investigate convergence.
+
+```{r ELBO 4, fig.height=12, fig.width=15}
+plot(progress_dat4$iter, progress_dat4$ELBO_diff, xlab="Iteration", ylab="log Difference in ELBO", main="ELBO vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
+```
+
+```{r mu1 4, fig.height=12, fig.width=15}
+plot(progress_dat4$iter, progress_dat4$mu1_max.diff, xlab="Iteration", ylab="log Difference in max(mu1)", main="mu1 vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
 ```
