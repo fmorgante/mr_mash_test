@@ -9,12 +9,53 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Introduction
-
-```{r}
-a <- rnorm(100)
-b <- rnorm(100)
-
-plot(a, b)
+```{r set opts}
+options(stringsAsFactors = FALSE)
 ```
+
+```{r load data 1}
+dat1 <- readRDS("output/fit_mr_mash_n600_p1000_p_caus50_r5_pve0.5_sigmaoffdiag1_sigmascale0.8_gammaoffdiag0_gammascale0.8_Voffdiag0.2_Vscale0_updatew0TRUE_updatew0TRUE_updatew0methodmixsqp_updateVTRUE.rds")
+n1 <- dat1$params$n
+p1 <- dat1$params$p
+p_causal1 <- dat1$params$p_causal
+r1 <- dat1$params$r
+pve1 <- dat1$params$pve
+prop_testset1 <- dat1$params$prop_testset
+B1 <- dat1$inputs$B
+V1 <- dat1$inputs$V
+Sigma1 <- dat1$inputs$Sigma
+Gamma1 <- dat1$inputs$Gamma
+Ytrain1 <- dat1$Ytrain
+Ytest1 <- dat1$Ytest
+mu11 <- dat1$fit$mu1
+fitted1 <- dat1$fit$fitted
+Yhat_test1 <- dat1$Yhat_test
+```
+
+The simulation below is based on `r n1` samples, `r p1` variables of which `r p_causal1` were causal, `r r1` responses with a per-response proportion of variance explained (PVE) of `r pve1`. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V).
+
+```{r disp corrs 1}
+cat("Gamma (First 5 elements)")
+Gamma1[1:5, 1:5]
+
+cat("Sigma")
+Sigma1
+
+cat("V")
+V1
+```
+
+mr.mash was fitted to the training data (`r (1-prop_testset1)*100` of the data) updating V and updating the prior weights using mixSQP. Then, responses were predicted on the test data (`r 1-prop_testset1*100` of the data).
+
+Here, we compare the estimated effects to the true effects 
+
+```{r effects 1}
+plot(B1[, 1], mu11[, 1], xlab="True effects", ylab="Estimated effects", main="True vs Estimated Effects")
+points(B1[, 2], mu11[, 2], col="blue")
+points(B1[, 3], mu11[, 3], col="red")
+points(B1[, 4], mu11[, 4], col="green")
+points(B1[, 5], mu11[, 5], col="yellow")
+```
+
+
 
