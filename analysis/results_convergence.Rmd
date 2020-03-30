@@ -9,9 +9,42 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Introduction
+```{r set opts}
+options(stringsAsFactors = FALSE)
+```
+#Simulation 1 -- Shared effects, independent variables
 
-```{r}
-plot(rnorm(10))
+```{r load data 1}
+dat1 <- readRDS("output/fit_mr_mash_n600_p1000_p_caus50_r5_pve0.5_sigmaoffdiag1_sigmascale0.8_gammaoffdiag0_gammascale0.8_Voffdiag0.2_Vscale0_updatew0TRUE_updatew0TRUE_updatew0methodmixsqp_updateVTRUE.rds")
+n1 <- dat1$params$n
+p1 <- dat1$params$p
+p_causal1 <- dat1$params$p_causal
+r1 <- dat1$params$r
+pve1 <- dat1$params$pve
+prop_testset1 <- dat1$params$prop_testset
+progress_dat1 <- dat1$fit$progress
+V1 <- dat1$inputs$V
+Sigma1 <- dat1$inputs$Sigma
+Gamma1 <- dat1$inputs$Gamma
 ```
 
+The simulation below is based on `r n1` samples, `r p1` variables of which `r p_causal1` were causal, `r r1` responses with a per-response proportion of variance explained (PVE) of `r pve1`. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V).
+
+```{r disp corrs 1}
+cat("Gamma (First 5 elements)")
+Gamma1[1:5, 1:5]
+
+cat("Sigma")
+Sigma1
+
+cat("V")
+V1
+```
+
+mr.mash was fitted to the training data (`r (1-prop_testset1)*100`% of the data) updating V and updating the prior weights using mixSQP.
+
+Here, we investigate convergence.
+
+```{r conv 1, fig.height=12, fig.width=15}
+plot(progress_dat1$iter, progress_dat1$ELBO_diff, xlab="Iteration", ylab="log Difference in ELBO", main="ELBO vs iteration", type="b", pch=16, cex.lab=1.5, log="y")
+```
