@@ -354,16 +354,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree1cfb1f8c7ba560442dbf81ff9e0eececbf334757targetblank1cfb1f8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/1cfb1f8c7ba560442dbf81ff9e0eececbf334757" target="_blank">1cfb1f8</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreef4eb72a083268a50b1e3386417a32c208998580ftargetblankf4eb72aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/f4eb72a083268a50b1e3386417a32c208998580f" target="_blank">f4eb72a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree1cfb1f8c7ba560442dbf81ff9e0eececbf334757targetblank1cfb1f8a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreef4eb72a083268a50b1e3386417a32c208998580ftargetblankf4eb72aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/1cfb1f8c7ba560442dbf81ff9e0eececbf334757" target="_blank">1cfb1f8</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/f4eb72a083268a50b1e3386417a32c208998580f" target="_blank">f4eb72a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -410,6 +410,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/f4eb72a083268a50b1e3386417a32c208998580f/analysis/results_accuracy.Rmd" target="_blank">f4eb72a</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Add simulation 2
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/8621d7dc49ed8b8187aeef7f7d366bf24bab6375/docs/results_accuracy.html" target="_blank">8621d7d</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -807,8 +841,8 @@ accuracy &lt;- function(Y, Yhat) {
   
   return(list(bias=bias, r2=r2, mse=mse))
 }</code></pre>
-<div id="simulation-1-shared-effects-independent-variables" class="section level1">
-<h1>Simulation 1 – Shared effects, independent variables</h1>
+<div id="simulation-1-shared-effects-independent-variables" class="section level2">
+<h2>Simulation 1 – Shared effects, independent variables</h2>
 <pre class="r"><code>dat1 &lt;- readRDS(&quot;output/fit_mr_mash_n600_p1000_p_caus50_r5_pve0.5_sigmaoffdiag1_sigmascale0.8_gammaoffdiag0_gammascale0.8_Voffdiag0.2_Vscale0_updatew0TRUE_updatew0TRUE_updatew0methodmixsqp_updateVTRUE.rds&quot;)
 n1 &lt;- dat1$params$n
 p1 &lt;- dat1$params$p
@@ -886,6 +920,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/8621d7dc49ed8b8187aeef7f7d366bf24bab6375/docs/figure/results_accuracy.Rmd/effects 1-1.png" target="_blank">8621d7d</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/4e9aad676c09457e52ca1c3f4eab794e38d9ec68/docs/figure/results_accuracy.Rmd/effects 1-1.png" target="_blank">4e9aad6</a>
 </td>
 <td>
@@ -961,6 +1006,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/8621d7dc49ed8b8187aeef7f7d366bf24bab6375/docs/figure/results_accuracy.Rmd/predict 1-1.png" target="_blank">8621d7d</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/4e9aad676c09457e52ca1c3f4eab794e38d9ec68/docs/figure/results_accuracy.Rmd/predict 1-1.png" target="_blank">4e9aad6</a>
 </td>
 <td>
@@ -985,6 +1041,101 @@ fmorgante
 </table>
 </div>
 </div>
+<pre class="r"><code>par(mfrow=c(1,1))
+
+r2_train1 &lt;- round(accuracy(Ytrain1, fitted1)$r2, 4)
+r2_test1 &lt;- round(accuracy(Ytest1, Yhat_test1)$r2, 4)
+bias_train1 &lt;- round(accuracy(Ytrain1, fitted1)$bias, 4)
+bias_test1 &lt;- round(accuracy(Ytest1, Yhat_test1)$bias, 4)
+mse_train1 &lt;- round(accuracy(Ytrain1, fitted1)$mse, 4)
+mse_test1 &lt;- round(accuracy(Ytest1, Yhat_test1)$mse, 4)
+
+acc1 &lt;- rbind(r2_train1, r2_test1, bias_train1, bias_test1, mse_train1, mse_test1)
+colnames(acc1) &lt;- paste0(&quot;Y&quot;, seq(1, r1))
+part_metric1 &lt;- c(&quot;Training data r2&quot;, &quot;Test data r2&quot;, &quot;Training data bias&quot;, &quot;Test data bias&quot; , &quot;Training data MSE&quot; , &quot;Test data MSE&quot;)
+res1 &lt;- data.frame(part_metric1, acc1)
+colnames(res1)[1] &lt;- c(&quot;Partition_metric&quot;)
+rownames(res1) &lt;- NULL
+print(res1)</code></pre>
+<pre><code>    Partition_metric      Y1      Y2      Y3      Y4      Y5
+1   Training data r2  0.5338  0.5418  0.4904  0.5239  0.5620
+2       Test data r2  0.4591  0.4476  0.4630  0.4523  0.4237
+3 Training data bias  1.0606  1.0586  0.9935  1.0013  1.0971
+4     Test data bias  0.9892  1.0660  1.0666  1.0905  0.9659
+5  Training data MSE 24.6985 23.8540 25.3913 22.4603 23.9106
+6      Test data MSE 24.5054 29.4890 27.1642 29.6734 26.7496</code></pre>
+</div>
+<div id="simulation-2-independent-effects-independent-variables" class="section level2">
+<h2>Simulation 2 – Independent effects, independent variables</h2>
+<pre class="r"><code>dat2 &lt;- readRDS(&quot;output/fit_mr_mash_n600_p1000_p_caus50_r5_pve0.5_sigmaoffdiag0_sigmascale0.8_gammaoffdiag0_gammascale0.8_Voffdiag0.2_Vscale0_updatew0TRUE_updatew0TRUE_updatew0methodmixsqp_updateVTRUE.rds&quot;)
+n2 &lt;- dat2$params$n
+p2 &lt;- dat2$params$p
+p_causal2 &lt;- dat2$params$p_causal
+r2 &lt;- dat2$params$r
+pve2 &lt;- dat2$params$pve
+prop_testset2 &lt;- dat2$params$prop_testset
+B2 &lt;- dat2$inputs$B
+V2 &lt;- dat2$inputs$V
+Sigma2 &lt;- dat2$inputs$Sigma
+Gamma2 &lt;- dat2$inputs$Gamma
+Ytrain2 &lt;- dat2$Ytrain
+Ytest2 &lt;- dat2$Ytest
+mu12 &lt;- dat2$fit$mu1
+fitted2 &lt;- dat2$fit$fitted
+Yhat_test2 &lt;- dat2$Yhat_test</code></pre>
+<p>The results below are based on simulation with 600 samples, 1000 variables of which 50 were causal, 5 responses with a per-response proportion of variance explained (PVE) of 0.5. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V).</p>
+<pre class="r"><code>cat(&quot;Gamma (First 5 elements)&quot;)</code></pre>
+<pre><code>Gamma (First 5 elements)</code></pre>
+<pre class="r"><code>Gamma2[1:5, 1:5]</code></pre>
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]  0.8  0.0  0.0  0.0  0.0
+[2,]  0.0  0.8  0.0  0.0  0.0
+[3,]  0.0  0.0  0.8  0.0  0.0
+[4,]  0.0  0.0  0.0  0.8  0.0
+[5,]  0.0  0.0  0.0  0.0  0.8</code></pre>
+<pre class="r"><code>cat(&quot;Sigma&quot;)</code></pre>
+<pre><code>Sigma</code></pre>
+<pre class="r"><code>Sigma2</code></pre>
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]  0.8  0.0  0.0  0.0  0.0
+[2,]  0.0  0.8  0.0  0.0  0.0
+[3,]  0.0  0.0  0.8  0.0  0.0
+[4,]  0.0  0.0  0.0  0.8  0.0
+[5,]  0.0  0.0  0.0  0.0  0.8</code></pre>
+<pre class="r"><code>cat(&quot;V&quot;)</code></pre>
+<pre><code>V</code></pre>
+<pre class="r"><code>V2</code></pre>
+<pre><code>         [,1]     [,2]     [,3]     [,4]     [,5]
+[1,] 39.87305  0.00000  0.00000  0.00000  0.00000
+[2,]  0.00000 24.41042  0.00000  0.00000  0.00000
+[3,]  0.00000  0.00000 27.69452  0.00000  0.00000
+[4,]  0.00000  0.00000  0.00000 25.53166  0.00000
+[5,]  0.00000  0.00000  0.00000  0.00000 29.00472</code></pre>
+<p>mr.mash was fitted to the training data (80% of the data) updating V and updating the prior weights using mixSQP. Then, responses were predicted on the test data (20% of the data).</p>
+<p>In the plots below, each color/symbol defines a diffrent response.</p>
+<p>Here, we compare the estimated effects with the true effects.</p>
+<pre class="r"><code>plot(B2[, 1], mu12[, 1], xlab=&quot;True effects&quot;, ylab=&quot;Estimated effects&quot;, main=&quot;True vs Estimated Effects&quot;, pch=1, cex.lab=1.5, cex.axis=1.5)
+points(B2[, 2], mu12[, 2], col=&quot;blue&quot;, pch=2)
+points(B2[, 3], mu12[, 3], col=&quot;red&quot;, pch=3)
+points(B2[, 4], mu12[, 4], col=&quot;green&quot;, pch=4)
+points(B2[, 5], mu12[, 5], col=&quot;yellow&quot;, pch=8)</code></pre>
+<p><img src="figure/results_accuracy.Rmd/effects%202-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>Then, we compare the predicted responses with the true responses in the training data (left panel) and test data (right panel).</p>
+<pre class="r"><code>par(mfrow=c(1,2))
+plot(Ytrain2[, 1], fitted2[, 1], xlab=&quot;True responses&quot;, ylab=&quot;Fitted values&quot;, main=&quot;True vs Fitted values \nTraining data&quot;, pch=1, cex.lab=1.5, cex.axis=1.5)
+points(Ytrain2[, 2], fitted2[, 2], col=&quot;blue&quot;, pch=2)
+points(Ytrain2[, 3], fitted2[, 3], col=&quot;red&quot;, pch=3)
+points(Ytrain2[, 4], fitted2[, 4], col=&quot;green&quot;, pch=4)
+points(Ytrain2[, 5], fitted2[, 5], col=&quot;yellow&quot;, pch=8)
+abline(0, 1)
+
+plot(Ytrain2[, 1], fitted2[, 1], xlab=&quot;True responses&quot;, ylab=&quot;Predicted responses&quot;, main=&quot;True vs Predicted Responses \nTest data&quot;, pch=1, cex.lab=1.5, cex.axis=1.5)
+points(Ytest2[, 2], Yhat_test2[, 2], col=&quot;blue&quot;, pch=2)
+points(Ytest2[, 3], Yhat_test2[, 3], col=&quot;red&quot;, pch=3)
+points(Ytest2[, 4], Yhat_test2[, 4], col=&quot;green&quot;, pch=4)
+points(Ytest2[, 5], Yhat_test2[, 5], col=&quot;yellow&quot;, pch=8)
+abline(0, 1)</code></pre>
+<p><img src="figure/results_accuracy.Rmd/predict%202-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>par(mfrow=c(1,1))
 
 r2_train1 &lt;- round(accuracy(Ytrain1, fitted1)$r2, 4)
