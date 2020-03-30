@@ -45,14 +45,14 @@ V1
 
 mr.mash was fitted to the training data (`r (1-prop_testset1)*100`% of the data) updating V and updating the prior weights using mixSQP. The mixture prior consisted of `r k1` components.
 
-Here, we investigate convergence.
+Here, we investigate convergence. Convergence was reached when max($mu1_{t}$ - $mu1_{t-1}$) was less than 1e-8.
 
 ```{r ELBO 1, fig.height=12, fig.width=15}
 plot(progress_dat1$iter, progress_dat1$ELBO_diff, xlab="Iteration", ylab="log Difference in ELBO", main="ELBO vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
 ```
 
 ```{r mu1 1, fig.height=12, fig.width=15}
-plot(progress_dat1$iter, progress_dat1$mu1_max.diff, xlab="Iteration", ylab="log Difference in max(mu1)", main="mu1 vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
+plot(progress_dat1$iter, progress_dat1$mu1_max.diff, xlab="Iteration", ylab="log max(Difference in mu1)", main="mu1 vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
 ```
 
 
@@ -88,14 +88,14 @@ V2
 
 mr.mash was fitted to the training data (`r (1-prop_testset2)*100`% of the data) updating V and updating the prior weights using mixSQP. The mixture prior consisted of `r k2` components.
 
-Here, we investigate convergence.
+Here, we investigate convergence. Convergence was reached when max($mu1_{t}$ - $mu1_{t-1}$) was less than 1e-8.
 
 ```{r ELBO 2, fig.height=12, fig.width=15}
 plot(progress_dat2$iter, progress_dat2$ELBO_diff, xlab="Iteration", ylab="log Difference in ELBO", main="ELBO vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
 ```
 
 ```{r mu1 2, fig.height=12, fig.width=15}
-plot(progress_dat2$iter, progress_dat2$mu1_max.diff, xlab="Iteration", ylab="log Difference in max(mu1)", main="mu1 vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
+plot(progress_dat2$iter, progress_dat2$mu1_max.diff, xlab="Iteration", ylab="log max(Difference in mu1)", main="mu1 vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
 ```
 
 
@@ -131,14 +131,14 @@ V3
 
 mr.mash was fitted to the training data (`r (1-prop_testset3)*100`% of the data) updating V and updating the prior weights using mixSQP. The mixture prior consisted of `r k3` components.
 
-Here, we investigate convergence.
+Here, we investigate convergence. Convergence was reached when max($mu1_{t}$ - $mu1_{t-1}$) was less than 1e-8.
 
 ```{r ELBO 3, fig.height=12, fig.width=15}
 plot(progress_dat3$iter, progress_dat3$ELBO_diff, xlab="Iteration", ylab="log Difference in ELBO", main="ELBO vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
 ```
 
 ```{r mu1 3, fig.height=12, fig.width=15}
-plot(progress_dat3$iter, progress_dat3$mu1_max.diff, xlab="Iteration", ylab="log Difference in max(mu1)", main="mu1 vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
+plot(progress_dat3$iter, progress_dat3$mu1_max.diff, xlab="Iteration", ylab="log max(Difference in mu1)", main="mu1 vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
 ```
 
 
@@ -174,12 +174,12 @@ V4
 
 mr.mash was fitted to the training data (`r (1-prop_testset4)*100`% of the data) updating V and updating the prior weights using mixSQP. The mixture prior consisted of `r k4` components.
 
-Here, we investigate convergence.
+Here, we investigate convergence. Convergence was reached when max($mu1_{t}$ - $mu1_{t-1}$) was less than 1e-8.
 
 ```{r ELBO 4, fig.height=12, fig.width=15}
 plot(progress_dat4$iter, progress_dat4$ELBO_diff, xlab="Iteration", ylab="log Difference in ELBO", main="ELBO vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
 ```
 
 ```{r mu1 4, fig.height=12, fig.width=15}
-plot(progress_dat4$iter, progress_dat4$mu1_max.diff, xlab="Iteration", ylab="log Difference in max(mu1)", main="mu1 vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
+plot(progress_dat4$iter, progress_dat4$mu1_max.diff, xlab="Iteration", ylab="log max(Difference in mu1)", main="mu1 vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
 ```
