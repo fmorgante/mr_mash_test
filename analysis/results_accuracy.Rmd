@@ -208,7 +208,7 @@ Sigma3 <- dat3$inputs$Sigma
 Gamma3 <- dat3$inputs$Gamma
 Ytrain3 <- dat3$Ytrain
 Ytest3 <- dat3$Ytest
-mu13 <- dat3$fit$mu3
+mu13 <- dat3$fit$mu1
 fitted3 <- dat3$fit$fitted
 Yhat_test3 <- dat3$Yhat_test
 ```
