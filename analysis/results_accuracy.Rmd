@@ -11,7 +11,19 @@ editor_options:
 
 ```{r set opts}
 options(stringsAsFactors = FALSE)
+
+mse <- function(Y, Yhat) {
+    msee <- rep(NA, ncol(Y))
+    for(i in 1:ncol(Y)){
+        msee[i] <- mean((Y[, i] - Yhat[, i])^2)
+    }
+    
+    return(msee)
+}
+
 ```
+
+#Simulation 1 -- Shared effects, independent variables
 
 ```{r load data 1}
 dat1 <- readRDS("output/fit_mr_mash_n600_p1000_p_caus50_r5_pve0.5_sigmaoffdiag1_sigmascale0.8_gammaoffdiag0_gammascale0.8_Voffdiag0.2_Vscale0_updatew0TRUE_updatew0TRUE_updatew0methodmixsqp_updateVTRUE.rds")
@@ -47,9 +59,11 @@ V1
 
 mr.mash was fitted to the training data (`r (1-prop_testset1)*100`% of the data) updating V and updating the prior weights using mixSQP. Then, responses were predicted on the test data (`r prop_testset1*100`% of the data).
 
+In the plots below, each color/symbol defines a diffrent response.
+
 Here, we compare the estimated effects with the true effects. 
 ```{r effects 1, fig.height=12, fig.width=15}
-plot(B1[, 1], mu11[, 1], xlab="True effects", ylab="Estimated effects", main="True vs Estimated Effects", pch=1)
+plot(B1[, 1], mu11[, 1], xlab="True effects", ylab="Estimated effects", main="True vs Estimated Effects", pch=1, cex.lab=1.5)
 points(B1[, 2], mu11[, 2], col="blue", pch=2)
 points(B1[, 3], mu11[, 3], col="red", pch=3)
 points(B1[, 4], mu11[, 4], col="green", pch=4)
@@ -59,18 +73,25 @@ points(B1[, 5], mu11[, 5], col="yellow", pch=8)
 Then, we compare the predicted responses with the true responses in the training data (left panel) and test data (right panel).
 ```{r predict 1, fig.height=12, fig.width=15}
 par(mfrow=c(1,2))
-plot(Ytrain1[, 1], fitted1[, 1], xlab="True responses", ylab="Fitted values", main="True vs Fitted values \nTraining data", pch=1)
+plot(Ytrain1[, 1], fitted1[, 1], xlab="True responses", ylab="Fitted values", main="True vs Fitted values \nTraining data", pch=1, cex.lab=1.5)
 points(Ytrain1[, 2], fitted1[, 2], col="blue", pch=2)
 points(Ytrain1[, 3], fitted1[, 3], col="red", pch=3)
 points(Ytrain1[, 4], fitted1[, 4], col="green", pch=4)
 points(Ytrain1[, 5], fitted1[, 5], col="yellow", pch=8)
+abline(0, 1)
 
-plot(Ytrain1[, 1], fitted1[, 1], xlab="True responses", ylab="Predicted responses", main="True vs Predicted Responses \nTest data", pch=1)
+plot(Ytrain1[, 1], fitted1[, 1], xlab="True responses", ylab="Predicted responses", main="True vs Predicted Responses \nTest data", pch=1, cex.lab=1.5)
 points(Ytest1[, 2], Yhat_test1[, 2], col="blue", pch=2)
 points(Ytest1[, 3], Yhat_test1[, 3], col="red", pch=3)
 points(Ytest1[, 4], Yhat_test1[, 4], col="green", pch=4)
 points(Ytest1[, 5], Yhat_test1[, 5], col="yellow", pch=8)
+abline(0, 1)
 par(mfrow=c(1,1))
+
+cat("Training data r2 =", diag(cor(Ytrain1, fitted1))^2)
+cat("Test data r2 =", diag(cor(Ytest1, Yhat_test1))^2)
+cat("Training data MSE =", mse(Ytrain1, fitted1))
+cat("Test data MSE =", mse(Ytest1, Yhat_test1))
 ```
 
 
