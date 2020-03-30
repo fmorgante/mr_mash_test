@@ -354,16 +354,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree749d2ca440e4b541ac104a77e476a7abf5e299f4targetblank749d2caa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/749d2ca440e4b541ac104a77e476a7abf5e299f4" target="_blank">749d2ca</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree1cfb1f8c7ba560442dbf81ff9e0eececbf334757targetblank1cfb1f8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/1cfb1f8c7ba560442dbf81ff9e0eececbf334757" target="_blank">1cfb1f8</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree749d2ca440e4b541ac104a77e476a7abf5e299f4targetblank749d2caa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree1cfb1f8c7ba560442dbf81ff9e0eececbf334757targetblank1cfb1f8a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/749d2ca440e4b541ac104a77e476a7abf5e299f4" target="_blank">749d2ca</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/1cfb1f8c7ba560442dbf81ff9e0eececbf334757" target="_blank">1cfb1f8</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -410,6 +410,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/1cfb1f8c7ba560442dbf81ff9e0eececbf334757/analysis/results_accuracy.Rmd" target="_blank">1cfb1f8</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Slight improvements
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/d5773c96871d2f0faa40949fc3ed30f54dbf4a5f/docs/results_accuracy.html" target="_blank">d5773c9</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -791,7 +825,7 @@ Ytest1 &lt;- dat1$Ytest
 mu11 &lt;- dat1$fit$mu1
 fitted1 &lt;- dat1$fit$fitted
 Yhat_test1 &lt;- dat1$Yhat_test</code></pre>
-<p>The simulation below is based on 600 samples, 1000 variables of which 50 were causal, 5 responses with a per-response proportion of variance explained (PVE) of 0.5. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V).</p>
+<p>The results below are based on simulation with 600 samples, 1000 variables of which 50 were causal, 5 responses with a per-response proportion of variance explained (PVE) of 0.5. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V).</p>
 <pre class="r"><code>cat(&quot;Gamma (First 5 elements)&quot;)</code></pre>
 <pre><code>Gamma (First 5 elements)</code></pre>
 <pre class="r"><code>Gamma1[1:5, 1:5]</code></pre>
@@ -822,7 +856,7 @@ Yhat_test1 &lt;- dat1$Yhat_test</code></pre>
 <p>mr.mash was fitted to the training data (80% of the data) updating V and updating the prior weights using mixSQP. Then, responses were predicted on the test data (20% of the data).</p>
 <p>In the plots below, each color/symbol defines a diffrent response.</p>
 <p>Here, we compare the estimated effects with the true effects.</p>
-<pre class="r"><code>plot(B1[, 1], mu11[, 1], xlab=&quot;True effects&quot;, ylab=&quot;Estimated effects&quot;, main=&quot;True vs Estimated Effects&quot;, pch=1, cex.lab=1.5)
+<pre class="r"><code>plot(B1[, 1], mu11[, 1], xlab=&quot;True effects&quot;, ylab=&quot;Estimated effects&quot;, main=&quot;True vs Estimated Effects&quot;, pch=1, cex.lab=1.5, cex.axis=1.5)
 points(B1[, 2], mu11[, 2], col=&quot;blue&quot;, pch=2)
 points(B1[, 3], mu11[, 3], col=&quot;red&quot;, pch=3)
 points(B1[, 4], mu11[, 4], col=&quot;green&quot;, pch=4)
@@ -889,14 +923,14 @@ fmorgante
 </div>
 <p>Then, we compare the predicted responses with the true responses in the training data (left panel) and test data (right panel).</p>
 <pre class="r"><code>par(mfrow=c(1,2))
-plot(Ytrain1[, 1], fitted1[, 1], xlab=&quot;True responses&quot;, ylab=&quot;Fitted values&quot;, main=&quot;True vs Fitted values \nTraining data&quot;, pch=1, cex.lab=1.5)
+plot(Ytrain1[, 1], fitted1[, 1], xlab=&quot;True responses&quot;, ylab=&quot;Fitted values&quot;, main=&quot;True vs Fitted values \nTraining data&quot;, pch=1, cex.lab=1.5, cex.axis=1.5)
 points(Ytrain1[, 2], fitted1[, 2], col=&quot;blue&quot;, pch=2)
 points(Ytrain1[, 3], fitted1[, 3], col=&quot;red&quot;, pch=3)
 points(Ytrain1[, 4], fitted1[, 4], col=&quot;green&quot;, pch=4)
 points(Ytrain1[, 5], fitted1[, 5], col=&quot;yellow&quot;, pch=8)
 abline(0, 1)
 
-plot(Ytrain1[, 1], fitted1[, 1], xlab=&quot;True responses&quot;, ylab=&quot;Predicted responses&quot;, main=&quot;True vs Predicted Responses \nTest data&quot;, pch=1, cex.lab=1.5)
+plot(Ytrain1[, 1], fitted1[, 1], xlab=&quot;True responses&quot;, ylab=&quot;Predicted responses&quot;, main=&quot;True vs Predicted Responses \nTest data&quot;, pch=1, cex.lab=1.5, cex.axis=1.5)
 points(Ytest1[, 2], Yhat_test1[, 2], col=&quot;blue&quot;, pch=2)
 points(Ytest1[, 3], Yhat_test1[, 3], col=&quot;red&quot;, pch=3)
 points(Ytest1[, 4], Yhat_test1[, 4], col=&quot;green&quot;, pch=4)

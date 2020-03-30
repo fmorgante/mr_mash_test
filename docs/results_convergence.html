@@ -354,16 +354,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree749d2ca440e4b541ac104a77e476a7abf5e299f4targetblank749d2caa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/749d2ca440e4b541ac104a77e476a7abf5e299f4" target="_blank">749d2ca</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree1cfb1f8c7ba560442dbf81ff9e0eececbf334757targetblank1cfb1f8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/1cfb1f8c7ba560442dbf81ff9e0eececbf334757" target="_blank">1cfb1f8</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree749d2ca440e4b541ac104a77e476a7abf5e299f4targetblank749d2caa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree1cfb1f8c7ba560442dbf81ff9e0eececbf334757targetblank1cfb1f8a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/749d2ca440e4b541ac104a77e476a7abf5e299f4" target="_blank">749d2ca</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/1cfb1f8c7ba560442dbf81ff9e0eececbf334757" target="_blank">1cfb1f8</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -410,6 +410,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/1cfb1f8c7ba560442dbf81ff9e0eececbf334757/analysis/results_convergence.Rmd" target="_blank">1cfb1f8</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Slight improvements
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/d5773c96871d2f0faa40949fc3ed30f54dbf4a5f/docs/results_convergence.html" target="_blank">d5773c9</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -703,7 +737,7 @@ progress_dat1 &lt;- dat1$fit$progress
 V1 &lt;- dat1$inputs$V
 Sigma1 &lt;- dat1$inputs$Sigma
 Gamma1 &lt;- dat1$inputs$Gamma</code></pre>
-<p>The simulation below is based on 600 samples, 1000 variables of which 50 were causal, 5 responses with a per-response proportion of variance explained (PVE) of 0.5. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V).</p>
+<p>The results below are based on simulation with 600 samples, 1000 variables of which 50 were causal, 5 responses with a per-response proportion of variance explained (PVE) of 0.5. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V).</p>
 <pre class="r"><code>cat(&quot;Gamma (First 5 elements)&quot;)</code></pre>
 <pre><code>Gamma (First 5 elements)</code></pre>
 <pre class="r"><code>Gamma1[1:5, 1:5]</code></pre>
@@ -733,10 +767,47 @@ Gamma1 &lt;- dat1$inputs$Gamma</code></pre>
 [5,]  0.00000  0.00000  0.00000  0.00000 25.55836</code></pre>
 <p>mr.mash was fitted to the training data (80% of the data) updating V and updating the prior weights using mixSQP.</p>
 <p>Here, we investigate convergence.</p>
-<pre class="r"><code>plot(progress_dat1$iter, progress_dat1$ELBO_diff, xlab=&quot;Iteration&quot;, ylab=&quot;log Difference in ELBO&quot;, main=&quot;ELBO vs iteration&quot;, type=&quot;b&quot;, pch=16, cex.lab=1.5, log=&quot;y&quot;)</code></pre>
+<pre class="r"><code>plot(progress_dat1$iter, progress_dat1$ELBO_diff, xlab=&quot;Iteration&quot;, ylab=&quot;log Difference in ELBO&quot;, main=&quot;ELBO vs iteration&quot;, type=&quot;b&quot;, pch=16, cex.lab=1.5, cex.axis=1.5, log=&quot;y&quot;)</code></pre>
 <pre><code>Warning in xy.coords(x, y, xlabel, ylabel, log): 7 y values &lt;= 0 omitted
 from logarithmic plot</code></pre>
 <p><img src="figure/results_convergence.Rmd/conv%201-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-conv-1-1">
+Past versions of “conv 1-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-conv-1-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/d5773c96871d2f0faa40949fc3ed30f54dbf4a5f/docs/figure/results_convergence.Rmd/conv 1-1.png" target="_blank">d5773c9</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
