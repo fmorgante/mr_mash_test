@@ -12,7 +12,8 @@ editor_options:
 ```{r set opts}
 options(stringsAsFactors = FALSE)
 ```
-#Simulation 1 -- Shared effects, independent variables
+
+##Simulation 1 -- Shared effects, independent variables
 
 ```{r load data 1}
 dat1 <- readRDS("output/fit_mr_mash_n600_p1000_p_caus50_r5_pve0.5_sigmaoffdiag1_sigmascale0.8_gammaoffdiag0_gammascale0.8_Voffdiag0.2_Vscale0_updatew0TRUE_updatew0TRUE_updatew0methodmixsqp_updateVTRUE.rds")
@@ -47,4 +48,42 @@ Here, we investigate convergence.
 
 ```{r conv 1, fig.height=12, fig.width=15}
 plot(progress_dat1$iter, progress_dat1$ELBO_diff, xlab="Iteration", ylab="log Difference in ELBO", main="ELBO vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
+```
+
+
+##Simulation 2 -- Independent effects, independent variables
+
+```{r load data 2}
+dat2 <- readRDS("output/fit_mr_mash_n600_p1000_p_caus50_r5_pve0.5_sigmaoffdiag0_sigmascale0.8_gammaoffdiag0_gammascale0.8_Voffdiag0.2_Vscale0_updatew0TRUE_updatew0TRUE_updatew0methodmixsqp_updateVTRUE.rds")
+n2 <- dat2$params$n
+p2 <- dat2$params$p
+p_causal2 <- dat2$params$p_causal
+r2 <- dat2$params$r
+pve2 <- dat2$params$pve
+prop_testset2 <- dat2$params$prop_testset
+progress_dat2 <- dat2$fit$progress
+V2 <- dat2$inputs$V
+Sigma2 <- dat2$inputs$Sigma
+Gamma2 <- dat2$inputs$Gamma
+```
+
+The results below are based on simulation with `r n2` samples, `r p2` variables of which `r p_causal2` were causal, `r r2` responses with a per-response proportion of variance explained (PVE) of `r pve2`. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V).
+
+```{r disp corrs 2}
+cat("Gamma (First 5 elements)")
+Gamma2[1:5, 1:5]
+
+cat("Sigma")
+Sigma2
+
+cat("V")
+V2
+```
+
+mr.mash was fitted to the training data (`r (1-prop_testset2)*100`% of the data) updating V and updating the prior weights using mixSQP.
+
+Here, we investigate convergence.
+
+```{r conv 2, fig.height=12, fig.width=15}
+plot(progress_dat2$iter, progress_dat2$ELBO_diff, xlab="Iteration", ylab="log Difference in ELBO", main="ELBO vs iteration", type="b", pch=16, cex.lab=1.5, cex.axis=1.5, log="y")
 ```

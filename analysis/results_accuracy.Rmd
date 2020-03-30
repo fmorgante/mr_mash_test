@@ -28,7 +28,7 @@ accuracy <- function(Y, Yhat) {
 }
 ```
 
-#Simulation 1 -- Shared effects, independent variables
+##Simulation 1 -- Shared effects, independent variables
 
 ```{r load data 1}
 dat1 <- readRDS("output/fit_mr_mash_n600_p1000_p_caus50_r5_pve0.5_sigmaoffdiag1_sigmascale0.8_gammaoffdiag0_gammascale0.8_Voffdiag0.2_Vscale0_updatew0TRUE_updatew0TRUE_updatew0methodmixsqp_updateVTRUE.rds")
@@ -90,6 +90,88 @@ points(Ytest1[, 2], Yhat_test1[, 2], col="blue", pch=2)
 points(Ytest1[, 3], Yhat_test1[, 3], col="red", pch=3)
 points(Ytest1[, 4], Yhat_test1[, 4], col="green", pch=4)
 points(Ytest1[, 5], Yhat_test1[, 5], col="yellow", pch=8)
+abline(0, 1)
+par(mfrow=c(1,1))
+
+r2_train1 <- round(accuracy(Ytrain1, fitted1)$r2, 4)
+r2_test1 <- round(accuracy(Ytest1, Yhat_test1)$r2, 4)
+bias_train1 <- round(accuracy(Ytrain1, fitted1)$bias, 4)
+bias_test1 <- round(accuracy(Ytest1, Yhat_test1)$bias, 4)
+mse_train1 <- round(accuracy(Ytrain1, fitted1)$mse, 4)
+mse_test1 <- round(accuracy(Ytest1, Yhat_test1)$mse, 4)
+
+acc1 <- rbind(r2_train1, r2_test1, bias_train1, bias_test1, mse_train1, mse_test1)
+colnames(acc1) <- paste0("Y", seq(1, r1))
+part_metric1 <- c("Training data r2", "Test data r2", "Training data bias", "Test data bias" , "Training data MSE" , "Test data MSE")
+res1 <- data.frame(part_metric1, acc1)
+colnames(res1)[1] <- c("Partition_metric")
+rownames(res1) <- NULL
+print(res1)
+```
+
+
+##Simulation 2 -- Independent effects, independent variables
+
+```{r load data 2}
+dat2 <- readRDS("output/fit_mr_mash_n600_p1000_p_caus50_r5_pve0.5_sigmaoffdiag0_sigmascale0.8_gammaoffdiag0_gammascale0.8_Voffdiag0.2_Vscale0_updatew0TRUE_updatew0TRUE_updatew0methodmixsqp_updateVTRUE.rds")
+n2 <- dat2$params$n
+p2 <- dat2$params$p
+p_causal2 <- dat2$params$p_causal
+r2 <- dat2$params$r
+pve2 <- dat2$params$pve
+prop_testset2 <- dat2$params$prop_testset
+B2 <- dat2$inputs$B
+V2 <- dat2$inputs$V
+Sigma2 <- dat2$inputs$Sigma
+Gamma2 <- dat2$inputs$Gamma
+Ytrain2 <- dat2$Ytrain
+Ytest2 <- dat2$Ytest
+mu12 <- dat2$fit$mu1
+fitted2 <- dat2$fit$fitted
+Yhat_test2 <- dat2$Yhat_test
+```
+
+The results below are based on simulation with `r n2` samples, `r p2` variables of which `r p_causal2` were causal, `r r2` responses with a per-response proportion of variance explained (PVE) of `r pve2`. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V).
+
+```{r disp corrs 2}
+cat("Gamma (First 5 elements)")
+Gamma2[1:5, 1:5]
+
+cat("Sigma")
+Sigma2
+
+cat("V")
+V2
+```
+
+mr.mash was fitted to the training data (`r (1-prop_testset2)*100`% of the data) updating V and updating the prior weights using mixSQP. Then, responses were predicted on the test data (`r prop_testset2*100`% of the data).
+
+In the plots below, each color/symbol defines a diffrent response.
+
+Here, we compare the estimated effects with the true effects. 
+```{r effects 2, fig.height=12, fig.width=15}
+plot(B2[, 1], mu12[, 1], xlab="True effects", ylab="Estimated effects", main="True vs Estimated Effects", pch=1, cex.lab=1.5, cex.axis=1.5)
+points(B2[, 2], mu12[, 2], col="blue", pch=2)
+points(B2[, 3], mu12[, 3], col="red", pch=3)
+points(B2[, 4], mu12[, 4], col="green", pch=4)
+points(B2[, 5], mu12[, 5], col="yellow", pch=8)
+```
+
+Then, we compare the predicted responses with the true responses in the training data (left panel) and test data (right panel).
+```{r predict 2, fig.height=12, fig.width=15}
+par(mfrow=c(1,2))
+plot(Ytrain2[, 1], fitted2[, 1], xlab="True responses", ylab="Fitted values", main="True vs Fitted values \nTraining data", pch=1, cex.lab=1.5, cex.axis=1.5)
+points(Ytrain2[, 2], fitted2[, 2], col="blue", pch=2)
+points(Ytrain2[, 3], fitted2[, 3], col="red", pch=3)
+points(Ytrain2[, 4], fitted2[, 4], col="green", pch=4)
+points(Ytrain2[, 5], fitted2[, 5], col="yellow", pch=8)
+abline(0, 1)
+
+plot(Ytrain2[, 1], fitted2[, 1], xlab="True responses", ylab="Predicted responses", main="True vs Predicted Responses \nTest data", pch=1, cex.lab=1.5, cex.axis=1.5)
+points(Ytest2[, 2], Yhat_test2[, 2], col="blue", pch=2)
+points(Ytest2[, 3], Yhat_test2[, 3], col="red", pch=3)
+points(Ytest2[, 4], Yhat_test2[, 4], col="green", pch=4)
+points(Ytest2[, 5], Yhat_test2[, 5], col="yellow", pch=8)
 abline(0, 1)
 par(mfrow=c(1,1))
 
