@@ -354,16 +354,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree6ff19bcba6aff353a6d2f682f3abbeccb541e493targetblank6ff19bca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/6ff19bcba6aff353a6d2f682f3abbeccb541e493" target="_blank">6ff19bc</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreea3d9023a5a3a88ed39ddf1956badeec4c6e5bdd8targetblanka3d9023a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/a3d9023a5a3a88ed39ddf1956badeec4c6e5bdd8" target="_blank">a3d9023</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree6ff19bcba6aff353a6d2f682f3abbeccb541e493targetblank6ff19bca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreea3d9023a5a3a88ed39ddf1956badeec4c6e5bdd8targetblanka3d9023a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/6ff19bcba6aff353a6d2f682f3abbeccb541e493" target="_blank">6ff19bc</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/a3d9023a5a3a88ed39ddf1956badeec4c6e5bdd8" target="_blank">a3d9023</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -410,6 +410,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/a3d9023a5a3a88ed39ddf1956badeec4c6e5bdd8/analysis/results_convergence.Rmd" target="_blank">a3d9023</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Add plots and additional info
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/b48d34d7880c26cda58f4afac0bb15422018c5f8/docs/results_convergence.html" target="_blank">b48d34d</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-03-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -833,6 +867,7 @@ n1 &lt;- dat1$params$n
 p1 &lt;- dat1$params$p
 p_causal1 &lt;- dat1$params$p_causal
 r1 &lt;- dat1$params$r
+k1 &lt;- length(dat1$fit$w0)
 pve1 &lt;- dat1$params$pve
 prop_testset1 &lt;- dat1$params$prop_testset
 progress_dat1 &lt;- dat1$fit$progress
@@ -867,60 +902,14 @@ Gamma1 &lt;- dat1$inputs$Gamma</code></pre>
 [3,]  0.00000  0.00000 25.55836  0.00000  0.00000
 [4,]  0.00000  0.00000  0.00000 25.55836  0.00000
 [5,]  0.00000  0.00000  0.00000  0.00000 25.55836</code></pre>
-<p>mr.mash was fitted to the training data (80% of the data) updating V and updating the prior weights using mixSQP.</p>
+<p>mr.mash was fitted to the training data (80% of the data) updating V and updating the prior weights using mixSQP. The mixture prior consisted of 101 components.</p>
 <p>Here, we investigate convergence.</p>
 <pre class="r"><code>plot(progress_dat1$iter, progress_dat1$ELBO_diff, xlab=&quot;Iteration&quot;, ylab=&quot;log Difference in ELBO&quot;, main=&quot;ELBO vs iteration&quot;, type=&quot;b&quot;, pch=16, cex.lab=1.5, cex.axis=1.5, log=&quot;y&quot;)</code></pre>
 <pre><code>Warning in xy.coords(x, y, xlabel, ylabel, log): 7 y values &lt;= 0 omitted
 from logarithmic plot</code></pre>
-<p><img src="figure/results_convergence.Rmd/conv%201-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-conv-1-1">
-Past versions of “conv 1-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-conv-1-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/8621d7dc49ed8b8187aeef7f7d366bf24bab6375/docs/figure/results_convergence.Rmd/conv 1-1.png" target="_blank">8621d7d</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/d5773c96871d2f0faa40949fc3ed30f54dbf4a5f/docs/figure/results_convergence.Rmd/conv 1-1.png" target="_blank">d5773c9</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_convergence.Rmd/ELBO%201-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot(progress_dat1$iter, progress_dat1$mu1_max.diff, xlab=&quot;Iteration&quot;, ylab=&quot;log Difference in max(mu1)&quot;, main=&quot;mu1 vs iteration&quot;, type=&quot;b&quot;, pch=16, cex.lab=1.5, cex.axis=1.5, log=&quot;y&quot;)</code></pre>
+<p><img src="figure/results_convergence.Rmd/mu1%201-1.png" width="1440" style="display: block; margin: auto;" /></p>
 </div>
 <div id="simulation-2-independent-effects-independent-variables" class="section level2">
 <h2>Simulation 2 – Independent effects, independent variables</h2>
@@ -929,6 +918,7 @@ n2 &lt;- dat2$params$n
 p2 &lt;- dat2$params$p
 p_causal2 &lt;- dat2$params$p_causal
 r2 &lt;- dat2$params$r
+k2 &lt;- length(dat2$fit$w0)
 pve2 &lt;- dat2$params$pve
 prop_testset2 &lt;- dat2$params$prop_testset
 progress_dat2 &lt;- dat2$fit$progress
@@ -963,49 +953,14 @@ Gamma2 &lt;- dat2$inputs$Gamma</code></pre>
 [3,]  0.00000  0.00000 27.69452  0.00000  0.00000
 [4,]  0.00000  0.00000  0.00000 25.53166  0.00000
 [5,]  0.00000  0.00000  0.00000  0.00000 29.00472</code></pre>
-<p>mr.mash was fitted to the training data (80% of the data) updating V and updating the prior weights using mixSQP.</p>
+<p>mr.mash was fitted to the training data (80% of the data) updating V and updating the prior weights using mixSQP. The mixture prior consisted of 101 components.</p>
 <p>Here, we investigate convergence.</p>
 <pre class="r"><code>plot(progress_dat2$iter, progress_dat2$ELBO_diff, xlab=&quot;Iteration&quot;, ylab=&quot;log Difference in ELBO&quot;, main=&quot;ELBO vs iteration&quot;, type=&quot;b&quot;, pch=16, cex.lab=1.5, cex.axis=1.5, log=&quot;y&quot;)</code></pre>
 <pre><code>Warning in xy.coords(x, y, xlabel, ylabel, log): 13 y values &lt;= 0 omitted
 from logarithmic plot</code></pre>
-<p><img src="figure/results_convergence.Rmd/conv%202-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-conv-2-1">
-Past versions of “conv 2-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-conv-2-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/4f5c29188cc0e30ca968f949eb01f9e78a6b15c1/docs/figure/results_convergence.Rmd/conv 2-1.png" target="_blank">4f5c291</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_convergence.Rmd/ELBO%202-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot(progress_dat2$iter, progress_dat2$mu1_max.diff, xlab=&quot;Iteration&quot;, ylab=&quot;log Difference in max(mu1)&quot;, main=&quot;mu1 vs iteration&quot;, type=&quot;b&quot;, pch=16, cex.lab=1.5, cex.axis=1.5, log=&quot;y&quot;)</code></pre>
+<p><img src="figure/results_convergence.Rmd/mu1%202-1.png" width="1440" style="display: block; margin: auto;" /></p>
 </div>
 <div id="simulation-3-independent-effects-correlated-variables" class="section level2">
 <h2>Simulation 3 – Independent effects, correlated variables</h2>
@@ -1014,6 +969,7 @@ n3 &lt;- dat3$params$n
 p3 &lt;- dat3$params$p
 p_causal3 &lt;- dat3$params$p_causal
 r3 &lt;- dat3$params$r
+k3 &lt;- length(dat3$fit$w0)
 pve3 &lt;- dat3$params$pve
 prop_testset3 &lt;- dat3$params$prop_testset
 progress_dat3 &lt;- dat3$fit$progress
@@ -1048,49 +1004,14 @@ Gamma3 &lt;- dat3$inputs$Gamma</code></pre>
 [3,]  0.00000  0.00000 27.69452  0.00000  0.00000
 [4,]  0.00000  0.00000  0.00000 25.53166  0.00000
 [5,]  0.00000  0.00000  0.00000  0.00000 29.00472</code></pre>
-<p>mr.mash was fitted to the training data (80% of the data) updating V and updating the prior weights using mixSQP.</p>
+<p>mr.mash was fitted to the training data (80% of the data) updating V and updating the prior weights using mixSQP. The mixture prior consisted of 101 components.</p>
 <p>Here, we investigate convergence.</p>
 <pre class="r"><code>plot(progress_dat3$iter, progress_dat3$ELBO_diff, xlab=&quot;Iteration&quot;, ylab=&quot;log Difference in ELBO&quot;, main=&quot;ELBO vs iteration&quot;, type=&quot;b&quot;, pch=16, cex.lab=1.5, cex.axis=1.5, log=&quot;y&quot;)</code></pre>
 <pre><code>Warning in xy.coords(x, y, xlabel, ylabel, log): 13 y values &lt;= 0 omitted
 from logarithmic plot</code></pre>
-<p><img src="figure/results_convergence.Rmd/conv%203-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-conv-3-1">
-Past versions of “conv 3-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-conv-3-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/7a2afe79917b474da63f04e00a46acf328372814/docs/figure/results_convergence.Rmd/conv 3-1.png" target="_blank">7a2afe7</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_convergence.Rmd/ELBO%203-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot(progress_dat3$iter, progress_dat3$mu1_max.diff, xlab=&quot;Iteration&quot;, ylab=&quot;log Difference in max(mu1)&quot;, main=&quot;mu1 vs iteration&quot;, type=&quot;b&quot;, pch=16, cex.lab=1.5, cex.axis=1.5, log=&quot;y&quot;)</code></pre>
+<p><img src="figure/results_convergence.Rmd/mu1%203-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
