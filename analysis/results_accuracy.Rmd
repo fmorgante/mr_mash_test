@@ -12,27 +12,19 @@ editor_options:
 ```{r set opts}
 options(stringsAsFactors = FALSE)
 
-mse <- function(Y, Yhat) {
-    msee <- rep(NA, ncol(Y))
-    
-    for(i in 1:ncol(Y)){
-        msee[i] <- mean((Y[, i] - Yhat[, i])^2)
-    }
-    
-    return(msee)
-}
-
 accuracy <- function(Y, Yhat) {
   bias <- rep(NA, ncol(Y))
   r2 <- rep(NA, ncol(Y))
+  mse <- rep(NA, ncol(Y))
   
   for(i in 1:ncol(Y)){
     fit  <- lm(Y[, i] ~ Yhat[, i])
     bias[i] <- coef(fit)[2] 
     r2[i] <- summary(fit)$r.squared
+    mse[i] <- mean((Y[, i] - Yhat[, i])^2)
   }
   
-  return(list(bias=bias, r2=r2))
+  return(list(bias=bias, r2=r2, mse=mse))
 }
 ```
 
@@ -101,12 +93,12 @@ points(Ytest1[, 5], Yhat_test1[, 5], col="yellow", pch=8)
 abline(0, 1)
 par(mfrow=c(1,1))
 
-r2_train1 <- accuracy(Ytrain1, fitted1)$r2
-r2_test1 <- accuracy(Ytest1, Yhat_test1)$r2
-bias_train1 <- accuracy(Ytrain1, fitted1)$bias
-bias_test1 <- accuracy(Ytest1, Yhat_test1)$bias
-mse_train1 <- mse(Ytrain1, fitted1)
-mse_test1 <- mse(Ytest1, Yhat_test1)
+r2_train1 <- round(accuracy(Ytrain1, fitted1)$r2, 4)
+r2_test1 <- round(accuracy(Ytest1, Yhat_test1)$r2, 4)
+bias_train1 <- round(accuracy(Ytrain1, fitted1)$bias, 4)
+bias_test1 <- round(accuracy(Ytest1, Yhat_test1)$bias, 4)
+mse_train1 <- round(accuracy(Ytrain1, fitted1)$mse, 4)
+mse_test1 <- round(accuracy(Ytest1, Yhat_test1)$mse, 4)
 
 acc1 <- rbind(r2_train1, r2_test1, bias_train1, bias_test1, mse_train1, mse_test1)
 colnames(acc1) <- paste0("Y", seq(1, r1))
