@@ -45,17 +45,32 @@ cat("V")
 V1
 ```
 
-mr.mash was fitted to the training data (`r (1-prop_testset1)*100` of the data) updating V and updating the prior weights using mixSQP. Then, responses were predicted on the test data (`r 1-prop_testset1*100` of the data).
+mr.mash was fitted to the training data (`r (1-prop_testset1)*100`% of the data) updating V and updating the prior weights using mixSQP. Then, responses were predicted on the test data (`r prop_testset1*100`% of the data).
 
-Here, we compare the estimated effects to the true effects 
-
-```{r effects 1}
-plot(B1[, 1], mu11[, 1], xlab="True effects", ylab="Estimated effects", main="True vs Estimated Effects")
-points(B1[, 2], mu11[, 2], col="blue")
-points(B1[, 3], mu11[, 3], col="red")
-points(B1[, 4], mu11[, 4], col="green")
-points(B1[, 5], mu11[, 5], col="yellow")
+Here, we compare the estimated effects with the true effects. 
+```{r effects 1, fig.height=12, fig.width=15}
+plot(B1[, 1], mu11[, 1], xlab="True effects", ylab="Estimated effects", main="True vs Estimated Effects", pch=1)
+points(B1[, 2], mu11[, 2], col="blue", pch=2)
+points(B1[, 3], mu11[, 3], col="red", pch=3)
+points(B1[, 4], mu11[, 4], col="green", pch=4)
+points(B1[, 5], mu11[, 5], col="yellow", pch=8)
 ```
 
+Then, we compare the predicted responses with the true responses in the training data (left panel) and test data (right panel).
+```{r predict 1, fig.height=12, fig.width=15}
+par(mfrow=c(1,2))
+plot(Ytrain1[, 1], fitted1[, 1], xlab="True responses", ylab="Fitted values", main="True vs Fitted values \nTraining data", pch=1)
+points(Ytrain1[, 2], fitted1[, 2], col="blue", pch=2)
+points(Ytrain1[, 3], fitted1[, 3], col="red", pch=3)
+points(Ytrain1[, 4], fitted1[, 4], col="green", pch=4)
+points(Ytrain1[, 5], fitted1[, 5], col="yellow", pch=8)
+
+plot(Ytrain1[, 1], fitted1[, 1], xlab="True responses", ylab="Predicted responses", main="True vs Predicted Responses \nTest data", pch=1)
+points(Ytest1[, 2], Yhat_test1[, 2], col="blue", pch=2)
+points(Ytest1[, 3], Yhat_test1[, 3], col="red", pch=3)
+points(Ytest1[, 4], Yhat_test1[, 4], col="green", pch=4)
+points(Ytest1[, 5], Yhat_test1[, 5], col="yellow", pch=8)
+par(mfrow=c(1,1))
+```
 
 
