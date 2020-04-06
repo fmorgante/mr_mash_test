@@ -11,3 +11,5 @@ analysis/*_cache
 analysis/site_libs
 code/*.out
 code/*.err
+dsc/outfiles
+output/*
