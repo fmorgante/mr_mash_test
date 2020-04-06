@@ -1,0 +1,1 @@
+err <- accuracy(Y, Yhat)$r2
