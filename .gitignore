@@ -13,3 +13,5 @@ code/*.out
 code/*.err
 dsc/outfiles
 output/*
+
+**/.sos

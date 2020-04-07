@@ -3,16 +3,16 @@
 ## A DSC for evaluating prediction accuracy of
 ## mr.mash in different scenarios.
 DSC:
-  R_libs:    mr.mash.alpha
-  lib_path:  functions
+  R_libs: mr.mash.alpha
+  lib_path: functions
   exec_path: modules
   global:
     n: 600
     r: 5
-    p: 1000
-    causal: 50 
+    p: 100
+    causal: 5 
     pve: 0.5
-  replicate: 2
+  replicate: 1
   define:
     simulate: indepX_lowcorrV_indepB, corrX_lowcorrV_indepB, 
               indepX_lowcorrV_sharedB, corrX_lowcorrV_sharedB             
@@ -111,8 +111,8 @@ mr_mash_consec_em: fit_mr_mash_mod.R
   standardize: TRUE
   update_V: TRUE
   ca_update_order: "consecutive"
-  fit_obj: out$fit
-  time: out$elapsed_time
+  $fit_obj: out$fit
+  $time: out$elapsed_time
   
 #mixsqp w0 updates, consecutive coordinate ascent updates
 mr_mash_consec_mixsqp: fit_mr_mash_mod.R
@@ -123,8 +123,8 @@ mr_mash_consec_mixsqp: fit_mr_mash_mod.R
   standardize: TRUE
   update_V: TRUE
   ca_update_order: "consecutive"
-  fit_obj: out$fit
-  time: out$elapsed_time
+  $fit_obj: out$fit
+  $time: out$elapsed_time
 
 #EM w0 updates, decreasing logBF coordinate ascent updates
 mr_mash_declogBF_em: fit_mr_mash_mod.R
@@ -135,8 +135,8 @@ mr_mash_declogBF_em: fit_mr_mash_mod.R
   standardize: TRUE
   update_V: TRUE
   ca_update_order: "decreasing_logBF"
-  fit_obj: out$fit
-  time: out$elapsed_time
+  $fit_obj: out$fit
+  $time: out$elapsed_time
   
 #mixsqp w0 updates, decreasing logBF coordinate ascent updates
 mr_mash_declogBF_mixsqp: fit_mr_mash_mod.R
@@ -147,8 +147,8 @@ mr_mash_declogBF_mixsqp: fit_mr_mash_mod.R
   standardize: TRUE
   update_V: TRUE
   ca_update_order: "decreasing_logBF"
-  fit_obj: out$fit
-  time: out$elapsed_time
+  $fit_obj: out$fit
+  $time: out$elapsed_time
 
 #EM w0 updates, increasing logBF coordinate ascent updates
 mr_mash_inclogBF_em: fit_mr_mash_mod.R
@@ -159,8 +159,8 @@ mr_mash_inclogBF_em: fit_mr_mash_mod.R
   standardize: TRUE
   update_V: TRUE
   ca_update_order: "increasing_logBF"
-  fit_obj: out$fit
-  time: out$elapsed_time
+  $fit_obj: out$fit
+  $time: out$elapsed_time
   
 #mixsqp w0 updates, increasing logBF coordinate ascent updates
 mr_mash_inclogBF_mixsqp: fit_mr_mash_mod.R
@@ -171,8 +171,8 @@ mr_mash_inclogBF_mixsqp: fit_mr_mash_mod.R
   standardize: TRUE
   update_V: TRUE
   ca_update_order: "increasing_logBF"
-  fit_obj: out$fit
-  time: out$elapsed_time
+  $fit_obj: out$fit
+  $time: out$elapsed_time
 
 
 ## Predict module

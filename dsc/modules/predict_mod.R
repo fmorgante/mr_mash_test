@@ -1,1 +1,1 @@
-Yhattest <- mr.mash.alpha::predict(fit, X)
+Yhattest <- mr.mash.alpha::predict.mr.mash(fit, X)
