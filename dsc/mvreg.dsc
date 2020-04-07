@@ -12,7 +12,7 @@ DSC:
     p: 100
     causal: 5 
     pve: 0.5
-  replicate: 1
+  replicate: 5
   define:
     simulate: indepX_lowcorrV_indepB, corrX_lowcorrV_indepB, 
               indepX_lowcorrV_sharedB, corrX_lowcorrV_sharedB             
