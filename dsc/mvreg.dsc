@@ -3,7 +3,7 @@
 ## A DSC for evaluating prediction accuracy of
 ## mr.mash in different scenarios.
 DSC:
-  R_libs: mr.mash.alpha
+  R_libs: mr.mash.alpha, mr.ash.alpha
   lib_path: functions
   exec_path: modules
   global:
@@ -18,7 +18,8 @@ DSC:
               indepX_lowcorrV_sharedB, corrX_lowcorrV_sharedB             
     fit:      mr_mash_consec_em, mr_mash_consec_mixsqp, 
               mr_mash_declogBF_em, mr_mash_declogBF_mixsqp,
-              mr_mash_inclogBF_em, mr_mash_inclogBF_mixsqp,
+              mr_mash_consec_em_init_indep, mr_mash_consec_mixsqp_init_indep,
+              mr_mash_consec_em_init_shared, mr_mash_consec_mixsqp_init_shared
     predict:  predict_linear
     score:    r2, mse, bias
   run: simulate * fit * predict * score
@@ -111,6 +112,7 @@ mr_mash_consec_em: fit_mr_mash_mod.R
   standardize: TRUE
   update_V: TRUE
   ca_update_order: "consecutive"
+  mr_ash_method: NULL
   $fit_obj: out$fit
   $time: out$elapsed_time
   
@@ -123,6 +125,7 @@ mr_mash_consec_mixsqp: fit_mr_mash_mod.R
   standardize: TRUE
   update_V: TRUE
   ca_update_order: "consecutive"
+  mr_ash_method: NULL
   $fit_obj: out$fit
   $time: out$elapsed_time
 
@@ -135,6 +138,7 @@ mr_mash_declogBF_em: fit_mr_mash_mod.R
   standardize: TRUE
   update_V: TRUE
   ca_update_order: "decreasing_logBF"
+  mr_ash_method: NULL
   $fit_obj: out$fit
   $time: out$elapsed_time
   
@@ -147,33 +151,66 @@ mr_mash_declogBF_mixsqp: fit_mr_mash_mod.R
   standardize: TRUE
   update_V: TRUE
   ca_update_order: "decreasing_logBF"
+  mr_ash_method: NULL
   $fit_obj: out$fit
   $time: out$elapsed_time
-
-#EM w0 updates, increasing logBF coordinate ascent updates
-mr_mash_inclogBF_em: fit_mr_mash_mod.R
+  
+#EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
+#run on each response
+mr_mash_consec_em_init_indep: fit_mr_mash_mod.R
   X: $Xtrain
   Y: $Ytrain
   update_w0: TRUE
   update_w0_method: "EM"
   standardize: TRUE
   update_V: TRUE
-  ca_update_order: "increasing_logBF"
+  ca_update_order: "consecutive"
+  mr_ash_method: "independent"
   $fit_obj: out$fit
   $time: out$elapsed_time
-  
-#mixsqp w0 updates, increasing logBF coordinate ascent updates
-mr_mash_inclogBF_mixsqp: fit_mr_mash_mod.R
+
+#mixsqp w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
+#run on each response
+mr_mash_consec_mixsqp_init_indep: fit_mr_mash_mod.R
   X: $Xtrain
   Y: $Ytrain
   update_w0: TRUE
   update_w0_method: "mixsqp"
   standardize: TRUE
   update_V: TRUE
-  ca_update_order: "increasing_logBF"
+  ca_update_order: "consecutive"
+  mr_ash_method: "independent"
+  $fit_obj: out$fit
+  $time: out$elapsed_time
+  
+#EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
+#run on stacked responses
+mr_mash_consec_em_init_shared: fit_mr_mash_mod.R
+  X: $Xtrain
+  Y: $Ytrain
+  update_w0: TRUE
+  update_w0_method: "EM"
+  standardize: TRUE
+  update_V: TRUE
+  ca_update_order: "consecutive"
+  mr_ash_method: "shared"
   $fit_obj: out$fit
   $time: out$elapsed_time
 
+#mixsqp w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
+#run on stacked responses
+mr_mash_consec_mixsqp_init_shared: fit_mr_mash_mod.R
+  X: $Xtrain
+  Y: $Ytrain
+  update_w0: TRUE
+  update_w0_method: "mixsqp"
+  standardize: TRUE
+  update_V: TRUE
+  ca_update_order: "consecutive"
+  mr_ash_method: "shared"
+  $fit_obj: out$fit
+  $time: out$elapsed_time
+  
 
 ## Predict module
 predict_linear: predict_mod.R
