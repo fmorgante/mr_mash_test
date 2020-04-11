@@ -8,11 +8,11 @@ DSC:
   exec_path: modules
   global:
     n: 600
-    r: 5
-    p: 100
-    causal: 5 
+    r: 10
+    p: 1000
+    causal: 50 
     pve: 0.5
-  replicate: 5
+  replicate: 50
   define:
     simulate: indepX_lowcorrV_indepB, corrX_lowcorrV_indepB, 
               indepX_lowcorrV_sharedB, corrX_lowcorrV_sharedB             
