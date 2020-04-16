@@ -173,7 +173,7 @@ V[1:5, 1:5]
 
 Then, responses were predicted on the test data (`r prop_testset*100`% of the data). 
 
-Here, we evaluate the accuracy of prediction assessed by r^2 and bias (slope) from the regression of the true response on the predicted response, and the relative mean square error (RMSE) in the test data. The boxplots are across simulations and responses.
+Here, we evaluate the accuracy of prediction assessed by $r^2$ and bias (slope) from the regression of the true response on the predicted response, and the relative mean square error (RMSE) in the test data. The boxplots are across simulations and responses.
 
 ```{r accuracy, fig.height=12, fig.width=15}
 ###Convert from list to data.frame for plotting
@@ -206,8 +206,8 @@ p <- ggplot(dsc_plots, aes_string(x = "method_fac", y = "score_value", fill = "m
     scale_fill_manual(values = colors) +
     labs(x = "", y = "Accuracy", title = "Prediction accuracy", fill="Method") +
     geom_hline(data=hlines, aes(yintercept = max_val), linetype="dashed", size=1) +
-    theme_cowplot(font_size = 14) +
-    theme(axis.line = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
+    theme_cowplot(font_size = 20) +
+    theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
 
 shift_legend(p)
 ```
@@ -219,13 +219,13 @@ p_rmse_nooutliers <- ggplot(dsc_plots[which(dsc_plots$score_metric=="rmse"), ], 
   Ipaper::geom_boxplot2(color = "black", outlier.size = 1, width = 0.85, width.errorbar = 0) +
   scale_fill_manual(values = colors) +
   labs(x = "", y = "Accuracy", title = "RMSE (relative to consec_em)", fill="Method") +
-  theme_cowplot(font_size = 14) +
-  theme(axis.line = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
+  theme_cowplot(font_size = 20) +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
 
 print(p_rmse_nooutliers)
 ```
 
-Here, we look at the elapsed time (log_{10} seconds) of *mr.mash*. Note that this time does not include the run time of *mr.ash* in the cases where we used it to initialize the posterior means of the regression coefficients.
+Here, we look at the elapsed time ($log_{10}$ seconds) of *mr.mash*. Note that this time does not include the run time of *mr.ash* in the cases where we used it to initialize the posterior means of the regression coefficients.
 
 ```{r run time, fig.height=12, fig.width=15}
 dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="r2"), 
@@ -236,8 +236,8 @@ p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill =
   scale_fill_manual(values = colors) +
   scale_y_continuous(trans='log10') +
   labs(x = "", y = "Elapsed time (log10(seconds))",title = "Run time", fill="Method") +
-  theme_cowplot(font_size = 14) +
-  theme(axis.line = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
+  theme_cowplot(font_size = 20) +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
 
 print(p_time)
 ```
