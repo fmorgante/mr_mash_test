@@ -1,0 +1,243 @@
+---
+title: "Independent predictors, shared effects, lowly correlated residuals"
+author: "Fabio Morgante"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  workflowr::wflow_html:
+    toc: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r set opts, warning=FALSE, message=FALSE}
+###Set options
+options(stringsAsFactors=FALSE)
+
+###Load libraries
+library(dscrutils)
+library(ggplot2)
+library(cowplot)
+
+###Function to convert dscquery output from list to data.frame suitable for plotting
+convert_dsc_to_dataframe <- function(dsc){
+  ###Data.frame to store the results after convertion
+  dsc_df <- data.frame()
+  
+  ###Get length of list elements 
+  n_elem <- length(dsc$DSC)
+  
+  ###Loop through the dsc list
+  for(i in 1:n_elem){
+    ##Prepare vectors making up the final data frame
+    r_scalar <- dsc$simulate.r[i]
+    repp <- rep(dsc$DSC[i], times=r_scalar)
+    n <- rep(dsc$simulate.n[i], times=r_scalar)
+    p <- rep(dsc$simulate.p[i], times=r_scalar)
+    p_causal <- rep(dsc$simulate.p_causal[i], times=r_scalar)
+    r <- rep(dsc$simulate.r[i], times=r_scalar)
+    response <- 1:r_scalar
+    pve <- rep(dsc$simulate.pve[i], times=r_scalar)
+    simulate <- rep(dsc$simulate[i], times=r_scalar)
+    fit <- rep(dsc$fit[i], times=r_scalar)
+    score <- rep(dsc$score[i], times=r_scalar)
+    score.err <- dsc$score.err[[i]]
+    timing <- rep(dsc$fit.time[i], times=r_scalar)
+    
+    ##Build the data frame
+    df <- data.frame(rep=repp, n=n, p=p, p_num_caus=p_causal, r=r, response=response, pve=pve,  
+                     scenario=simulate, method=fit, score_metric=score, score_value=score.err, time=timing)
+    dsc_df <- rbind(dsc_df, df)
+  }
+  
+  return(dsc_df)
+}
+
+###Function to compute rmse (relative to mr_mash_consec_em)
+compute_rmse <- function(dsc_plot, log10_scale=FALSE){
+  dsc_plot <- transform(dsc_plot, experiment=paste(rep, response, scenario, sep="-"))
+  t <- 0
+  for (i in unique(dsc_plot$experiment)) {
+    t <- t+1
+    rmse_data  <- dsc_plot[which(dsc_plot$experiment == i & dsc_plot$score_metric=="mse"), ]
+    mse_mr_mash_consec_em <- rmse_data[which(rmse_data$method=="mr_mash_consec_em"), "score_value"]
+    if(!log10_scale)
+      rmse_data$score_value <- rmse_data$score_value/mse_mr_mash_consec_em
+    else
+      rmse_data$score_value <- log10(rmse_data$score_value/mse_mr_mash_consec_em)
+    rmse_data$score_metric <- "rmse"
+    if(t>1){
+      rmse_data_tot <- rbind(rmse_data_tot, rmse_data)
+    } else if(t==1){
+      rmse_data_tot <- rmse_data
+    }
+  }
+  
+  rmse_data_tot$experiment <- NULL
+  
+  return(rmse_data_tot)
+}
+
+###Function to shift legend in the empty facet
+shift_legend <- function(p) {
+  library(gtable)
+  library(lemon)
+  # check if p is a valid object
+  if(!(inherits(p, "gtable"))){
+    if(inherits(p, "ggplot")){
+      gp <- ggplotGrob(p) # convert to grob
+    } else {
+      message("This is neither a ggplot object nor a grob generated from ggplotGrob. Returning original plot.")
+      return(p)
+    }
+  } else {
+    gp <- p
+  }
+  
+  # check for unfilled facet panels
+  facet.panels <- grep("^panel", gp[["layout"]][["name"]])
+  empty.facet.panels <- sapply(facet.panels, function(i) "zeroGrob" %in% class(gp[["grobs"]][[i]]), 
+                               USE.NAMES = F)
+  empty.facet.panels <- facet.panels[empty.facet.panels]
+  
+  if(length(empty.facet.panels) == 0){
+    message("There are no unfilled facet panels to shift legend into. Returning original plot.")
+    return(p)
+  }
+  
+  # establish name of empty panels
+  empty.facet.panels <- gp[["layout"]][empty.facet.panels, ]
+  names <- empty.facet.panels$name
+  
+  # return repositioned legend
+  reposition_legend(p, 'center', panel=names)
+}
+
+###Set some quantities used in the following plots
+colors <- c("skyblue", "dodgerblue", "limegreen", "green", "gold", "orange", "red", "firebrick")
+facet_labels <- c(r2 = "r2", bias = "bias", rmse="RMSE (relative to consec_em)")
+```
+
+```{r load data, warning=FALSE, message=FALSE}
+###Load the dsc results
+dsc_out <- dscquery("output/dsc", c("simulate.n", "simulate.p", "simulate.p_causal", "simulate.r",   
+                                 "simulate.pve", "simulate.Sigma_cor_offdiag", "simulate.Sigma_scale",
+                                 "simulate.Gamma_cor_offdiag", "simulate.Gamma_scale",
+                                 "simulate.V_cor_offdiag", "simulate.V_offdiag_scale", "simulate.prop_testset",
+                                 "simulate", "fit", "score", "score.err", "fit.time"), 
+                    conditions = "$(simulate) == 'indepX_lowcorrV_sharedB'", verbose=FALSE,
+                    ignore.missing.files = TRUE )
+
+###Obtain simulation parameters
+n <- unique(dsc_out$simulate.n)
+p <- unique(dsc_out$simulate.p)
+p_causal <- unique(dsc_out$simulate.p_causal)
+r <- unique(dsc_out$simulate.r)
+k <- 166
+pve <- unique(dsc_out$simulate.pve)
+prop_testset <- unique(dsc_out$simulate.prop_testset)
+Sigma_cor_offdiag <- unique(dsc_out$simulate.Sigma_cor_offdiag)
+Sigma_scale <- unique(dsc_out$simulate.Sigma_scale)
+Gamma_cor_offdiag <- unique(dsc_out$simulate.Gamma_cor_offdiag)
+Gamma_scale <- unique(dsc_out$simulate.Gamma_scale)
+V_cor_offdiag <- unique(dsc_out$simulate.V_cor_offdiag)
+V_offdiag_scale <- unique(dsc_out$simulate.V_offdiag_scale)
+
+Sigma <- mr.mash.alpha:::create_cov_canonical(r, singletons=FALSE, hetgrid=Sigma_cor_offdiag)[[1]]*Sigma_scale
+Gamma <- mr.mash.alpha:::create_cov_canonical(p, singletons=FALSE, hetgrid=Gamma_cor_offdiag)[[1]]*Gamma_scale
+V <- mr.mash.alpha:::create_cov_canonical(r, singletons=FALSE, hetgrid=V_cor_offdiag)[[1]]*V_offdiag_scale
+
+###Remove list elements that are not useful anymore
+dsc_out$simulate.prop_testset <- NULL
+dsc_out$simulate.Sigma_cor_offdiag <- NULL
+dsc_out$simulate.Sigma_scale <- NULL
+dsc_out$simulate.Gamma_cor_offdiag <- NULL
+dsc_out$simulate.Gamma_scale <- NULL
+dsc_out$simulate.V_cor_offdiag <- NULL
+dsc_out$simulate.V_offdiag_scale <- NULL
+```
+
+The results below are based on 50 simulations with `r n` samples, `r p` variables of which `r p_causal` were causal, `r r` responses with a per-response proportion of variance explained (PVE) of `r pve`. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V). Below are the covariance matrices used. Note that the diagonal elements of V were then adjusted to produce the desired PVE.
+
+```{r disp corrs}
+cat("Gamma (First 5 elements)")
+Gamma[1:5, 1:5]
+
+cat("Sigma (First 5 elements)")
+Sigma[1:5, 1:5]
+
+cat("V (First 5 elements)")
+V[1:5, 1:5]
+```
+
+*mr.mash* was fitted to the training data (`r (1-prop_testset)*100`% of the data) updating V and updating the prior weights. We investigate a few combinations of methods to update the prior weights (i.e., EM and mixSQP), orderings of the coordinate ascent updates (i.e., consecutive and decreasing logBF from a multivariate simple linear regression with MASH prior), and initialization of the posterior means of the regression coefficients (i.e., 0, from *mr.ash* assuming independent effects across tissues, and from *mr.ash* assuming shared effects across tissues). The mixture prior consisted of `r k` components defined by a few canonical matrices correpsonding to different settings of effect sharing/specificity (i.e., zero, singletons, independent, low heterogeneity, medium heterogeneity, high heterogeneity, shared) scaled by a grid of values (i.e., from 0.1 to 2.1 in steps of 0.2). The same grid was used in *mr.ash* with the addition of 0. Convergence was declared when the maximum difference in the posterior mean of the regression coefficients between two successive iterations was smaller than 1e-4.
+
+Then, responses were predicted on the test data (`r prop_testset*100`% of the data). 
+
+Here, we evaluate the accuracy of prediction assessed by r^2 and bias (slope) from the regression of the true response on the predicted response, and the relative mean square error (RMSE) in the test data. The boxplots are across simulations and responses.
+
+```{r accuracy, fig.height=12, fig.width=15}
+###Convert from list to data.frame for plotting
+dsc_plots <- convert_dsc_to_dataframe(dsc_out)
+
+###Compute rmse score (relative to mr_mash_consec_em) and add it to the data
+rmse_dat <- compute_rmse(dsc_plots)
+dsc_plots <- rbind(dsc_plots, rmse_dat)
+
+###Remove mse from scores
+dsc_plots <- dsc_plots[which(dsc_plots$score_metric!="mse"), ]
+
+###Create factor version of method
+###Create factor version of method
+dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_consec_em", "mr_mash_consec_em_init_indep",
+                                                        "mr_mash_consec_em_init_shared", "mr_mash_declogBF_em",
+                                                        "mr_mash_consec_mixsqp", "mr_mash_consec_mixsqp_init_indep", 
+                                                        "mr_mash_consec_mixsqp_init_shared", "mr_mash_declogBF_mixsqp"),
+                                                labels=c("consec_em", "consec_em_mrash_indep", "consec_em_mrash_shared",
+                                                         "decrease_logBF_em", "consec_mixsqp", "consec_mixsqp_mrash_indep", 
+                                                         "consec_mixsqp_mrash_shared", "decrease_logBF_mixsqp"))
+
+###Build data.frame with best accuracy achievable
+hlines <- data.frame(score_metric=c("r2", "bias"), max_val=c(unique(dsc_plots$pve), 1))
+
+###Create plots
+p <- ggplot(dsc_plots, aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
+    geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
+    facet_wrap(vars(score_metric), scales="free_y", ncol=2, labeller=labeller(score_metric=facet_labels)) +
+    scale_fill_manual(values = colors) +
+    labs(x = "", y = "Accuracy", title = "Prediction accuracy", fill="Method") +
+    geom_hline(data=hlines, aes(yintercept = max_val), linetype="dashed", size=1) +
+    theme_cowplot(font_size = 14) +
+    theme(axis.line = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+shift_legend(p)
+```
+
+Let's now remove outliers from the RMSE plot to make things a little clearer.
+
+```{r accuracy rmse, fig.height=12, fig.width=15}
+p_rmse_nooutliers <- ggplot(dsc_plots[which(dsc_plots$score_metric=="rmse"), ], aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
+  Ipaper::geom_boxplot2(color = "black", outlier.size = 1, width = 0.85, width.errorbar = 0) +
+  scale_fill_manual(values = colors) +
+  labs(x = "", y = "Accuracy", title = "RMSE (relative to consec_em)", fill="Method") +
+  theme_cowplot(font_size = 14) +
+  theme(axis.line = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+print(p_rmse_nooutliers)
+```
+
+Here, we look at the elapsed time (log_{10} seconds) of *mr.mash*. Note that this time does not include the run time of *mr.ash* in the cases where we used it to initialize the posterior means of the regression coefficients.
+
+```{r run time, fig.height=12, fig.width=15}
+dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="r2"), 
+                          -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))]
+
+p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
+  geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
+  scale_fill_manual(values = colors) +
+  scale_y_continuous(trans='log10') +
+  labs(x = "", y = "Elapsed time (log10(seconds))",title = "Run time", fill="Method") +
+  theme_cowplot(font_size = 14) +
+  theme(axis.line = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+print(p_time)
+```
