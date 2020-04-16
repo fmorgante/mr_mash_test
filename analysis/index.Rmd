@@ -11,10 +11,12 @@ editor_options:
 This website includes analyses to assess the performance of *mr.mash*.
 
 Results for meeting on 03/30/2020.
+
 + [Assessment of prediction accuracy.](results_accuracy.html)
 + [Assessment of convergence.](results_convergence.html)
 
 Results for meeting on 04/16/2020.
+
 + [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: independent predictors, shared effects, lowly correlated residuals.](results_indepX_lowcorrV_sharedB.html)
 + [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: independent predictors, independent effects, lowly correlated residuals.]
 + [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: correlated predictors, shared effects, lowly correlated residuals.]
