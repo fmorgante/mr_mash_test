@@ -1,5 +1,5 @@
 ---
-title: "Independent predictors, shared effects, lowly correlated residuals"
+title: "Independent predictors, independent effects, lowly correlated residuals"
 author: "Fabio Morgante"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
@@ -125,7 +125,7 @@ dsc_out <- dscquery("output/dsc", c("simulate.n", "simulate.p", "simulate.p_caus
                                  "simulate.Gamma_cor_offdiag", "simulate.Gamma_scale",
                                  "simulate.V_cor_offdiag", "simulate.V_offdiag_scale", "simulate.prop_testset",
                                  "simulate", "fit", "score", "score.err", "fit.time"), 
-                    conditions = "$(simulate) == 'indepX_lowcorrV_sharedB'", verbose=FALSE,
+                    conditions = "$(simulate) == 'indepX_lowcorrV_indepB'", verbose=FALSE,
                     ignore.missing.files = TRUE )
 
 ###Obtain simulation parameters
