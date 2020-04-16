@@ -17,6 +17,7 @@ options(stringsAsFactors=FALSE)
 library(dscrutils)
 library(ggplot2)
 library(cowplot)
+library(scales)
 
 ###Function to convert dscquery output from list to data.frame suitable for plotting
 convert_dsc_to_dataframe <- function(dsc){
@@ -207,7 +208,8 @@ p <- ggplot(dsc_plots, aes_string(x = "method_fac", y = "score_value", fill = "m
     labs(x = "", y = "Accuracy", title = "Prediction accuracy", fill="Method") +
     geom_hline(data=hlines, aes(yintercept = max_val), linetype="dashed", size=1) +
     theme_cowplot(font_size = 20) +
-    theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+    theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+          plot.title = element_text(hjust = 0.5))
 
 shift_legend(p)
 ```
@@ -220,7 +222,8 @@ p_rmse_nooutliers <- ggplot(dsc_plots[which(dsc_plots$score_metric=="rmse"), ], 
   scale_fill_manual(values = colors) +
   labs(x = "", y = "Accuracy", title = "RMSE (relative to consec_em)", fill="Method") +
   theme_cowplot(font_size = 20) +
-  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        plot.title = element_text(hjust = 0.5))
 
 print(p_rmse_nooutliers)
 ```
@@ -234,10 +237,12 @@ dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric
 p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors) +
-  scale_y_continuous(trans='log10') +
-  labs(x = "", y = "Elapsed time (log10(seconds))",title = "Run time", fill="Method") +
+  scale_y_continuous(trans='log10', breaks = trans_breaks("log10", function(x) 10^x),
+                      labels = trans_format("log10", math_format(10^.x))) +
+  labs(x = "", y = "Elapsed time (seconds) in log10 scale",title = "Run time", fill="Method") +
   theme_cowplot(font_size = 20) +
-  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        plot.title = element_text(hjust = 0.5))
 
 print(p_time)
 ```
