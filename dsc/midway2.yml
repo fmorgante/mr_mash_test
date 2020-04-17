@@ -3,7 +3,7 @@ DSC:
     description: UChicago RCC cluster Midway 2
     queue_type: pbs
     status_check_interval: 60
-    max_running_jobs: 25
+    max_running_jobs: 30
     max_cores: 40
     max_walltime: "36:00:00"
     max_mem: 64G
@@ -48,8 +48,8 @@ default:
   mem_per_instance: 2G
   time_per_instance: 5m
 
-
 fit:
-  time_per_instance: 40m
+  time_per_instance: 120m
   instances_per_job: 20
-  mem_per_instance: 4G
+  instances_per_node: 4
+  mem_per_instance: 2G
