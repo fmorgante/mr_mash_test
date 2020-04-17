@@ -1,7 +1,9 @@
-fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V, ca_update_order, mr_ash_method, scaling_grid){
+fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V, ca_update_order, mr_ash_method){
   
   r <- ncol(Y)
   p <- ncol(X)
+  
+  scaling_grid <- seq(0.1, 2.1, 0.2)
 
   ###Fit mr.ash to get initial estimates of mu1 for mr.mash, if requested
   if(!is.null(mr_ash_method)){

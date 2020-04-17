@@ -1,4 +1,4 @@
-simulate_data <- function(n, p, p_causal, r, intercepts,
+simulate_data <- function(n, p, p_causal, r, intercepts=rep(1, r),
                           pve, B_cor, B_scale, X_cor, X_scale,
                           V_cor, prop_testset){
   

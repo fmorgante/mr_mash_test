@@ -25,7 +25,6 @@ indepX_lowcorrV_indepB: simulate_data_mod.R
   p: 1000
   p_causal: 50
   r: 10
-  intercepts: R{rep(1, 10)}
   pve: 0.5
   B_cor: 0
   B_scale: 0.8
@@ -90,7 +89,6 @@ mr_mash_consec_em: fit_mr_mash_mod.R
   update_V: TRUE
   ca_update_order: "consecutive"
   mr_ash_method: NULL
-  scaling_grid: R{seq(0.1, 2.1, 0.2)}
   $fit_obj: out$fit
   $B_est: out$B_est
   $intercept_est: out$intercept_est
