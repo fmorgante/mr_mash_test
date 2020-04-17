@@ -1,8 +1,8 @@
-simulate_data <- function(n, p, p_causal, r, intercepts=rep(1, r),
+simulate_data <- function(n, p, p_causal, r,
                           pve, B_cor, B_scale, X_cor, X_scale,
                           V_cor, prop_testset){
   
-  dat <- mr.mash.alpha:::simulate_mr_mash_data(n=n, p=p, p_causal=p_causal, r=r, intercepts=intercepts,
+  dat <- mr.mash.alpha:::simulate_mr_mash_data(n=n, p=p, p_causal=p_causal, r=r, intercepts=rep(1, r),
                                                pve=pve, B_cor=B_cor, B_scale=B_scale,
                                                X_cor=X_cor, X_scale=X_scale,
                                                V_cor=V_cor)
