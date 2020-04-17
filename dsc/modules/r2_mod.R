@@ -1,1 +1,1 @@
-err <- accuracy(Y, Yhat)$r2
+err <- compute_accuracy(Y, Yhat)$r2

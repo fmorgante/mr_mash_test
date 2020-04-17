@@ -1,7 +1,7 @@
-accuracy <- function(Y, Yhat) {
-  bias <- rep(NA, ncol(Y))
-  r2 <- rep(NA, ncol(Y))
-  mse <- rep(NA, ncol(Y))
+compute_accuracy <- function(Y, Yhat) {
+  bias <- rep(as.numeric(NA), ncol(Y))
+  r2 <- rep(as.numeric(NA), ncol(Y))
+  mse <- rep(as.numeric(NA), ncol(Y))
   
   for(i in 1:ncol(Y)){
     fit  <- lm(Y[, i] ~ Yhat[, i])

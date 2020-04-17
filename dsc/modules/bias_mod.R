@@ -1,1 +1,1 @@
-err <- accuracy(Y, Yhat)$bias
+err <- compute_accuracy(Y, Yhat)$bias

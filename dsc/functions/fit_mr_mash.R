@@ -1,12 +1,11 @@
-fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V, ca_update_order, mr_ash_method){
+fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V, ca_update_order, mr_ash_method, scaling_grid){
   
   r <- ncol(Y)
   p <- ncol(X)
-  
-  scaling_grid <- seq(0.1, 2.1, 0.2)
-  
+
   ###Fit mr.ash to get initial estimates of mu1 for mr.mash, if requested
   if(!is.null(mr_ash_method)){
+    ##Compute prior grid and weights for mr.ash
     scaling_grid_mr_ash <- c(1e-10, scaling_grid)
     w0_mr_ash <- rep(1/length(scaling_grid_mr_ash), times=length(scaling_grid_mr_ash))
     
@@ -29,7 +28,7 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
       
     } else if(mr_ash_method=="independent"){
       
-      mu1_init <- matrix(NA, nrow=p, ncol=r)
+      mu1_init <- matrix(as.numeric(NA), nrow=p, ncol=r)
       for(i in 1:r){
         y_mr_ash <- Y[, i]
         
@@ -37,9 +36,12 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
         fit_mr_ash <- mr.ash.alpha::mr.ash(X, y_mr_ash, sigma2=var(y_mr_ash), sa2=scaling_grid_mr_ash/var(y_mr_ash), pi=w0_mr_ash, 
                                            update.sigma=update_V, update.pi=update_w0, standardize=standardize, verbose=FALSE, max.iter=5000)
         
+        ##Build matrix of initial estimates for mr.mash
         mu1_init[, i] <- fit_mr_ash$beta
       }
     }
+  } else {
+    mu1_init <- matrix(0, nrow=p, ncol=r)
   }
   
   ###Fit mr.mash
@@ -47,19 +49,13 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
   
   time1 <- proc.time()
   
-  if(is.null(mr_ash_method)){
-    fit <- mr.mash.alpha::mr.mash(X=X, Y=Y, S0=S0, update_w0=update_w0, update_w0_method=update_w0_method,
-                                  compute_ELBO=TRUE, standardize=standardize, verbose=FALSE, update_V=update_V,
-                                  version="Rcpp", ca_update_order=ca_update_order)
-  } else {
-    fit <- mr.mash.alpha::mr.mash(X=X, Y=Y, S0=S0, update_w0=update_w0, update_w0_method=update_w0_method,
+  fit <- mr.mash.alpha::mr.mash(X=X, Y=Y, S0=S0, update_w0=update_w0, update_w0_method=update_w0_method,
                                   compute_ELBO=TRUE, standardize=standardize, verbose=FALSE, update_V=update_V,
                                   version="Rcpp", ca_update_order=ca_update_order, mu1_init=mu1_init)
-  }
   
   time2 <- proc.time()
   
   elapsed_time <- time2["elapsed"] - time1["elapsed"]
   
-  return(list(fit=fit, elapsed_time=elapsed_time))
+  return(list(fit=fit, B_est=fit$mu1, intercept_est=fit$intercept, elapsed_time=elapsed_time))
 }

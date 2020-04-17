@@ -1,1 +1,1 @@
-Yhattest <- mr.mash.alpha::predict.mr.mash(fit, X)
+Yhattest <- predict.general(B, intercept, X)
