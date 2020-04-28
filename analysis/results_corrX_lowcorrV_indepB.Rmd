@@ -140,7 +140,7 @@ B_cor <- unique(dsc_out$simulate.B_cor)
 B_scale <- unique(dsc_out$simulate.B_scale)
 X_cor <- unique(dsc_out$simulate.X_cor)
 X_scale <- unique(dsc_out$simulate.X_scale)
-V_cor <- unique(dsc_out$simulate.V_cor_)
+V_cor <- unique(dsc_out$simulate.V_cor)
 
 ###Remove list elements that are not useful anymore
 dsc_out$simulate.prop_testset <- NULL
