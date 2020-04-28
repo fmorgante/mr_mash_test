@@ -121,9 +121,9 @@ facet_labels <- c(r2 = "r2", bias = "bias", rmse="RMSE (relative to consec_em)")
 ```{r load data, warning=FALSE, message=FALSE}
 ###Load the dsc results
 dsc_out <- dscquery("output/dsc", c("simulate.n", "simulate.p", "simulate.p_causal", "simulate.r",   
-                                 "simulate.pve", "simulate.Sigma_cor_offdiag", "simulate.Sigma_scale",
-                                 "simulate.Gamma_cor_offdiag", "simulate.Gamma_scale",
-                                 "simulate.V_cor_offdiag", "simulate.V_offdiag_scale", "simulate.prop_testset",
+                                 "simulate.pve", "simulate.B_cor", "simulate.B_scale",
+                                 "simulate.X_cor", "simulate.X_scale",
+                                 "simulate.V_cor", "simulate.prop_testset",
                                  "simulate", "fit", "score", "score.err", "fit.time"), 
                     conditions = "$(simulate) == 'corrX_lowcorrV_indepB'", verbose=FALSE,
                     ignore.missing.files = TRUE )
@@ -136,39 +136,22 @@ r <- unique(dsc_out$simulate.r)
 k <- 166
 pve <- unique(dsc_out$simulate.pve)
 prop_testset <- unique(dsc_out$simulate.prop_testset)
-Sigma_cor_offdiag <- unique(dsc_out$simulate.Sigma_cor_offdiag)
-Sigma_scale <- unique(dsc_out$simulate.Sigma_scale)
-Gamma_cor_offdiag <- unique(dsc_out$simulate.Gamma_cor_offdiag)
-Gamma_scale <- unique(dsc_out$simulate.Gamma_scale)
-V_cor_offdiag <- unique(dsc_out$simulate.V_cor_offdiag)
-V_offdiag_scale <- unique(dsc_out$simulate.V_offdiag_scale)
-
-Sigma <- mr.mash.alpha:::create_cov_canonical(r, singletons=FALSE, hetgrid=Sigma_cor_offdiag)[[1]]*Sigma_scale
-Gamma <- mr.mash.alpha:::create_cov_canonical(p, singletons=FALSE, hetgrid=Gamma_cor_offdiag)[[1]]*Gamma_scale
-V <- mr.mash.alpha:::create_cov_canonical(r, singletons=FALSE, hetgrid=V_cor_offdiag)[[1]]*V_offdiag_scale
+B_cor <- unique(dsc_out$simulate.B_cor)
+B_scale <- unique(dsc_out$simulate.B_scale)
+X_cor <- unique(dsc_out$simulate.X_cor)
+X_scale <- unique(dsc_out$simulate.X_scale)
+V_cor <- unique(dsc_out$simulate.V_cor_)
 
 ###Remove list elements that are not useful anymore
 dsc_out$simulate.prop_testset <- NULL
-dsc_out$simulate.Sigma_cor_offdiag <- NULL
-dsc_out$simulate.Sigma_scale <- NULL
-dsc_out$simulate.Gamma_cor_offdiag <- NULL
-dsc_out$simulate.Gamma_scale <- NULL
-dsc_out$simulate.V_cor_offdiag <- NULL
-dsc_out$simulate.V_offdiag_scale <- NULL
+dsc_out$simulate.B_cor <- NULL
+dsc_out$simulate.B_scale <- NULL
+dsc_out$simulate.X_cor <- NULL
+dsc_out$simulate.X_scale <- NULL
+dsc_out$simulate.V_cor <- NULL
 ```
 
-The results below are based on 50 simulations with `r n` samples, `r p` variables of which `r p_causal` were causal, `r r` responses with a per-response proportion of variance explained (PVE) of `r pve`. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V). Below are the covariance matrices used. Note that the diagonal elements of V were then adjusted to produce the desired PVE.
-
-```{r disp corrs}
-cat("Gamma (First 5 elements)")
-Gamma[1:5, 1:5]
-
-cat("Sigma (First 5 elements)")
-Sigma[1:5, 1:5]
-
-cat("V (First 5 elements)")
-V[1:5, 1:5]
-```
+The results below are based on 50 simulations with `r n` samples, `r p` variables of which `r p_causal` were causal, `r r` responses with a per-response proportion of variance explained (PVE) of `r pve`. Variables, X, were drawn from MVN(0, Gamma), where Gamma is such that it achieves a correlation between variables of `r X_cor` and a scale of `r X_scale`. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of `r B_cor` and a scale of `r B_scale`. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of `r V_cor` and a scale defined py PVE.
 
 *mr.mash* was fitted to the training data (`r (1-prop_testset)*100`% of the data) updating V and updating the prior weights. We investigate a few combinations of methods to update the prior weights (i.e., EM and mixSQP), orderings of the coordinate ascent updates (i.e., consecutive and decreasing logBF from a multivariate simple linear regression with MASH prior), and initialization of the posterior means of the regression coefficients (i.e., 0, from *mr.ash* assuming independent effects across tissues, and from *mr.ash* assuming shared effects across tissues). The mixture prior consisted of `r k` components defined by a few canonical matrices correpsonding to different settings of effect sharing/specificity (i.e., zero, singletons, independent, low heterogeneity, medium heterogeneity, high heterogeneity, shared) scaled by a grid of values (i.e., from 0.1 to 2.1 in steps of 0.2). The same grid was used in *mr.ash* with the addition of 0. Convergence was declared when the maximum difference in the posterior mean of the regression coefficients between two successive iterations was smaller than 1e-4.
 
