@@ -28,3 +28,6 @@ Results for meeting on 04/30/2020.
 + [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: independent predictors, independent effects, lowly correlated residuals.](results_indepX_lowcorrV_indepB.html)
 + [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: correlated predictors, shared effects, lowly correlated residuals.](results_corrX_lowcorrV_sharedB.html)
 + [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: correlated predictors, independent effects, lowly correlated residuals.](results_corrX_lowcorrV_indepB.html)
++ [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: highly correlated predictors, shared effects, lowly correlated residuals.](results_highcorrX_lowcorrV_sharedB.html)
++ [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: highly correlated predictors, independent effects, lowly correlated residuals.](results_highcorrX_lowcorrV_indepB.html)
+
