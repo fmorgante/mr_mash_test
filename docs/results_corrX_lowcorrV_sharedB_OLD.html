@@ -13,7 +13,7 @@
 
 <meta name="date" content="2020-04-28" />
 
-<title>Independent predictors, independent effects, lowly correlated residuals</title>
+<title>Correlated predictors, shared effects, lowly correlated residuals</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -237,7 +237,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Independent predictors, independent effects, lowly correlated residuals</h1>
+<h1 class="title toc-ignore">Correlated predictors, shared effects, lowly correlated residuals</h1>
 <h4 class="author"><em>Fabio Morgante</em></h4>
 <h4 class="date"><em>April 28, 2020</em></h4>
 
@@ -401,7 +401,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/results_indepX_lowcorrV_indepB.Rmd</code>) and HTML (<code>docs/results_indepX_lowcorrV_indepB.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/results_corrX_lowcorrV_sharedB_OLD.Rmd</code>) and HTML (<code>docs/results_corrX_lowcorrV_sharedB_OLD.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -430,7 +430,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/51cea81ba44b5faa2773245bd3cb3ec4e3534453/analysis/results_indepX_lowcorrV_indepB.Rmd" target="_blank">51cea81</a>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/51cea81ba44b5faa2773245bd3cb3ec4e3534453/analysis/results_corrX_lowcorrV_sharedB_OLD.Rmd" target="_blank">51cea81</a>
 </td>
 <td>
 fmorgante
@@ -440,40 +440,6 @@ fmorgante
 </td>
 <td>
 Add newest results
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/e2c955012d581f53c8458f56ecd4537fe2dbee73/docs/results_indepX_lowcorrV_indepB.html" target="_blank">e2c9550</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-16
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/2e37a1de68a7a26be769943fe4a87b093e7de7b5/analysis/results_indepX_lowcorrV_indepB.Rmd" target="_blank">2e37a1d</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-16
-</td>
-<td>
-Add more results
 </td>
 </tr>
 </tbody>
@@ -590,12 +556,12 @@ shift_legend &lt;- function(p) {
 colors &lt;- c(&quot;skyblue&quot;, &quot;dodgerblue&quot;, &quot;limegreen&quot;, &quot;green&quot;, &quot;gold&quot;, &quot;orange&quot;, &quot;red&quot;, &quot;firebrick&quot;)
 facet_labels &lt;- c(r2 = &quot;r2&quot;, bias = &quot;bias&quot;, rmse=&quot;RMSE (relative to consec_em)&quot;)</code></pre>
 <pre class="r"><code>###Load the dsc results
-dsc_out &lt;- dscquery(&quot;output/dsc&quot;, c(&quot;simulate.n&quot;, &quot;simulate.p&quot;, &quot;simulate.p_causal&quot;, &quot;simulate.r&quot;,   
-                                 &quot;simulate.pve&quot;, &quot;simulate.B_cor&quot;, &quot;simulate.B_scale&quot;,
-                                 &quot;simulate.X_cor&quot;, &quot;simulate.X_scale&quot;,
-                                 &quot;simulate.V_cor&quot;, &quot;simulate.prop_testset&quot;,
+dsc_out &lt;- dscquery(&quot;output/dsc_OLD&quot;, c(&quot;simulate.n&quot;, &quot;simulate.p&quot;, &quot;simulate.p_causal&quot;, &quot;simulate.r&quot;,   
+                                 &quot;simulate.pve&quot;, &quot;simulate.Sigma_cor_offdiag&quot;, &quot;simulate.Sigma_scale&quot;,
+                                 &quot;simulate.Gamma_cor_offdiag&quot;, &quot;simulate.Gamma_scale&quot;,
+                                 &quot;simulate.V_cor_offdiag&quot;, &quot;simulate.V_offdiag_scale&quot;, &quot;simulate.prop_testset&quot;,
                                  &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
-                    conditions = &quot;$(simulate) == &#39;indepX_lowcorrV_indepB&#39;&quot;, verbose=FALSE,
+                    conditions = &quot;$(simulate) == &#39;corrX_lowcorrV_sharedB&#39;&quot;, verbose=FALSE,
                     ignore.missing.files = TRUE )
 
 ###Obtain simulation parameters
@@ -606,20 +572,53 @@ r &lt;- unique(dsc_out$simulate.r)
 k &lt;- 166
 pve &lt;- unique(dsc_out$simulate.pve)
 prop_testset &lt;- unique(dsc_out$simulate.prop_testset)
-B_cor &lt;- unique(dsc_out$simulate.B_cor)
-B_scale &lt;- unique(dsc_out$simulate.B_scale)
-X_cor &lt;- unique(dsc_out$simulate.X_cor)
-X_scale &lt;- unique(dsc_out$simulate.X_scale)
-V_cor &lt;- unique(dsc_out$simulate.V_cor_)
+Sigma_cor_offdiag &lt;- unique(dsc_out$simulate.Sigma_cor_offdiag)
+Sigma_scale &lt;- unique(dsc_out$simulate.Sigma_scale)
+Gamma_cor_offdiag &lt;- unique(dsc_out$simulate.Gamma_cor_offdiag)
+Gamma_scale &lt;- unique(dsc_out$simulate.Gamma_scale)
+V_cor_offdiag &lt;- unique(dsc_out$simulate.V_cor_offdiag)
+V_offdiag_scale &lt;- unique(dsc_out$simulate.V_offdiag_scale)
+
+Sigma &lt;- mr.mash.alpha:::create_cov_canonical(r, singletons=FALSE, hetgrid=Sigma_cor_offdiag)[[1]]*Sigma_scale
+Gamma &lt;- mr.mash.alpha:::create_cov_canonical(p, singletons=FALSE, hetgrid=Gamma_cor_offdiag)[[1]]*Gamma_scale
+V &lt;- mr.mash.alpha:::create_cov_canonical(r, singletons=FALSE, hetgrid=V_cor_offdiag)[[1]]*V_offdiag_scale
 
 ###Remove list elements that are not useful anymore
 dsc_out$simulate.prop_testset &lt;- NULL
-dsc_out$simulate.B_cor &lt;- NULL
-dsc_out$simulate.B_scale &lt;- NULL
-dsc_out$simulate.X_cor &lt;- NULL
-dsc_out$simulate.X_scale &lt;- NULL
-dsc_out$simulate.V_cor &lt;- NULL</code></pre>
-<p>The results below are based on 50 simulations with 600 samples, 1000 variables of which 50 were causal, 10 responses with a per-response proportion of variance explained (PVE) of 0.5. Variables, X, were drawn from MVN(0, Gamma), where Gamma is such that it achieves a correlation between variables of 0 and a scale of 0.8. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of 0 and a scale of 0.8. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of and a scale defined py PVE.</p>
+dsc_out$simulate.Sigma_cor_offdiag &lt;- NULL
+dsc_out$simulate.Sigma_scale &lt;- NULL
+dsc_out$simulate.Gamma_cor_offdiag &lt;- NULL
+dsc_out$simulate.Gamma_scale &lt;- NULL
+dsc_out$simulate.V_cor_offdiag &lt;- NULL
+dsc_out$simulate.V_offdiag_scale &lt;- NULL</code></pre>
+<p>The results below are based on 50 simulations with 600 samples, 1000 variables of which 50 were causal, 10 responses with a per-response proportion of variance explained (PVE) of 0.5. Variables, X, were drawn from MVN(0, Gamma), causal effects, B, were drawn from MVN(0, Sigma). The responses, Y, were drawn from MN(XB, I, V). Below are the covariance matrices used. Note that the diagonal elements of V were then adjusted to produce the desired PVE.</p>
+<pre class="r"><code>cat(&quot;Gamma (First 5 elements)&quot;)</code></pre>
+<pre><code>Gamma (First 5 elements)</code></pre>
+<pre class="r"><code>Gamma[1:5, 1:5]</code></pre>
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]  0.8  0.4  0.4  0.4  0.4
+[2,]  0.4  0.8  0.4  0.4  0.4
+[3,]  0.4  0.4  0.8  0.4  0.4
+[4,]  0.4  0.4  0.4  0.8  0.4
+[5,]  0.4  0.4  0.4  0.4  0.8</code></pre>
+<pre class="r"><code>cat(&quot;Sigma (First 5 elements)&quot;)</code></pre>
+<pre><code>Sigma (First 5 elements)</code></pre>
+<pre class="r"><code>Sigma[1:5, 1:5]</code></pre>
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]  0.8  0.8  0.8  0.8  0.8
+[2,]  0.8  0.8  0.8  0.8  0.8
+[3,]  0.8  0.8  0.8  0.8  0.8
+[4,]  0.8  0.8  0.8  0.8  0.8
+[5,]  0.8  0.8  0.8  0.8  0.8</code></pre>
+<pre class="r"><code>cat(&quot;V (First 5 elements)&quot;)</code></pre>
+<pre><code>V (First 5 elements)</code></pre>
+<pre class="r"><code>V[1:5, 1:5]</code></pre>
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,] 1.00 0.15 0.15 0.15 0.15
+[2,] 0.15 1.00 0.15 0.15 0.15
+[3,] 0.15 0.15 1.00 0.15 0.15
+[4,] 0.15 0.15 0.15 1.00 0.15
+[5,] 0.15 0.15 0.15 0.15 1.00</code></pre>
 <p><em>mr.mash</em> was fitted to the training data (80% of the data) updating V and updating the prior weights. We investigate a few combinations of methods to update the prior weights (i.e., EM and mixSQP), orderings of the coordinate ascent updates (i.e., consecutive and decreasing logBF from a multivariate simple linear regression with MASH prior), and initialization of the posterior means of the regression coefficients (i.e., 0, from <em>mr.ash</em> assuming independent effects across tissues, and from <em>mr.ash</em> assuming shared effects across tissues). The mixture prior consisted of 166 components defined by a few canonical matrices correpsonding to different settings of effect sharing/specificity (i.e., zero, singletons, independent, low heterogeneity, medium heterogeneity, high heterogeneity, shared) scaled by a grid of values (i.e., from 0.1 to 2.1 in steps of 0.2). The same grid was used in <em>mr.ash</em> with the addition of 0. Convergence was declared when the maximum difference in the posterior mean of the regression coefficients between two successive iterations was smaller than 1e-4.</p>
 <p>Then, responses were predicted on the test data (20% of the data).</p>
 <p>Here, we evaluate the accuracy of prediction assessed by <span class="math">\(r^2\)</span> and bias (slope) from the regression of the true response on the predicted response, and the relative mean square error (RMSE) in the test data. The boxplots are across simulations and responses.</p>
@@ -658,44 +657,7 @@ p &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = &quot;score
           plot.title = element_text(hjust = 0.5))
 
 shift_legend(p)</code></pre>
-<p><img src="figure/results_indepX_lowcorrV_indepB.Rmd/accuracy-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-accuracy-1">
-Past versions of accuracy-1.png
-</button>
-</p>
-<div id="fig-accuracy-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/e2c955012d581f53c8458f56ecd4537fe2dbee73/docs/figure/results_indepX_lowcorrV_indepB.Rmd/accuracy-1.png" target="_blank">e2c9550</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-16
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_corrX_lowcorrV_sharedB_OLD.Rmd/accuracy-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>Let’s now remove outliers from the RMSE plot to make things a little clearer.</p>
 <pre class="r"><code>p_rmse_nooutliers &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;rmse&quot;), ], aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;, outlier.size = 1, width = 0.85, width.errorbar = 0) +
@@ -706,44 +668,7 @@ fmorgante
         plot.title = element_text(hjust = 0.5))
 
 print(p_rmse_nooutliers)</code></pre>
-<p><img src="figure/results_indepX_lowcorrV_indepB.Rmd/accuracy%20rmse-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-rmse-1">
-Past versions of “accuracy rmse-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-accuracy-rmse-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/e2c955012d581f53c8458f56ecd4537fe2dbee73/docs/figure/results_indepX_lowcorrV_indepB.Rmd/accuracy rmse-1.png" target="_blank">e2c9550</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-16
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_corrX_lowcorrV_sharedB_OLD.Rmd/accuracy%20rmse-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>Here, we look at the elapsed time (<span class="math">\(log_{10}\)</span> seconds) of <em>mr.mash</em>. Note that this time does not include the run time of <em>mr.ash</em> in the cases where we used it to initialize the posterior means of the regression coefficients.</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;r2&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -759,44 +684,7 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
         plot.title = element_text(hjust = 0.5))
 
 print(p_time)</code></pre>
-<p><img src="figure/results_indepX_lowcorrV_indepB.Rmd/run%20time-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-run-time-1">
-Past versions of “run time-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-run-time-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/e2c955012d581f53c8458f56ecd4537fe2dbee73/docs/figure/results_indepX_lowcorrV_indepB.Rmd/run time-1.png" target="_blank">e2c9550</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-16
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_corrX_lowcorrV_sharedB_OLD.Rmd/run%20time-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -829,33 +717,38 @@ other attached packages:
 [9] dscrutils_0.4.2
 
 loaded via a namespace (and not attached):
- [1] pkgload_1.0.2      jsonlite_1.6       foreach_1.4.4     
- [4] Ipaper_0.1.5       assertthat_0.2.1   sp_1.3-1          
- [7] cellranger_1.1.0   yaml_2.2.1         remotes_2.1.0     
-[10] progress_1.2.2     sessioninfo_1.1.1  pillar_1.4.1      
-[13] backports_1.1.5    lattice_0.20-38    glue_1.4.0        
-[16] digest_0.6.25      RColorBrewer_1.1-2 promises_1.0.1    
-[19] colorspace_1.4-1   htmltools_0.3.6    httpuv_1.4.5      
-[22] plyr_1.8.5         clipr_0.4.1        pkgconfig_2.0.3   
-[25] purrr_0.3.3        processx_3.4.0     whisker_0.3-2     
-[28] openxlsx_4.1.0     later_0.7.5        git2r_0.26.1      
-[31] tibble_2.1.3       farver_2.0.3       withr_2.1.2       
-[34] repr_0.17          lazyeval_0.2.2     cli_1.1.0         
-[37] crayon_1.3.4       readxl_1.1.0       memoise_1.1.0     
-[40] evaluate_0.12      ps_1.2.1           fs_1.3.1          
-[43] doParallel_1.0.14  xml2_1.2.0         pkgbuild_1.0.3    
-[46] tools_3.5.1        data.table_1.12.8  prettyunits_1.1.1 
-[49] hms_0.5.3          matrixStats_0.55.0 lifecycle_0.2.0   
-[52] stringr_1.4.0      munsell_0.5.0      zip_1.0.0         
-[55] callr_3.3.2        compiler_3.5.1     rlang_0.4.5       
-[58] grid_3.5.1         rstudioapi_0.10    iterators_1.0.10  
-[61] base64enc_0.1-3    labeling_0.3       rmarkdown_1.10    
-[64] boot_1.3-20        testthat_2.1.1     codetools_0.2-15  
-[67] reshape2_1.4.3     R6_2.4.1           lubridate_1.7.4   
-[70] gridExtra_2.3      knitr_1.20         dplyr_0.8.0.1     
-[73] workflowr_1.6.1    rprojroot_1.3-2    desc_1.2.0        
-[76] stringi_1.4.3      parallel_3.5.1     IRdisplay_0.6.1   
-[79] Rcpp_1.0.4.6       vctrs_0.2.4        tidyselect_0.2.5  </code></pre>
+ [1] mcmc_0.9-6           matrixStats_0.55.0   fs_1.3.1            
+ [4] lubridate_1.7.4      doParallel_1.0.14    RColorBrewer_1.1-2  
+ [7] progress_1.2.2       rprojroot_1.3-2      repr_0.17           
+[10] tools_3.5.1          backports_1.1.5      R6_2.4.1            
+[13] irlba_2.3.3          lazyeval_0.2.2       colorspace_1.4-1    
+[16] sp_1.3-1             withr_2.1.2          tidyselect_0.2.5    
+[19] gridExtra_2.3        prettyunits_1.1.1    processx_3.4.0      
+[22] compiler_3.5.1       git2r_0.26.1         MBSP_1.0            
+[25] cli_1.1.0            quantreg_5.36        SparseM_1.77        
+[28] xml2_1.2.0           desc_1.2.0           labeling_0.3        
+[31] mvtnorm_1.0-12       callr_3.3.2          mixsqp_0.3-31       
+[34] stringr_1.4.0        digest_0.6.25        rmarkdown_1.10      
+[37] MCMCpack_1.4-4       base64enc_0.1-3      pkgconfig_2.0.3     
+[40] htmltools_0.3.6      sessioninfo_1.1.1    Ipaper_0.1.5        
+[43] rlang_0.4.5          readxl_1.1.0         rstudioapi_0.10     
+[46] farver_2.0.3         jsonlite_1.6         dplyr_0.8.0.1       
+[49] zip_1.0.0            Matrix_1.2-15        Rcpp_1.0.4.6        
+[52] munsell_0.5.0        clipr_0.4.1          lifecycle_0.2.0     
+[55] stringi_1.4.3        whisker_0.3-2        yaml_2.2.1          
+[58] MASS_7.3-51.1        pkgbuild_1.0.3       plyr_1.8.5          
+[61] grid_3.5.1           parallel_3.5.1       promises_1.0.1      
+[64] crayon_1.3.4         lattice_0.20-38      IRdisplay_0.6.1     
+[67] hms_0.5.3            knitr_1.20           ps_1.2.1            
+[70] pillar_1.4.1         boot_1.3-20          reshape2_1.4.3      
+[73] codetools_0.2-15     pkgload_1.0.2        glue_1.4.0          
+[76] evaluate_0.12        mr.mash.alpha_0.1-72 data.table_1.12.8   
+[79] remotes_2.1.0        vctrs_0.2.4          GIGrvg_0.5          
+[82] httpuv_1.4.5         foreach_1.4.4        testthat_2.1.1      
+[85] MatrixModels_0.4-1   cellranger_1.1.0     purrr_0.3.3         
+[88] assertthat_0.2.1     openxlsx_4.1.0       coda_0.19-3         
+[91] later_0.7.5          tibble_2.1.3         iterators_1.0.10    
+[94] memoise_1.1.0        workflowr_1.6.1     </code></pre>
 </div>
 
 
