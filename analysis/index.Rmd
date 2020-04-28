@@ -15,19 +15,19 @@ Results for meeting on 03/30/2020.
 + [Assessment of prediction accuracy.](results_accuracy.html)
 + [Assessment of convergence.](results_convergence.html)
 
-Results for meeting on 04/16/2020.
+Results for meeting on 04/16/2020. Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenarios:
 
-+ [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: independent predictors, shared effects, lowly correlated residuals.](results_indepX_lowcorrV_sharedB_OLD.html)
-+ [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: independent predictors, independent effects, lowly correlated residuals.](results_indepX_lowcorrV_indepB_OLD.html)
-+ [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: correlated predictors, shared effects, lowly correlated residuals.](results_corrX_lowcorrV_sharedB_OLD.html)
-+ [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: correlated predictors, independent effects, lowly correlated residuals.](results_corrX_lowcorrV_indepB_OLD.html)
++ [Independent predictors, shared effects, lowly correlated residuals.](results_indepX_lowcorrV_sharedB_OLD.html)
++ [Independent predictors, independent effects, lowly correlated residuals.](results_indepX_lowcorrV_indepB_OLD.html)
++ [Correlated predictors, shared effects, lowly correlated residuals.](results_corrX_lowcorrV_sharedB_OLD.html)
++ [Correlated predictors, independent effects, lowly correlated residuals.](results_corrX_lowcorrV_indepB_OLD.html)
 
-Results for meeting on 04/30/2020.
+Results for meeting on 04/30/2020. Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenarios:
 
-+ [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: independent predictors, shared effects, lowly correlated residuals.](results_indepX_lowcorrV_sharedB.html)
-+ [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: independent predictors, independent effects, lowly correlated residuals.](results_indepX_lowcorrV_indepB.html)
-+ [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: correlated predictors, shared effects, lowly correlated residuals.](results_corrX_lowcorrV_sharedB.html)
-+ [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: correlated predictors, independent effects, lowly correlated residuals.](results_corrX_lowcorrV_indepB.html)
-+ [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: highly correlated predictors, shared effects, lowly correlated residuals.](results_highcorrX_lowcorrV_sharedB.html)
-+ [Assessment of prediction accuracy and run time of *mr.mash* with different options in the following simulation scenario: highly correlated predictors, independent effects, lowly correlated residuals.](results_highcorrX_lowcorrV_indepB.html)
++ [Independent predictors, shared effects, lowly correlated residuals.](results_indepX_lowcorrV_sharedB.html)
++ [Independent predictors, independent effects, lowly correlated residuals.](results_indepX_lowcorrV_indepB.html)
++ [Correlated predictors, shared effects, lowly correlated residuals.](results_corrX_lowcorrV_sharedB.html)
++ [Correlated predictors, independent effects, lowly correlated residuals.](results_corrX_lowcorrV_indepB.html)
++ [Highly correlated predictors, shared effects, lowly correlated residuals.](results_highcorrX_lowcorrV_sharedB.html)
++ [Highly correlated predictors, independent effects, lowly correlated residuals.](results_highcorrX_lowcorrV_indepB.html)
 
