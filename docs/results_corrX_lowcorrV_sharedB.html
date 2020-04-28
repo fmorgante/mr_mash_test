@@ -355,16 +355,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree247e5c326536af2bbfd1e75569e840886b46f854targetblank247e5c3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/247e5c326536af2bbfd1e75569e840886b46f854" target="_blank">247e5c3</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree84ab89b3cfbb3ddb6197f76d1ce3b2af37363be9targetblank84ab89ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/84ab89b3cfbb3ddb6197f76d1ce3b2af37363be9" target="_blank">84ab89b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree247e5c326536af2bbfd1e75569e840886b46f854targetblank247e5c3a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree84ab89b3cfbb3ddb6197f76d1ce3b2af37363be9targetblank84ab89ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/247e5c326536af2bbfd1e75569e840886b46f854" target="_blank">247e5c3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/84ab89b3cfbb3ddb6197f76d1ce3b2af37363be9" target="_blank">84ab89b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -425,6 +425,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/84ab89b3cfbb3ddb6197f76d1ce3b2af37363be9/analysis/results_corrX_lowcorrV_sharedB.Rmd" target="_blank">84ab89b</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-04-28
+</td>
+<td>
+Fix typo
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/8ed3a7fccd4fc50f1c414708e2d150650ad275a5/docs/results_corrX_lowcorrV_sharedB.html" target="_blank">8ed3a7f</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-04-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -627,7 +661,7 @@ B_cor &lt;- unique(dsc_out$simulate.B_cor)
 B_scale &lt;- unique(dsc_out$simulate.B_scale)
 X_cor &lt;- unique(dsc_out$simulate.X_cor)
 X_scale &lt;- unique(dsc_out$simulate.X_scale)
-V_cor &lt;- unique(dsc_out$simulate.V_cor_)
+V_cor &lt;- unique(dsc_out$simulate.V_cor)
 
 ###Remove list elements that are not useful anymore
 dsc_out$simulate.prop_testset &lt;- NULL
@@ -636,7 +670,7 @@ dsc_out$simulate.B_scale &lt;- NULL
 dsc_out$simulate.X_cor &lt;- NULL
 dsc_out$simulate.X_scale &lt;- NULL
 dsc_out$simulate.V_cor &lt;- NULL</code></pre>
-<p>The results below are based on 50 simulations with 600 samples, 1000 variables of which 50 were causal, 10 responses with a per-response proportion of variance explained (PVE) of 0.5. Variables, X, were drawn from MVN(0, Gamma), where Gamma is such that it achieves a correlation between variables of 0.5 and a scale of 0.8. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of 1 and a scale of 0.8. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of and a scale defined py PVE.</p>
+<p>The results below are based on 50 simulations with 600 samples, 1000 variables of which 50 were causal, 10 responses with a per-response proportion of variance explained (PVE) of 0.5. Variables, X, were drawn from MVN(0, Gamma), where Gamma is such that it achieves a correlation between variables of 0.5 and a scale of 0.8. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of 1 and a scale of 0.8. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of 0.15 and a scale defined py PVE.</p>
 <p><em>mr.mash</em> was fitted to the training data (80% of the data) updating V and updating the prior weights. We investigate a few combinations of methods to update the prior weights (i.e., EM and mixSQP), orderings of the coordinate ascent updates (i.e., consecutive and decreasing logBF from a multivariate simple linear regression with MASH prior), and initialization of the posterior means of the regression coefficients (i.e., 0, from <em>mr.ash</em> assuming independent effects across tissues, and from <em>mr.ash</em> assuming shared effects across tissues). The mixture prior consisted of 166 components defined by a few canonical matrices correpsonding to different settings of effect sharing/specificity (i.e., zero, singletons, independent, low heterogeneity, medium heterogeneity, high heterogeneity, shared) scaled by a grid of values (i.e., from 0.1 to 2.1 in steps of 0.2). The same grid was used in <em>mr.ash</em> with the addition of 0. Convergence was declared when the maximum difference in the posterior mean of the regression coefficients between two successive iterations was smaller than 1e-4.</p>
 <p>Then, responses were predicted on the test data (20% of the data).</p>
 <p>Here, we evaluate the accuracy of prediction assessed by <span class="math">\(r^2\)</span> and bias (slope) from the regression of the true response on the predicted response, and the relative mean square error (RMSE) in the test data. The boxplots are across simulations and responses.</p>
