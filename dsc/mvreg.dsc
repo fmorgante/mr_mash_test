@@ -6,14 +6,16 @@ DSC:
   R_libs: mr.mash.alpha, mr.ash.alpha
   lib_path: functions
   exec_path: modules
-  replicate: 50
+  replicate: 20
   define:
     simulate: indepX_lowcorrV_indepB, corrX_lowcorrV_indepB, highcorrX_lowcorrV_indepB, 
               indepX_lowcorrV_sharedB, corrX_lowcorrV_sharedB, highcorrX_lowcorrV_sharedB             
     fit:      mr_mash_consec_em, mr_mash_consec_mixsqp, 
               mr_mash_declogBF_em, mr_mash_declogBF_mixsqp,
-              mr_mash_consec_em_init_indep, mr_mash_consec_mixsqp_init_indep,
-              mr_mash_consec_em_init_shared, mr_mash_consec_mixsqp_init_shared
+              #mr_mash_consec_em_init_indep, mr_mash_consec_mixsqp_init_indep,
+              mr_mash_consec_em_init_shared, mr_mash_consec_mixsqp_init_shared,
+              mr_mash_consec_em_init_2pass, mr_mash_consec_mixsqp_init_2pass,
+              mr_mash_consec_em_init_trueB, mr_mash_consec_mixsqp_init_trueB
     predict:  predict_linear
     score:    r2, mse, bias
   run: simulate * fit * predict * score
@@ -22,8 +24,8 @@ DSC:
 #Independent predictors, lowly correlated residuals, independent effects
 indepX_lowcorrV_indepB: simulate_data_mod.R
   n:        600
-  p:        1000
-  p_causal: 50
+  p:        10
+  p_causal: 2
   r:        10
   pve:      0.5
   B_cor:    0
@@ -36,6 +38,7 @@ indepX_lowcorrV_indepB: simulate_data_mod.R
   $Ytrain: out$Ytrain
   $Xtest:  out$Xtest
   $Ytest:  out$Ytest
+  $B_true: out$B_true
  
 #Correlated predictors, lowly correlated residuals, independent effects
 corrX_lowcorrV_indepB(indepX_lowcorrV_indepB):
@@ -80,14 +83,15 @@ highcorrX_lowcorrV_sharedB(indepX_lowcorrV_indepB):
 ## Fit modules
 #EM w0 updates, consecutive coordinate ascent updates
 mr_mash_consec_em: fit_mr_mash_mod.R
-  X: $Xtrain
-  Y: $Ytrain
+  X:                $Xtrain
+  Y:                $Ytrain
   update_w0:        TRUE
   update_w0_method: "EM"
   standardize:      TRUE
   update_V:         TRUE
   ca_update_order:  "consecutive"
-  mr_ash_method:    NULL
+  init_method:      "default"
+  B_true:           $B_true
   $fit_obj:         out$fit
   $B_est:           out$B_est
   $intercept_est:   out$intercept_est
@@ -109,24 +113,44 @@ mr_mash_declogBF_mixsqp(mr_mash_consec_em):
 #EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
 #run on each response
 mr_mash_consec_em_init_indep(mr_mash_consec_em):
-  mr_ash_method: "independent"
+  init_method: "independent"
 
 #mixsqp w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
 #run on each response
 mr_mash_consec_mixsqp_init_indep(mr_mash_consec_em):
   update_w0_method: "mixsqp"
-  mr_ash_method:    "independent"
+  init_method:    "independent"
   
 #EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
 #run on stacked responses
 mr_mash_consec_em_init_shared(mr_mash_consec_em):
-  mr_ash_method: "shared"
+  init_method: "shared"
 
 #mixsqp w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
 #run on stacked responses
 mr_mash_consec_mixsqp_init_shared(mr_mash_consec_em):
   update_w0_method: "mixsqp"
-  mr_ash_method:    "shared"
+  init_method:    "shared"
+
+#EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
+#two pass
+mr_mash_consec_em_init_2pass(mr_mash_consec_em):
+  init_method: "2pass"
+
+#mixsqp w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
+#two pass
+mr_mash_consec_mixsqp_init_2pass(mr_mash_consec_em):
+  update_w0_method: "mixsqp"
+  init_method:    "2pass"
+  
+#EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by true B
+mr_mash_consec_em_init_trueB(mr_mash_consec_em):
+  init_method: "truth"
+
+#mixsqp w0 updates, consecutive coordinate ascent updates, mu1 initilized by true B
+mr_mash_consec_mixsqp_init_trueB(mr_mash_consec_em):
+  update_w0_method: "mixsqp"
+  init_method:    "truth"
 
 ## Predict module
 predict_linear: predict_mod.R
