@@ -6,7 +6,7 @@ DSC:
   R_libs: mr.mash.alpha, mr.ash.alpha
   lib_path: functions
   exec_path: modules
-  replicate: 20
+  replicate: 5
   define:
     simulate: indepX_lowcorrV_indepB, corrX_lowcorrV_indepB, highcorrX_lowcorrV_indepB, 
               indepX_lowcorrV_sharedB, corrX_lowcorrV_sharedB, highcorrX_lowcorrV_sharedB             
@@ -83,19 +83,20 @@ highcorrX_lowcorrV_sharedB(indepX_lowcorrV_indepB):
 ## Fit modules
 #EM w0 updates, consecutive coordinate ascent updates
 mr_mash_consec_em: fit_mr_mash_mod.R
-  X:                $Xtrain
-  Y:                $Ytrain
-  update_w0:        TRUE
-  update_w0_method: "EM"
-  standardize:      TRUE
-  update_V:         TRUE
-  ca_update_order:  "consecutive"
-  init_method:      "default"
-  B_true:           $B_true
-  $fit_obj:         out$fit
-  $B_est:           out$B_est
-  $intercept_est:   out$intercept_est
-  $time:            out$elapsed_time
+  X:                    $Xtrain
+  Y:                    $Ytrain
+  update_w0:            TRUE
+  update_w0_method:     "EM"
+  standardize:          TRUE
+  update_V:             TRUE
+  ca_update_order:      "consecutive"
+  init_method:          "default"
+  B_true:               $B_true
+  select_w0_threshold:  0
+  $fit_obj:             out$fit
+  $B_est:               out$B_est
+  $intercept_est:       out$intercept_est
+  $time:                out$elapsed_time
   
 #mixsqp w0 updates, consecutive coordinate ascent updates
 mr_mash_consec_mixsqp(mr_mash_consec_em):
