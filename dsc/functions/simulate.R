@@ -13,5 +13,5 @@ simulate_data <- function(n, p, p_causal, r,
   Ytest <- dat$Y[test_set, ]
   Xtest <- dat$X[test_set, ]
   
-  return(list(Xtrain=Xtrain, Ytrain=Ytrain, Xtest=Xtest, Ytest=Ytest))
+  return(list(Xtrain=Xtrain, Ytrain=Ytrain, Xtest=Xtest, Ytest=Ytest, B_true=dat$B))
 }
