@@ -1,5 +1,5 @@
 fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V, ca_update_order, init_method, B_true,
-                        select_w0_threshold){
+                        select_w0_threshold, daarem){
   
   r <- ncol(Y)
   p <- ncol(X)
@@ -22,8 +22,9 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
     }
       
     ##Fit mr.ash
-    fit_mr_ash <- mr.ash.alpha::mr.ash(X_mr_ash, y_mr_ash, sigma2=var(y_mr_ash), sa2=scaling_grid_mr_ash/var(y_mr_ash), pi=w0_mr_ash, 
-                                       update.sigma=update_V, update.pi=update_w0, standardize=standardize, verbose=FALSE, max.iter=5000)
+    fit_mr_ash <- mr.ash.alpha::mr.ash(X_mr_ash, y_mr_ash, sa2=scaling_grid_mr_ash, pi=w0_mr_ash, 
+                                       update.sigma=update_V, update.pi=update_w0, standardize=standardize, 
+                                       verbose=FALSE, max.iter=5000)
       
     ##Build matrix of initial estimates for mr.mash
     mu1_init <- matrix(drop(fit_mr_ash$beta), nrow=p, ncol=r)
@@ -35,8 +36,9 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
       y_mr_ash <- Y[, i]
         
       ##Fit mr.ash
-      fit_mr_ash <- mr.ash.alpha::mr.ash(X, y_mr_ash, sigma2=var(y_mr_ash), sa2=scaling_grid_mr_ash/var(y_mr_ash), pi=w0_mr_ash, 
-                                         update.sigma=update_V, update.pi=update_w0, standardize=standardize, verbose=FALSE, max.iter=5000)
+      fit_mr_ash <- mr.ash.alpha::mr.ash(X, y_mr_ash, sa2=scaling_grid_mr_ash, pi=w0_mr_ash, 
+                                         update.sigma=update_V, update.pi=update_w0, standardize=standardize, 
+                                         verbose=FALSE, max.iter=5000)
         
       ##Build matrix of initial estimates for mr.mash
       mu1_init[, i] <- drop(fit_mr_ash$beta)
@@ -52,8 +54,9 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
       }
     
       ##Fit mr.ash assuming shared effects
-      fit_mr_ash1 <- mr.ash.alpha::mr.ash(X_mr_ash1, y_mr_ash1, sigma2=var(y_mr_ash1), sa2=scaling_grid_mr_ash/var(y_mr_ash1), pi=w0_mr_ash, 
-                                         update.sigma=update_V, update.pi=update_w0, standardize=standardize, verbose=FALSE, max.iter=5000)
+      fit_mr_ash1 <- mr.ash.alpha::mr.ash(X_mr_ash1, y_mr_ash1, sa2=scaling_grid_mr_ash, pi=w0_mr_ash, 
+                                         update.sigma=update_V, update.pi=update_w0, standardize=standardize, 
+                                         verbose=FALSE, max.iter=5000)
     
       ##Save initial estimates for mr.ash assuming independent effects
       beta_init1 <- drop(fit_mr_ash1$beta)
@@ -64,9 +67,9 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
         y_mr_ash <- Y[, i]
       
         ##Fit mr.ash
-        fit_mr_ash <- mr.ash.alpha::mr.ash(X, y_mr_ash, sigma2=var(y_mr_ash), sa2=scaling_grid_mr_ash/var(y_mr_ash), pi=w0_mr_ash, 
-                                           update.sigma=update_V, update.pi=update_w0, standardize=standardize, verbose=FALSE, max.iter=5000,
-                                           beta.init = beta_init1)
+        fit_mr_ash <- mr.ash.alpha::mr.ash(X, y_mr_ash, sa2=scaling_grid_mr_ash, pi=w0_mr_ash, 
+                                           update.sigma=update_V, update.pi=update_w0, standardize=standardize, 
+                                           verbose=FALSE, max.iter=5000, beta.init = beta_init1)
       
         ##Build matrix of initial estimates for mr.mash
         mu1_init[, i] <- drop(fit_mr_ash$beta)
@@ -80,7 +83,7 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
   if(init_method %in% c("shared", "independent", "2pass")){
     w0_up <- cbind(drop(fit_mr_ash$pi), scaling_grid_mr_ash)
     w0_up_sel <- w0_up[which(w0_up[, 1]>=select_w0_threshold), 2]
-    scaling_grid <- w0_up_sel[which(w0_up_sel!=0)]
+    scaling_grid <- w0_up_sel[-1] ##remove 0 because compute_cov_canonical() already has the null matrix
   }
   
   ###Fit mr.mash
@@ -88,9 +91,16 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
   
   time1 <- proc.time()
   
-  fit <- mr.mash.alpha::mr.mash(X=X, Y=Y, S0=S0, update_w0=update_w0, update_w0_method=update_w0_method,
+  if(daarem){
+    fit <- mr.mash.alpha::mr.mash.daar(X=X, Y=Y, S0=S0, update_w0=update_w0, update_w0_method=update_w0_method, 
+                                       compute_ELBO=TRUE, standardize=standardize, verbose=FALSE, update_V=update_V, 
+                                       version="Rcpp", ca_update_order=ca_update_order, mu1_init=mu1_init,
+                                       mon_tol=1e-3, kappa=25, alpha=1.2)
+  } else{
+    fit <- mr.mash.alpha::mr.mash(X=X, Y=Y, S0=S0, update_w0=update_w0, update_w0_method=update_w0_method,
                                   compute_ELBO=TRUE, standardize=standardize, verbose=FALSE, update_V=update_V,
                                   version="Rcpp", ca_update_order=ca_update_order, mu1_init=mu1_init)
+  }
   
   time2 <- proc.time()
   
