@@ -10,12 +10,12 @@ DSC:
   define:
     simulate: indepX_lowcorrV_indepB, corrX_lowcorrV_indepB, highcorrX_lowcorrV_indepB, 
               indepX_lowcorrV_sharedB, corrX_lowcorrV_sharedB, highcorrX_lowcorrV_sharedB             
-    fit:      mr_mash_consec_em #, mr_mash_consec_mixsqp, 
-              mr_mash_declogBF_em #, mr_mash_declogBF_mixsqp,
-              #mr_mash_consec_em_init_indep, mr_mash_consec_mixsqp_init_indep,
-              mr_mash_consec_em_init_shared #, mr_mash_consec_mixsqp_init_shared,
-              mr_mash_consec_em_init_2pass #, mr_mash_consec_mixsqp_init_2pass,
-              mr_mash_consec_em_init_trueB #, mr_mash_consec_mixsqp_init_trueB
+    fit:      mr_mash_consec_em, mr_mash_consec_em_daarem #, mr_mash_consec_mixsqp, 
+              mr_mash_declogBF_em, mr_mash_declogBF_em_daarem #, mr_mash_declogBF_mixsqp,
+              #mr_mash_consec_em_init_indep, mr_mash_consec_em_daarem_init_indep, mr_mash_consec_mixsqp_init_indep,
+              mr_mash_consec_em_init_shared, mr_mash_consec_em_daarem_init_shared #, mr_mash_consec_mixsqp_init_shared,
+              mr_mash_consec_em_init_2pass, mr_mash_consec_em_daarem_init_2pass #, mr_mash_consec_mixsqp_init_2pass,
+              mr_mash_consec_em_init_trueB, mr_mash_consec_em_daarem_init_trueB #, mr_mash_consec_mixsqp_init_trueB
     predict:  predict_linear
     score:    r2, mse, bias
   run: simulate * fit * predict * score
@@ -24,7 +24,7 @@ DSC:
 #Independent predictors, lowly correlated residuals, independent effects
 indepX_lowcorrV_indepB: simulate_data_mod.R
   n:        600
-  p:        10
+  p:        10, 20
   p_causal: 2
   r:        10
   pve:      0.5
@@ -93,6 +93,7 @@ mr_mash_consec_em: fit_mr_mash_mod.R
   init_method:          "default"
   B_true:               $B_true
   select_w0_threshold:  0
+  daarem:               FALSE
   $fit_obj:             out$fit
   $B_est:               out$B_est
   $intercept_est:       out$intercept_est
@@ -102,6 +103,10 @@ mr_mash_consec_em: fit_mr_mash_mod.R
 mr_mash_consec_mixsqp(mr_mash_consec_em):
   update_w0_method: "mixsqp"
 
+#EM updates, consecutive coordinate ascent updates, daarem
+mr_mash_consec_em_daarem(mr_mash_consec_em):
+  daarem: TRUE
+
 #EM w0 updates, decreasing logBF coordinate ascent updates
 mr_mash_declogBF_em(mr_mash_consec_em):
   ca_update_order: "decreasing_logBF"
@@ -110,6 +115,11 @@ mr_mash_declogBF_em(mr_mash_consec_em):
 mr_mash_declogBF_mixsqp(mr_mash_consec_em):
   update_w0_method: "mixsqp"
   ca_update_order:  "decreasing_logBF"
+  
+#EM updates, decreasing logBF coordinate ascent updates, daarem
+mr_mash_declogBF_em_daarem(mr_mash_consec_em):
+  ca_update_order:  "decreasing_logBF"
+  daarem: TRUE
   
 #EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
 #run on each response
@@ -123,6 +133,12 @@ mr_mash_consec_mixsqp_init_indep(mr_mash_consec_em):
   init_method:    "independent"
   
 #EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
+#run on each response, daarem
+mr_mash_consec_em_daarem_init_indep(mr_mash_consec_em):
+  init_method:    "independent"
+  daarem: TRUE
+  
+#EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
 #run on stacked responses
 mr_mash_consec_em_init_shared(mr_mash_consec_em):
   init_method: "shared"
@@ -132,6 +148,12 @@ mr_mash_consec_em_init_shared(mr_mash_consec_em):
 mr_mash_consec_mixsqp_init_shared(mr_mash_consec_em):
   update_w0_method: "mixsqp"
   init_method:    "shared"
+  
+#EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
+#run on stacked responses, daarem
+mr_mash_consec_em_daarem_init_shared(mr_mash_consec_em):
+  init_method:    "shared"
+  daarem: TRUE
 
 #EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
 #two pass
@@ -144,6 +166,12 @@ mr_mash_consec_mixsqp_init_2pass(mr_mash_consec_em):
   update_w0_method: "mixsqp"
   init_method:    "2pass"
   
+#EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by mr.ash
+#two pass, daarem
+mr_mash_consec_em_daarem_init_2pass(mr_mash_consec_em):
+  init_method: "2pass"
+  daarem: TRUE
+  
 #EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by true B
 mr_mash_consec_em_init_trueB(mr_mash_consec_em):
   init_method: "truth"
@@ -152,6 +180,11 @@ mr_mash_consec_em_init_trueB(mr_mash_consec_em):
 mr_mash_consec_mixsqp_init_trueB(mr_mash_consec_em):
   update_w0_method: "mixsqp"
   init_method:    "truth"
+  
+#EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by true B, daarem
+mr_mash_consec_em_daarem_init_trueB(mr_mash_consec_em):
+  init_method: "truth"
+  daarem: TRUE
 
 ## Predict module
 predict_linear: predict_mod.R
