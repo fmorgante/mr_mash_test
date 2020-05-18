@@ -6,7 +6,7 @@ DSC:
   R_libs: mr.mash.alpha, mr.ash.alpha
   lib_path: functions
   exec_path: modules
-  replicate: 5
+  replicate: 20
   define:
     simulate: indepX_lowcorrV_indepB, corrX_lowcorrV_indepB, highcorrX_lowcorrV_indepB, 
               indepX_lowcorrV_sharedB, corrX_lowcorrV_sharedB, highcorrX_lowcorrV_sharedB             
@@ -24,8 +24,8 @@ DSC:
 #Independent predictors, lowly correlated residuals, independent effects
 indepX_lowcorrV_indepB: simulate_data_mod.R
   n:        600
-  p:        10, 20
-  p_causal: 2
+  p:        1000
+  p_causal: 50, 500
   r:        10
   pve:      0.5
   B_cor:    0
