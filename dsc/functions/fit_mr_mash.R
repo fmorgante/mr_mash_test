@@ -74,11 +74,11 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
         ##Build matrix of initial estimates for mr.mash
         mu1_init[, i] <- drop(fit_mr_ash$beta)
       }
-    } else if(init_method=="truth"){
-      mu1_init <- B_true
-    } else if(init_method=="default"){
-      mu1_init <- matrix(0, nrow=p, ncol=r)
-    }
+  } else if(init_method=="truth"){
+    mu1_init <- B_true
+  } else if(init_method=="default"){
+    mu1_init <- matrix(0, nrow=p, ncol=r)
+  }
   
   if(init_method %in% c("shared", "independent", "2pass")){
     w0_up <- cbind(drop(fit_mr_ash$pi), scaling_grid_mr_ash)
