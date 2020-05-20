@@ -31,3 +31,6 @@ Results for meeting on 04/30/2020. Assessment of prediction accuracy and run tim
 + [Highly correlated predictors, shared effects, lowly correlated residuals.](results_highcorrX_lowcorrV_sharedB.html)
 + [Highly correlated predictors, independent effects, lowly correlated residuals.](results_highcorrX_lowcorrV_indepB.html)
 
+Results for meeting on ???. Assessment of prediction accuracy and run time of *mr.mash* with different options (mainly standard vs DAAREM) in the following simulation scenarios:
+
++ [Independent predictors, shared effects, lowly correlated residuals.](results_indepX_lowcorrV_sharedB_05_18_20.html)
