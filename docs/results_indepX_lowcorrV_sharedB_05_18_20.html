@@ -355,16 +355,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree3da8aaf95f08122c9a345168fd05d84d8a480dbatargetblank3da8aafa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/3da8aaf95f08122c9a345168fd05d84d8a480dba" target="_blank">3da8aaf</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree60c0e0a25bc1492fa16ac9c351372094ac0b5412targetblank60c0e0aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/60c0e0a25bc1492fa16ac9c351372094ac0b5412" target="_blank">60c0e0a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree3da8aaf95f08122c9a345168fd05d84d8a480dbatargetblank3da8aafa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree60c0e0a25bc1492fa16ac9c351372094ac0b5412targetblank60c0e0aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/3da8aaf95f08122c9a345168fd05d84d8a480dba" target="_blank">3da8aaf</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/60c0e0a25bc1492fa16ac9c351372094ac0b5412" target="_blank">60c0e0a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -429,6 +429,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/60c0e0a25bc1492fa16ac9c351372094ac0b5412/analysis/results_indepX_lowcorrV_sharedB_05_18_20.Rmd" target="_blank">60c0e0a</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-05-20
+</td>
+<td>
+Test new set of results
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/72c302a7331531632de0f72ee48e92a8525bce52/docs/results_indepX_lowcorrV_sharedB_05_18_20.html" target="_blank">72c302a</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-05-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -589,10 +623,12 @@ dsc_out$simulate.B_scale &lt;- NULL
 dsc_out$simulate.X_cor &lt;- NULL
 dsc_out$simulate.X_scale &lt;- NULL
 dsc_out$simulate.V_cor &lt;- NULL</code></pre>
-<p>The results below are based on 50 simulations with 600 samples, 1000 variables of which 50 were causal, 10 responses with a per-response proportion of variance explained (PVE) of 0.5. Variables, X, were drawn from MVN(0, Gamma), where Gamma is such that it achieves a correlation between variables of 0 and a scale of 0.8. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of 1 and a scale of 0.8. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of 0.15 and a scale defined py PVE.</p>
+<div id="causal-variables" class="section level3">
+<h3>50 causal variables</h3>
+<p>The results below are based on 20 simulations with 600 samples, 1000 variables of which 50 were causal, 10 responses with a per-response proportion of variance explained (PVE) of 0.5. Variables, X, were drawn from MVN(0, Gamma), where Gamma is such that it achieves a correlation between variables of 0 and a scale of 0.8. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of 1 and a scale of 0.8. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of 0.15 and a scale defined py PVE.</p>
 <p><em>mr.mash</em> was fitted to the training data (80% of the data) updating V and updating the prior weights using EM updates. We investigate a few combinations of orderings of the coordinate ascent updates (i.e., consecutive and decreasing logBF from a multivariate simple linear regression with MASH prior), and initialization of the posterior means of the regression coefficients (i.e., 0, from <em>mr.ash</em> assuming shared effects across tissues, from two passes of <em>mr.ash</em> – first assuming shared effects across tissues, then using the estimated coefficients as initial values assuming independent effects across tissues –, the true coefficients). The mixture prior consisted of 166 components defined by a few canonical matrices correpsonding to different settings of effect sharing/specificity (i.e., zero, singletons, independent, low heterogeneity, medium heterogeneity, high heterogeneity, shared) scaled by a grid of values (i.e., from 0.1 to 2.1 in steps of 0.2). The same grid was used in <em>mr.ash</em> with the addition of 0. Convergence was declared when the maximum difference in the posterior mean of the regression coefficients between two successive iterations was smaller than 1e-4. Standard <em>mr.mash</em> is compared to an accelerated version that uses DAAREM.</p>
 <p>Then, responses were predicted on the test data (20% of the data).</p>
-<p>Here, we evaluate the accuracy of prediction assessed by <span class="math">\(r^2\)</span> and bias (slope) from the regression of the true response on the predicted response, and the relative mean square error (RMSE) in the test data. The boxplots are across simulations and responses.</p>
+<p>Here, we evaluate the accuracy of prediction assessed by <span class="math">\(r^2\)</span> and bias (slope) from the regression of the true response on the predicted response, and the relative mean square error (rMSE) in the test data. The boxplots are across simulations and responses.</p>
 <pre class="r"><code>###Convert from list to data.frame for plotting
 dsc_plots &lt;- convert_dsc_to_dataframe(dsc_out)
 
@@ -624,25 +660,25 @@ p &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = &quot;score
     geom_boxplot(color = &quot;black&quot;, outlier.size = 1, width = 0.85) +
     facet_wrap(vars(score_metric), scales=&quot;free_y&quot;, ncol=2, labeller=labeller(score_metric=facet_labels)) +
     scale_fill_manual(values = colors) +
-    labs(x = &quot;&quot;, y = &quot;Accuracy&quot;, title = &quot;Prediction accuracy&quot;, fill=&quot;Method&quot;) +
+    labs(x = &quot;&quot;, y = &quot;Accuracy/Error&quot;, title = &quot;Prediction performance&quot;, fill=&quot;Method&quot;) +
     geom_hline(data=hlines, aes(yintercept = max_val), linetype=&quot;dashed&quot;, size=1) +
     theme_cowplot(font_size = 20) +
     theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
           plot.title = element_text(hjust = 0.5))
 
 shift_legend(p)</code></pre>
-<p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>Let’s now remove outliers from the RMSE plot to make things a little clearer.</p>
+<p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy%2050-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>Let’s now remove outliers from the rMSE plot to make things a little clearer.</p>
 <pre class="r"><code>p_rmse_nooutliers &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;rmse&quot;), ], aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;, outlier.size = 1, width = 0.85, width.errorbar = 0) +
   scale_fill_manual(values = colors) +
-  labs(x = &quot;&quot;, y = &quot;Accuracy&quot;, title = &quot;MSE (relative to consec_em)&quot;, fill=&quot;Method&quot;) +
+  labs(x = &quot;&quot;, y = &quot;Relative error&quot;, title = &quot;rMSE (relative to consec_em)&quot;, fill=&quot;Method&quot;) +
   theme_cowplot(font_size = 20) +
   theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         plot.title = element_text(hjust = 0.5))
 
 print(p_rmse_nooutliers)</code></pre>
-<p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy%20rmse-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy%20rmse%2050-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>Here, we look at the elapsed time (<span class="math">\(log_{10}\)</span> seconds) of <em>mr.mash</em>. Note that this time does not include the run time of <em>mr.ash</em> in the cases where we used it to initialize the posterior means of the regression coefficients.</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;r2&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -658,7 +694,107 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
         plot.title = element_text(hjust = 0.5))
 
 print(p_time)</code></pre>
-<p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/run%20time-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/run%20time%2050-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>###Load the dsc results
+dsc_out &lt;- dscquery(&quot;output/dsc_05_18_20&quot;, c(&quot;simulate.n&quot;, &quot;simulate.p&quot;, &quot;simulate.p_causal&quot;, &quot;simulate.r&quot;,   
+                                 &quot;simulate.pve&quot;, &quot;simulate.B_cor&quot;, &quot;simulate.B_scale&quot;,
+                                 &quot;simulate.X_cor&quot;, &quot;simulate.X_scale&quot;,
+                                 &quot;simulate.V_cor&quot;, &quot;simulate.prop_testset&quot;,
+                                 &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
+                    conditions = &quot;$(simulate) == &#39;indepX_lowcorrV_sharedB&#39; &amp; $(simulate.p_causal) == 500&quot;, verbose=FALSE,
+                    ignore.missing.files = TRUE )
+
+###Obtain simulation parameters
+n &lt;- unique(dsc_out$simulate.n)
+p &lt;- unique(dsc_out$simulate.p)
+p_causal &lt;- unique(dsc_out$simulate.p_causal)
+r &lt;- unique(dsc_out$simulate.r)
+k &lt;- 166
+pve &lt;- unique(dsc_out$simulate.pve)
+prop_testset &lt;- unique(dsc_out$simulate.prop_testset)
+B_cor &lt;- unique(dsc_out$simulate.B_cor)
+B_scale &lt;- unique(dsc_out$simulate.B_scale)
+X_cor &lt;- unique(dsc_out$simulate.X_cor)
+X_scale &lt;- unique(dsc_out$simulate.X_scale)
+V_cor &lt;- unique(dsc_out$simulate.V_cor)
+
+###Remove list elements that are not useful anymore
+dsc_out$simulate.prop_testset &lt;- NULL
+dsc_out$simulate.B_cor &lt;- NULL
+dsc_out$simulate.B_scale &lt;- NULL
+dsc_out$simulate.X_cor &lt;- NULL
+dsc_out$simulate.X_scale &lt;- NULL
+dsc_out$simulate.V_cor &lt;- NULL</code></pre>
+</div>
+<div id="causal-variables-1" class="section level3">
+<h3>500 causal variables</h3>
+<p>The results below are based on the same simulation/analysis scheme as above but with 500 causal variables.</p>
+<pre class="r"><code>###Convert from list to data.frame for plotting
+dsc_plots &lt;- convert_dsc_to_dataframe(dsc_out)
+
+###Compute rmse score (relative to mr_mash_consec_em) and add it to the data
+rmse_dat &lt;- compute_rmse(dsc_plots)
+dsc_plots &lt;- rbind(dsc_plots, rmse_dat)
+
+###Remove mse from scores
+dsc_plots &lt;- dsc_plots[which(dsc_plots$score_metric!=&quot;mse&quot;), ]
+
+###Create factor version of method
+###Create factor version of method
+dsc_plots$method_fac &lt;- factor(dsc_plots$method, levels=c(&quot;mr_mash_consec_em&quot;, &quot;mr_mash_declogBF_em&quot;, 
+                                                          &quot;mr_mash_consec_em_init_shared&quot;, &quot;mr_mash_consec_em_init_2pass&quot;,
+                                                          &quot;mr_mash_consec_em_init_trueB&quot;,
+                                                          &quot;mr_mash_consec_em_daarem&quot;, &quot;mr_mash_declogBF_em_daarem&quot;, 
+                                                          &quot;mr_mash_consec_em_daarem_init_shared&quot;, &quot;mr_mash_consec_em_daarem_init_2pass&quot;,
+                                                          &quot;mr_mash_consec_em_daarem_init_trueB&quot;),
+                                                labels=c(&quot;consec_em&quot;, &quot;decrease_logBF_em&quot;, &quot;consec_em_mrash_shared&quot;, 
+                                                         &quot;consec_em_init_2pass&quot;, &quot;consec_em_init_trueB&quot;,
+                                                         &quot;consec_em_daarem&quot;, &quot;decrease_logBF_em_daarem&quot;, &quot;consec_em_daarem_mrash_shared&quot;,
+                                                         &quot;consec_em_daarem_init_2pass&quot;, &quot;consec_em_daarem_init_trueB&quot;))
+
+###Build data.frame with best accuracy achievable
+hlines &lt;- data.frame(score_metric=c(&quot;r2&quot;, &quot;bias&quot;), max_val=c(unique(dsc_plots$pve), 1))
+
+###Create plots
+p &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
+    geom_boxplot(color = &quot;black&quot;, outlier.size = 1, width = 0.85) +
+    facet_wrap(vars(score_metric), scales=&quot;free_y&quot;, ncol=2, labeller=labeller(score_metric=facet_labels)) +
+    scale_fill_manual(values = colors) +
+    labs(x = &quot;&quot;, y = &quot;Accuracy/Error&quot;, title = &quot;Prediction performance&quot;, fill=&quot;Method&quot;) +
+    geom_hline(data=hlines, aes(yintercept = max_val), linetype=&quot;dashed&quot;, size=1) +
+    theme_cowplot(font_size = 20) +
+    theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+          plot.title = element_text(hjust = 0.5))
+
+shift_legend(p)</code></pre>
+<p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy%20500-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>Let’s now remove outliers from the rMSE plot to make things a little clearer.</p>
+<pre class="r"><code>p_rmse_nooutliers &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;rmse&quot;), ], aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
+  Ipaper::geom_boxplot2(color = &quot;black&quot;, outlier.size = 1, width = 0.85, width.errorbar = 0) +
+  scale_fill_manual(values = colors) +
+  labs(x = &quot;&quot;, y = &quot;Relative error&quot;, title = &quot;rMSE (relative to consec_em)&quot;, fill=&quot;Method&quot;) +
+  theme_cowplot(font_size = 20) +
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+print(p_rmse_nooutliers)</code></pre>
+<p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy%20rmse%20500-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>Here, we look at the elapsed time (<span class="math">\(log_{10}\)</span> seconds) of <em>mr.mash</em>. Note that this time does not include the run time of <em>mr.ash</em> in the cases where we used it to initialize the posterior means of the regression coefficients.</p>
+<pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;r2&quot;), 
+                          -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
+
+p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &quot;time&quot;, fill = &quot;method_fac&quot;)) +
+  geom_boxplot(color = &quot;black&quot;, outlier.size = 1, width = 0.85) +
+  scale_fill_manual(values = colors) +
+  scale_y_continuous(trans=&quot;log10&quot;, breaks = trans_breaks(&quot;log10&quot;, function(x) 10^x),
+                      labels = trans_format(&quot;log10&quot;, math_format(10^.x))) +
+  labs(x = &quot;&quot;, y = &quot;Elapsed time (seconds) in log10 scale&quot;,title = &quot;Run time&quot;, fill=&quot;Method&quot;) +
+  theme_cowplot(font_size = 20) +
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+print(p_time)</code></pre>
+<p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/run%20time%20500-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -718,6 +854,7 @@ loaded via a namespace (and not attached):
 [73] workflowr_1.6.1    rprojroot_1.3-2    desc_1.2.0        
 [76] stringi_1.4.3      parallel_3.5.1     IRdisplay_0.6.1   
 [79] Rcpp_1.0.4.6       vctrs_0.2.4        tidyselect_0.2.5  </code></pre>
+</div>
 </div>
 
 
