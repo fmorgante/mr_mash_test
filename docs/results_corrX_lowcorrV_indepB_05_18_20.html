@@ -13,7 +13,7 @@
 
 <meta name="date" content="2020-05-20" />
 
-<title>Independent predictors, shared effects, lowly correlated residuals</title>
+<title>Correlated predictors, independent effects, lowly correlated residuals</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -237,7 +237,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Independent predictors, shared effects, lowly correlated residuals</h1>
+<h1 class="title toc-ignore">Correlated predictors, independent effects, lowly correlated residuals</h1>
 <h4 class="author"><em>Fabio Morgante</em></h4>
 <h4 class="date"><em>May 20, 2020</em></h4>
 
@@ -405,7 +405,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/results_indepX_lowcorrV_sharedB_05_18_20.Rmd</code>) and HTML (<code>docs/results_indepX_lowcorrV_sharedB_05_18_20.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/results_corrX_lowcorrV_indepB_05_18_20.Rmd</code>) and HTML (<code>docs/results_corrX_lowcorrV_indepB_05_18_20.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -431,27 +431,10 @@ Message
 <tbody>
 <tr>
 <td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/4263395553cfa9bc55ce3bda982dbcdf726b3f6a/docs/results_indepX_lowcorrV_sharedB_05_18_20.html" target="_blank">4263395</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
 Rmd
 </td>
 <td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/60c0e0a25bc1492fa16ac9c351372094ac0b5412/analysis/results_indepX_lowcorrV_sharedB_05_18_20.Rmd" target="_blank">60c0e0a</a>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/7622d8d17104bd6f71a2b134fe68aca23cff0efa/analysis/results_corrX_lowcorrV_indepB_05_18_20.Rmd" target="_blank">7622d8d</a>
 </td>
 <td>
 fmorgante
@@ -460,41 +443,7 @@ fmorgante
 2020-05-20
 </td>
 <td>
-Test new set of results
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/72c302a7331531632de0f72ee48e92a8525bce52/docs/results_indepX_lowcorrV_sharedB_05_18_20.html" target="_blank">72c302a</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/3da8aaf95f08122c9a345168fd05d84d8a480dba/analysis/results_indepX_lowcorrV_sharedB_05_18_20.Rmd" target="_blank">3da8aaf</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-<td>
-Test new set of results
+Add new set of results
 </td>
 </tr>
 </tbody>
@@ -616,7 +565,7 @@ dsc_out &lt;- dscquery(&quot;output/dsc_05_18_20&quot;, c(&quot;simulate.n&quot;
                                  &quot;simulate.X_cor&quot;, &quot;simulate.X_scale&quot;,
                                  &quot;simulate.V_cor&quot;, &quot;simulate.prop_testset&quot;,
                                  &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
-                    conditions = &quot;$(simulate) == &#39;indepX_lowcorrV_sharedB&#39; &amp; $(simulate.p_causal) == 50&quot;, verbose=FALSE,
+                    conditions = &quot;$(simulate) == &#39;corrX_lowcorrV_indepB&#39; &amp; $(simulate.p_causal) == 50&quot;, verbose=FALSE,
                     ignore.missing.files = TRUE )
 
 ###Obtain simulation parameters
@@ -642,7 +591,7 @@ dsc_out$simulate.X_scale &lt;- NULL
 dsc_out$simulate.V_cor &lt;- NULL</code></pre>
 <div id="causal-variables" class="section level3">
 <h3>50 causal variables</h3>
-<p>The results below are based on 20 simulations with 600 samples, 1000 variables of which 50 were causal, 10 responses with a per-response proportion of variance explained (PVE) of 0.5. Variables, X, were drawn from MVN(0, Gamma), where Gamma is such that it achieves a correlation between variables of 0 and a scale of 0.8. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of 1 and a scale of 0.8. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of 0.15 and a scale defined py PVE.</p>
+<p>The results below are based on 20 simulations with 600 samples, 1000 variables of which 50 were causal, 10 responses with a per-response proportion of variance explained (PVE) of 0.5. Variables, X, were drawn from MVN(0, Gamma), where Gamma is such that it achieves a correlation between variables of 0.5 and a scale of 0.8. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of 0 and a scale of 0.8. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of 0.15 and a scale defined py PVE.</p>
 <p><em>mr.mash</em> was fitted to the training data (80% of the data) updating V and updating the prior weights using EM updates. We investigate a few combinations of orderings of the coordinate ascent updates (i.e., consecutive and decreasing logBF from a multivariate simple linear regression with MASH prior), and initialization of the posterior means of the regression coefficients (i.e., 0, from <em>mr.ash</em> assuming shared effects across tissues, from two passes of <em>mr.ash</em> – first assuming shared effects across tissues, then using the estimated coefficients as initial values assuming independent effects across tissues –, the true coefficients). The mixture prior consisted of 166 components defined by a few canonical matrices correpsonding to different settings of effect sharing/specificity (i.e., zero, singletons, independent, low heterogeneity, medium heterogeneity, high heterogeneity, shared) scaled by a grid of values (i.e., from 0.1 to 2.1 in steps of 0.2). The same grid was used in <em>mr.ash</em> with the addition of 0. Convergence was declared when the maximum difference in the posterior mean of the regression coefficients between two successive iterations was smaller than 1e-4. Standard <em>mr.mash</em> is compared to an accelerated version that uses DAAREM.</p>
 <p>Then, responses were predicted on the test data (20% of the data).</p>
 <p>Here, we evaluate the accuracy of prediction assessed by <span class="math">\(r^2\)</span> and bias (slope) from the regression of the true response on the predicted response, and the relative mean square error (rMSE) in the test data. The boxplots are across simulations and responses.</p>
@@ -684,44 +633,7 @@ p &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = &quot;score
           plot.title = element_text(hjust = 0.5))
 
 shift_legend(p)</code></pre>
-<p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy%2050-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-50-1">
-Past versions of “accuracy 50-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-accuracy-50-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/4263395553cfa9bc55ce3bda982dbcdf726b3f6a/docs/figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy 50-1.png" target="_blank">4263395</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_corrX_lowcorrV_indepB_05_18_20.Rmd/accuracy%2050-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>Let’s now remove outliers from the rMSE plot to make things a little clearer.</p>
 <pre class="r"><code>p_rmse_nooutliers &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;rmse&quot;), ], aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;, outlier.size = 1, width = 0.85, width.errorbar = 0) +
@@ -732,44 +644,7 @@ fmorgante
         plot.title = element_text(hjust = 0.5))
 
 print(p_rmse_nooutliers)</code></pre>
-<p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy%20rmse%2050-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-rmse-50-1">
-Past versions of “accuracy rmse 50-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-accuracy-rmse-50-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/4263395553cfa9bc55ce3bda982dbcdf726b3f6a/docs/figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy rmse 50-1.png" target="_blank">4263395</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_corrX_lowcorrV_indepB_05_18_20.Rmd/accuracy%20rmse%2050-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>Here, we look at the elapsed time (<span class="math">\(log_{10}\)</span> seconds) of <em>mr.mash</em>. Note that this time does not include the run time of <em>mr.ash</em> in the cases where we used it to initialize the posterior means of the regression coefficients.</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;r2&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -785,51 +660,14 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
         plot.title = element_text(hjust = 0.5))
 
 print(p_time)</code></pre>
-<p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/run%20time%2050-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-run-time-50-1">
-Past versions of “run time 50-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-run-time-50-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/4263395553cfa9bc55ce3bda982dbcdf726b3f6a/docs/figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/run time 50-1.png" target="_blank">4263395</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_corrX_lowcorrV_indepB_05_18_20.Rmd/run%20time%2050-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>###Load the dsc results
 dsc_out &lt;- dscquery(&quot;output/dsc_05_18_20&quot;, c(&quot;simulate.n&quot;, &quot;simulate.p&quot;, &quot;simulate.p_causal&quot;, &quot;simulate.r&quot;,   
                                  &quot;simulate.pve&quot;, &quot;simulate.B_cor&quot;, &quot;simulate.B_scale&quot;,
                                  &quot;simulate.X_cor&quot;, &quot;simulate.X_scale&quot;,
                                  &quot;simulate.V_cor&quot;, &quot;simulate.prop_testset&quot;,
                                  &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
-                    conditions = &quot;$(simulate) == &#39;indepX_lowcorrV_sharedB&#39; &amp; $(simulate.p_causal) == 500&quot;, verbose=FALSE,
+                    conditions = &quot;$(simulate) == &#39;corrX_lowcorrV_indepB&#39; &amp; $(simulate.p_causal) == 500&quot;, verbose=FALSE,
                     ignore.missing.files = TRUE )
 
 ###Obtain simulation parameters
@@ -895,44 +733,7 @@ p &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = &quot;score
           plot.title = element_text(hjust = 0.5))
 
 shift_legend(p)</code></pre>
-<p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy%20500-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-500-1">
-Past versions of “accuracy 500-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-accuracy-500-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/4263395553cfa9bc55ce3bda982dbcdf726b3f6a/docs/figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy 500-1.png" target="_blank">4263395</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_corrX_lowcorrV_indepB_05_18_20.Rmd/accuracy%20500-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>Let’s now remove outliers from the rMSE plot to make things a little clearer.</p>
 <pre class="r"><code>p_rmse_nooutliers &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;rmse&quot;), ], aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;, outlier.size = 1, width = 0.85, width.errorbar = 0) +
@@ -943,44 +744,7 @@ fmorgante
         plot.title = element_text(hjust = 0.5))
 
 print(p_rmse_nooutliers)</code></pre>
-<p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy%20rmse%20500-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-rmse-500-1">
-Past versions of “accuracy rmse 500-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-accuracy-rmse-500-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/4263395553cfa9bc55ce3bda982dbcdf726b3f6a/docs/figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy rmse 500-1.png" target="_blank">4263395</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_corrX_lowcorrV_indepB_05_18_20.Rmd/accuracy%20rmse%20500-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>Here, we look at the elapsed time (<span class="math">\(log_{10}\)</span> seconds) of <em>mr.mash</em>. Note that this time does not include the run time of <em>mr.ash</em> in the cases where we used it to initialize the posterior means of the regression coefficients.</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;r2&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -996,44 +760,7 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
         plot.title = element_text(hjust = 0.5))
 
 print(p_time)</code></pre>
-<p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/run%20time%20500-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-run-time-500-1">
-Past versions of “run time 500-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-run-time-500-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/4263395553cfa9bc55ce3bda982dbcdf726b3f6a/docs/figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/run time 500-1.png" target="_blank">4263395</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_corrX_lowcorrV_indepB_05_18_20.Rmd/run%20time%20500-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
