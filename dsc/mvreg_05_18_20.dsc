@@ -189,6 +189,37 @@ mr_mash_consec_em_daarem_init_trueB(mr_mash_consec_em):
   init_method: "truth"
   daarem: TRUE
 
+#Multivariate LASSO  
+mlasso: fit_mglmnet_mod.R
+  X:                    $Xtrain
+  Y:                    $Ytrain
+  alpha:                1
+  $fit_obj:             out$fit
+  $B_est:               out$B_est
+  $intercept_est:       out$intercept_est
+  $time:                out$elapsed_time
+
+#Multivariate ridge  
+mridge: fit_mglmnet_mod.R
+  X:                    $Xtrain
+  Y:                    $Ytrain
+  alpha:                0
+  $fit_obj:             out$fit
+  $B_est:               out$B_est
+  $intercept_est:       out$intercept_est
+  $time:                out$elapsed_time
+
+#Multivariate enet  
+menet: fit_mglmnet_mod.R
+  X:                    $Xtrain
+  Y:                    $Ytrain
+  alpha:                0.5
+  $fit_obj:             out$fit
+  $B_est:               out$B_est
+  $intercept_est:       out$intercept_est
+  $time:                out$elapsed_time
+
+
 ## Predict module
 predict_linear: predict_mod.R
   B:         $B_est
