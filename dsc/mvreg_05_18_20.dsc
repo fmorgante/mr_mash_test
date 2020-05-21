@@ -14,7 +14,8 @@ DSC:
               mr_mash_declogBF_em, mr_mash_declogBF_em_daarem, 
               mr_mash_consec_em_init_shared, mr_mash_consec_em_daarem_init_shared, 
               mr_mash_consec_em_init_2pass, mr_mash_consec_em_daarem_init_2pass, 
-              mr_mash_consec_em_init_trueB, mr_mash_consec_em_daarem_init_trueB 
+              mr_mash_consec_em_init_trueB, mr_mash_consec_em_daarem_init_trueB,
+              mlasso, mridge, menet
               #mr_mash_consec_mixsqp, mr_mash_declogBF_mixsqp, mr_mash_consec_em_init_indep, 
               #mr_mash_consec_em_daarem_init_indep, mr_mash_consec_mixsqp_init_indep,
               #mr_mash_consec_mixsqp_init_shared, mr_mash_consec_mixsqp_init_2pass,
