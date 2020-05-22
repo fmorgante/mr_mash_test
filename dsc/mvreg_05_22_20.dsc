@@ -89,7 +89,7 @@ highcorrX_lowcorrV_sharedB(indepX_lowcorrV_indepB):
 #Independent predictors, lowly correlated residuals, effects in only 1 resp
 indepX_lowcorrV_1respB(indepX_lowcorrV_indepB):
   r_causal: 1
-  B_cor:   1
+  B_cor:   0
   B_scale: 0.8
   X_cor:   0
   X_scale: 0.8
@@ -98,7 +98,7 @@ indepX_lowcorrV_1respB(indepX_lowcorrV_indepB):
 #Correlated predictors, lowly correlated residuals, effects in only 1 resp
 corrX_lowcorrV_1respB(indepX_lowcorrV_indepB):
   r_causal: 1
-  B_cor:   1
+  B_cor:   0
   B_scale: 0.8
   X_cor:   0.5
   X_scale: 0.8
@@ -107,7 +107,7 @@ corrX_lowcorrV_1respB(indepX_lowcorrV_indepB):
 #Higly correlated predictors, lowly correlated residuals, effects in only 1 resp
 highcorrX_lowcorrV_1respB(indepX_lowcorrV_indepB):
   r_causal: 1
-  B_cor:   1
+  B_cor:   0
   B_scale: 0.8
   X_cor:   0.8
   X_scale: 0.8
@@ -231,24 +231,12 @@ mlasso: fit_mglmnet_mod.R
   $time:                out$elapsed_time
 
 #Multivariate ridge  
-mridge: fit_mglmnet_mod.R
-  X:                    $Xtrain
-  Y:                    $Ytrain
+mridge(mlasso): fit_mglmnet_mod.R
   alpha:                0
-  $fit_obj:             out$fit
-  $B_est:               out$B_est
-  $intercept_est:       out$intercept_est
-  $time:                out$elapsed_time
 
 #Multivariate enet  
-menet: fit_mglmnet_mod.R
-  X:                    $Xtrain
-  Y:                    $Ytrain
+menet(mlasso): fit_mglmnet_mod.R
   alpha:                0.5
-  $fit_obj:             out$fit
-  $B_est:               out$B_est
-  $intercept_est:       out$intercept_est
-  $time:                out$elapsed_time
 
 
 ## Predict module
