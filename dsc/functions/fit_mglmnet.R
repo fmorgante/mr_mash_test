@@ -1,8 +1,8 @@
 fit_mglmnet <- function(X, Y, alpha){
   time1 <- proc.time()
   
-  cvfit <- cv.glmnet(x=X, y=Y, family="mgaussian", alpha=alpha)
-  fit <- glmnet(x=X, y=Y, family="mgaussian", alpha=alpha, lambda=cvfit$lambda.min)
+  cvfit <- glmnet::cv.glmnet(x=X, y=Y, family="mgaussian", alpha=alpha)
+  fit <- glmnet::glmnet(x=X, y=Y, family="mgaussian", alpha=alpha, lambda=cvfit$lambda.min)
   
   time2 <- proc.time()
   
