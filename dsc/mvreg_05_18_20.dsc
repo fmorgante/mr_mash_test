@@ -3,7 +3,7 @@
 ## A DSC for evaluating prediction accuracy of
 ## mr.mash in different scenarios.
 DSC:
-  R_libs: mr.mash.alpha, mr.ash.alpha
+  R_libs: mr.mash.alpha, mr.ash.alpha, glmnet
   lib_path: functions
   exec_path: modules
   replicate: 20
