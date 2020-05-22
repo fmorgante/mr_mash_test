@@ -9,8 +9,8 @@ DSC:
   replicate: 20
   define:
     simulate: indepX_lowcorrV_indepB, corrX_lowcorrV_indepB, highcorrX_lowcorrV_indepB, 
-              indepX_lowcorrV_sharedB, corrX_lowcorrV_sharedB, highcorrX_lowcorrV_sharedB,
-              indepX_lowcorrV_1respB, corrX_lowcorrV_1respB, highcorrX_lowcorrV_1respB
+              indepX_lowcorrV_1respB, corrX_lowcorrV_1respB, highcorrX_lowcorrV_1respB #,
+              #indepX_lowcorrV_sharedB, corrX_lowcorrV_sharedB, highcorrX_lowcorrV_sharedB
     fit:      mr_mash_consec_em, mr_mash_consec_em_daarem,  
               mr_mash_declogBF_em, mr_mash_declogBF_em_daarem, 
               mr_mash_consec_em_init_shared, mr_mash_consec_em_daarem_init_shared, 
