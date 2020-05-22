@@ -231,11 +231,11 @@ mlasso: fit_mglmnet_mod.R
   $time:                out$elapsed_time
 
 #Multivariate ridge  
-mridge(mlasso): fit_mglmnet_mod.R
+mridge(mlasso):
   alpha:                0
 
 #Multivariate enet  
-menet(mlasso): fit_mglmnet_mod.R
+menet(mlasso):
   alpha:                0.5
 
 
