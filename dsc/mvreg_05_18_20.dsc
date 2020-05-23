@@ -15,8 +15,8 @@ DSC:
               mr_mash_consec_em_init_shared, mr_mash_consec_em_daarem_init_shared, 
               mr_mash_consec_em_init_2pass, mr_mash_consec_em_daarem_init_2pass,
               mr_mash_consec_em_init_trueB, mr_mash_consec_em_daarem_init_trueB,
+              mr_mash_consec_em_init_mlasso, mr_mash_consec_em_daarem_init_mlasso,
               mlasso, mridge, menet
-              #mr_mash_consec_em_init_mlasso, mr_mash_consec_em_daarem_init_mlasso,
               #mr_mash_consec_mixsqp, mr_mash_declogBF_mixsqp, mr_mash_consec_em_init_indep, 
               #mr_mash_consec_em_daarem_init_indep, mr_mash_consec_mixsqp_init_indep,
               #mr_mash_consec_mixsqp_init_shared, mr_mash_consec_mixsqp_init_2pass,
@@ -191,16 +191,6 @@ mr_mash_consec_em_daarem_init_trueB(mr_mash_consec_em):
   init_method: "truth"
   daarem: TRUE
   
-#mixsqp w0 updates, consecutive coordinate ascent updates, mu1 initilized by true B
-mr_mash_consec_mixsqp_init_trueB(mr_mash_consec_em):
-  update_w0_method: "mixsqp"
-  init_method:    "truth"
-  
-#EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by true B, daarem
-mr_mash_consec_em_daarem_init_trueB(mr_mash_consec_em):
-  init_method: "truth"
-  daarem: TRUE
-
 #EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by mlasso
 mr_mash_consec_em_init_mlasso(mr_mash_consec_em):
   init_method: "mlasso"
@@ -214,17 +204,6 @@ mr_mash_consec_mixsqp_init_mlasso(mr_mash_consec_em):
 mr_mash_consec_em_daarem_init_mlasso(mr_mash_consec_em):
   init_method: "mlasso"
   daarem: TRUE
-  
-#mixsqp w0 updates, consecutive coordinate ascent updates, mu1 initilized by mlasso
-mr_mash_consec_mixsqp_init_mlasso(mr_mash_consec_em):
-  update_w0_method: "mixsqp"
-  init_method:    "mlasso"
-  
-#EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by mlasso, daarem
-mr_mash_consec_em_daarem_init_mlasso(mr_mash_consec_em):
-  init_method: "mlasso"
-  daarem: TRUE
-
 
 #Multivariate LASSO  
 mlasso: fit_mglmnet_mod.R
