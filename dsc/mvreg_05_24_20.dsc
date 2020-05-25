@@ -9,18 +9,19 @@ DSC:
   replicate: 20
   define:
     simulate: indepX_lowcorrV_indepB, corrX_lowcorrV_indepB, highcorrX_lowcorrV_indepB, 
-              indepX_lowcorrV_1respB, corrX_lowcorrV_1respB, highcorrX_lowcorrV_1respB #,
-              #indepX_lowcorrV_sharedB, corrX_lowcorrV_sharedB, highcorrX_lowcorrV_sharedB
+              indepX_lowcorrV_1respB, corrX_lowcorrV_1respB, highcorrX_lowcorrV_1respB,
+              indepX_lowcorrV_sharedB, corrX_lowcorrV_sharedB, highcorrX_lowcorrV_sharedB
     fit:      mr_mash_consec_em, mr_mash_consec_em_daarem,  
               mr_mash_declogBF_em, mr_mash_declogBF_em_daarem, 
               mr_mash_consec_em_init_shared, mr_mash_consec_em_daarem_init_shared, 
               mr_mash_consec_em_init_2pass, mr_mash_consec_em_daarem_init_2pass, 
               mr_mash_consec_em_init_trueB, mr_mash_consec_em_daarem_init_trueB,
+              mr_mash_consec_em_init_mlasso, mr_mash_consec_em_daarem_init_mlasso,
               mlasso, mridge, menet
               #mr_mash_consec_mixsqp, mr_mash_declogBF_mixsqp, mr_mash_consec_em_init_indep, 
               #mr_mash_consec_em_daarem_init_indep, mr_mash_consec_mixsqp_init_indep,
               #mr_mash_consec_mixsqp_init_shared, mr_mash_consec_mixsqp_init_2pass,
-              #mr_mash_consec_mixsqp_init_trueB
+              #mr_mash_consec_mixsqp_init_trueB, mr_mash_consec_mixsqp_init_mlasso
     predict:  predict_linear
     score:    r2, mse, bias
   run: simulate * fit * predict * score
@@ -218,6 +219,20 @@ mr_mash_consec_mixsqp_init_trueB(mr_mash_consec_em):
 #EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by true B, daarem
 mr_mash_consec_em_daarem_init_trueB(mr_mash_consec_em):
   init_method: "truth"
+  daarem: TRUE
+  
+#EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by mlasso
+mr_mash_consec_em_init_mlasso(mr_mash_consec_em):
+  init_method: "mlasso"
+
+#mixsqp w0 updates, consecutive coordinate ascent updates, mu1 initilized by mlasso
+mr_mash_consec_mixsqp_init_mlasso(mr_mash_consec_em):
+  update_w0_method: "mixsqp"
+  init_method:    "mlasso"
+  
+#EM w0 updates, consecutive coordinate ascent updates, mu1 initilized by mlasso, daarem
+mr_mash_consec_em_daarem_init_mlasso(mr_mash_consec_em):
+  init_method: "mlasso"
   daarem: TRUE
 
 #Multivariate LASSO  
