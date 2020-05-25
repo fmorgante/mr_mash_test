@@ -151,7 +151,8 @@ dsc_out$simulate.X_scale <- NULL
 dsc_out$simulate.V_cor <- NULL
 ```
 
-### `r p_causal` causal variables
+## `r p_causal` causal variables
+### Standard vs DAAREM
 
 The results below are based on 20 simulations with `r n` samples, `r p` variables of which `r p_causal` were causal, `r r` responses with a per-response proportion of variance explained (PVE) of `r pve`. Variables, X, were drawn from MVN(0, Gamma), where Gamma is such that it achieves a correlation between variables of `r X_cor` and a scale of `r X_scale`. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of `r B_cor` and a scale of `r B_scale`. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of `r V_cor` and a scale defined py PVE.
 
@@ -169,10 +170,14 @@ dsc_plots <- convert_dsc_to_dataframe(dsc_out)
 rmse_dat <- compute_rmse(dsc_plots)
 dsc_plots <- rbind(dsc_plots, rmse_dat)
 
-###Remove mse from scores
-dsc_plots <- dsc_plots[which(dsc_plots$score_metric!="mse"), ]
+###Remove mse from scores and keep only methods wanted
+dsc_plots <- dsc_plots[which(dsc_plots$score_metric!="mse" & dsc_plots$method %in% c("mr_mash_consec_em", "mr_mash_declogBF_em", 
+                                                          "mr_mash_consec_em_init_shared", "mr_mash_consec_em_init_2pass",
+                                                          "mr_mash_consec_em_init_trueB",
+                                                          "mr_mash_consec_em_daarem", "mr_mash_declogBF_em_daarem", 
+                                                          "mr_mash_consec_em_daarem_init_shared", "mr_mash_consec_em_daarem_init_2pass",
+                                                          "mr_mash_consec_em_daarem_init_trueB")), ]
 
-###Create factor version of method
 ###Create factor version of method
 dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_consec_em", "mr_mash_declogBF_em", 
                                                           "mr_mash_consec_em_init_shared", "mr_mash_consec_em_init_2pass",
@@ -235,6 +240,78 @@ p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill =
 print(p_time)
 ```
 
+### mr.mash vs other methods
+
+Here, we compare *mr.mash* to the multivariate versions of LASSO, Elastic Net ($\alpha = 0.5$), and Ridge Regression as implemented in *glmnet*. The form of the penalty id the following: $\lambda[(1-\alpha)/2 ||\mathbf{\beta}_j||^2_2 + \alpha ||\mathbf{\beta}_j||_2]$. $\lambda$ is chosen by cross-validation in the training set.  
+
+```{r accuracy vs others 50, fig.height=12, fig.width=15}
+###Convert from list to data.frame for plotting
+dsc_plots <- convert_dsc_to_dataframe(dsc_out)
+
+###Compute rmse score (relative to mr_mash_consec_em) and add it to the data
+rmse_dat <- compute_rmse(dsc_plots)
+dsc_plots <- rbind(dsc_plots, rmse_dat)
+
+###Remove mse from scores and keep only methods wanted
+dsc_plots <- dsc_plots[which(dsc_plots$score_metric!="mse" & dsc_plots$method %in% c("mr_mash_consec_em", "mr_mash_consec_em_init_mlasso",
+                                                          "mr_mash_consec_em_init_trueB", "mlasso", "menet", "mridge")), ]
+
+###Create factor version of method
+dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_consec_em", "mr_mash_consec_em_init_mlasso",
+                                                          "mr_mash_consec_em_init_trueB", "mlasso", "menet", "mridge"),
+                                                labels=c("consec_em", "consec_em_init_mlasso", "consec_em_init_trueB",
+                                                         "mlasso", "menet", "mridge"))
+
+###Build data.frame with best accuracy achievable
+hlines <- data.frame(score_metric=c("r2", "bias"), max_val=c(unique(dsc_plots$pve), 1))
+
+###Create plots
+p <- ggplot(dsc_plots, aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
+    geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
+    facet_wrap(vars(score_metric), scales="free_y", ncol=2, labeller=labeller(score_metric=facet_labels)) +
+    scale_fill_manual(values = colors) +
+    labs(x = "", y = "Accuracy/Error", title = "Prediction performance", fill="Method") +
+    geom_hline(data=hlines, aes(yintercept = max_val), linetype="dashed", size=1) +
+    theme_cowplot(font_size = 20) +
+    theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+          plot.title = element_text(hjust = 0.5))
+
+shift_legend(p)
+```
+
+Let's now remove outliers from the rMSE plot to make things a little clearer.
+
+```{r accuracy rmse vs others 50, fig.height=12, fig.width=15}
+p_rmse_nooutliers <- ggplot(dsc_plots[which(dsc_plots$score_metric=="rmse"), ], aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
+  Ipaper::geom_boxplot2(color = "black", outlier.size = 1, width = 0.85, width.errorbar = 0) +
+  scale_fill_manual(values = colors) +
+  labs(x = "", y = "Relative error", title = "rMSE (relative to consec_em)", fill="Method") +
+  theme_cowplot(font_size = 20) +
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+print(p_rmse_nooutliers)
+```
+
+Here, we look at the elapsed time ($log_{10}$ seconds) of *mr.mash*. Note that this time does not include the run time of *glmnet* in the cases where we used it to initialize the posterior means of the regression coefficients.
+
+```{r run time vs others 50, fig.height=12, fig.width=15}
+dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="r2"), 
+                          -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))]
+
+p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
+  geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
+  scale_fill_manual(values = colors) +
+  scale_y_continuous(trans="log10", breaks = trans_breaks("log10", function(x) 10^x),
+                      labels = trans_format("log10", math_format(10^.x))) +
+  labs(x = "", y = "Elapsed time (seconds) in log10 scale",title = "Run time", fill="Method") +
+  theme_cowplot(font_size = 20) +
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+print(p_time)
+```
+
 
 ```{r load data 500, warning=FALSE, message=FALSE}
 ###Load the dsc results
@@ -269,7 +346,7 @@ dsc_out$simulate.X_scale <- NULL
 dsc_out$simulate.V_cor <- NULL
 ```
 
-### `r p_causal` causal variables
+## `r p_causal` causal variables
 
 The results below are based on the same simulation/analysis scheme as above but with `r p_causal` causal variables.
 
@@ -281,10 +358,14 @@ dsc_plots <- convert_dsc_to_dataframe(dsc_out)
 rmse_dat <- compute_rmse(dsc_plots)
 dsc_plots <- rbind(dsc_plots, rmse_dat)
 
-###Remove mse from scores
-dsc_plots <- dsc_plots[which(dsc_plots$score_metric!="mse"), ]
+###Remove mse from scores and keep only methods wanted
+dsc_plots <- dsc_plots[which(dsc_plots$score_metric!="mse" & dsc_plots$method %in% c("mr_mash_consec_em", "mr_mash_declogBF_em", 
+                                                          "mr_mash_consec_em_init_shared", "mr_mash_consec_em_init_2pass",
+                                                          "mr_mash_consec_em_init_trueB",
+                                                          "mr_mash_consec_em_daarem", "mr_mash_declogBF_em_daarem", 
+                                                          "mr_mash_consec_em_daarem_init_shared", "mr_mash_consec_em_daarem_init_2pass",
+                                                          "mr_mash_consec_em_daarem_init_trueB")), ]
 
-###Create factor version of method
 ###Create factor version of method
 dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_consec_em", "mr_mash_declogBF_em", 
                                                           "mr_mash_consec_em_init_shared", "mr_mash_consec_em_init_2pass",
@@ -331,6 +412,78 @@ print(p_rmse_nooutliers)
 Here, we look at the elapsed time ($log_{10}$ seconds) of *mr.mash*. Note that this time does not include the run time of *mr.ash* in the cases where we used it to initialize the posterior means of the regression coefficients.
 
 ```{r run time 500, fig.height=12, fig.width=15}
+dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="r2"), 
+                          -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))]
+
+p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
+  geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
+  scale_fill_manual(values = colors) +
+  scale_y_continuous(trans="log10", breaks = trans_breaks("log10", function(x) 10^x),
+                      labels = trans_format("log10", math_format(10^.x))) +
+  labs(x = "", y = "Elapsed time (seconds) in log10 scale",title = "Run time", fill="Method") +
+  theme_cowplot(font_size = 20) +
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+print(p_time)
+```
+
+### mr.mash vs other methods
+
+Here, we compare *mr.mash* to the multivariate versions of LASSO, Elastic Net ($\alpha = 0.5$), and Ridge Regression as implemented in *glmnet*. The form of the penalty id the following: $\lambda[(1-\alpha)/2 ||\mathbf{\beta}_j||^2_2 + \alpha ||\mathbf{\beta}_j||_2]$. $\lambda$ is chosen by cross-validation in the training set.  
+
+```{r accuracy vs others 500, fig.height=12, fig.width=15}
+###Convert from list to data.frame for plotting
+dsc_plots <- convert_dsc_to_dataframe(dsc_out)
+
+###Compute rmse score (relative to mr_mash_consec_em) and add it to the data
+rmse_dat <- compute_rmse(dsc_plots)
+dsc_plots <- rbind(dsc_plots, rmse_dat)
+
+###Remove mse from scores and keep only methods wanted
+dsc_plots <- dsc_plots[which(dsc_plots$score_metric!="mse" & dsc_plots$method %in% c("mr_mash_consec_em", "mr_mash_consec_em_init_mlasso",
+                                                          "mr_mash_consec_em_init_trueB", "mlasso", "menet", "mridge")), ]
+
+###Create factor version of method
+dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_consec_em", "mr_mash_consec_em_init_mlasso",
+                                                          "mr_mash_consec_em_init_trueB", "mlasso", "menet", "mridge"),
+                                                labels=c("consec_em", "consec_em_init_mlasso", "consec_em_init_trueB",
+                                                         "mlasso", "menet", "mridge"))
+
+###Build data.frame with best accuracy achievable
+hlines <- data.frame(score_metric=c("r2", "bias"), max_val=c(unique(dsc_plots$pve), 1))
+
+###Create plots
+p <- ggplot(dsc_plots, aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
+    geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
+    facet_wrap(vars(score_metric), scales="free_y", ncol=2, labeller=labeller(score_metric=facet_labels)) +
+    scale_fill_manual(values = colors) +
+    labs(x = "", y = "Accuracy/Error", title = "Prediction performance", fill="Method") +
+    geom_hline(data=hlines, aes(yintercept = max_val), linetype="dashed", size=1) +
+    theme_cowplot(font_size = 20) +
+    theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+          plot.title = element_text(hjust = 0.5))
+
+shift_legend(p)
+```
+
+Let's now remove outliers from the rMSE plot to make things a little clearer.
+
+```{r accuracy rmse vs others 500, fig.height=12, fig.width=15}
+p_rmse_nooutliers <- ggplot(dsc_plots[which(dsc_plots$score_metric=="rmse"), ], aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
+  Ipaper::geom_boxplot2(color = "black", outlier.size = 1, width = 0.85, width.errorbar = 0) +
+  scale_fill_manual(values = colors) +
+  labs(x = "", y = "Relative error", title = "rMSE (relative to consec_em)", fill="Method") +
+  theme_cowplot(font_size = 20) +
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+print(p_rmse_nooutliers)
+```
+
+Here, we look at the elapsed time ($log_{10}$ seconds) of *mr.mash*. Note that this time does not include the run time of *glmnet* in the cases where we used it to initialize the posterior means of the regression coefficients.
+
+```{r run time vs others 500, fig.height=12, fig.width=15}
 dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="r2"), 
                           -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))]
 
