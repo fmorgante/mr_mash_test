@@ -355,16 +355,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree3002ada2c81359946171ac8548f5c9c93d5eb0cetargetblank3002adaa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/3002ada2c81359946171ac8548f5c9c93d5eb0ce" target="_blank">3002ada</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree5e9985fee7e12ee1268e28758657162c5e56de0ctargetblank5e9985fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/5e9985fee7e12ee1268e28758657162c5e56de0c" target="_blank">5e9985f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree3002ada2c81359946171ac8548f5c9c93d5eb0cetargetblank3002adaa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree5e9985fee7e12ee1268e28758657162c5e56de0ctargetblank5e9985fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/3002ada2c81359946171ac8548f5c9c93d5eb0ce" target="_blank">3002ada</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/5e9985fee7e12ee1268e28758657162c5e56de0c" target="_blank">5e9985f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -427,6 +427,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/9f85985e3af677465673ff2902d3f27020d25fa3/docs/results_indepX_lowcorrV_sharedB_05_18_20.html" target="_blank">9f85985</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-05-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -898,6 +915,43 @@ p &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = &quot;score
 
 shift_legend(p)</code></pre>
 <p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy%20vs%20others%2050-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-vs-others-50-1">
+Past versions of “accuracy vs others 50-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-vs-others-50-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/9f85985e3af677465673ff2902d3f27020d25fa3/docs/figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy vs others 50-1.png" target="_blank">9f85985</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-05-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Let’s now remove outliers from the rMSE plot to make things a little clearer.</p>
 <pre class="r"><code>p_rmse_nooutliers &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;rmse&quot;), ], aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;, outlier.size = 1, width = 0.85, width.errorbar = 0) +
@@ -909,6 +963,43 @@ shift_legend(p)</code></pre>
 
 print(p_rmse_nooutliers)</code></pre>
 <p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy%20rmse%20vs%20others%2050-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-rmse-vs-others-50-1">
+Past versions of “accuracy rmse vs others 50-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-rmse-vs-others-50-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/9f85985e3af677465673ff2902d3f27020d25fa3/docs/figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy rmse vs others 50-1.png" target="_blank">9f85985</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-05-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Here, we look at the elapsed time (<span class="math">\(log_{10}\)</span> seconds) of <em>mr.mash</em>. Note that this time does not include the run time of <em>glmnet</em> in the cases where we used it to initialize the posterior means of the regression coefficients.</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;r2&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -925,6 +1016,43 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
 
 print(p_time)</code></pre>
 <p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/run%20time%20vs%20others%2050-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-run-time-vs-others-50-1">
+Past versions of “run time vs others 50-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-run-time-vs-others-50-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/9f85985e3af677465673ff2902d3f27020d25fa3/docs/figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/run time vs others 50-1.png" target="_blank">9f85985</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-05-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>###Load the dsc results
 dsc_out &lt;- dscquery(&quot;output/dsc_05_18_20&quot;, c(&quot;simulate.n&quot;, &quot;simulate.p&quot;, &quot;simulate.p_causal&quot;, &quot;simulate.r&quot;,   
                                  &quot;simulate.pve&quot;, &quot;simulate.B_cor&quot;, &quot;simulate.B_scale&quot;,
@@ -1177,6 +1305,43 @@ p &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = &quot;score
 
 shift_legend(p)</code></pre>
 <p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy%20vs%20others%20500-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-vs-others-500-1">
+Past versions of “accuracy vs others 500-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-vs-others-500-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/9f85985e3af677465673ff2902d3f27020d25fa3/docs/figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy vs others 500-1.png" target="_blank">9f85985</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-05-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Let’s now remove outliers from the rMSE plot to make things a little clearer.</p>
 <pre class="r"><code>p_rmse_nooutliers &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;rmse&quot;), ], aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;, outlier.size = 1, width = 0.85, width.errorbar = 0) +
@@ -1188,6 +1353,43 @@ shift_legend(p)</code></pre>
 
 print(p_rmse_nooutliers)</code></pre>
 <p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy%20rmse%20vs%20others%20500-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-rmse-vs-others-500-1">
+Past versions of “accuracy rmse vs others 500-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-rmse-vs-others-500-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/9f85985e3af677465673ff2902d3f27020d25fa3/docs/figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/accuracy rmse vs others 500-1.png" target="_blank">9f85985</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-05-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Here, we look at the elapsed time (<span class="math">\(log_{10}\)</span> seconds) of <em>mr.mash</em>. Note that this time does not include the run time of <em>glmnet</em> in the cases where we used it to initialize the posterior means of the regression coefficients.</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;r2&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -1204,6 +1406,43 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
 
 print(p_time)</code></pre>
 <p><img src="figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/run%20time%20vs%20others%20500-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-run-time-vs-others-500-1">
+Past versions of “run time vs others 500-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-run-time-vs-others-500-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/9f85985e3af677465673ff2902d3f27020d25fa3/docs/figure/results_indepX_lowcorrV_sharedB_05_18_20.Rmd/run time vs others 500-1.png" target="_blank">9f85985</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-05-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
