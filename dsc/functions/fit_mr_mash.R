@@ -81,12 +81,13 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
   } else if(init_method=="mlasso"){
     ##Fit multivariate LASSO
     cvfit_glmnet <- glmnet::cv.glmnet(x=X, y=Y, family="mgaussian", alpha=1)
-    fit_glmnet <- glmnet::glmnet(x=X, y=Y, family="mgaussian", alpha=1, lambda = cvfit_glmnet$lambda.min)
+    fit_glmnet <- glmnet::glmnet(x=X, y=Y, family="mgaussian", alpha=1)
+    coeff_glmnet <- coef(fit_glmnet, s=cvfit_glmnet$lambda.min)
     
     ##Build matrix of initial estimates for mr.mash
     mu1_init <- matrix(as.numeric(NA), nrow=p, ncol=r)
-    for(i in 1:length(fit_glmnet$beta)){
-      mu1_init[, i] <- as.vector(fit_glmnet$beta[[i]])
+    for(i in 1:length(coeff_glmnet)){
+      mu1_init[, i] <- as.vector(coeff_glmnet[[i]])[-1]
     }
   }
   
