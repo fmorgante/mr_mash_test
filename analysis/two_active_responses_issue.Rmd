@@ -88,9 +88,10 @@ layout(matrix(c(1, 1, 2, 2,
 ###Plot estimated vs true coeffcients
 ##mr.mash
 plot(out$B, fit_mrmash$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients",
-     cex=1.5)
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
 ##glmnet
-plot(out$B, Bhat_glmnet, main="glmnet", xlab="True coefficients", ylab="Estimated coefficients")
+plot(out$B, Bhat_glmnet, main="glmnet", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
 
 ###Plot mr.mash vs glmnet estimated coeffcients
 colorz <- matrix("black", nrow=p, ncol=r)
@@ -101,13 +102,13 @@ for(i in 1:ncol(colorz)){
 
 plot(Bhat_glmnet, fit_mrmash$mu1, main="mr.mash vs glmnet", 
      xlab="glmnet estimated coefficients", ylab="mr.mash estimated coefficients",
-     col=colorz)
+     col=colorz, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
 legend("topleft", 
        legend = c("Non-zero", "Zero"), 
        col = c("black", "red"), 
        pch = c(1, 1), 
        horiz = FALSE,
-       cex=1) 
+       cex=2) 
 ```
 
 As we can see, *mr.mash* performs pretty poorly. One possibility is that the prior used cannot capture the pattern of sharing present only among the first two tissues. Let's now test this hypothesis by adding the correspondent prior matrices to the mixture and re-run *mr.mash*.
@@ -145,9 +146,10 @@ layout(matrix(c(1, 1, 2, 2,
 
 ###Plot estimated vs true coeffcients
 ##mr.mash
-plot(out$B, fit_mrmash_updated$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients")
+plot(out$B, fit_mrmash_updated$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients", cex=2, cex.lab=2, cex.main=2, cex.axis=2)
 ##glmnet
-plot(out$B, Bhat_glmnet, main="glmnet", xlab="True coefficients", ylab="Estimated coefficients")
+plot(out$B, Bhat_glmnet, main="glmnet", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
 
 ###Plot mr.mash vs glmnet estimated coeffcients
 colorz <- matrix("black", nrow=p, ncol=r)
@@ -158,13 +160,13 @@ for(i in 1:ncol(colorz)){
 
 plot(Bhat_glmnet, fit_mrmash_updated$mu1, main="mr.mash vs glmnet", 
      xlab="glmnet estimated coefficients", ylab="mr.mash estimated coefficients",
-     col=colorz)
+     col=colorz, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
 legend("topleft", 
        legend = c("Non-zero", "Zero"), 
        col = c("black", "red"), 
        pch = c(1, 1), 
        horiz = FALSE,
-       cex=1) 
+       cex=2) 
 ```
 
 Now the results look much better!
