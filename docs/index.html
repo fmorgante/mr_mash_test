@@ -260,7 +260,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-05-25
+<strong>Last updated:</strong> 2020-05-27
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -291,16 +291,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree5e9985fee7e12ee1268e28758657162c5e56de0ctargetblank5e9985fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/5e9985fee7e12ee1268e28758657162c5e56de0c" target="_blank">5e9985f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree465b10d8420fbe86031871bab5594631f3a246a4targetblank465b10da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/465b10d8420fbe86031871bab5594631f3a246a4" target="_blank">465b10d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree5e9985fee7e12ee1268e28758657162c5e56de0ctargetblank5e9985fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree465b10d8420fbe86031871bab5594631f3a246a4targetblank465b10da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/5e9985fee7e12ee1268e28758657162c5e56de0c" target="_blank">5e9985f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/465b10d8420fbe86031871bab5594631f3a246a4" target="_blank">465b10d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -308,6 +308,7 @@ Note that you need to be careful to ensure that all relevant files for the analy
 <pre><code>
 Ignored files:
     Ignored:    .sos/
+    Ignored:    analysis/figure/
     Ignored:    code/fit_mr_mash.66662433.err
     Ignored:    code/fit_mr_mash.66662433.out
     Ignored:    dsc/.sos/
@@ -324,7 +325,11 @@ Ignored files:
     Ignored:    output/dsc_test/
 
 Untracked files:
+    Untracked:  Rplots.pdf
     Untracked:  code/plot_test.R
+
+Unstaged changes:
+    Modified:   dsc/midway2.yml
 
 </code></pre>
 <p>
@@ -363,6 +368,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/465b10d8420fbe86031871bab5594631f3a246a4/analysis/index.Rmd" target="_blank">465b10d</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-05-27
+</td>
+<td>
+Add case study with only two causal tissues out of five
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/3f8349c355d684c63eae80dcc15bdbeae0bb001d/docs/index.html" target="_blank">3f8349c</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-05-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1250,6 +1289,7 @@ Start workflowr project.
 <li><a href="results_corrX_lowcorrV_indepB_05_18_20.html">Correlated predictors, independent effects, lowly correlated residuals.</a></li>
 <li><a href="results_highcorrX_lowcorrV_sharedB_05_18_20.html">Highly correlated predictors, shared effects, lowly correlated residuals.</a></li>
 <li><a href="results_highcorrX_lowcorrV_indepB_05_18_20.html">Highly correlated predictors, independent effects, lowly correlated residuals.</a></li>
+<li><a href="two_active_responses_issue.Rmd">Case study with only two causal responses out of five total.</a></li>
 </ul>
 
 
