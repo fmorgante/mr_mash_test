@@ -355,16 +355,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreea626e53faebb3dab68b46c8c5fd36658dc56dafftargetblanka626e53a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/a626e53faebb3dab68b46c8c5fd36658dc56daff" target="_blank">a626e53</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree068beb288aaac3b0139018b701200cd4179ee75dtargetblank068beb2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/068beb288aaac3b0139018b701200cd4179ee75d" target="_blank">068beb2</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreea626e53faebb3dab68b46c8c5fd36658dc56dafftargetblanka626e53a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree068beb288aaac3b0139018b701200cd4179ee75dtargetblank068beb2a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/a626e53faebb3dab68b46c8c5fd36658dc56daff" target="_blank">a626e53</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/068beb288aaac3b0139018b701200cd4179ee75d" target="_blank">068beb2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -431,6 +431,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/068beb288aaac3b0139018b701200cd4179ee75d/analysis/two_active_responses_issue.Rmd" target="_blank">068beb2</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-05-27
+</td>
+<td>
+Increase cex
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/f2b6bf8ba2b2c4b0d1cd1392d78771bcd1ee1d50/docs/two_active_responses_issue.html" target="_blank">f2b6bf8</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-05-27
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -550,7 +584,7 @@ fit_mrmash &lt;- mr.mash(Xtrain, Ytrain, S0, update_w0=TRUE, update_w0_method=&q
 <pre><code>Processing the inputs... Done!
 Fitting the optimization algorithm... Done!
 Processing the outputs... Done!
-mr.mash successfully executed in 8.758583 minutes!</code></pre>
+mr.mash successfully executed in 8.890438 minutes!</code></pre>
 <p>Let’s now compare the results.</p>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
@@ -560,9 +594,10 @@ mr.mash successfully executed in 8.758583 minutes!</code></pre>
 ###Plot estimated vs true coeffcients
 ##mr.mash
 plot(out$B, fit_mrmash$mu1, main=&quot;mr.mash&quot;, xlab=&quot;True coefficients&quot;, ylab=&quot;Estimated coefficients&quot;,
-     cex=1.5)
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
 ##glmnet
-plot(out$B, Bhat_glmnet, main=&quot;glmnet&quot;, xlab=&quot;True coefficients&quot;, ylab=&quot;Estimated coefficients&quot;)
+plot(out$B, Bhat_glmnet, main=&quot;glmnet&quot;, xlab=&quot;True coefficients&quot;, ylab=&quot;Estimated coefficients&quot;,
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
 
 ###Plot mr.mash vs glmnet estimated coeffcients
 colorz &lt;- matrix(&quot;black&quot;, nrow=p, ncol=r)
@@ -573,13 +608,13 @@ for(i in 1:ncol(colorz)){
 
 plot(Bhat_glmnet, fit_mrmash$mu1, main=&quot;mr.mash vs glmnet&quot;, 
      xlab=&quot;glmnet estimated coefficients&quot;, ylab=&quot;mr.mash estimated coefficients&quot;,
-     col=colorz)
+     col=colorz, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
 legend(&quot;topleft&quot;, 
        legend = c(&quot;Non-zero&quot;, &quot;Zero&quot;), 
        col = c(&quot;black&quot;, &quot;red&quot;), 
        pch = c(1, 1), 
        horiz = FALSE,
-       cex=1) </code></pre>
+       cex=2) </code></pre>
 <p><img src="figure/two_active_responses_issue.Rmd/plot%20results-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-plot-results-1">
@@ -603,6 +638,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/f2b6bf8ba2b2c4b0d1cd1392d78771bcd1ee1d50/docs/figure/two_active_responses_issue.Rmd/plot results-1.png" target="_blank">f2b6bf8</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/7dad46c90c5d4cd0cfb96fffe5058bb725c006f8/docs/figure/two_active_responses_issue.Rmd/plot results-1.png" target="_blank">7dad46c</a>
@@ -642,7 +688,7 @@ fit_mrmash_updated &lt;- mr.mash(Xtrain, Ytrain, S0_1, update_w0=TRUE, update_w0
 <pre><code>Processing the inputs... Done!
 Fitting the optimization algorithm... Done!
 Processing the outputs... Done!
-mr.mash successfully executed in 5.450435 minutes!</code></pre>
+mr.mash successfully executed in 5.530349 minutes!</code></pre>
 <p>Let’s compare the results again.</p>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
@@ -651,9 +697,10 @@ mr.mash successfully executed in 5.450435 minutes!</code></pre>
 
 ###Plot estimated vs true coeffcients
 ##mr.mash
-plot(out$B, fit_mrmash_updated$mu1, main=&quot;mr.mash&quot;, xlab=&quot;True coefficients&quot;, ylab=&quot;Estimated coefficients&quot;)
+plot(out$B, fit_mrmash_updated$mu1, main=&quot;mr.mash&quot;, xlab=&quot;True coefficients&quot;, ylab=&quot;Estimated coefficients&quot;, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
 ##glmnet
-plot(out$B, Bhat_glmnet, main=&quot;glmnet&quot;, xlab=&quot;True coefficients&quot;, ylab=&quot;Estimated coefficients&quot;)
+plot(out$B, Bhat_glmnet, main=&quot;glmnet&quot;, xlab=&quot;True coefficients&quot;, ylab=&quot;Estimated coefficients&quot;,
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
 
 ###Plot mr.mash vs glmnet estimated coeffcients
 colorz &lt;- matrix(&quot;black&quot;, nrow=p, ncol=r)
@@ -664,13 +711,13 @@ for(i in 1:ncol(colorz)){
 
 plot(Bhat_glmnet, fit_mrmash_updated$mu1, main=&quot;mr.mash vs glmnet&quot;, 
      xlab=&quot;glmnet estimated coefficients&quot;, ylab=&quot;mr.mash estimated coefficients&quot;,
-     col=colorz)
+     col=colorz, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
 legend(&quot;topleft&quot;, 
        legend = c(&quot;Non-zero&quot;, &quot;Zero&quot;), 
        col = c(&quot;black&quot;, &quot;red&quot;), 
        pch = c(1, 1), 
        horiz = FALSE,
-       cex=1) </code></pre>
+       cex=2) </code></pre>
 <p><img src="figure/two_active_responses_issue.Rmd/plot%20updated%20results-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-plot-updated-results-1">
