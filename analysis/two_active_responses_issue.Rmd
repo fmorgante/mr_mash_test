@@ -1,0 +1,169 @@
+---
+title: "Two active responses case"
+author: "Fabio Morgante"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  workflowr::wflow_html:
+    toc: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r set opts}
+library(mr.mash.alpha)
+library(glmnet)
+
+###Set options
+options(stringsAsFactors = FALSE)
+```
+
+Let's simulate data with n=600, p=1,000, p_causal=50, r=5, r_causal=2, PVE=0.5, shared effects, independent predictors, and lowly correlated residuals.
+
+```{r simulate data}
+###Set seed
+set.seed(123)
+
+###Set parameters
+n <- 600
+p <- 1000
+p_causal <- 50
+r <- 5
+r_causal <- 2
+
+###Simulate V, B, X and Y
+out <- mr.mash.alpha:::simulate_mr_mash_data(n, p, p_causal, r, r_causal, intercepts = rep(1, r),
+                                             pve=0.5, B_cor=1, B_scale=0.8, X_cor=0, X_scale=0.8, V_cor=0.15)
+
+colnames(out$Y) <- paste0("Y", seq(1, r))
+rownames(out$Y) <- paste0("N", seq(1, n))
+colnames(out$X) <- paste0("X", seq(1, p))
+rownames(out$X) <- paste0("N", seq(1, n))
+
+###Split the data in training and test sets
+test_set <- sort(sample(x=c(1:n), size=round(n*0.2), replace=FALSE))
+Ytrain <- out$Y[-test_set, ]
+Xtrain <- out$X[-test_set, ]
+Ytest <- out$Y[test_set, ]
+Xtest <- out$X[test_set, ]
+
+head(out$B[out$causal_variables, ])
+```
+
+We build the mixture prior as usual including zero matrix, identity matrix, rank-1 matrices, low, medium and high heterogeneity matrices, shared matrix, each scaled by a grid from 0.1 to 2.1 in steps of 0.2.
+
+```{r build prior}
+grid <- seq(0.1, 2.1, 0.2)
+S0 <- mr.mash.alpha:::compute_cov_canonical(ncol(Ytrain), singletons=TRUE, hetgrid=c(0, 0.25, 0.5, 0.75, 0.99), grid, zeromat=TRUE)
+```
+
+We run *glmnet* with $\alpha=1$ to obtain an inital estimate for the regression coefficients to provide to *mr.mash*, and for comparison.
+
+```{r fit glmnet}
+###Fit grop-lasso to initialize mr.mash
+cvfit_glmnet <- cv.glmnet(x=Xtrain, y=Ytrain, family="mgaussian", alpha=1)
+coeff_glmnet <- coef(cvfit_glmnet, s="lambda.min")
+Bhat_glmnet <- matrix(as.numeric(NA), nrow=p, ncol=r)
+for(i in 1:length(coeff_glmnet)){
+  Bhat_glmnet[, i] <- as.vector(coeff_glmnet[[i]])[-1]
+}
+```
+
+We run *mr.mash* with EM updates of the mixture weights, updating V, and initializing the regression coefficients with the estimates from *glmnet*.
+
+```{r fit mr.mash}
+###Fit mr.mash
+fit_mrmash <- mr.mash(Xtrain, Ytrain, S0, update_w0=TRUE, update_w0_method="EM", 
+                    compute_ELBO=TRUE, standardize=TRUE, verbose=FALSE, update_V=TRUE,
+                    e=1e-8, ca_update_order="consecutive", mu1_init=Bhat_glmnet)
+```
+
+Let's now compare the results.
+
+```{r plot results, fig.height=12, fig.width=15}
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                0, 3, 3, 0,
+                0, 3, 3, 0), 4, 4, byrow = TRUE))
+
+###Plot estimated vs true coeffcients
+##mr.mash
+plot(out$B, fit_mrmash$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients")
+##glmnet
+plot(out$B, Bhat_glmnet, main="glmnet", xlab="True coefficients", ylab="Estimated coefficients")
+
+###Plot mr.mash vs glmnet estimated coeffcients
+colorz <- matrix("black", nrow=p, ncol=r)
+zeros <- apply(out$B, 2, function(x) x==0)
+for(i in 1:ncol(colorz)){
+  colorz[zeros[, i], i] <- "red"
+}
+
+plot(Bhat_glmnet, fit_mrmash$mu1, main="mr.mash vs glmnet", 
+     xlab="glmnet estimated coefficients", ylab="mr.mash estimated coefficients",
+     col=colorz)
+legend("topleft", 
+       legend = c("Non-zero", "Zero"), 
+       col = c("black", "red"), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=1) 
+```
+
+As we can see, *mr.mash* performs pretty poorly. One possibility is that the prior used cannot capture the pattern of sharing present only among the first two tissues. Let's now test this hypothesis by adding the correspondent prior matrices to the mixture and re-run *mr.mash*.
+
+```{r fit mr.mash update prior}
+###Update the mixture prior
+K <- length(S0)
+matr <- matrix(c(1, 1, 0, 0, 0,
+                 1, 1, 0, 0, 0,
+                 0, 0, 0, 0, 0,
+                 0, 0, 0, 0, 0,
+                 0, 0, 0, 0, 0), 5, 5, byrow=T)
+
+S0_1 <- S0
+for(i in 1:length(grid)){
+  S0_1[[K+i]] <- matr * grid[i]
+}
+print(paste("Length of the original mixture:", K))
+print(paste("Length of the updated mixture:", length(S0_1)))
+
+
+###Fit mr.mash
+fit_mrmash_updated <- mr.mash(Xtrain, Ytrain, S0_1, update_w0=TRUE, update_w0_method="EM", 
+                              compute_ELBO=TRUE, standardize=TRUE, verbose=FALSE, update_V=TRUE,
+                              e=1e-8, ca_update_order="consecutive", mu1_init=Bhat_glmnet)
+```
+
+Let's compare the results again.
+
+```{r plot updated results, fig.height=12, fig.width=15}
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                0, 3, 3, 0,
+                0, 3, 3, 0), 4, 4, byrow = TRUE))
+
+###Plot estimated vs true coeffcients
+##mr.mash
+plot(out$B, fit_mrmash_updated$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients")
+##glmnet
+plot(out$B, Bhat_glmnet, main="glmnet", xlab="True coefficients", ylab="Estimated coefficients")
+
+###Plot mr.mash vs glmnet estimated coeffcients
+colorz <- matrix("black", nrow=p, ncol=r)
+zeros <- apply(out$B, 2, function(x) x==0)
+for(i in 1:ncol(colorz)){
+  colorz[zeros[, i], i] <- "red"
+}
+
+plot(Bhat_glmnet, fit_mrmash_updated$mu1, main="mr.mash vs glmnet", 
+     xlab="glmnet estimated coefficients", ylab="mr.mash estimated coefficients",
+     col=colorz)
+legend("topleft", 
+       legend = c("Non-zero", "Zero"), 
+       col = c("black", "red"), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=1) 
+```
+
+Now the results look much better!
