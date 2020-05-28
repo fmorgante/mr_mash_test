@@ -17,7 +17,7 @@ library(glmnet)
 options(stringsAsFactors = FALSE)
 ```
 
-Let's simulate data with n=600, p=1,000, p_causal=50, r=5, r_causal=2, PVE=0.5, shared effects, independent predictors, and lowly correlated residuals.
+Let's simulate data with n=600, p=1,000, p_causal=50, r=5, r_causal=2, PVE=0.5, shared effects, independent predictors, and lowly correlated residuals. The models will be fitted to the training data (80% of the full data).
 
 ```{r simulate data}
 ###Set seed
@@ -171,8 +171,7 @@ legend("topleft",
 
 Now the results look much better!
 
-However, we all thought that the identity matrix (properly scaled) could be able to capture these kinds of effects. So, let's test this intuition by initializing all the parameters (mu1, V, w0) to the true values
-and provide a 2-component prior with the zero matrix and an identity scaled by the true variance (i.e., 0.8).
+However, we all thought that the identity matrix (properly scaled) should be able to capture these kinds of effects. So, let's test this intuition by initializing all the parameters (mu1, V, w0) to the true values (keep in mind that these values are from the full data, but we are fitting the model to the training data), updating them, and providing a 2-component prior with the zero matrix and an identity scaled by the true variance (i.e., 0.8).
 
 ```{r fit mr.mash identity prior}
 ###Update the mixture prior
@@ -186,7 +185,7 @@ fit_mrmash_diag <- mr.mash(Xtrain, Ytrain, S0_2, w0=c((p_causal/p), (1-(p_causal
                           verbose=FALSE, update_V=TRUE, e=1e-8, ca_update_order="consecutive")
 
 ###Plot the results
-plot(out$B, fit_mrmash_diag$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients", cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+plot(out$B, fit_mrmash_diag$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients")
 ```
 
 Unfortunately, it does not work well, as we hoped. Let's now try to fix w0 and V instead of updating them.
@@ -199,41 +198,57 @@ fit_mrmash_diag_fix <- mr.mash(Xtrain, Ytrain, S0_2, w0=c((p_causal/p), (1-(p_ca
                                ca_update_order="consecutive")
 
 ###Plot the results
-plot(out$B, fit_mrmash_diag_fix$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients", cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+plot(out$B, fit_mrmash_diag_fix$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients")
 ```
 
-Still not good. Now, we will try to replace the identity matrix with the true covariance among effects, and update all the model parameters.
+Much better! Now, we will try to update w0 but not V.
 
-```{r fit mr.mash true prior}
+```{r fit mr.mash identity prior fixed V}
+###Fit mr.mash
+fit_mrmash_diag_fixV <- mr.mash(Xtrain, Ytrain, S0_2, w0=c((p_causal/p), (1-(p_causal/p))), V=out$V, 
+                               mu1_init=out$B, update_w0=TRUE, update_w0_method="EM", compute_ELBO=TRUE, 
+                               standardize=TRUE, verbose=FALSE, update_V=FALSE, e=1e-8, 
+                               ca_update_order="consecutive")
+
+###Plot the results
+plot(out$B, fit_mrmash_diag_fixV$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients")
+```
+
+In summary, it looks like the problem is the estimation of V when using an identity matrix to capture this kind of structure in the effects.
+
+```{r print V}
+print("True V (full data)")
+out$V
+
+print("Estimated V from model with the two-component prior with identity (training data)")
+fit_mrmash_diag$V
+```
+
+This is not a problem when including the matrix capturing the true structure in the prior.
+
+```{r fit mr.mash truecov prior}
 ###Update the mixture prior
 zeromat <- matrix(0, r, r)
-truecovmat <- matrix(c(0.8, 0.8, 0, 0, 0,
-                       0.8, 0.8, 0, 0, 0,
-                       0, 0, 0, 0, 0,
-                       0, 0, 0, 0, 0,
-                       0, 0, 0, 0, 0), 5, 5, byrow=T)
-S0_3 <- list(S0_1=truecovmat, S0_2=zeromat)
+truemat <- matrix(c(0.8, 0.8, 0, 0, 0,
+                     0.8, 0.8, 0, 0, 0,
+                     0, 0, 0, 0, 0,
+                     0, 0, 0, 0, 0,
+                     0, 0, 0, 0, 0), 5, 5, byrow=T)
+
+S0_3 <- list(S0_1=truemat, S0_2=zeromat)
 
 ###Fit mr.mash
-fit_mrmash_truecov <- mr.mash(Xtrain, Ytrain, S0_3, w0=c((p_causal/p), (1-(p_causal/p))), V=out$V, mu1_init=out$B,
+fit_mrmash_truecov <- mr.mash(Xtrain, Ytrain, S0_3, w0=c((p_causal/p), (1-(p_causal/p))), V=out$V, mu1_init=out$B, 
                           update_w0=TRUE, update_w0_method="EM", compute_ELBO=TRUE, standardize=TRUE,
                           verbose=FALSE, update_V=TRUE, e=1e-8, ca_update_order="consecutive")
 
 ###Plot the results
-plot(out$B, fit_mrmash_truecov$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients", cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+plot(out$B, fit_mrmash_truecov$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients")
+
+print("True V (full data)")
+out$V
+
+print("Estimated V from model with the two-component prior with true effect covariance (training data)")
+fit_mrmash_truecov$V
+
 ```
-
-Now it works well. Finally, let's try not to update the model parameters.
-
-```{r fit mr.mash true prior fixed}
-###Fit mr.mash
-fit_mrmash_truecov_fix <- mr.mash(Xtrain, Ytrain, S0_3, w0=c((p_causal/p), (1-(p_causal/p))), V=out$V, 
-                                  mu1_init=out$B, update_w0=FALSE, update_w0_method="EM", compute_ELBO=TRUE, 
-                                  standardize=TRUE, verbose=FALSE, update_V=FALSE, e=1e-8, 
-                                  ca_update_order="consecutive")
-
-###Plot the results
-plot(out$B, fit_mrmash_truecov_fix$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients", cex=2, cex.lab=2, cex.main=2, cex.axis=2)
-```
-
-In summary, it looks like we need the proper prior to capture that kind of structure.
