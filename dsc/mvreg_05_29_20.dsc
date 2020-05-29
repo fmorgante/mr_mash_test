@@ -3,35 +3,37 @@
 ## A DSC for evaluating prediction accuracy of
 ## mr.mash in different scenarios.
 DSC:
-  R_libs: mr.mash.alpha, mr.ash.alpha, glmnet
+  R_libs: mr.mash.alpha, mr.ash.alpha, glmnet, gflasso
   lib_path: functions
   exec_path: modules
   replicate: 20
   define:
-    simulate: indepX_lowcorrV_indepB, corrX_lowcorrV_indepB, highcorrX_lowcorrV_indepB, 
-              indepX_lowcorrV_1respB, corrX_lowcorrV_1respB, highcorrX_lowcorrV_1respB,
-              indepX_lowcorrV_sharedB, corrX_lowcorrV_sharedB, highcorrX_lowcorrV_sharedB
-    fit:      mr_mash_consec_em, mr_mash_consec_em_daarem,  
-              mr_mash_declogBF_em, mr_mash_declogBF_em_daarem, 
-              mr_mash_consec_em_init_shared, mr_mash_consec_em_daarem_init_shared, 
-              mr_mash_consec_em_init_2pass, mr_mash_consec_em_daarem_init_2pass, 
-              mr_mash_consec_em_init_trueB, mr_mash_consec_em_daarem_init_trueB,
-              mr_mash_consec_em_init_mlasso, mr_mash_consec_em_daarem_init_mlasso,
-              mlasso, mridge, menet
+    simulate: indepX_indepV_indepB, corrX_indepV_indepB, highcorrX_indepV_indepB, 
+              indepX_indepV_1respB, corrX_indepV_1respB, highcorrX_indepV_1respB,
+              indepX_indepV_sharedB, corrX_indepV_sharedB, highcorrX_indepV_sharedB
+    fit:      mr_mash_consec_em, mr_mash_consec_em_init_mlasso, 
+              mr_mash_consec_em_drop_w0, mr_mash_consec_em_drop_w0_init_mlasso,
+              mlasso, mridge, menet, gflasso
               #mr_mash_consec_mixsqp, mr_mash_declogBF_mixsqp, mr_mash_consec_em_init_indep, 
               #mr_mash_consec_em_daarem_init_indep, mr_mash_consec_mixsqp_init_indep,
               #mr_mash_consec_mixsqp_init_shared, mr_mash_consec_mixsqp_init_2pass,
               #mr_mash_consec_mixsqp_init_trueB, mr_mash_consec_mixsqp_init_mlasso
+              #mr_mash_declogBF_em, mr_mash_declogBF_em_daarem, 
+              #mr_mash_consec_em_init_shared, mr_mash_consec_em_daarem_init_shared, 
+              #mr_mash_consec_em_init_2pass, mr_mash_consec_em_daarem_init_2pass, 
+              #mr_mash_consec_em_init_trueB, mr_mash_consec_em_daarem_init_trueB,
+              #, mr_mash_consec_em_daarem_init_mlasso,
+
     predict:  predict_linear
     score:    r2, mse, bias
   run: simulate * fit * predict * score
 
 ## Simulate modules
 #Independent predictors, lowly correlated residuals, independent effects
-indepX_lowcorrV_indepB: simulate_data_mod.R
+indepX_indepV_indepB: simulate_data_mod.R
   n:        600
   p:        1000
-  p_causal: 50, 500
+  p_causal: 50
   r:        10
   r_causal: 10
   pve:      0.5
@@ -39,7 +41,7 @@ indepX_lowcorrV_indepB: simulate_data_mod.R
   B_scale:  0.8
   X_cor:    0
   X_scale:  0.8
-  V_cor:    0.15
+  V_cor:    0
   prop_testset: 0.2
   $Xtrain: out$Xtrain
   $Ytrain: out$Ytrain
@@ -48,71 +50,71 @@ indepX_lowcorrV_indepB: simulate_data_mod.R
   $B_true: out$B_true
  
 #Correlated predictors, lowly correlated residuals, independent effects
-corrX_lowcorrV_indepB(indepX_lowcorrV_indepB):
+corrX_indepV_indepB(indepX_indepV_indepB):
   B_cor:   0
   B_scale: 0.8
   X_cor:   0.5
   X_scale: 0.8
-  V_cor:   0.15
+  V_cor:   0
   
 #Higly correlated predictors, lowly correlated residuals, independent effects
-highcorrX_lowcorrV_indepB(indepX_lowcorrV_indepB):
+highcorrX_indepV_indepB(indepX_indepV_indepB):
   B_cor:   0
   B_scale: 0.8
   X_cor:   0.8
   X_scale: 0.8
-  V_cor:   0.15
+  V_cor:   0
   
 #Independent predictors, lowly correlated residuals, shared effects
-indepX_lowcorrV_sharedB(indepX_lowcorrV_indepB):
+indepX_indepV_sharedB(indepX_indepV_indepB):
   B_cor:   1
   B_scale: 0.8
   X_cor:   0
   X_scale: 0.8
-  V_cor:   0.15
+  V_cor:   0
 
 #Correlated predictors, lowly correlated residuals, shared effects
-corrX_lowcorrV_sharedB(indepX_lowcorrV_indepB):
+corrX_indepV_sharedB(indepX_indepV_indepB):
   B_cor:   1
   B_scale: 0.8
   X_cor:   0.5
   X_scale: 0.8
-  V_cor:   0.15
+  V_cor:   0
 
 #Higly correlated predictors, lowly correlated residuals, shared effects
-highcorrX_lowcorrV_sharedB(indepX_lowcorrV_indepB):
+highcorrX_indepV_sharedB(indepX_indepV_indepB):
   B_cor:   1
   B_scale: 0.8
   X_cor:   0.8
   X_scale: 0.8
-  V_cor:   0.15
+  V_cor:   0
   
 #Independent predictors, lowly correlated residuals, effects in only 1 resp
-indepX_lowcorrV_1respB(indepX_lowcorrV_indepB):
+indepX_indepV_1respB(indepX_indepV_indepB):
   r_causal: 1
   B_cor:   0
   B_scale: 0.8
   X_cor:   0
   X_scale: 0.8
-  V_cor:   0.15
+  V_cor:   0
 
 #Correlated predictors, lowly correlated residuals, effects in only 1 resp
-corrX_lowcorrV_1respB(indepX_lowcorrV_indepB):
+corrX_indepV_1respB(indepX_indepV_indepB):
   r_causal: 1
   B_cor:   0
   B_scale: 0.8
   X_cor:   0.5
   X_scale: 0.8
-  V_cor:   0.15
+  V_cor:   0
 
 #Higly correlated predictors, lowly correlated residuals, effects in only 1 resp
-highcorrX_lowcorrV_1respB(indepX_lowcorrV_indepB):
+highcorrX_indepV_1respB(indepX_indepV_indepB):
   r_causal: 1
   B_cor:   0
   B_scale: 0.8
   X_cor:   0.8
   X_scale: 0.8
-  V_cor:   0.15
+  V_cor:   0
 
 
 ## Fit modules
@@ -122,12 +124,14 @@ mr_mash_consec_em: fit_mr_mash_mod.R
   Y:                    $Ytrain
   update_w0:            TRUE
   update_w0_method:     "EM"
+  w0_threshold:         0
   standardize:          TRUE
   update_V:             TRUE
   ca_update_order:      "consecutive"
   init_method:          "default"
+  convergence_criterion: "ELBO"
+  tol:                  1e-2
   B_true:               $B_true
-  select_w0_threshold:  0
   daarem:               FALSE
   $fit_obj:             out$fit
   $B_est:               out$B_est
@@ -234,6 +238,15 @@ mr_mash_consec_mixsqp_init_mlasso(mr_mash_consec_em):
 mr_mash_consec_em_daarem_init_mlasso(mr_mash_consec_em):
   init_method: "mlasso"
   daarem: TRUE
+  
+#EM updates, consecutive coordinate ascent updates, drop w0 < 1e-8
+mr_mash_consec_em_drop_w0(mr_mash_consec_em):
+  w0_threshold: 1e-8
+  
+#EM w0 updates, consecutive coordinate ascent updates, drop w0 < 1e-8, mu1 initilized by mlasso
+mr_mash_consec_em_drop_w0_init_mlasso(mr_mash_consec_em):
+  init_method: "mlasso"
+  w0_threshold: 1e-8
 
 #Multivariate LASSO  
 mlasso: fit_mglmnet_mod.R
@@ -252,6 +265,17 @@ mridge(mlasso):
 #Multivariate enet  
 menet(mlasso):
   alpha:                0.5
+  
+#Multivariate Graph-Guided fused LASSO  
+gflasso: fit_gflasso_mod.R
+  X:                    $Xtrain
+  Y:                    $Ytrain
+  nCores:               1
+  $fit_obj:             out$fit
+  $B_est:               out$B_est
+  $intercept_est:       out$intercept_est
+  $time:                out$elapsed_time
+
 
 
 ## Predict module
