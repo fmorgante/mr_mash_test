@@ -4,7 +4,8 @@ fit_gflasso <- function(X, Y, nCores){
   
   time1 <- proc.time()
   
-  cvfit <- gflasso::cv_gflasso(X = X_s, Y = Y_s, R = cor(Y)^2, nCores = nCores, seed=DSC_SEED)
+  cvfit <- gflasso::cv_gflasso(X = X_s, Y = Y_s, R = cor(Y)^2, nCores = nCores, seed=DSC_SEED,
+                               params=10^seq(0,-4,length.out = 20))
   fit <- gflasso::gflasso(X = X_s, Y = Y_s, R = cor(Y)^2,
                          opts = list(lambda = cvfit$optimal$lambda, gamma = cvfit$optimal$gamma))
   
