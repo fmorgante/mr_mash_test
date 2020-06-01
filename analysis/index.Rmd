@@ -40,3 +40,4 @@ Results for meeting on 05/27/2020. Assessment of prediction accuracy and run tim
 + [Highly correlated predictors, shared effects, lowly correlated residuals.](results_highcorrX_lowcorrV_sharedB_05_18_20.html)
 + [Highly correlated predictors, independent effects, lowly correlated residuals.](results_highcorrX_lowcorrV_indepB_05_18_20.html)
 + [Case study with only two causal responses out of five total.](two_active_responses_issue.html)
++ [Case study with dense scenarios.](dense_scenario_issue.html)
