@@ -448,12 +448,6 @@ compute_accuracy(Ytest, Yhat_test_glmnet)
 
 print("Prediction performance with mr.mash")
 compute_accuracy(Ytest, Yhat_test_mrmash_trueV_truew0)
-
-print("True V (full data)")
-out$V
-
-print("Estimated V (training data)")
-fit_mrmash_trueV_truew0$V
 ```
 
 Not surprisingly we now achieve the best accuracy of all models.
