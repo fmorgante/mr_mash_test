@@ -187,7 +187,61 @@ print("Prediction performance with mr.mash")
 compute_accuracy(Ytest, Yhat_test_mrmash_fixV)
 ```
 
-Prediction performance looks worse in terms of MSE and $r^2$ while bias, although still off, is closer to 1. However, looking at the plots of the coefficients, we can see that many coefficients are no longer overshrunk.
+Prediction performance looks worse in terms of MSE and $r^2$ while bias, although still off, is closer to 1. However, looking at the plots of the coefficients, we can see that many coefficients are no longer overshrunk. Let's see what happens if we initialize V to the truth but then we update it.
+```{r fit mr.mash init V, message=FALSE}
+###Fit mr.mash
+fit_mrmash_initV <- mr.mash(Xtrain, Ytrain, S0, tol=1e-2, convergence_criterion="ELBO", update_w0=TRUE, 
+                     update_w0_method="EM", compute_ELBO=TRUE, standardize=TRUE, verbose=FALSE, update_V=TRUE,
+                     mu1_init = Bhat_glmnet, w0_threshold=1e-8, V=out$V)
+Yhat_test_mrmash_initV <- predict(fit_mrmash_initV, Xtest)
+```
+
+Let's look at the results.
+```{r plot results init V, fig.height=12, fig.width=15}
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                0, 3, 3, 0,
+                0, 3, 3, 0), 4, 4, byrow = TRUE))
+
+###Plot estimated vs true coeffcients
+##mr.mash
+plot(out$B, fit_mrmash_initV$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8)
+##glmnet
+plot(out$B, Bhat_glmnet, main="glmnet", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8)
+
+###Plot mr.mash vs glmnet estimated coeffcients
+colorz <- matrix("black", nrow=p, ncol=r)
+zeros <- apply(out$B, 2, function(x) x==0)
+for(i in 1:ncol(colorz)){
+  colorz[zeros[, i], i] <- "red"
+}
+
+plot(Bhat_glmnet, fit_mrmash_initV$mu1, main="mr.mash vs glmnet", 
+     xlab="glmnet estimated coefficients", ylab="mr.mash estimated coefficients",
+     col=colorz, cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8)
+legend("topleft", 
+       legend = c("Non-zero", "Zero"), 
+       col = c("black", "red"), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=2) 
+
+print("Prediction performance with glmnet")
+compute_accuracy(Ytest, Yhat_test_glmnet)
+
+print("Prediction performance with mr.mash")
+compute_accuracy(Ytest, Yhat_test_mrmash_initV)
+
+print("True V (full data)")
+out$V
+
+print("Estimated V (training data)")
+fit_mrmash_initV$V
+```
+
+Here, we can see that that initilizing the residual covariance to the truth leads to essentially the same solutions as using the default initialization method.
 
 For comparison let's try to repeat the analysis above (updating V) on a sparser scenario, i.e., p_causal=50.
 ```{r 50 causal variables analysis, message=FALSE}
