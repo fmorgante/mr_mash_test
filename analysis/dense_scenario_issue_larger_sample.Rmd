@@ -187,7 +187,7 @@ print("Prediction performance with mr.mash")
 compute_accuracy(Ytest, Yhat_test_mrmash_fixV)
 ```
 
-Prediction performance looks worse in terms of MSE and $r^2$ while bias, although still off, is closer to 1. However, looking at the plots of the coefficients, we can see that many coefficients are no longer overshrunk. Let's see what happens if we initialize V to the truth but then we update it.
+Prediction performance looks worse. However, looking at the plots of the coefficients, we can see that many coefficients are no longer overshrunk. Let's see what happens if we initialize V to the truth but then we update it.
 ```{r fit mr.mash init V, message=FALSE}
 ###Fit mr.mash
 fit_mrmash_initV <- mr.mash(Xtrain, Ytrain, S0, tol=1e-2, convergence_criterion="ELBO", update_w0=TRUE, 
