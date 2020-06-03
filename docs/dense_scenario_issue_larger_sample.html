@@ -355,16 +355,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree33806cd40f09a60f031024b6bff93d7e547a66cftargetblank33806cda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/33806cd40f09a60f031024b6bff93d7e547a66cf" target="_blank">33806cd</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree0f87958919794e2c8ef6c795108dd97f3aab81c5targetblank0f87958a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/0f87958919794e2c8ef6c795108dd97f3aab81c5" target="_blank">0f87958</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree33806cd40f09a60f031024b6bff93d7e547a66cftargetblank33806cda" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree0f87958919794e2c8ef6c795108dd97f3aab81c5targetblank0f87958a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/33806cd40f09a60f031024b6bff93d7e547a66cf" target="_blank">33806cd</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/0f87958919794e2c8ef6c795108dd97f3aab81c5" target="_blank">0f87958</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -430,6 +430,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/0f87958919794e2c8ef6c795108dd97f3aab81c5/analysis/dense_scenario_issue_larger_sample.Rmd" target="_blank">0f87958</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-06-03
+</td>
+<td>
+Fix description
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/01e3909675b70244bca8a6071a17ff6ae89d5812/docs/dense_scenario_issue_larger_sample.html" target="_blank">01e3909</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-06-03
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -531,7 +565,7 @@ fit_mrmash &lt;- mr.mash(Xtrain, Ytrain, S0, tol=1e-2, convergence_criterion=&qu
 <pre><code>Processing the inputs... Done!
 Fitting the optimization algorithm... Done!
 Processing the outputs... Done!
-mr.mash successfully executed in 3.224477 minutes!</code></pre>
+mr.mash successfully executed in 3.148192 minutes!</code></pre>
 <pre class="r"><code>Yhat_test_mrmash &lt;- predict(fit_mrmash, Xtest)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
@@ -563,6 +597,43 @@ legend(&quot;topleft&quot;,
        horiz = FALSE,
        cex=2) </code></pre>
 <p><img src="figure/dense_scenario_issue_larger_sample.Rmd/plot%20results-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-plot-results-1">
+Past versions of “plot results-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-plot-results-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/01e3909675b70244bca8a6071a17ff6ae89d5812/docs/figure/dense_scenario_issue_larger_sample.Rmd/plot results-1.png" target="_blank">01e3909</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-06-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>print(&quot;Prediction performance with glmnet&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_glmnet)</code></pre>
@@ -611,7 +682,7 @@ fit_mrmash_fixV &lt;- mr.mash(Xtrain, Ytrain, S0, tol=1e-2, convergence_criterio
 <pre><code>Processing the inputs... Done!
 Fitting the optimization algorithm... Done!
 Processing the outputs... Done!
-mr.mash successfully executed in 2.725533 minutes!</code></pre>
+mr.mash successfully executed in 2.683476 minutes!</code></pre>
 <pre class="r"><code>Yhat_test_mrmash_fixV &lt;- predict(fit_mrmash_fixV, Xtest)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
@@ -643,6 +714,43 @@ legend(&quot;topleft&quot;,
        horiz = FALSE,
        cex=2) </code></pre>
 <p><img src="figure/dense_scenario_issue_larger_sample.Rmd/plot%20results%20fixed%20V-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-plot-results-fixed-V-1">
+Past versions of “plot results fixed V-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-plot-results-fixed-V-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/01e3909675b70244bca8a6071a17ff6ae89d5812/docs/figure/dense_scenario_issue_larger_sample.Rmd/plot results fixed V-1.png" target="_blank">01e3909</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-06-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>print(&quot;Prediction performance with glmnet&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_glmnet)</code></pre>
@@ -665,7 +773,7 @@ $r2
 
 $mse
 [1] 627.9131 627.6031 675.0825 610.6552 619.2527</code></pre>
-<p>Prediction performance looks worse in terms of MSE and <span class="math">\(r^2\)</span> while bias, although still off, is closer to 1. However, looking at the plots of the coefficients, we can see that many coefficients are no longer overshrunk. Let’s see what happens if we initialize V to the truth but then we update it.</p>
+<p>Prediction performance looks worse. However, looking at the plots of the coefficients, we can see that many coefficients are no longer overshrunk. Let’s see what happens if we initialize V to the truth but then we update it.</p>
 <pre class="r"><code>###Fit mr.mash
 fit_mrmash_initV &lt;- mr.mash(Xtrain, Ytrain, S0, tol=1e-2, convergence_criterion=&quot;ELBO&quot;, update_w0=TRUE, 
                      update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=TRUE, verbose=FALSE, update_V=TRUE,
@@ -673,7 +781,7 @@ fit_mrmash_initV &lt;- mr.mash(Xtrain, Ytrain, S0, tol=1e-2, convergence_criteri
 <pre><code>Processing the inputs... Done!
 Fitting the optimization algorithm... Done!
 Processing the outputs... Done!
-mr.mash successfully executed in 3.177592 minutes!</code></pre>
+mr.mash successfully executed in 3.131635 minutes!</code></pre>
 <pre class="r"><code>Yhat_test_mrmash_initV &lt;- predict(fit_mrmash_initV, Xtest)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
@@ -705,6 +813,43 @@ legend(&quot;topleft&quot;,
        horiz = FALSE,
        cex=2) </code></pre>
 <p><img src="figure/dense_scenario_issue_larger_sample.Rmd/plot%20results%20init%20V-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-plot-results-init-V-1">
+Past versions of “plot results init V-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-plot-results-init-V-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/01e3909675b70244bca8a6071a17ff6ae89d5812/docs/figure/dense_scenario_issue_larger_sample.Rmd/plot results init V-1.png" target="_blank">01e3909</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-06-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>print(&quot;Prediction performance with glmnet&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_glmnet)</code></pre>
@@ -754,7 +899,7 @@ fit_mrmash_diagV &lt;- mr.mash(Xtrain, Ytrain, S0, tol=1e-2, convergence_criteri
 <pre><code>Processing the inputs... Done!
 Fitting the optimization algorithm... Done!
 Processing the outputs... Done!
-mr.mash successfully executed in 2.899423 minutes!</code></pre>
+mr.mash successfully executed in 2.848305 minutes!</code></pre>
 <pre class="r"><code>Yhat_test_mrmash_diagV &lt;- predict(fit_mrmash_diagV, Xtest)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
@@ -786,6 +931,43 @@ legend(&quot;topleft&quot;,
        horiz = FALSE,
        cex=2) </code></pre>
 <p><img src="figure/dense_scenario_issue_larger_sample.Rmd/plot%20results%20diag%20V-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-plot-results-diag-V-1">
+Past versions of “plot results diag V-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-plot-results-diag-V-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/01e3909675b70244bca8a6071a17ff6ae89d5812/docs/figure/dense_scenario_issue_larger_sample.Rmd/plot results diag V-1.png" target="_blank">01e3909</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-06-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>print(&quot;Prediction performance with glmnet&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_glmnet)</code></pre>
@@ -836,7 +1018,7 @@ fit_mrmash_diagV_initw0 &lt;- mr.mash(Xtrain, Ytrain, S0, w0=w0, tol=1e-2, conve
 <pre><code>Processing the inputs... Done!
 Fitting the optimization algorithm... Done!
 Processing the outputs... Done!
-mr.mash successfully executed in 0.3866981 minutes!</code></pre>
+mr.mash successfully executed in 0.3819031 minutes!</code></pre>
 <pre class="r"><code>Yhat_test_mrmash_diagV_initw0 &lt;- predict(fit_mrmash_diagV_initw0, Xtest)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
@@ -868,6 +1050,43 @@ legend(&quot;topleft&quot;,
        horiz = FALSE,
        cex=2) </code></pre>
 <p><img src="figure/dense_scenario_issue_larger_sample.Rmd/plot%20results%20diag%20V%20init%20w0-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-plot-results-diag-V-init-w0-1">
+Past versions of “plot results diag V init w0-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-plot-results-diag-V-init-w0-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/01e3909675b70244bca8a6071a17ff6ae89d5812/docs/figure/dense_scenario_issue_larger_sample.Rmd/plot results diag V init w0-1.png" target="_blank">01e3909</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-06-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>print(&quot;Prediction performance with glmnet&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_glmnet)</code></pre>
@@ -916,7 +1135,7 @@ fit_mrmash_diagV_truew0 &lt;- mr.mash(Xtrain, Ytrain, S0, w0=w0, tol=1e-2, conve
 <pre><code>Processing the inputs... Done!
 Fitting the optimization algorithm... Done!
 Processing the outputs... Done!
-mr.mash successfully executed in 0.8566629 minutes!</code></pre>
+mr.mash successfully executed in 0.8442296 minutes!</code></pre>
 <pre class="r"><code>Yhat_test_mrmash_diagV_truew0 &lt;- predict(fit_mrmash_diagV_truew0, Xtest)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
@@ -948,6 +1167,43 @@ legend(&quot;topleft&quot;,
        horiz = FALSE,
        cex=2) </code></pre>
 <p><img src="figure/dense_scenario_issue_larger_sample.Rmd/plot%20results%20diag%20V%20true%20w0-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-plot-results-diag-V-true-w0-1">
+Past versions of “plot results diag V true w0-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-plot-results-diag-V-true-w0-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/01e3909675b70244bca8a6071a17ff6ae89d5812/docs/figure/dense_scenario_issue_larger_sample.Rmd/plot results diag V true w0-1.png" target="_blank">01e3909</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-06-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>print(&quot;Prediction performance with glmnet&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_glmnet)</code></pre>
@@ -996,7 +1252,7 @@ fit_mrmash_trueV_truew0 &lt;- mr.mash(Xtrain, Ytrain, S0, w0=w0, tol=1e-2, conve
 <pre><code>Processing the inputs... Done!
 Fitting the optimization algorithm... Done!
 Processing the outputs... Done!
-mr.mash successfully executed in 1.862052 minutes!</code></pre>
+mr.mash successfully executed in 1.840563 minutes!</code></pre>
 <pre class="r"><code>Yhat_test_mrmash_trueV_truew0 &lt;- predict(fit_mrmash_trueV_truew0, Xtest)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
@@ -1028,6 +1284,43 @@ legend(&quot;topleft&quot;,
        horiz = FALSE,
        cex=2) </code></pre>
 <p><img src="figure/dense_scenario_issue_larger_sample.Rmd/plot%20results%20true%20V%20true%20w0-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-plot-results-true-V-true-w0-1">
+Past versions of “plot results true V true w0-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-plot-results-true-V-true-w0-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/01e3909675b70244bca8a6071a17ff6ae89d5812/docs/figure/dense_scenario_issue_larger_sample.Rmd/plot results true V true w0-1.png" target="_blank">01e3909</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-06-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>print(&quot;Prediction performance with glmnet&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_glmnet)</code></pre>
@@ -1115,7 +1408,7 @@ fit_mrmash50 &lt;- mr.mash(Xtrain50, Ytrain50, S0, tol=1e-2, convergence_criteri
 <pre><code>Processing the inputs... Done!
 Fitting the optimization algorithm... Done!
 Processing the outputs... Done!
-mr.mash successfully executed in 0.9788831 minutes!</code></pre>
+mr.mash successfully executed in 0.9589499 minutes!</code></pre>
 <pre class="r"><code>Yhat_test_mrmash50 &lt;- predict(fit_mrmash50, Xtest50)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
@@ -1147,6 +1440,43 @@ legend(&quot;topleft&quot;,
        horiz = FALSE,
        cex=2) </code></pre>
 <p><img src="figure/dense_scenario_issue_larger_sample.Rmd/plot%20results%2050-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-plot-results-50-1">
+Past versions of “plot results 50-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-plot-results-50-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/01e3909675b70244bca8a6071a17ff6ae89d5812/docs/figure/dense_scenario_issue_larger_sample.Rmd/plot results 50-1.png" target="_blank">01e3909</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-06-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>print(&quot;Prediction performance with glmnet&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest50, Yhat_test_glmnet50)</code></pre>
@@ -1237,7 +1567,7 @@ fit_mrmash500 &lt;- mr.mash(Xtrain500, Ytrain500, S0, tol=1e-2, convergence_crit
 <pre><code>Processing the inputs... Done!
 Fitting the optimization algorithm... Done!
 Processing the outputs... Done!
-mr.mash successfully executed in 1.08829 minutes!</code></pre>
+mr.mash successfully executed in 1.07149 minutes!</code></pre>
 <pre class="r"><code>Yhat_test_mrmash500 &lt;- predict(fit_mrmash500, Xtest500)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
@@ -1269,6 +1599,43 @@ legend(&quot;topleft&quot;,
        horiz = FALSE,
        cex=2) </code></pre>
 <p><img src="figure/dense_scenario_issue_larger_sample.Rmd/plot%20results%20500-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-plot-results-500-1">
+Past versions of “plot results 500-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-plot-results-500-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/01e3909675b70244bca8a6071a17ff6ae89d5812/docs/figure/dense_scenario_issue_larger_sample.Rmd/plot results 500-1.png" target="_blank">01e3909</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-06-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>print(&quot;Prediction performance with glmnet&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest500, Yhat_test_glmnet500)</code></pre>
