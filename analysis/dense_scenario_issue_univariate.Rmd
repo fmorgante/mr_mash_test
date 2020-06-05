@@ -1,0 +1,414 @@
+---
+title: "Dense scenario issue - univariate models"
+author: "Fabio Morgante"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  workflowr::wflow_html:
+    toc: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r set opts}
+library(mr.mash.alpha)
+library(glmnet)
+library(mr.ash.alpha)
+
+###Set options
+options(stringsAsFactors = FALSE)
+
+###Functions to select the grid
+autoselect.mixsd <- function(betahat, sebetahat, mult=2){
+  sigmaamin = min(sebetahat)/10
+  if (all(betahat^2 <= sebetahat^2)) {
+    sigmaamax = 8 * sigmaamin
+  }
+  else {
+    sigmaamax = 2 * sqrt(max(betahat^2 - sebetahat^2))
+  }
+  if (mult == 0) {
+    return(c(0, sigmaamax/2))
+  }
+  else {
+    npoint = ceiling(log2(sigmaamax/sigmaamin)/log2(mult))
+    return(mult^((-npoint):0) * sigmaamax)
+  }
+}
+
+get_univariate_sumstats <- function(X, Y, standardize=FALSE, standardize.response=FALSE){
+  r <- ncol(Y)
+  p <- ncol(X)
+  B <- matrix(as.numeric(NA), nrow=p, ncol=r)
+  S <- matrix(as.numeric(NA), nrow=p, ncol=r)
+  
+  X <- scale(X, center=TRUE, scale=standardize) 
+  Y <- scale(Y, center=TRUE, scale=standardize.response)
+  
+  for(i in 1:r){
+    for(j in 1:p){
+      fit <- lm(Y[, i] ~ X[, j]-1)
+      B[j, i] <- coef(fit)
+      S[j, i] <- summary(fit)$coefficients[1, 2]
+    }
+  }
+  
+  return(list(Bhat=B, Shat=S))
+}
+
+###Set seed
+RNGversion("3.5.0")
+set.seed(123)
+```
+
+Let's simulate data with n=600, p=1,000, p_causal=500, r=5, r_causal=5, PVE=0.5, shared effects, independent predictors, and independent residuals. The models will be fitted to the full data.
+
+```{r simulate data}
+###Set parameters
+n <- 600
+p <- 1000
+p_causal <- 500
+r <- 5
+r_causal <- r
+pve <- 0.5
+B_cor <- 1
+X_cor <- 0
+V_cor <- 0
+
+###Simulate V, B, X and Y
+out <- mr.mash.alpha:::simulate_mr_mash_data(n, p, p_causal, r, r_causal=r, intercepts = rep(1, r),
+                                             pve=pve, B_cor=B_cor, B_scale=0.9, X_cor=X_cor, X_scale=0.8, V_cor=V_cor)
+
+colnames(out$Y) <- paste0("Y", seq(1, r))
+rownames(out$Y) <- paste0("N", seq(1, n))
+colnames(out$X) <- paste0("X", seq(1, p))
+rownames(out$X) <- paste0("N", seq(1, n))
+```
+
+We run *glmnet* with $\alpha=1$ to obtain an inital estimate for the regression coefficients to provide to *mr.ash*. Then, we run *mr.mash* initialized from the *mr.ash* solution. All the methods are run with standardize=FALSE.
+
+```{r fit, results='hide'}
+###Compute univariate summary stats needed to compute the prior variances
+univ_sumstats <- get_univariate_sumstats(out$X, out$Y, standardize=FALSE, standardize.response=FALSE)
+
+###Define matrices to store the coefficients
+Bhat_glmnet_univ <- matrix(as.numeric(NA), nrow=p, ncol=r)
+Bhat_mrash <- matrix(as.numeric(NA), nrow=p, ncol=r)
+Bhat_mrmash_univ <- matrix(as.numeric(NA), nrow=p, ncol=r)
+
+###Loop through responses
+for(resp in 1:r){
+  ###Fit lasso
+  cvfit_glmnet_univ <- cv.glmnet(x=out$X, y=out$Y[, resp], family="gaussian", alpha=1, standardize=FALSE)
+  coeff_glmnet_univ <- coef(cvfit_glmnet_univ, s="lambda.min")
+  Bhat_glmnet_univ[, resp] <- as.vector(coeff_glmnet_univ)[-1]
+  
+  ###Compute prior variances
+  grid_univ <- c(0, autoselect.mixsd(univ_sumstats$Bhat[, resp], univ_sumstats$Shat[, resp], mult=2))^2
+  
+  ###Fit mr.ash
+  fit_mrash <- mr.ash.alpha::mr.ash(out$X, out$Y[, resp], sa2=grid_univ, standardize=FALSE, update.pi=TRUE, update.sigma=TRUE,
+                                    beta.init=Bhat_glmnet_univ[, resp])
+  Bhat_mrash[, resp] <- drop(fit_mrash$beta)
+  
+  ###Fit mr.mash
+  S0 <- vector("list", length(grid_univ))
+  for(i in 1:length(grid_univ)){
+    S0[[i]] <- matrix(grid_univ[i], ncol=1, nrow=1) 
+  }
+
+  fit_mrmash_univ <- mr.mash(out$X, matrix(out$Y[, resp], ncol=1), S0, tol=1e-2, convergence_criterion="ELBO", update_w0=TRUE, 
+                            update_w0_method="EM", standardize=FALSE, verbose=FALSE, update_V=TRUE, update_V_method="full", 
+                            w0_threshold=0, mu1_init=fit_mrash$beta)
+  Bhat_mrmash_univ[, resp] <- drop(fit_mrmash_univ$mu1)
+}
+```
+
+Let's look at the results for each response.
+
+```{r plot results, fig.height=12, fig.width=12}
+###Response 1
+resp <- 1
+
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                0, 3, 3, 0,
+                0, 3, 3, 0), 4, 4, byrow = TRUE))
+
+###Plot estimated vs true coeffcients
+ymax <- max(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+ymin <- min(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+##mr.mash
+plot(out$B[, resp], Bhat_mrmash_univ[, resp], main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, ylim=c(ymin, ymax))
+##mr.ash
+plot(out$B[, resp], Bhat_mrash[, resp], main="mr.ash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, ylim=c(ymin, ymax))
+
+###Plot mr.mash vs glmnet estimated coeffcients
+colorz <- matrix("black", nrow=p, ncol=1)
+zeros <- out$B[, resp]==0
+for(i in 1:ncol(colorz)){
+  colorz[zeros, i] <- "red"
+}
+
+xymax <- max(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+xymin <- min(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+
+plot(Bhat_mrash[, resp], Bhat_mrmash_univ[, resp], main="mr.mash vs mr.ash", 
+     xlab="mr.ash estimated coefficients", ylab="mr.mash estimated coefficients",
+     col=colorz, cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, xlim=c(xymin, xymax), ylim=c(xymin, xymax))
+abline(0, 1)
+legend("topleft", 
+       legend = c("Non-zero", "Zero"), 
+       col = c("black", "red"), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=2)
+
+###Response 2
+resp <- 2
+
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                0, 3, 3, 0,
+                0, 3, 3, 0), 4, 4, byrow = TRUE))
+
+###Plot estimated vs true coeffcients
+ymax <- max(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+ymin <- min(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+##mr.mash
+plot(out$B[, resp], Bhat_mrmash_univ[, resp], main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, ylim=c(ymin, ymax))
+##mr.ash
+plot(out$B[, resp], Bhat_mrash[, resp], main="mr.ash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, ylim=c(ymin, ymax))
+
+###Plot mr.mash vs glmnet estimated coeffcients
+colorz <- matrix("black", nrow=p, ncol=1)
+zeros <- out$B[, resp]==0
+for(i in 1:ncol(colorz)){
+  colorz[zeros, i] <- "red"
+}
+
+xymax <- max(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+xymin <- min(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+
+plot(Bhat_mrash[, resp], Bhat_mrmash_univ[, resp], main="mr.mash vs mr.ash", 
+     xlab="mr.ash estimated coefficients", ylab="mr.mash estimated coefficients",
+     col=colorz, cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, xlim=c(xymin, xymax), ylim=c(xymin, xymax))
+abline(0, 1)
+legend("topleft", 
+       legend = c("Non-zero", "Zero"), 
+       col = c("black", "red"), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=2)
+
+###Response 3
+resp <- 3
+
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                0, 3, 3, 0,
+                0, 3, 3, 0), 4, 4, byrow = TRUE))
+
+###Plot estimated vs true coeffcients
+ymax <- max(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+ymin <- min(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+##mr.mash
+plot(out$B[, resp], Bhat_mrmash_univ[, resp], main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, ylim=c(ymin, ymax))
+##mr.ash
+plot(out$B[, resp], Bhat_mrash[, resp], main="mr.ash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, ylim=c(ymin, ymax))
+
+###Plot mr.mash vs glmnet estimated coeffcients
+colorz <- matrix("black", nrow=p, ncol=1)
+zeros <- out$B[, resp]==0
+for(i in 1:ncol(colorz)){
+  colorz[zeros, i] <- "red"
+}
+
+xymax <- max(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+xymin <- min(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+
+plot(Bhat_mrash[, resp], Bhat_mrmash_univ[, resp], main="mr.mash vs mr.ash", 
+     xlab="mr.ash estimated coefficients", ylab="mr.mash estimated coefficients",
+     col=colorz, cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, xlim=c(xymin, xymax), ylim=c(xymin, xymax))
+abline(0, 1)
+legend("topleft", 
+       legend = c("Non-zero", "Zero"), 
+       col = c("black", "red"), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=2)
+
+###Response 4
+resp <- 4
+
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                0, 3, 3, 0,
+                0, 3, 3, 0), 4, 4, byrow = TRUE))
+
+###Plot estimated vs true coeffcients
+ymax <- max(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+ymin <- min(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+##mr.mash
+plot(out$B[, resp], Bhat_mrmash_univ[, resp], main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, ylim=c(ymin, ymax))
+##mr.ash
+plot(out$B[, resp], Bhat_mrash[, resp], main="mr.ash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, ylim=c(ymin, ymax))
+
+###Plot mr.mash vs glmnet estimated coeffcients
+colorz <- matrix("black", nrow=p, ncol=1)
+zeros <- out$B[, resp]==0
+for(i in 1:ncol(colorz)){
+  colorz[zeros, i] <- "red"
+}
+
+xymax <- max(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+xymin <- min(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+
+plot(Bhat_mrash[, resp], Bhat_mrmash_univ[, resp], main="mr.mash vs mr.ash", 
+     xlab="mr.ash estimated coefficients", ylab="mr.mash estimated coefficients",
+     col=colorz, cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, xlim=c(xymin, xymax), ylim=c(xymin, xymax))
+abline(0, 1)
+legend("topleft", 
+       legend = c("Non-zero", "Zero"), 
+       col = c("black", "red"), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=2)
+
+###Response 5
+resp <- 5
+
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                0, 3, 3, 0,
+                0, 3, 3, 0), 4, 4, byrow = TRUE))
+
+###Plot estimated vs true coeffcients
+ymax <- max(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+ymin <- min(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+##mr.mash
+plot(out$B[, resp], Bhat_mrmash_univ[, resp], main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, ylim=c(ymin, ymax))
+##mr.ash
+plot(out$B[, resp], Bhat_mrash[, resp], main="mr.ash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, ylim=c(ymin, ymax))
+
+###Plot mr.mash vs glmnet estimated coeffcients
+colorz <- matrix("black", nrow=p, ncol=1)
+zeros <- out$B[, resp]==0
+for(i in 1:ncol(colorz)){
+  colorz[zeros, i] <- "red"
+}
+
+xymax <- max(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+xymin <- min(c(Bhat_mrmash_univ[, resp], Bhat_mrash[, resp]))
+
+plot(Bhat_mrash[, resp], Bhat_mrmash_univ[, resp], main="mr.mash vs mr.ash", 
+     xlab="mr.ash estimated coefficients", ylab="mr.mash estimated coefficients",
+     col=colorz, cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, xlim=c(xymin, xymax), ylim=c(xymin, xymax))
+abline(0, 1)
+legend("topleft", 
+       legend = c("Non-zero", "Zero"), 
+       col = c("black", "red"), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=2)
+```
+
+As we can see, *mr.mash* shrinks large coeffcients more than *mr.ash*. Now, we need to understand why these two implementations are giving different results. We will start by making sure that the two methods give the same results with fixed residual variance (and properly scaled prior variances in the case of *mr.ash*).
+
+```{r fit fixed residual variance, results='hide'}
+###Define matrices to store the coefficients
+Bhat_mrash_fixV <- matrix(as.numeric(NA), nrow=p, ncol=r)
+Bhat_mrmash_univ_fixV <- matrix(as.numeric(NA), nrow=p, ncol=r)
+
+###Loop through responses
+for(resp in 1:r){
+  ###Compute prior variances
+  grid_univ <- c(0, autoselect.mixsd(univ_sumstats$Bhat[, resp], univ_sumstats$Shat[, resp], mult=2))^2
+  
+  ###Fit mr.ash
+  fit_mrash_fixV <-mr.ash(out$X, out$Y[, resp], standardize=FALSE, update.pi=TRUE, update.sigma=FALSE, sa2 = grid_univ/var(out$Y[,resp]),
+                          beta.init=Bhat_glmnet_univ[, resp], sigma2 = var(out$Y[,resp]), pi = rep(1/length(grid_univ), length(grid_univ)))
+  Bhat_mrash_fixV[, resp] <- drop(fit_mrash_fixV$beta)
+  
+  ###Fit mr.mash
+  S0 <- vector("list", length(grid_univ))
+  for(i in 1:length(grid_univ)){
+    S0[[i]] <- matrix(grid_univ[i], ncol=1, nrow=1) 
+  }
+
+  fit_mrmash_univ_fixV <- mr.mash(out$X, matrix(out$Y[, resp], ncol=1), S0, tol=1e-4, convergence_criterion="ELBO", update_w0=TRUE, 
+                            update_w0_method="EM", standardize=FALSE, verbose=FALSE, update_V=FALSE, update_V_method="full", 
+                            w0_threshold=0, mu1_init=fit_mrash_fixV$beta, V=matrix(var(out$Y[,resp]), 1, 1), e=0)
+  Bhat_mrmash_univ_fixV[, resp] <- drop(fit_mrmash_univ_fixV$mu1)
+}
+```
+
+Let's look at the results for each response.
+
+```{r plot results fixed V, fig.height=12, fig.width=12}
+layout(matrix(c(1, 1, 2, 2, 3, 3,
+                1, 1, 2, 2, 3, 3,
+                0, 4, 4, 5, 5, 0,
+                0, 4, 4, 5, 5, 0), 4, 6, byrow = TRUE))
+
+resp <- 1
+
+xymax <- max(c(Bhat_mrmash_univ_fixV[, resp], Bhat_mrash_fixV[, resp]))
+xymin <- min(c(Bhat_mrmash_univ_fixV[, resp], Bhat_mrash_fixV[, resp]))
+
+plot(Bhat_mrash_fixV[, resp], Bhat_mrmash_univ_fixV[, resp], main="mr.mash vs mr.ash", 
+     xlab="mr.ash estimated coefficients", ylab="mr.mash estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, xlim=c(xymin, xymax), ylim=c(xymin, xymax))
+abline(0, 1)
+
+resp <- 2
+
+xymax <- max(c(Bhat_mrmash_univ_fixV[, resp], Bhat_mrash_fixV[, resp]))
+xymin <- min(c(Bhat_mrmash_univ_fixV[, resp], Bhat_mrash_fixV[, resp]))
+
+plot(Bhat_mrash_fixV[, resp], Bhat_mrmash_univ_fixV[, resp], main="mr.mash vs mr.ash", 
+     xlab="mr.ash estimated coefficients", ylab="mr.mash estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, xlim=c(xymin, xymax), ylim=c(xymin, xymax))
+abline(0, 1)
+
+resp <- 3
+
+xymax <- max(c(Bhat_mrmash_univ_fixV[, resp], Bhat_mrash_fixV[, resp]))
+xymin <- min(c(Bhat_mrmash_univ_fixV[, resp], Bhat_mrash_fixV[, resp]))
+
+plot(Bhat_mrash_fixV[, resp], Bhat_mrmash_univ_fixV[, resp], main="mr.mash vs mr.ash", 
+     xlab="mr.ash estimated coefficients", ylab="mr.mash estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, xlim=c(xymin, xymax), ylim=c(xymin, xymax))
+abline(0, 1)
+
+resp <- 4
+
+xymax <- max(c(Bhat_mrmash_univ_fixV[, resp], Bhat_mrash_fixV[, resp]))
+xymin <- min(c(Bhat_mrmash_univ_fixV[, resp], Bhat_mrash_fixV[, resp]))
+
+plot(Bhat_mrash_fixV[, resp], Bhat_mrmash_univ_fixV[, resp], main="mr.mash vs mr.ash", 
+     xlab="mr.ash estimated coefficients", ylab="mr.mash estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, xlim=c(xymin, xymax), ylim=c(xymin, xymax))
+abline(0, 1)
+
+resp <- 5
+
+xymax <- max(c(Bhat_mrmash_univ_fixV[, resp], Bhat_mrash_fixV[, resp]))
+xymin <- min(c(Bhat_mrmash_univ_fixV[, resp], Bhat_mrash_fixV[, resp]))
+
+plot(Bhat_mrash_fixV[, resp], Bhat_mrmash_univ_fixV[, resp], main="mr.mash vs mr.ash", 
+     xlab="mr.ash estimated coefficients", ylab="mr.mash estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, xlim=c(xymin, xymax), ylim=c(xymin, xymax))
+abline(0, 1)
+```
+
+The results look very similar, so the coordinate ascent algorithm and the update of the mixture weights should not be the culprit of the differences seen in the first plots. N.B. we still had to make the convergence criterion stricter in *mr.mash* to reach this level of agreement.
