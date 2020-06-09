@@ -9,51 +9,13 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r set opts}
+```{r set opts, message=FALSE}
 library(mr.mash.alpha)
 library(glmnet)
 library(mr.ash.alpha)
 
 ###Set options
 options(stringsAsFactors = FALSE)
-
-###Functions to select the grid
-autoselect.mixsd <- function(betahat, sebetahat, mult=2){
-  sigmaamin = min(sebetahat)/10
-  if (all(betahat^2 <= sebetahat^2)) {
-    sigmaamax = 8 * sigmaamin
-  }
-  else {
-    sigmaamax = 2 * sqrt(max(betahat^2 - sebetahat^2))
-  }
-  if (mult == 0) {
-    return(c(0, sigmaamax/2))
-  }
-  else {
-    npoint = ceiling(log2(sigmaamax/sigmaamin)/log2(mult))
-    return(mult^((-npoint):0) * sigmaamax)
-  }
-}
-
-get_univariate_sumstats <- function(X, Y, standardize=FALSE, standardize.response=FALSE){
-  r <- ncol(Y)
-  p <- ncol(X)
-  B <- matrix(as.numeric(NA), nrow=p, ncol=r)
-  S <- matrix(as.numeric(NA), nrow=p, ncol=r)
-  
-  X <- scale(X, center=TRUE, scale=standardize) 
-  Y <- scale(Y, center=TRUE, scale=standardize.response)
-  
-  for(i in 1:r){
-    for(j in 1:p){
-      fit <- lm(Y[, i] ~ X[, j]-1)
-      B[j, i] <- coef(fit)
-      S[j, i] <- summary(fit)$coefficients[1, 2]
-    }
-  }
-  
-  return(list(Bhat=B, Shat=S))
-}
 
 ###Set seed
 RNGversion("3.5.0")
@@ -88,7 +50,7 @@ We run *glmnet* with $\alpha=1$ to obtain an inital estimate for the regression 
 
 ```{r fit, results='hide'}
 ###Compute univariate summary stats needed to compute the prior variances
-univ_sumstats <- get_univariate_sumstats(out$X, out$Y, standardize=FALSE, standardize.response=FALSE)
+univ_sumstats <- mr.mash.alpha:::get_univariate_sumstats(out$X, out$Y, standardize=FALSE, standardize.response=FALSE)
 
 ###Define matrices to store the coefficients
 Bhat_glmnet_univ <- matrix(as.numeric(NA), nrow=p, ncol=r)
@@ -103,7 +65,7 @@ for(resp in 1:r){
   Bhat_glmnet_univ[, resp] <- as.vector(coeff_glmnet_univ)[-1]
   
   ###Compute prior variances
-  grid_univ <- c(0, autoselect.mixsd(univ_sumstats$Bhat[, resp], univ_sumstats$Shat[, resp], mult=2))^2
+  grid_univ <- c(0, mr.mash.alpha:::autoselect.mixsd(univ_sumstats$Bhat[, resp], univ_sumstats$Shat[, resp], mult=2))^2
   
   ###Fit mr.ash
   fit_mrash <- mr.ash.alpha::mr.ash(out$X, out$Y[, resp], sa2=grid_univ, standardize=FALSE, update.pi=TRUE, update.sigma=TRUE,
@@ -332,7 +294,7 @@ Bhat_mrmash_univ_fixV <- matrix(as.numeric(NA), nrow=p, ncol=r)
 ###Loop through responses
 for(resp in 1:r){
   ###Compute prior variances
-  grid_univ <- c(0, autoselect.mixsd(univ_sumstats$Bhat[, resp], univ_sumstats$Shat[, resp], mult=2))^2
+  grid_univ <- c(0, mr.mash.alpha:::autoselect.mixsd(univ_sumstats$Bhat[, resp], univ_sumstats$Shat[, resp], mult=2))^2
   
   ###Fit mr.ash
   fit_mrash_fixV <-mr.ash(out$X, out$Y[, resp], standardize=FALSE, update.pi=TRUE, update.sigma=FALSE, sa2 = grid_univ/var(out$Y[,resp]),
@@ -412,3 +374,100 @@ abline(0, 1)
 ```
 
 The results look very similar, so the coordinate ascent algorithm and the update of the mixture weights should not be the culprit of the differences seen in the first plots. N.B. we still had to make the convergence criterion stricter in *mr.mash* to reach this level of agreement.
+
+After a conversation, Matthew and I discovered that I have been providing a grid that was not sensible to *mr.ash*. This is because of the different (scaled) parameterization of the prior, $b \sim N(0, \sigma^2 \sigma^2_b)$. This might account for all the differences between *mr.ash* and *mr.mash* we have seen. To test this hypothesis, we will use this strategy:
+1. Fit *mr.ash* with a sufficiently dense and wide grid.
+2. Fit *mr.mash* with the same grid multiplied by the estimated residual variance from *mr.ash*
+In this way, the two grids will be approximately equivalent, given the two different parameterizations of the model.
+
+```{r fit equivalent grid, results='hide'}
+###Compute grid of prior variances for mr.ash
+grid_mrash <- c(0, sort(10^seq(2,-3.5,length.out = 500)))
+
+###Define matrices to store the coefficients
+Bhat_mrash_eqgrid <- matrix(as.numeric(NA), nrow=p, ncol=r)
+Bhat_mrmash_univ_eqgrid <- matrix(as.numeric(NA), nrow=p, ncol=r)
+
+###Loop through responses
+for(resp in 1:r){
+
+  ###Fit mr.ash
+  fit_mrash_eqgrid <- mr.ash.alpha::mr.ash(out$X, out$Y[, resp], sa2=grid_mrash, standardize=FALSE, update.pi=TRUE, update.sigma=TRUE,
+                                    beta.init=Bhat_glmnet_univ[, resp])
+  Bhat_mrash_eqgrid[, resp] <- drop(fit_mrash_eqgrid$beta)
+  
+  ###Fit mr.mash
+  S0 <- list()
+  for(i in 1:length(grid_mrash)){
+    S0[[i]] <- matrix(grid_mrash[i]*fit_mrash_eqgrid$sigma2, ncol=1, nrow=1) 
+  }
+  
+  fit_mrmash_univ_eqgrid <- mr.mash(out$X, matrix(out$Y[, resp], ncol=1), S0, tol=1e-4, convergence_criterion="ELBO", update_w0=TRUE, 
+                                    update_w0_method="EM", standardize=FALSE, verbose=FALSE, update_V=TRUE, update_V_method="full", 
+                                    w0_threshold=0, mu1_init=matrix(Bhat_glmnet_univ[, resp], ncol=1), e=0)  
+  Bhat_mrmash_univ_eqgrid[, resp] <- drop(fit_mrmash_univ_eqgrid$mu1)
+}
+```
+
+```{r plot results equivalent grid, fig.height=12, fig.width=12}
+layout(matrix(c(1, 1, 2, 2, 3, 3,
+                1, 1, 2, 2, 3, 3,
+                0, 4, 4, 5, 5, 0,
+                0, 4, 4, 5, 5, 0), 4, 6, byrow = TRUE))
+
+resp <- 1
+
+xymax <- max(c(Bhat_mrmash_univ_eqgrid[, resp], Bhat_mrash_eqgrid[, resp]))
+xymin <- min(c(Bhat_mrmash_univ_eqgrid[, resp], Bhat_mrash_eqgrid[, resp]))
+
+plot(Bhat_mrash_eqgrid[, resp], Bhat_mrmash_univ_eqgrid[, resp], main="mr.mash vs mr.ash", 
+     xlab="mr.ash estimated coefficients", ylab="mr.mash estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, xlim=c(xymin, xymax), ylim=c(xymin, xymax))
+abline(0, 1)
+
+resp <- 2
+
+xymax <- max(c(Bhat_mrmash_univ_eqgrid[, resp], Bhat_mrash_eqgrid[, resp]))
+xymin <- min(c(Bhat_mrmash_univ_eqgrid[, resp], Bhat_mrash_eqgrid[, resp]))
+
+plot(Bhat_mrash_eqgrid[, resp], Bhat_mrmash_univ_eqgrid[, resp], main="mr.mash vs mr.ash", 
+     xlab="mr.ash estimated coefficients", ylab="mr.mash estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, xlim=c(xymin, xymax), ylim=c(xymin, xymax))
+abline(0, 1)
+
+resp <- 3
+
+xymax <- max(c(Bhat_mrmash_univ_eqgrid[, resp], Bhat_mrash_eqgrid[, resp]))
+xymin <- min(c(Bhat_mrmash_univ_eqgrid[, resp], Bhat_mrash_eqgrid[, resp]))
+
+plot(Bhat_mrash_eqgrid[, resp], Bhat_mrmash_univ_eqgrid[, resp], main="mr.mash vs mr.ash", 
+     xlab="mr.ash estimated coefficients", ylab="mr.mash estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, xlim=c(xymin, xymax), ylim=c(xymin, xymax))
+abline(0, 1)
+
+resp <- 4
+
+xymax <- max(c(Bhat_mrmash_univ_eqgrid[, resp], Bhat_mrash_eqgrid[, resp]))
+xymin <- min(c(Bhat_mrmash_univ_eqgrid[, resp], Bhat_mrash_eqgrid[, resp]))
+
+plot(Bhat_mrash_eqgrid[, resp], Bhat_mrmash_univ_eqgrid[, resp], main="mr.mash vs mr.ash", 
+     xlab="mr.ash estimated coefficients", ylab="mr.mash estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, xlim=c(xymin, xymax), ylim=c(xymin, xymax))
+abline(0, 1)
+
+resp <- 5
+
+xymax <- max(c(Bhat_mrmash_univ_eqgrid[, resp], Bhat_mrash_eqgrid[, resp]))
+xymin <- min(c(Bhat_mrmash_univ_eqgrid[, resp], Bhat_mrash_eqgrid[, resp]))
+
+plot(Bhat_mrash_eqgrid[, resp], Bhat_mrmash_univ_eqgrid[, resp], main="mr.mash vs mr.ash", 
+     xlab="mr.ash estimated coefficients", ylab="mr.mash estimated coefficients",
+     cex=2, cex.lab=1.8, cex.main=2, cex.axis=1.8, xlim=c(xymin, xymax), ylim=c(xymin, xymax))
+abline(0, 1)
+```
+
+The results are now essentially the same! The remaining differences (I believe) can be attributed to the slightly different solutions achieved due to the different convergence checks used in the two software (i.e., ELBO in `mr.mash` and mixture weights in `mr.ash`).
+
+So, the take-home messages are: 
+1. At least in this example, the two different parameterizations lead essentially to the same results.
+2. One needs to be careful in choosing the grid of prior variances, **especially** with the scaled parameterization, which is less intuitive!
