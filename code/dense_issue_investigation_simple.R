@@ -125,7 +125,7 @@ closest_comp <- grid[which.min(abs(0.9-grid))]
 S0fix <- list(S0_1=matrix(closest_comp, r, r), S0_2=matrix(0, r, r))
 w0fix <- c(0.5, 0.5)
 
-# fit_mrmash_simple_g <- mr_mash_simple(Xtrain, Ytrain, cov(Ytrain - Xtrain%*%Bhat_glmnet), S0fix, w0fix, Bhat_glmnet, 200,
+# fit_mrmash_simple_fixg <- mr_mash_simple(Xtrain, Ytrain, cov(Ytrain - Xtrain%*%Bhat_glmnet), S0fix, w0fix, Bhat_glmnet, 200,
 #                                       tol=1e-3, update_w0=FALSE, update_V=TRUE, verbose=TRUE)
 
 fit_mrmash_fixg <- mr.mash(Xtrain, Ytrain, S0=S0fix, w0=w0fix, tol=1e-3, convergence_criterion="mu1", update_w0=FALSE,
