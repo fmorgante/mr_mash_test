@@ -1,8 +1,8 @@
-setwd("/project2/mstephens/fmorgante/software/mr.mash.alpha/inst/code")
+# setwd("/project2/mstephens/fmorgante/software/mr.mash.alpha/inst/code")
 
-source("../../R/misc.R")
-source("../../R/mr_mash_simple.R")
-#library(mr.mash.alpha)
+# source("../../R/misc.R")
+# source("../../R/mr_mash_simple.R")
+library(mr.mash.alpha)
 library(glmnet)
 library(ggplot2)
 library(cowplot)
