@@ -11,7 +11,7 @@
 
 <meta name="author" content="Fabio Morgante" />
 
-<meta name="date" content="2020-06-03" />
+<meta name="date" content="2020-06-12" />
 
 <title>Dense case (larger sample size)</title>
 
@@ -239,7 +239,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Dense case (larger sample size)</h1>
 <h4 class="author"><em>Fabio Morgante</em></h4>
-<h4 class="date"><em>June 03, 2020</em></h4>
+<h4 class="date"><em>June 12, 2020</em></h4>
 
 </div>
 
@@ -264,7 +264,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-06-03
+<strong>Last updated:</strong> 2020-06-12
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -274,7 +274,7 @@ $(document).ready(function () {
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.1). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -355,16 +355,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree0f87958919794e2c8ef6c795108dd97f3aab81c5targetblank0f87958a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/0f87958919794e2c8ef6c795108dd97f3aab81c5" target="_blank">0f87958</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree31b80df82cf88af61300127be6b162a333c20278targetblank31b80dfa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/31b80df82cf88af61300127be6b162a333c20278" target="_blank">31b80df</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree0f87958919794e2c8ef6c795108dd97f3aab81c5targetblank0f87958a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree31b80df82cf88af61300127be6b162a333c20278targetblank31b80dfa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/0f87958919794e2c8ef6c795108dd97f3aab81c5" target="_blank">0f87958</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/31b80df82cf88af61300127be6b162a333c20278" target="_blank">31b80df</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -386,8 +386,11 @@ Ignored files:
     Ignored:    output/dsc_OLD/
     Ignored:    output/dsc_test.html
     Ignored:    output/dsc_test/
+    Ignored:    output/test_dense_issue.rds
+    Ignored:    output/test_sparse_issue.rds
 
 Untracked files:
+    Untracked:  analysis/dense_issue_investigation2/
     Untracked:  code/plot_test.R
 
 Unstaged changes:
@@ -430,6 +433,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/31b80df82cf88af61300127be6b162a333c20278/analysis/dense_scenario_issue_larger_sample.Rmd" target="_blank">31b80df</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-06-12
+</td>
+<td>
+Update code to use the new grid
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/642737cff7da01f649e2f5a879537f7042d788f8/docs/dense_scenario_issue_larger_sample.html" target="_blank">642737c</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-06-03
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -489,11 +526,9 @@ Add dense scenario with larger sample size
 </div>
 </div>
 <pre class="r"><code>library(mr.mash.alpha)
-library(glmnet)</code></pre>
-<pre><code>Loading required package: Matrix</code></pre>
-<pre><code>Loading required package: foreach</code></pre>
-<pre><code>Loaded glmnet 2.0-16</code></pre>
-<pre class="r"><code>###Set options
+library(glmnet)
+
+###Set options
 options(stringsAsFactors = FALSE)
 
 ###Function to compute accuracy
@@ -511,6 +546,7 @@ compute_accuracy &lt;- function(Y, Yhat) {
   
   return(list(bias=bias, r2=r2, mse=mse))
 }</code></pre>
+<p>[Note: updated on 06/12/2020 –&gt; grid computed from univariate summary statistics, and standardize=FALSE]</p>
 <div id="dense-scenario" class="section level3">
 <h3>Dense scenario</h3>
 <p>Here we investigate why <em>mr.mash</em> does not perform as well in denser scenarios. Let’s simulate data with n=1000, p=1,000, p_causal=500, r=5, r_causal=5, PVE=0.5, shared effects, independent predictors, and independent residuals. The models will be fitted to the training data (50% of the full data).</p>
@@ -543,12 +579,13 @@ Ytrain &lt;- out$Y[-test_set, ]
 Xtrain &lt;- out$X[-test_set, ]
 Ytest &lt;- out$Y[test_set, ]
 Xtest &lt;- out$X[test_set, ]</code></pre>
-<p>We build the mixture prior as usual including zero matrix, identity matrix, rank-1 matrices, low, medium and high heterogeneity matrices, shared matrix, each scaled by a grid from 0.1 to 2.1 in steps of 0.2.</p>
-<pre class="r"><code>grid &lt;- seq(0.1, 2.1, 0.2)
+<p>We build the mixture prior as usual including zero matrix, identity matrix, rank-1 matrices, low, medium and high heterogeneity matrices, shared matrix, each scaled by a grid computed from univariate summary statistics.</p>
+<pre class="r"><code>univ_sumstats &lt;- mr.mash.alpha:::get_univariate_sumstats(Xtrain, Ytrain, standardize=FALSE, standardize.response=FALSE)
+grid &lt;- mr.mash.alpha:::autoselect.mixsd(c(univ_sumstats$Bhat), c(univ_sumstats$Shat), mult=sqrt(2))^2
 S0 &lt;- mr.mash.alpha:::compute_cov_canonical(ncol(Ytrain), singletons=TRUE, hetgrid=c(0, 0.25, 0.5, 0.75, 1), grid, zeromat=TRUE)</code></pre>
 <p>We run <em>glmnet</em> with <span class="math">\(\alpha=1\)</span> to obtain an inital estimate for the regression coefficients to provide to <em>mr.mash</em>, and for comparison.</p>
 <pre class="r"><code>###Fit group-lasso
-cvfit_glmnet &lt;- cv.glmnet(x=Xtrain, y=Ytrain, family=&quot;mgaussian&quot;, alpha=1)
+cvfit_glmnet &lt;- cv.glmnet(x=Xtrain, y=Ytrain, family=&quot;mgaussian&quot;, alpha=1, standardize=FALSE)
 coeff_glmnet &lt;- coef(cvfit_glmnet, s=&quot;lambda.min&quot;)
 Bhat_glmnet &lt;- matrix(as.numeric(NA), nrow=p, ncol=r)
 ahat_glmnet &lt;- vector(&quot;numeric&quot;, r)
@@ -560,13 +597,9 @@ Yhat_test_glmnet &lt;- drop(predict(cvfit_glmnet, newx=Xtest, s=&quot;lambda.min
 <p>We run <em>mr.mash</em> with EM updates of the mixture weights, updating V, and initializing the regression coefficients with the estimates from <em>glmnet</em>.</p>
 <pre class="r"><code>###Fit mr.mash
 fit_mrmash &lt;- mr.mash(Xtrain, Ytrain, S0, tol=1e-2, convergence_criterion=&quot;ELBO&quot;, update_w0=TRUE, 
-                     update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=TRUE, verbose=FALSE, update_V=TRUE,
-                     mu1_init = Bhat_glmnet, w0_threshold=1e-8)</code></pre>
-<pre><code>Processing the inputs... Done!
-Fitting the optimization algorithm... Done!
-Processing the outputs... Done!
-mr.mash successfully executed in 3.148192 minutes!</code></pre>
-<pre class="r"><code>Yhat_test_mrmash &lt;- predict(fit_mrmash, Xtest)</code></pre>
+                     update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=FALSE, verbose=FALSE, update_V=TRUE,
+                     mu1_init = Bhat_glmnet, w0_threshold=1e-8)
+Yhat_test_mrmash &lt;- predict(fit_mrmash, Xtest)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
                 0, 3, 3, 0,
@@ -638,24 +671,24 @@ fmorgante
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_glmnet)</code></pre>
 <pre><code>$bias
-[1] 0.8512846 1.1180041 1.2579560 1.0588456 0.9750071
+[1] 0.8518387 1.1181319 1.2890366 1.0579858 1.0070721
 
 $r2
-[1] 0.08147787 0.13022180 0.14289736 0.10333887 0.09575056
+[1] 0.07926694 0.12502546 0.14366905 0.09959621 0.09842417
 
 $mse
-[1] 545.7879 564.5279 615.7842 519.2563 549.6524</code></pre>
+[1] 547.1047 567.8887 616.0232 521.4515 547.9793</code></pre>
 <pre class="r"><code>print(&quot;Prediction performance with mr.mash&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with mr.mash&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_mrmash)</code></pre>
 <pre><code>$bias
-[1] 0.6516976 0.9183228 0.9410845 0.7707970 0.7797258
+[1] 0.5584297 0.8123096 0.8227181 0.6659965 0.6774035
 
 $r2
-[1] 0.06605585 0.11926910 0.11548491 0.09433716 0.09202714
+[1] 0.05602825 0.10793945 0.10183011 0.08152975 0.08030188
 
 $mse
-[1] 564.6308 571.3867 631.5586 529.2172 556.3545</code></pre>
+[1] 580.1523 581.8364 644.3348 543.6616 570.0800</code></pre>
 <pre class="r"><code>print(&quot;True V (full data)&quot;)</code></pre>
 <pre><code>[1] &quot;True V (full data)&quot;</code></pre>
 <pre class="r"><code>out$V</code></pre>
@@ -669,21 +702,17 @@ $mse
 <pre><code>[1] &quot;Estimated V (training data)&quot;</code></pre>
 <pre class="r"><code>fit_mrmash$V</code></pre>
 <pre><code>         Y1       Y2       Y3       Y4       Y5
-Y1 490.1115 167.7120 160.6188 147.9239 173.9672
-Y2 167.7120 526.3014 174.7532 151.7764 194.1976
-Y3 160.6188 174.7532 431.1815 136.2331 183.0482
-Y4 147.9239 151.7764 136.2331 379.9777 157.3819
-Y5 173.9672 194.1976 183.0482 157.3819 527.2492</code></pre>
-<p>It looks <em>mr.mash</em> shrinks the coeffcients too much and the residual covariance is absorbing part of the effects. Let’s now try to fix the residual covariance to the truth (although it is going to be a little different since we are fitting the model to the training set only).</p>
+Y1 494.5476 170.4644 163.5916 151.4800 177.0819
+Y2 170.4644 533.0359 177.5957 155.2169 197.3186
+Y3 163.5916 177.5957 436.3683 139.8099 186.3018
+Y4 151.4800 155.2169 139.8099 382.6222 161.3397
+Y5 177.0819 197.3186 186.3018 161.3397 531.3298</code></pre>
+<p>It looks <em>mr.mash</em> shrinks the coeffcients too much and the residual covariance is absorbing part of the effects. Let’s now try to fix the residual covariance to the truth.</p>
 <pre class="r"><code>###Fit mr.mash
 fit_mrmash_fixV &lt;- mr.mash(Xtrain, Ytrain, S0, tol=1e-2, convergence_criterion=&quot;ELBO&quot;, update_w0=TRUE, 
-                     update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=TRUE, verbose=FALSE, update_V=FALSE,
-                     mu1_init = Bhat_glmnet, w0_threshold=1e-8, V=out$V)</code></pre>
-<pre><code>Processing the inputs... Done!
-Fitting the optimization algorithm... Done!
-Processing the outputs... Done!
-mr.mash successfully executed in 2.683476 minutes!</code></pre>
-<pre class="r"><code>Yhat_test_mrmash_fixV &lt;- predict(fit_mrmash_fixV, Xtest)</code></pre>
+                     update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=FALSE, verbose=FALSE, update_V=FALSE,
+                     mu1_init = Bhat_glmnet, w0_threshold=1e-8, V=out$V)
+Yhat_test_mrmash_fixV &lt;- predict(fit_mrmash_fixV, Xtest)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
                 0, 3, 3, 0,
@@ -755,34 +784,30 @@ fmorgante
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_glmnet)</code></pre>
 <pre><code>$bias
-[1] 0.8512846 1.1180041 1.2579560 1.0588456 0.9750071
+[1] 0.8518387 1.1181319 1.2890366 1.0579858 1.0070721
 
 $r2
-[1] 0.08147787 0.13022180 0.14289736 0.10333887 0.09575056
+[1] 0.07926694 0.12502546 0.14366905 0.09959621 0.09842417
 
 $mse
-[1] 545.7879 564.5279 615.7842 519.2563 549.6524</code></pre>
+[1] 547.1047 567.8887 616.0232 521.4515 547.9793</code></pre>
 <pre class="r"><code>print(&quot;Prediction performance with mr.mash&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with mr.mash&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_mrmash_fixV)</code></pre>
 <pre><code>$bias
-[1] 0.4388856 0.5346376 0.5651601 0.4447900 0.4799520
+[1] 0.4530571 0.5552930 0.6208323 0.4792331 0.5243710
 
 $r2
-[1] 0.09424586 0.12724880 0.13040179 0.09928547 0.11030759
+[1] 0.09099277 0.12430902 0.14253512 0.10442110 0.11910132
 
 $mse
-[1] 627.9131 627.6031 675.0825 610.6552 619.2527</code></pre>
-<p>Prediction performance looks worse. However, looking at the plots of the coefficients, we can see that many coefficients are no longer overshrunk. Let’s see what happens if we initialize V to the truth but then we update it.</p>
+[1] 617.4501 619.5676 650.5751 590.2828 595.2566</code></pre>
+<p>Prediction performance looks worse in terms of MSE. However, looking at the plots of the coefficients, we can see that many coefficients are no longer overshrunk. Let’s see what happens if we initialize V to the truth but then we update it.</p>
 <pre class="r"><code>###Fit mr.mash
 fit_mrmash_initV &lt;- mr.mash(Xtrain, Ytrain, S0, tol=1e-2, convergence_criterion=&quot;ELBO&quot;, update_w0=TRUE, 
-                     update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=TRUE, verbose=FALSE, update_V=TRUE,
-                     mu1_init = Bhat_glmnet, w0_threshold=1e-8, V=out$V)</code></pre>
-<pre><code>Processing the inputs... Done!
-Fitting the optimization algorithm... Done!
-Processing the outputs... Done!
-mr.mash successfully executed in 3.131635 minutes!</code></pre>
-<pre class="r"><code>Yhat_test_mrmash_initV &lt;- predict(fit_mrmash_initV, Xtest)</code></pre>
+                     update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=FALSE, verbose=FALSE, update_V=TRUE,
+                     mu1_init = Bhat_glmnet, w0_threshold=1e-8, V=out$V)
+Yhat_test_mrmash_initV &lt;- predict(fit_mrmash_initV, Xtest)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
                 0, 3, 3, 0,
@@ -854,24 +879,24 @@ fmorgante
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_glmnet)</code></pre>
 <pre><code>$bias
-[1] 0.8512846 1.1180041 1.2579560 1.0588456 0.9750071
+[1] 0.8518387 1.1181319 1.2890366 1.0579858 1.0070721
 
 $r2
-[1] 0.08147787 0.13022180 0.14289736 0.10333887 0.09575056
+[1] 0.07926694 0.12502546 0.14366905 0.09959621 0.09842417
 
 $mse
-[1] 545.7879 564.5279 615.7842 519.2563 549.6524</code></pre>
+[1] 547.1047 567.8887 616.0232 521.4515 547.9793</code></pre>
 <pre class="r"><code>print(&quot;Prediction performance with mr.mash&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with mr.mash&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_mrmash_initV)</code></pre>
 <pre><code>$bias
-[1] 0.6517158 0.9183659 0.9411075 0.7708241 0.7797849
+[1] 0.5610211 0.8151299 0.8260401 0.6687940 0.6800940
 
 $r2
-[1] 0.06605841 0.11927623 0.11548872 0.09434182 0.09203971
+[1] 0.05632059 0.10825220 0.10223811 0.08188427 0.08061416
 
 $mse
-[1] 564.6280 571.3815 631.5556 529.2132 556.3446</code></pre>
+[1] 579.6529 581.5075 643.9059 543.2112 569.6620</code></pre>
 <pre class="r"><code>print(&quot;True V (full data)&quot;)</code></pre>
 <pre><code>[1] &quot;True V (full data)&quot;</code></pre>
 <pre class="r"><code>out$V</code></pre>
@@ -885,22 +910,18 @@ $mse
 <pre><code>[1] &quot;Estimated V (training data)&quot;</code></pre>
 <pre class="r"><code>fit_mrmash_initV$V</code></pre>
 <pre><code>         Y1       Y2       Y3       Y4       Y5
-Y1 490.0991 167.7206 160.6264 147.9331 173.9756
-Y2 167.7206 526.2906 174.7637 151.7885 194.2077
-Y3 160.6264 174.7637 431.1751 136.2462 183.0564
-Y4 147.9331 151.7885 136.2462 379.9678 157.3929
-Y5 173.9756 194.2077 183.0564 157.3929 527.2299</code></pre>
+Y1 494.4493 170.3279 163.4511 151.3242 176.9302
+Y2 170.3279 532.9190 177.4565 155.0622 197.1693
+Y3 163.4511 177.4565 436.2580 139.6459 186.1493
+Y4 151.3242 155.0622 139.6459 382.4974 161.1707
+Y5 176.9302 197.1693 186.1493 161.1707 531.1984</code></pre>
 <p>Here, we can see that that initilizing the residual covariance to the truth leads to essentially the same solutions as using the default initialization method.</p>
-<p>After modifying <em>mr.mash</em>, we can now update the residual covariance imposing a diagonal structure. Let’s see how that works.</p>
+<p>We will now update the residual covariance imposing a diagonal structure. Let’s see how that works.</p>
 <pre class="r"><code>###Fit mr.mash
 fit_mrmash_diagV &lt;- mr.mash(Xtrain, Ytrain, S0, tol=1e-2, convergence_criterion=&quot;ELBO&quot;, update_w0=TRUE, 
-                            update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=TRUE, verbose=FALSE, update_V=TRUE,
-                            update_V_method=&quot;diagonal&quot;, mu1_init=Bhat_glmnet, w0_threshold=1e-8)</code></pre>
-<pre><code>Processing the inputs... Done!
-Fitting the optimization algorithm... Done!
-Processing the outputs... Done!
-mr.mash successfully executed in 2.848305 minutes!</code></pre>
-<pre class="r"><code>Yhat_test_mrmash_diagV &lt;- predict(fit_mrmash_diagV, Xtest)</code></pre>
+                            update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=FALSE, verbose=FALSE, update_V=TRUE,
+                            update_V_method=&quot;diagonal&quot;, mu1_init=Bhat_glmnet, w0_threshold=1e-8)
+Yhat_test_mrmash_diagV &lt;- predict(fit_mrmash_diagV, Xtest)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
                 0, 3, 3, 0,
@@ -972,24 +993,24 @@ fmorgante
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_glmnet)</code></pre>
 <pre><code>$bias
-[1] 0.8512846 1.1180041 1.2579560 1.0588456 0.9750071
+[1] 0.8518387 1.1181319 1.2890366 1.0579858 1.0070721
 
 $r2
-[1] 0.08147787 0.13022180 0.14289736 0.10333887 0.09575056
+[1] 0.07926694 0.12502546 0.14366905 0.09959621 0.09842417
 
 $mse
-[1] 545.7879 564.5279 615.7842 519.2563 549.6524</code></pre>
+[1] 547.1047 567.8887 616.0232 521.4515 547.9793</code></pre>
 <pre class="r"><code>print(&quot;Prediction performance with mr.mash&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with mr.mash&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_mrmash_diagV)</code></pre>
 <pre><code>$bias
-[1] 0.5055930 0.5973226 0.6661191 0.4961578 0.5509116
+[1] 0.4590680 0.5441586 0.6004030 0.4286839 0.5007622
 
 $r2
-[1] 0.1171651 0.1491995 0.1697827 0.1156971 0.1358167
+[1] 0.09625995 0.12339177 0.13733223 0.08599529 0.11179664
 
 $mse
-[1] 589.5178 595.1503 622.9059 580.9298 580.0254</code></pre>
+[1] 614.5711 623.3936 657.9755 616.9041 607.0033</code></pre>
 <pre class="r"><code>print(&quot;True V (full data)&quot;)</code></pre>
 <pre><code>[1] &quot;True V (full data)&quot;</code></pre>
 <pre class="r"><code>out$V</code></pre>
@@ -1003,23 +1024,19 @@ $mse
 <pre><code>[1] &quot;Estimated V (training data)&quot;</code></pre>
 <pre class="r"><code>fit_mrmash_diagV$V</code></pre>
 <pre><code>         Y1       Y2       Y3       Y4       Y5
-Y1 347.9812   0.0000   0.0000   0.0000   0.0000
-Y2   0.0000 379.9561   0.0000   0.0000   0.0000
-Y3   0.0000   0.0000 308.6972   0.0000   0.0000
-Y4   0.0000   0.0000   0.0000 269.3813   0.0000
-Y5   0.0000   0.0000   0.0000   0.0000 376.9686</code></pre>
+Y1 325.9281   0.0000   0.0000   0.0000   0.0000
+Y2   0.0000 379.5774   0.0000   0.0000   0.0000
+Y3   0.0000   0.0000 299.4771   0.0000   0.0000
+Y4   0.0000   0.0000   0.0000 268.2436   0.0000
+Y5   0.0000   0.0000   0.0000   0.0000 380.3463</code></pre>
 <p>Although the estimated residual covariance is much closer to the truth and now many coefficients are not overshrunk, prediction performance is still poor. Another possibility is that overshrinking of coefficients happens because the mixture weights are poorly initialized. Let’s now try to initialize the mixture weights to the truth.</p>
 <pre class="r"><code>###Fit mr.mash
-w0 &lt;- rep(0, length(S0))
-w0[c(104, 111)] &lt;- c(0.5, 0.5)
-fit_mrmash_diagV_initw0 &lt;- mr.mash(Xtrain, Ytrain, S0, w0=w0, tol=1e-2, convergence_criterion=&quot;ELBO&quot;, update_w0=TRUE, 
-                                   update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=TRUE, verbose=FALSE, update_V=TRUE,
-                                   update_V_method=&quot;diagonal&quot;, mu1_init=Bhat_glmnet, w0_threshold=1e-8)</code></pre>
-<pre><code>Processing the inputs... Done!
-Fitting the optimization algorithm... Done!
-Processing the outputs... Done!
-mr.mash successfully executed in 0.3819031 minutes!</code></pre>
-<pre class="r"><code>Yhat_test_mrmash_diagV_initw0 &lt;- predict(fit_mrmash_diagV_initw0, Xtest)</code></pre>
+w0init &lt;- rep(0, length(S0))
+w0init[c(143, 151)] &lt;- c(0.5, 0.5)
+fit_mrmash_diagV_initw0 &lt;- mr.mash(Xtrain, Ytrain, S0, w0=w0init, tol=1e-2, convergence_criterion=&quot;ELBO&quot;, update_w0=TRUE, 
+                                   update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=FALSE, verbose=FALSE, update_V=TRUE,
+                                   update_V_method=&quot;diagonal&quot;, mu1_init=Bhat_glmnet, w0_threshold=0)
+Yhat_test_mrmash_diagV_initw0 &lt;- predict(fit_mrmash_diagV_initw0, Xtest)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
                 0, 3, 3, 0,
@@ -1091,24 +1108,24 @@ fmorgante
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_glmnet)</code></pre>
 <pre><code>$bias
-[1] 0.8512846 1.1180041 1.2579560 1.0588456 0.9750071
+[1] 0.8518387 1.1181319 1.2890366 1.0579858 1.0070721
 
 $r2
-[1] 0.08147787 0.13022180 0.14289736 0.10333887 0.09575056
+[1] 0.07926694 0.12502546 0.14366905 0.09959621 0.09842417
 
 $mse
-[1] 545.7879 564.5279 615.7842 519.2563 549.6524</code></pre>
+[1] 547.1047 567.8887 616.0232 521.4515 547.9793</code></pre>
 <pre class="r"><code>print(&quot;Prediction performance with mr.mash&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with mr.mash&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_mrmash_diagV_initw0)</code></pre>
 <pre><code>$bias
-[1] 0.5847326 0.7040007 0.7906296 0.6201078 0.6626815
+[1] 0.5650397 0.7052100 0.7861362 0.6137133 0.6712195
 
 $r2
-[1] 0.1073869 0.1426389 0.1636928 0.1238145 0.1345438
+[1] 0.1009943 0.1441554 0.1629976 0.1221435 0.1390226
 
 $mse
-[1] 560.9732 571.7148 604.8914 534.0159 547.0646</code></pre>
+[1] 568.1387 570.7545 605.8555 536.1243 543.4498</code></pre>
 <pre class="r"><code>print(&quot;True V (full data)&quot;)</code></pre>
 <pre><code>[1] &quot;True V (full data)&quot;</code></pre>
 <pre class="r"><code>out$V</code></pre>
@@ -1121,22 +1138,22 @@ $mse
 <pre class="r"><code>print(&quot;Estimated V (training data)&quot;)</code></pre>
 <pre><code>[1] &quot;Estimated V (training data)&quot;</code></pre>
 <pre class="r"><code>fit_mrmash_diagV_initw0$V</code></pre>
-<pre><code>         Y1       Y2       Y3      Y4       Y5
-Y1 346.3538   0.0000   0.0000   0.000   0.0000
-Y2   0.0000 397.1369   0.0000   0.000   0.0000
-Y3   0.0000   0.0000 312.6765   0.000   0.0000
-Y4   0.0000   0.0000   0.0000 270.874   0.0000
-Y5   0.0000   0.0000   0.0000   0.000 383.9086</code></pre>
+<pre><code>         Y1       Y2       Y3       Y4       Y5
+Y1 342.8592   0.0000   0.0000   0.0000   0.0000
+Y2   0.0000 395.7401   0.0000   0.0000   0.0000
+Y3   0.0000   0.0000 311.0833   0.0000   0.0000
+Y4   0.0000   0.0000   0.0000 271.6935   0.0000
+Y5   0.0000   0.0000   0.0000   0.0000 379.1278</code></pre>
 <p>Now, prediction performance is better. Next, let’s try to fix the mixture weights to the truth.</p>
 <pre class="r"><code>###Fit mr.mash
-fit_mrmash_diagV_truew0 &lt;- mr.mash(Xtrain, Ytrain, S0, w0=w0, tol=1e-2, convergence_criterion=&quot;ELBO&quot;, update_w0=FALSE, 
-                                    update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=TRUE, verbose=FALSE, update_V=TRUE,
-                                    update_V_method=&quot;diagonal&quot;, mu1_init=Bhat_glmnet, w0_threshold=1e-8)</code></pre>
-<pre><code>Processing the inputs... Done!
-Fitting the optimization algorithm... Done!
-Processing the outputs... Done!
-mr.mash successfully executed in 0.8442296 minutes!</code></pre>
-<pre class="r"><code>Yhat_test_mrmash_diagV_truew0 &lt;- predict(fit_mrmash_diagV_truew0, Xtest)</code></pre>
+closest_comp &lt;- grid[which.min(abs(0.9-grid))]
+S0fix &lt;- list(S0_1=matrix(closest_comp, r, r), S0_2=matrix(0, r, r))
+w0fix &lt;- c(0.5, 0.5)
+
+fit_mrmash_diagV_truew0 &lt;- mr.mash(Xtrain, Ytrain, S0fix, w0=w0fix, tol=1e-2, convergence_criterion=&quot;ELBO&quot;, update_w0=FALSE, 
+                                    update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=FALSE, verbose=FALSE, update_V=TRUE,
+                                    update_V_method=&quot;diagonal&quot;, mu1_init=Bhat_glmnet, w0_threshold=1e-8)
+Yhat_test_mrmash_diagV_truew0 &lt;- predict(fit_mrmash_diagV_truew0, Xtest)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
                 0, 3, 3, 0,
@@ -1208,24 +1225,24 @@ fmorgante
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_glmnet)</code></pre>
 <pre><code>$bias
-[1] 0.8512846 1.1180041 1.2579560 1.0588456 0.9750071
+[1] 0.8518387 1.1181319 1.2890366 1.0579858 1.0070721
 
 $r2
-[1] 0.08147787 0.13022180 0.14289736 0.10333887 0.09575056
+[1] 0.07926694 0.12502546 0.14366905 0.09959621 0.09842417
 
 $mse
-[1] 545.7879 564.5279 615.7842 519.2563 549.6524</code></pre>
+[1] 547.1047 567.8887 616.0232 521.4515 547.9793</code></pre>
 <pre class="r"><code>print(&quot;Prediction performance with mr.mash&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with mr.mash&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_mrmash_diagV_truew0)</code></pre>
 <pre><code>$bias
-[1] 0.7213450 0.8576250 0.9273799 0.7328750 0.7946515
+[1] 0.7106733 0.8601239 0.9169594 0.7243430 0.7988996
 
 $r2
-[1] 0.1438929 0.1863817 0.1982966 0.1522697 0.1703428
+[1] 0.1434966 0.1926099 0.1991813 0.1528236 0.1768900
 
 $mse
-[1] 519.8999 530.0643 572.4096 502.0776 510.8810</code></pre>
+[1] 521.4989 525.9623 572.0003 502.8177 506.7851</code></pre>
 <pre class="r"><code>print(&quot;True V (full data)&quot;)</code></pre>
 <pre><code>[1] &quot;True V (full data)&quot;</code></pre>
 <pre class="r"><code>out$V</code></pre>
@@ -1239,21 +1256,17 @@ $mse
 <pre><code>[1] &quot;Estimated V (training data)&quot;</code></pre>
 <pre class="r"><code>fit_mrmash_diagV_truew0$V</code></pre>
 <pre><code>         Y1       Y2       Y3       Y4       Y5
-Y1 350.8131   0.0000   0.0000   0.0000   0.0000
-Y2   0.0000 398.0888   0.0000   0.0000   0.0000
-Y3   0.0000   0.0000 312.0516   0.0000   0.0000
-Y4   0.0000   0.0000   0.0000 277.4814   0.0000
-Y5   0.0000   0.0000   0.0000   0.0000 383.0856</code></pre>
+Y1 349.3808   0.0000   0.0000   0.0000   0.0000
+Y2   0.0000 396.0128   0.0000   0.0000   0.0000
+Y3   0.0000   0.0000 311.7625   0.0000   0.0000
+Y4   0.0000   0.0000   0.0000 278.3492   0.0000
+Y5   0.0000   0.0000   0.0000   0.0000 380.7376</code></pre>
 <p>Prediction accuracy is now good and better than group-lasso. Finally, let’s fix both the residual covariance and mixture weights to the truth.</p>
 <pre class="r"><code>###Fit mr.mash
-fit_mrmash_trueV_truew0 &lt;- mr.mash(Xtrain, Ytrain, S0, w0=w0, tol=1e-2, convergence_criterion=&quot;ELBO&quot;, update_w0=FALSE, 
-                                    update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=TRUE, verbose=FALSE, update_V=FALSE,
-                                    update_V_method=&quot;diagonal&quot;, mu1_init=Bhat_glmnet, w0_threshold=1e-8, V=out$V)</code></pre>
-<pre><code>Processing the inputs... Done!
-Fitting the optimization algorithm... Done!
-Processing the outputs... Done!
-mr.mash successfully executed in 1.840563 minutes!</code></pre>
-<pre class="r"><code>Yhat_test_mrmash_trueV_truew0 &lt;- predict(fit_mrmash_trueV_truew0, Xtest)</code></pre>
+fit_mrmash_trueV_truew0 &lt;- mr.mash(Xtrain, Ytrain, S0fix, w0=w0fix, tol=1e-2, convergence_criterion=&quot;ELBO&quot;, update_w0=FALSE, 
+                                    update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=FALSE, verbose=FALSE, update_V=FALSE,
+                                    update_V_method=&quot;diagonal&quot;, mu1_init=Bhat_glmnet, w0_threshold=1e-8, V=out$V)
+Yhat_test_mrmash_trueV_truew0 &lt;- predict(fit_mrmash_trueV_truew0, Xtest)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
                 0, 3, 3, 0,
@@ -1325,40 +1338,40 @@ fmorgante
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_glmnet)</code></pre>
 <pre><code>$bias
-[1] 0.8512846 1.1180041 1.2579560 1.0588456 0.9750071
+[1] 0.8518387 1.1181319 1.2890366 1.0579858 1.0070721
 
 $r2
-[1] 0.08147787 0.13022180 0.14289736 0.10333887 0.09575056
+[1] 0.07926694 0.12502546 0.14366905 0.09959621 0.09842417
 
 $mse
-[1] 545.7879 564.5279 615.7842 519.2563 549.6524</code></pre>
+[1] 547.1047 567.8887 616.0232 521.4515 547.9793</code></pre>
 <pre class="r"><code>print(&quot;Prediction performance with mr.mash&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with mr.mash&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest, Yhat_test_mrmash_trueV_truew0)</code></pre>
 <pre><code>$bias
-[1] 0.7072783 0.8323298 0.8531695 0.6922553 0.7646095
+[1] 0.7034135 0.8297291 0.8671787 0.6870042 0.7695739
 
 $r2
-[1] 0.1533563 0.1946108 0.1860537 0.1506101 0.1748307
+[1] 0.1560834 0.1990046 0.1977877 0.1526351 0.1822440
 
 $mse
-[1] 517.1990 526.8574 584.6708 508.8264 511.4591</code></pre>
-<p>Not surprisingly we now achieve the best accuracy of all models.</p>
-<p>However, looking at ELBO for all the models fitted so far reveals something interesting. The models that provide the best prediction performance in the test set are those with smaller ELBO, and viceversa. My intuition is that the largest ELBO is due to those models having more free parameters (since the include updating the weights and V with no structure imposed).</p>
+[1] 516.4040 524.0623 575.3026 508.5362 506.6930</code></pre>
+<p>Not surprisingly, we now achieve the best accuracy of all models.</p>
+<p>However, looking at ELBO for all the models fitted so far reveals something interesting. The models that provide the best prediction performance in the test set are those with smaller ELBO, and viceversa. My intuition is that the largest ELBO is due to those models having more free parameters (since they include updating the weights and V with no structure imposed).</p>
 <pre class="r"><code>print(paste(&quot;Update w0, update V:&quot;, fit_mrmash$ELBO))</code></pre>
-<pre><code>[1] &quot;Update w0, update V: -11175.3716018461&quot;</code></pre>
+<pre><code>[1] &quot;Update w0, update V: -11175.3962254482&quot;</code></pre>
 <pre class="r"><code>print(paste(&quot;Update w0, fix V to the truth:&quot;, fit_mrmash_fixV$ELBO))</code></pre>
-<pre><code>[1] &quot;Update w0, fix V to the truth: -11238.0171099136&quot;</code></pre>
+<pre><code>[1] &quot;Update w0, fix V to the truth: -11239.6904501032&quot;</code></pre>
 <pre class="r"><code>print(paste(&quot;Update w0, update V initializing it to the truth:&quot;, fit_mrmash_initV$ELBO))</code></pre>
-<pre><code>[1] &quot;Update w0, update V initializing it to the truth: -11175.3730696164&quot;</code></pre>
+<pre><code>[1] &quot;Update w0, update V initializing it to the truth: -11175.3937438927&quot;</code></pre>
 <pre class="r"><code>print(paste(&quot;Update w0, update V imposing a diagonal structure:&quot;, fit_mrmash_diagV$ELBO))</code></pre>
-<pre><code>[1] &quot;Update w0, update V imposing a diagonal structure: -11229.4169361434&quot;</code></pre>
+<pre><code>[1] &quot;Update w0, update V imposing a diagonal structure: -11227.0476540694&quot;</code></pre>
 <pre class="r"><code>print(paste(&quot;Update w0 initializing them to the truth, update V imposing a diagonal structure:&quot;, fit_mrmash_diagV_initw0$ELBO))</code></pre>
-<pre><code>[1] &quot;Update w0 initializing them to the truth, update V imposing a diagonal structure: -11243.3199315825&quot;</code></pre>
+<pre><code>[1] &quot;Update w0 initializing them to the truth, update V imposing a diagonal structure: -11241.8971374156&quot;</code></pre>
 <pre class="r"><code>print(paste(&quot;Fix w0 to the truth, update V imposing a diagonal structure:&quot;, fit_mrmash_diagV_truew0$ELBO))</code></pre>
-<pre><code>[1] &quot;Fix w0 to the truth, update V imposing a diagonal structure: -11317.2706086721&quot;</code></pre>
+<pre><code>[1] &quot;Fix w0 to the truth, update V imposing a diagonal structure: -11319.1170084933&quot;</code></pre>
 <pre class="r"><code>print(paste(&quot;Fix w0 and V to the truth:&quot;, fit_mrmash_trueV_truew0$ELBO))</code></pre>
-<pre><code>[1] &quot;Fix w0 and V to the truth: -11326.6122079057&quot;</code></pre>
+<pre><code>[1] &quot;Fix w0 and V to the truth: -11328.5451731686&quot;</code></pre>
 </div>
 <div id="sparser-scenario" class="section level3">
 <h3>Sparser scenario</h3>
@@ -1391,7 +1404,7 @@ Ytest50 &lt;- out50$Y[test_set50, ]
 Xtest50 &lt;- out50$X[test_set50, ]
 
 ###Fit group-lasso
-cvfit_glmnet50 &lt;- cv.glmnet(x=Xtrain50, y=Ytrain50, family=&quot;mgaussian&quot;, alpha=1)
+cvfit_glmnet50 &lt;- cv.glmnet(x=Xtrain50, y=Ytrain50, family=&quot;mgaussian&quot;, alpha=1, standardize=FALSE)
 coeff_glmnet50 &lt;- coef(cvfit_glmnet50, s=&quot;lambda.min&quot;)
 Bhat_glmnet50 &lt;- matrix(as.numeric(NA), nrow=p, ncol=r)
 ahat_glmnet50 &lt;- vector(&quot;numeric&quot;, r)
@@ -1403,13 +1416,9 @@ Yhat_test_glmnet50 &lt;- drop(predict(cvfit_glmnet50, newx=Xtest50, s=&quot;lamb
 
 ###Fit mr.mash
 fit_mrmash50 &lt;- mr.mash(Xtrain50, Ytrain50, S0, tol=1e-2, convergence_criterion=&quot;ELBO&quot;, update_w0=TRUE, 
-                     update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=TRUE, verbose=FALSE, update_V=TRUE,
-                     mu1_init = Bhat_glmnet50, w0_threshold=1e-8)</code></pre>
-<pre><code>Processing the inputs... Done!
-Fitting the optimization algorithm... Done!
-Processing the outputs... Done!
-mr.mash successfully executed in 0.9589499 minutes!</code></pre>
-<pre class="r"><code>Yhat_test_mrmash50 &lt;- predict(fit_mrmash50, Xtest50)</code></pre>
+                     update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=FALSE, verbose=FALSE, update_V=TRUE,
+                     mu1_init = Bhat_glmnet50, w0_threshold=1e-8)
+Yhat_test_mrmash50 &lt;- predict(fit_mrmash50, Xtest50)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
                 0, 3, 3, 0,
@@ -1481,24 +1490,24 @@ fmorgante
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest50, Yhat_test_glmnet50)</code></pre>
 <pre><code>$bias
-[1] 1.199362 1.379444 1.076210 1.295043 1.261338
+[1] 1.195819 1.379157 1.080143 1.294941 1.253665
 
 $r2
-[1] 0.4138042 0.4650768 0.3838995 0.4621230 0.3903651
+[1] 0.4146822 0.4619715 0.3858639 0.4600377 0.3897421
 
 $mse
-[1] 55.85811 58.97457 58.10302 54.64713 64.96945</code></pre>
+[1] 55.76038 59.28675 57.89934 54.82581 64.95119</code></pre>
 <pre class="r"><code>print(&quot;Prediction performance with mr.mash&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with mr.mash&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest50, Yhat_test_mrmash50)</code></pre>
 <pre><code>$bias
-[1] 0.9598673 1.0442544 0.9326388 1.0081957 0.9972526
+[1] 0.9605322 1.0451756 0.9323631 1.0078177 0.9970912
 
 $r2
-[1] 0.4915822 0.5269943 0.4646516 0.5201747 0.4770788
+[1] 0.4932532 0.5287686 0.4657318 0.5208618 0.4758840
 
 $mse
-[1] 47.60989 49.10529 50.46953 46.69598 54.35184</code></pre>
+[1] 47.46795 48.93416 50.37683 46.62724 54.46268</code></pre>
 <pre class="r"><code>print(&quot;True V (full data)&quot;)</code></pre>
 <pre><code>[1] &quot;True V (full data)&quot;</code></pre>
 <pre class="r"><code>out50$V</code></pre>
@@ -1512,11 +1521,11 @@ $mse
 <pre><code>[1] &quot;Estimated V (training data)&quot;</code></pre>
 <pre class="r"><code>fit_mrmash50$V</code></pre>
 <pre><code>            Y1        Y2         Y3         Y4          Y5
-Y1 47.14100703  3.499271  1.8974135  0.6745678 -0.08287119
-Y2  3.49927140 48.523627 -2.3529618  2.7666402  1.33756992
-Y3  1.89741348 -2.352962 49.5967297  4.4538398 -0.95114634
-Y4  0.67456782  2.766640  4.4538398 54.2393501 -0.89130437
-Y5 -0.08287119  1.337570 -0.9511463 -0.8913044 51.07249272</code></pre>
+Y1 45.96214410  3.696660  2.0791487  0.6975673  0.04477361
+Y2  3.69666023 47.333638 -2.1948288  2.9340544  1.45354533
+Y3  2.07914867 -2.194829 48.2164300  4.4873530 -0.66300263
+Y4  0.69756732  2.934054  4.4873530 53.0158990 -0.72472854
+Y5  0.04477361  1.453545 -0.6630026 -0.7247285 50.22435028</code></pre>
 <p>The results of this simulation look very good in terms of prediction performance, estimation of the coefficients, and estimation of the residual covariance.</p>
 </div>
 <div id="dense-scenario-fewer-variables" class="section level3">
@@ -1550,7 +1559,7 @@ Ytest500 &lt;- out500$Y[test_set500, ]
 Xtest500 &lt;- out500$X[test_set500, ]
 
 ###Fit group-lasso
-cvfit_glmnet500 &lt;- cv.glmnet(x=Xtrain500, y=Ytrain500, family=&quot;mgaussian&quot;, alpha=1)
+cvfit_glmnet500 &lt;- cv.glmnet(x=Xtrain500, y=Ytrain500, family=&quot;mgaussian&quot;, alpha=1, standardize=FALSE)
 coeff_glmnet500 &lt;- coef(cvfit_glmnet500, s=&quot;lambda.min&quot;)
 Bhat_glmnet500 &lt;- matrix(as.numeric(NA), nrow=p, ncol=r)
 ahat_glmnet500 &lt;- vector(&quot;numeric&quot;, r)
@@ -1562,13 +1571,9 @@ Yhat_test_glmnet500 &lt;- drop(predict(cvfit_glmnet500, newx=Xtest500, s=&quot;l
 
 ###Fit mr.mash
 fit_mrmash500 &lt;- mr.mash(Xtrain500, Ytrain500, S0, tol=1e-2, convergence_criterion=&quot;ELBO&quot;, update_w0=TRUE, 
-                     update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=TRUE, verbose=FALSE, update_V=TRUE,
-                     mu1_init = Bhat_glmnet500, w0_threshold=1e-8)</code></pre>
-<pre><code>Processing the inputs... Done!
-Fitting the optimization algorithm... Done!
-Processing the outputs... Done!
-mr.mash successfully executed in 1.07149 minutes!</code></pre>
-<pre class="r"><code>Yhat_test_mrmash500 &lt;- predict(fit_mrmash500, Xtest500)</code></pre>
+                     update_w0_method=&quot;EM&quot;, compute_ELBO=TRUE, standardize=FALSE, verbose=FALSE, update_V=TRUE,
+                     mu1_init = Bhat_glmnet500, w0_threshold=1e-8)
+Yhat_test_mrmash500 &lt;- predict(fit_mrmash500, Xtest500)</code></pre>
 <pre class="r"><code>layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
                 0, 3, 3, 0,
@@ -1640,24 +1645,24 @@ fmorgante
 <pre><code>[1] &quot;Prediction performance with glmnet&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest500, Yhat_test_glmnet500)</code></pre>
 <pre><code>$bias
-[1] 1.1255548 1.1507096 1.2025003 1.1321183 0.9449982
+[1] 1.1135057 1.1448266 1.1831552 1.1210518 0.9469529
 
 $r2
-[1] 0.2456096 0.2086680 0.2525343 0.2178140 0.2241591
+[1] 0.2472891 0.2115488 0.2502438 0.2205002 0.2275750
 
 $mse
-[1] 243.5651 245.6349 248.0822 242.4490 213.1741</code></pre>
+[1] 242.8296 244.6767 248.4512 241.5001 212.1975</code></pre>
 <pre class="r"><code>print(&quot;Prediction performance with mr.mash&quot;)</code></pre>
 <pre><code>[1] &quot;Prediction performance with mr.mash&quot;</code></pre>
 <pre class="r"><code>compute_accuracy(Ytest500, Yhat_test_mrmash500)</code></pre>
 <pre><code>$bias
-[1] 0.9242366 0.9082153 0.9863245 0.9116667 0.8504277
+[1] 0.9457993 0.9275316 1.0052297 0.9303536 0.8669876
 
 $r2
-[1] 0.2367275 0.2421513 0.2639270 0.2373244 0.2482003
+[1] 0.2426038 0.2472925 0.2671149 0.2420950 0.2529487
 
 $mse
-[1] 244.4928 233.5644 242.0282 236.2430 207.8620</code></pre>
+[1] 242.3914 231.7617 240.9589 234.4983 206.0967</code></pre>
 <pre class="r"><code>print(&quot;True V (full data)&quot;)</code></pre>
 <pre><code>[1] &quot;True V (full data)&quot;</code></pre>
 <pre class="r"><code>out500$V</code></pre>
@@ -1671,11 +1676,11 @@ $mse
 <pre><code>[1] &quot;Estimated V (training data)&quot;</code></pre>
 <pre class="r"><code>fit_mrmash500$V</code></pre>
 <pre><code>          Y1         Y2        Y3         Y4         Y5
-Y1 183.39698  32.589382  29.23365  29.286564  34.280134
-Y2  32.58938 180.306943  32.29370   5.839094   7.604363
-Y3  29.23365  32.293700 195.98299  26.927416  27.605103
-Y4  29.28656   5.839094  26.92742 181.142905  27.707847
-Y5  34.28013   7.604363  27.60510  27.707847 168.922558</code></pre>
+Y1 183.04474  32.637629  28.99554  29.034766  34.112325
+Y2  32.63763 180.053159  32.29493   5.908755   7.772015
+Y3  28.99554  32.294929 197.99964  26.728751  27.351392
+Y4  29.03477   5.908755  26.72875 180.464744  27.574611
+Y5  34.11233   7.772015  27.35139  27.574611 169.668844</code></pre>
 <p>In this last simulation, we can see that <em>mr.mash</em> performs pretty well, even in a denser scenario with fewer variables.</p>
 <br>
 <p>
@@ -1705,21 +1710,21 @@ attached base packages:
 
 other attached packages:
 [1] glmnet_2.0-16        foreach_1.4.4        Matrix_1.2-15       
-[4] mr.mash.alpha_0.1-76
+[4] mr.mash.alpha_0.1-81
 
 loaded via a namespace (and not attached):
  [1] MBSP_1.0           Rcpp_1.0.4.6       compiler_3.5.1    
- [4] later_0.7.5        git2r_0.26.1       workflowr_1.6.1   
+ [4] later_0.7.5        git2r_0.26.1       workflowr_1.6.2   
  [7] iterators_1.0.10   tools_3.5.1        digest_0.6.25     
 [10] evaluate_0.12      lattice_0.20-38    GIGrvg_0.5        
-[13] yaml_2.2.1         SparseM_1.77       mvtnorm_1.0-12    
+[13] yaml_2.2.1         SparseM_1.77       mvtnorm_1.1-1     
 [16] coda_0.19-3        stringr_1.4.0      knitr_1.20        
 [19] fs_1.3.1           MatrixModels_0.4-1 rprojroot_1.3-2   
 [22] grid_3.5.1         glue_1.4.0         R6_2.4.1          
 [25] rmarkdown_1.10     mixsqp_0.3-43      irlba_2.3.3       
 [28] magrittr_1.5       whisker_0.3-2      codetools_0.2-15  
 [31] backports_1.1.5    promises_1.0.1     htmltools_0.3.6   
-[34] matrixStats_0.55.0 mcmc_0.9-6         MASS_7.3-51.1     
+[34] matrixStats_0.56.0 mcmc_0.9-6         MASS_7.3-51.1     
 [37] httpuv_1.4.5       quantreg_5.36      stringi_1.4.3     
 [40] MCMCpack_1.4-4    </code></pre>
 </div>
