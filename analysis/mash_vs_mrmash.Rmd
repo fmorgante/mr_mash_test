@@ -1,0 +1,275 @@
+---
+title: "mash vs mr.mash"
+author: "Fabio Morgante"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  workflowr::wflow_html:
+    toc: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r set opts, message=FALSE}
+library(mr.mash.alpha)
+library(glmnet)
+
+options(stringsAsFactors = FALSE)
+
+expand_cov <- function(mats, grid, zeromat=TRUE){
+  mats <- lapply(mats, normalize_cov)
+  U <- list()
+  nms <- vector("character")
+  t <- 0
+  for(i in 1:length(grid)){
+    for(j in 1:length(mats)){
+      t <- t+1
+      U[[t]] <- mats[[j]]*grid[i]
+      nms[t] <- paste0(names(mats)[j], "_grid", i) 
+    }
+  }
+  
+  if(zeromat){
+    zero_mat <- list(matrix(0, r, r))
+    U <- c(zero_mat, U)
+    nms <- c("null", nms)
+  }
+  
+  names(U) <- nms
+  
+  return(U)
+}
+normalize_cov <- function(U){
+  if(max(diag(U))!=0){
+    U = U/max(diag(U))
+  }
+  return(U)
+}
+
+nreps <- 10
+```
+
+### Shared effects among all responses.
+We want to investigate the similarities and differences of *mash* and *mr.mash*. We perform 10 simulations with n=600, p=1,000, p_causal=50, r=4, r_causal=4, PVE=0.5, shared effects (with variance 1), independent predictors (with variance 1), and independent residuals. In *mr.mash*, we are going to fix V to be diagonal estimated from the group-lasso solution. In *mash*, we are going to leave it as the default value. The prior is built using the canonical covariance matrices scaled by a grid computed from the summary statistics. In this scenario, we expect the two methods to perform pretty similarly.
+
+```{r shared effects simulations, results='hide'}
+full_res_shared <- vector("list", nreps)
+group_comparisons_shared <- vector("list", nreps)
+
+###Set parameters
+n <- 600
+p <- 1000
+p_causal <- 50
+r <- 4
+r_causal <- list(1:4)
+
+set.seed(1)
+
+for(rep_i in 1:nreps){
+  ###Simulate V, B, X and Y
+  out <- simulate_mr_mash_data(n, p, p_causal, r, r_causal, intercepts = rep(1, r),
+                               pve=0.5, B_cor=1, B_scale=1, X_cor=0, X_scale=1, V_cor=0)
+  colnames(out$Y) <- paste0("Y", seq(1, r))
+  rownames(out$Y) <- paste0("N", seq(1, n))
+  colnames(out$X) <- paste0("X", seq(1, p))
+  rownames(out$X) <- paste0("N", seq(1, n))
+  
+  ###Get the data
+  Y <- out$Y
+  X <- out$X
+  
+  ###Compute grid of variances
+  univ_sumstats <- compute_univariate_sumstats(X, Y, standardize=FALSE, standardize.response=FALSE)
+  grid <- autoselect.mixsd(univ_sumstats, mult=sqrt(2))^2
+  
+  ###Compute prior with only canonical matrices
+  S0_can <- compute_canonical_covs(ncol(Y), singletons=TRUE, hetgrid=c(0, 0.25, 0.5, 0.75, 1))
+  S0 <- expand_cov(S0_can, grid, zeromat=TRUE)
+  
+  ###Fit grop-lasso to initialize mr.mash
+  cvfit_glmnet <- cv.glmnet(x=X, y=Y, family="mgaussian", alpha=1, standardize=FALSE)
+  coeff_glmnet <- coef(cvfit_glmnet, s="lambda.min")
+  Bhat_glmnet <- matrix(as.numeric(NA), nrow=p, ncol=r)
+  for(i in 1:length(coeff_glmnet)){
+    Bhat_glmnet[, i] <- as.vector(coeff_glmnet[[i]])[-1]
+  }
+  prop_nonzero_glmnet <- sum(Bhat_glmnet[, 1]!=0)/p
+  
+  ###Fit mr.mash
+  w0 <- c((1-prop_nonzero_glmnet), rep(prop_nonzero_glmnet/(length(S0)-1), (length(S0)-1)))
+  
+  ##V diagonal fixed
+  fit_mrmash_fixVdiag <- mr.mash(X, Y, S0, w0=w0, update_w0=TRUE, update_w0_method="EM", tol=1e-2,
+                                 convergence_criterion="ELBO", compute_ELBO=TRUE, standardize=FALSE, 
+                                 verbose=FALSE, update_V=FALSE, update_V_method="diagonal", e=1e-8,
+                                 mu1_init=Bhat_glmnet, w0_threshold=0)
+  
+  ###Fit mash
+  data <- mashr::mash_set_data(univ_sumstats$Bhat, univ_sumstats$Shat)
+  m.c <- mashr::mash(data, S0_can, grid=sqrt(grid))
+  
+  ###Comparisons of groups of effects
+  singletons_ind <- grep("singleton", names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  independent_ind <- grep("independent", names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared025_ind <- grep("shared0.25", names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared05_ind <- grep("shared0.5", names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared075_ind <- grep("shared0.75", names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared1_ind <- grep("shared1", names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  
+  dat <- cbind(mash=mashr::get_estimated_pi(m.c, dimension="all"), mrmash=fit_mrmash_fixVdiag$w0)
+  
+  null <- dat[1, ]
+  singletons <- colSums(dat[singletons_ind, ])
+  independent <- colSums(dat[independent_ind, ])
+  shared025 <- colSums(dat[shared025_ind, ])
+  shared05 <- colSums(dat[shared05_ind, ])
+  shared075 <- colSums(dat[shared075_ind, ])
+  shared1 <- colSums(dat[shared1_ind, ])
+  
+  all_effects_comparison <- rbind(null, singletons, independent, shared025, shared05, shared075, shared1)
+  
+  ###Store the results
+  full_res_shared[[rep_i]] <- list(grid=grid, mash=mashr::get_estimated_pi(m.c, dimension="all"), mrmash=fit_mrmash_fixVdiag$w0)
+  group_comparisons_shared[[rep_i]] <- all_effects_comparison
+}
+```
+
+```{r shared effects results}
+group_comparisons_shared
+
+rep <- 1
+shared1_mash_index <- grep("shared1", names(full_res_shared[[rep]]$mash), fixed=TRUE)
+shared1_mrmash_index <- grep("shared1", names(full_res_shared[[rep]]$mrmash), fixed=TRUE)
+cbind(mash=full_res_shared[[rep]]$mash[shared1_mash_index], mrmash=full_res_shared[[rep]]$mrmash[shared1_mrmash_index])
+
+singleton_mrmash_index <- grep("singleton", names(full_res_shared[[rep]]$mrmash), fixed=TRUE)
+mrmash_singletons <- as.matrix(full_res_shared[[rep]]$mrmash[singleton_mrmash_index])
+colnames(mrmash_singletons) <- "mr.mash"
+mrmash_singletons
+
+cat("grid\n", grid, "\n")
+
+rep <- 3
+shared1_mash_index <- grep("shared1", names(full_res_shared[[rep]]$mash), fixed=TRUE)
+shared1_mrmash_index <- grep("shared1", names(full_res_shared[[rep]]$mrmash), fixed=TRUE)
+cbind(mash=full_res_shared[[rep]]$mash[shared1_mash_index], mrmash=full_res_shared[[rep]]$mrmash[shared1_mrmash_index])
+
+singleton_mrmash_index <- grep("singleton", names(full_res_shared[[rep]]$mrmash), fixed=TRUE)
+mrmash_singletons <- as.matrix(full_res_shared[[rep]]$mrmash[singleton_mrmash_index])
+colnames(mrmash_singletons) <- "mr.mash"
+mrmash_singletons
+
+cat("grid\n", grid, "\n")
+```
+Although the results may seem different at first, we can see that actually *mash* puts a lot of weight on shared matrices corresponding to small grid values. Also, *mr.mash* does something similar with the singletons (actually putting weight on very small grid values). So, in this scenario, the two methods perform pretty similarly.
+
+### Shared effects among 2 out of 4 responses.
+A more challenging scenario is the one where 2 out of 4 responses have shared effects, and the other 2 responses have no effect. It is more challenging because we are not providing the two methods with the covariance matrix that describes this pattern of sharing.
+
+```{r group-shared effects simulations, results='hide'}
+full_res_group_shared <- vector("list", nreps)
+group_comparisons_group_shared <- vector("list", nreps)
+
+###Set parameters
+n <- 600
+p <- 1000
+p_causal <- 50
+r <- 4
+r_causal <- list(1:2)
+
+set.seed(1)
+
+for(rep_i in 1:nreps){
+  ###Simulate V, B, X and Y
+  out <- simulate_mr_mash_data(n, p, p_causal, r, r_causal, intercepts = rep(1, r),
+                               pve=0.5, B_cor=1, B_scale=1, X_cor=0, X_scale=1, V_cor=0)
+  colnames(out$Y) <- paste0("Y", seq(1, r))
+  rownames(out$Y) <- paste0("N", seq(1, n))
+  colnames(out$X) <- paste0("X", seq(1, p))
+  rownames(out$X) <- paste0("N", seq(1, n))
+  
+  ###Get the data
+  Y <- out$Y
+  X <- out$X
+  
+  ###Compute grid of variances
+  univ_sumstats <- compute_univariate_sumstats(X, Y, standardize=FALSE, standardize.response=FALSE)
+  grid <- autoselect.mixsd(univ_sumstats, mult=sqrt(2))^2
+  
+  ###Compute prior with only canonical matrices
+  S0_can <- compute_canonical_covs(ncol(Y), singletons=TRUE, hetgrid=c(0, 0.25, 0.5, 0.75, 1))
+  S0 <- expand_cov(S0_can, grid, zeromat=TRUE)
+  
+  ###Fit grop-lasso to initialize mr.mash
+  cvfit_glmnet <- cv.glmnet(x=X, y=Y, family="mgaussian", alpha=1, standardize=FALSE)
+  coeff_glmnet <- coef(cvfit_glmnet, s="lambda.min")
+  Bhat_glmnet <- matrix(as.numeric(NA), nrow=p, ncol=r)
+  for(i in 1:length(coeff_glmnet)){
+    Bhat_glmnet[, i] <- as.vector(coeff_glmnet[[i]])[-1]
+  }
+  prop_nonzero_glmnet <- sum(Bhat_glmnet[, 1]!=0)/p
+  
+  ###Fit mr.mash
+  w0 <- c((1-prop_nonzero_glmnet), rep(prop_nonzero_glmnet/(length(S0)-1), (length(S0)-1)))
+  
+  ##V diagonal fixed
+  fit_mrmash_fixVdiag <- mr.mash(X, Y, S0, w0=w0, update_w0=TRUE, update_w0_method="EM", tol=1e-2,
+                                 convergence_criterion="ELBO", compute_ELBO=TRUE, standardize=FALSE, 
+                                 verbose=FALSE, update_V=FALSE, update_V_method="diagonal", e=1e-8,
+                                 mu1_init=Bhat_glmnet, w0_threshold=0)
+  
+  ###Fit mash
+  data <- mashr::mash_set_data(univ_sumstats$Bhat, univ_sumstats$Shat)
+  m.c <- mashr::mash(data, S0_can, grid=sqrt(grid))
+  
+  ###Comparisons of groups of effects
+  singletons_ind <- grep("singleton", names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  independent_ind <- grep("independent", names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared025_ind <- grep("shared0.25", names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared05_ind <- grep("shared0.5", names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared075_ind <- grep("shared0.75", names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared1_ind <- grep("shared1", names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  
+  dat <- cbind(mash=mashr::get_estimated_pi(m.c, dimension="all"), mrmash=fit_mrmash_fixVdiag$w0)
+  
+  null <- dat[1, ]
+  singletons <- colSums(dat[singletons_ind, ])
+  independent <- colSums(dat[independent_ind, ])
+  shared025 <- colSums(dat[shared025_ind, ])
+  shared05 <- colSums(dat[shared05_ind, ])
+  shared075 <- colSums(dat[shared075_ind, ])
+  shared1 <- colSums(dat[shared1_ind, ])
+  
+  all_effects_comparison <- rbind(null, singletons, independent, shared025, shared05, shared075, shared1)
+  
+  ###Store the results
+  full_res_group_shared[[rep_i]] <- list(grid=grid, mash=mashr::get_estimated_pi(m.c, dimension="all"), mrmash=fit_mrmash_fixVdiag$w0)
+  group_comparisons_group_shared[[rep_i]] <- all_effects_comparison
+}
+```
+
+```{r group-shared effects results}
+group_comparisons_group_shared
+
+rep <- 1
+shared1_mash_index <- grep("shared1", names(full_res_group_shared[[rep]]$mash), fixed=TRUE)
+shared1_mrmash_index <- grep("shared1", names(full_res_group_shared[[rep]]$mrmash), fixed=TRUE)
+cbind(mash=full_res_group_shared[[rep]]$mash[shared1_mash_index], mrmash=full_res_group_shared[[rep]]$mrmash[shared1_mrmash_index])
+
+singleton_mash_index <- grep("singleton", names(full_res_group_shared[[rep]]$mash), fixed=TRUE)
+singleton_mrmash_index <- grep("singleton", names(full_res_group_shared[[rep]]$mrmash), fixed=TRUE)
+cbind(mash=full_res_group_shared[[rep]]$mash[singleton_mash_index], mrmash=full_res_group_shared[[rep]]$mrmash[singleton_mrmash_index])
+
+cat("grid\n", grid, "\n")
+
+rep <- 3
+shared1_mash_index <- grep("shared1", names(full_res_group_shared[[rep]]$mash), fixed=TRUE)
+shared1_mrmash_index <- grep("shared1", names(full_res_group_shared[[rep]]$mrmash), fixed=TRUE)
+cbind(mash=full_res_group_shared[[rep]]$mash[shared1_mash_index], mrmash=full_res_group_shared[[rep]]$mrmash[shared1_mrmash_index])
+
+singleton_mash_index <- grep("singleton", names(full_res_group_shared[[rep]]$mash), fixed=TRUE)
+singleton_mrmash_index <- grep("singleton", names(full_res_group_shared[[rep]]$mrmash), fixed=TRUE)
+cbind(mash=full_res_group_shared[[rep]]$mash[singleton_mash_index], mrmash=full_res_group_shared[[rep]]$mrmash[singleton_mrmash_index])
+
+cat("grid\n", grid, "\n")
+```
+Again, the two methods seem to perform similarly by trying to "reconstruct" the that pattern of sharing by using singleton matrices, and loading on other matrices only with very small or small grid values  
