@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Fabio Morgante" />
+
+<meta name="date" content="2020-07-01" />
+
+<title>mash vs mr.mash</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">mr_mash_test</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/fmorgante/mr_mash_test">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">mash vs mr.mash</h1>
+<h4 class="author"><em>Fabio Morgante</em></h4>
+<h4 class="date"><em>July 01, 2020</em></h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2020-07-01
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>mr_mash_test/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200328code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200328)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200328code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200328)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree29d5be51934b08cdd45e2af73cb07603a868e2ebtargetblank29d5be5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/29d5be51934b08cdd45e2af73cb07603a868e2eb" target="_blank">29d5be5</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree29d5be51934b08cdd45e2af73cb07603a868e2ebtargetblank29d5be5a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/29d5be51934b08cdd45e2af73cb07603a868e2eb" target="_blank">29d5be5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .sos/
+    Ignored:    code/fit_mr_mash.66662433.err
+    Ignored:    code/fit_mr_mash.66662433.out
+    Ignored:    dsc/.sos/
+    Ignored:    dsc/outfiles/
+    Ignored:    output/dsc.html
+    Ignored:    output/dsc/
+    Ignored:    output/dsc_05_18_20.html
+    Ignored:    output/dsc_05_18_20/
+    Ignored:    output/dsc_05_29_20.html
+    Ignored:    output/dsc_05_29_20/
+    Ignored:    output/dsc_OLD.html
+    Ignored:    output/dsc_OLD/
+    Ignored:    output/dsc_test.html
+    Ignored:    output/dsc_test/
+    Ignored:    output/test_dense_issue.rds
+    Ignored:    output/test_sparse_issue.rds
+
+Untracked files:
+    Untracked:  analysis/dense_issue_investigation2/
+    Untracked:  code/plot_test.R
+
+Unstaged changes:
+    Modified:   dsc/midway2.yml
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/mash_vs_mrmash.Rmd</code>) and HTML (<code>docs/mash_vs_mrmash.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/29d5be51934b08cdd45e2af73cb07603a868e2eb/analysis/mash_vs_mrmash.Rmd" target="_blank">29d5be5</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-07-01
+</td>
+<td>
+Add mash vs mr.mash comparison
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<pre class="r"><code>library(mr.mash.alpha)
+library(glmnet)
+
+options(stringsAsFactors = FALSE)
+
+expand_cov &lt;- function(mats, grid, zeromat=TRUE){
+  mats &lt;- lapply(mats, normalize_cov)
+  U &lt;- list()
+  nms &lt;- vector(&quot;character&quot;)
+  t &lt;- 0
+  for(i in 1:length(grid)){
+    for(j in 1:length(mats)){
+      t &lt;- t+1
+      U[[t]] &lt;- mats[[j]]*grid[i]
+      nms[t] &lt;- paste0(names(mats)[j], &quot;_grid&quot;, i) 
+    }
+  }
+  
+  if(zeromat){
+    zero_mat &lt;- list(matrix(0, r, r))
+    U &lt;- c(zero_mat, U)
+    nms &lt;- c(&quot;null&quot;, nms)
+  }
+  
+  names(U) &lt;- nms
+  
+  return(U)
+}
+normalize_cov &lt;- function(U){
+  if(max(diag(U))!=0){
+    U = U/max(diag(U))
+  }
+  return(U)
+}
+
+nreps &lt;- 10</code></pre>
+<div id="shared-effects-among-all-responses." class="section level3">
+<h3>Shared effects among all responses.</h3>
+<p>We want to investigate the similarities and differences of <em>mash</em> and <em>mr.mash</em>. We perform 10 simulations with n=600, p=1,000, p_causal=50, r=4, r_causal=4, PVE=0.5, shared effects (with variance 1), independent predictors (with variance 1), and independent residuals. In <em>mr.mash</em>, we are going to fix V to be diagonal estimated from the group-lasso solution. In <em>mash</em>, we are going to leave it as the default value. The prior is built using the canonical covariance matrices scaled by a grid computed from the summary statistics. In this scenario, we expect the two methods to perform pretty similarly.</p>
+<pre class="r"><code>full_res_shared &lt;- vector(&quot;list&quot;, nreps)
+group_comparisons_shared &lt;- vector(&quot;list&quot;, nreps)
+
+###Set parameters
+n &lt;- 600
+p &lt;- 1000
+p_causal &lt;- 50
+r &lt;- 4
+r_causal &lt;- list(1:4)
+
+set.seed(1)
+
+for(rep_i in 1:nreps){
+  ###Simulate V, B, X and Y
+  out &lt;- simulate_mr_mash_data(n, p, p_causal, r, r_causal, intercepts = rep(1, r),
+                               pve=0.5, B_cor=1, B_scale=1, X_cor=0, X_scale=1, V_cor=0)
+  colnames(out$Y) &lt;- paste0(&quot;Y&quot;, seq(1, r))
+  rownames(out$Y) &lt;- paste0(&quot;N&quot;, seq(1, n))
+  colnames(out$X) &lt;- paste0(&quot;X&quot;, seq(1, p))
+  rownames(out$X) &lt;- paste0(&quot;N&quot;, seq(1, n))
+  
+  ###Get the data
+  Y &lt;- out$Y
+  X &lt;- out$X
+  
+  ###Compute grid of variances
+  univ_sumstats &lt;- compute_univariate_sumstats(X, Y, standardize=FALSE, standardize.response=FALSE)
+  grid &lt;- autoselect.mixsd(univ_sumstats, mult=sqrt(2))^2
+  
+  ###Compute prior with only canonical matrices
+  S0_can &lt;- compute_canonical_covs(ncol(Y), singletons=TRUE, hetgrid=c(0, 0.25, 0.5, 0.75, 1))
+  S0 &lt;- expand_cov(S0_can, grid, zeromat=TRUE)
+  
+  ###Fit grop-lasso to initialize mr.mash
+  cvfit_glmnet &lt;- cv.glmnet(x=X, y=Y, family=&quot;mgaussian&quot;, alpha=1, standardize=FALSE)
+  coeff_glmnet &lt;- coef(cvfit_glmnet, s=&quot;lambda.min&quot;)
+  Bhat_glmnet &lt;- matrix(as.numeric(NA), nrow=p, ncol=r)
+  for(i in 1:length(coeff_glmnet)){
+    Bhat_glmnet[, i] &lt;- as.vector(coeff_glmnet[[i]])[-1]
+  }
+  prop_nonzero_glmnet &lt;- sum(Bhat_glmnet[, 1]!=0)/p
+  
+  ###Fit mr.mash
+  w0 &lt;- c((1-prop_nonzero_glmnet), rep(prop_nonzero_glmnet/(length(S0)-1), (length(S0)-1)))
+  
+  ##V diagonal fixed
+  fit_mrmash_fixVdiag &lt;- mr.mash(X, Y, S0, w0=w0, update_w0=TRUE, update_w0_method=&quot;EM&quot;, tol=1e-2,
+                                 convergence_criterion=&quot;ELBO&quot;, compute_ELBO=TRUE, standardize=FALSE, 
+                                 verbose=FALSE, update_V=FALSE, update_V_method=&quot;diagonal&quot;, e=1e-8,
+                                 mu1_init=Bhat_glmnet, w0_threshold=0)
+  
+  ###Fit mash
+  data &lt;- mashr::mash_set_data(univ_sumstats$Bhat, univ_sumstats$Shat)
+  m.c &lt;- mashr::mash(data, S0_can, grid=sqrt(grid))
+  
+  ###Comparisons of groups of effects
+  singletons_ind &lt;- grep(&quot;singleton&quot;, names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  independent_ind &lt;- grep(&quot;independent&quot;, names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared025_ind &lt;- grep(&quot;shared0.25&quot;, names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared05_ind &lt;- grep(&quot;shared0.5&quot;, names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared075_ind &lt;- grep(&quot;shared0.75&quot;, names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared1_ind &lt;- grep(&quot;shared1&quot;, names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  
+  dat &lt;- cbind(mash=mashr::get_estimated_pi(m.c, dimension=&quot;all&quot;), mrmash=fit_mrmash_fixVdiag$w0)
+  
+  null &lt;- dat[1, ]
+  singletons &lt;- colSums(dat[singletons_ind, ])
+  independent &lt;- colSums(dat[independent_ind, ])
+  shared025 &lt;- colSums(dat[shared025_ind, ])
+  shared05 &lt;- colSums(dat[shared05_ind, ])
+  shared075 &lt;- colSums(dat[shared075_ind, ])
+  shared1 &lt;- colSums(dat[shared1_ind, ])
+  
+  all_effects_comparison &lt;- rbind(null, singletons, independent, shared025, shared05, shared075, shared1)
+  
+  ###Store the results
+  full_res_shared[[rep_i]] &lt;- list(grid=grid, mash=mashr::get_estimated_pi(m.c, dimension=&quot;all&quot;), mrmash=fit_mrmash_fixVdiag$w0)
+  group_comparisons_shared[[rep_i]] &lt;- all_effects_comparison
+}</code></pre>
+<pre class="r"><code>group_comparisons_shared</code></pre>
+<pre><code>[[1]]
+                 mash      mrmash
+null        0.3203207 0.847288006
+singletons  0.0000000 0.061298544
+independent 0.0000000 0.016330294
+shared025   0.0000000 0.008036514
+shared05    0.0000000 0.005098362
+shared075   0.0000000 0.003941879
+shared1     0.6796793 0.058006401
+
+[[2]]
+                 mash      mrmash
+null        0.2572289 0.922606349
+singletons  0.0000000 0.017194090
+independent 0.0000000 0.002717724
+shared025   0.0000000 0.002539932
+shared05    0.0000000 0.002407017
+shared075   0.0000000 0.002368227
+shared1     0.7427711 0.050166661
+
+[[3]]
+                 mash      mrmash
+null        0.3378258 0.873236721
+singletons  0.0000000 0.044649670
+independent 0.0000000 0.018078807
+shared025   0.0000000 0.006592893
+shared05    0.0000000 0.004672244
+shared075   0.0000000 0.003791388
+shared1     0.6621742 0.048978276
+
+[[4]]
+                 mash      mrmash
+null        0.4046104 0.906739011
+singletons  0.0000000 0.028501028
+independent 0.0000000 0.005621662
+shared025   0.0000000 0.005010965
+shared05    0.0000000 0.004578317
+shared075   0.0000000 0.004349040
+shared1     0.5953896 0.045199977
+
+[[5]]
+                 mash      mrmash
+null        0.3018341 0.880891633
+singletons  0.0000000 0.044027095
+independent 0.0000000 0.010383494
+shared025   0.0000000 0.006298904
+shared05    0.0000000 0.004694742
+shared075   0.0000000 0.003832044
+shared1     0.6981659 0.049872088
+
+[[6]]
+                 mash      mrmash
+null        0.3373425 0.782871694
+singletons  0.0000000 0.097994362
+independent 0.0000000 0.059053279
+shared025   0.0000000 0.010218952
+shared05    0.0000000 0.005557823
+shared075   0.0000000 0.003964605
+shared1     0.6626575 0.040339285
+
+[[7]]
+                mash      mrmash
+null        0.309217 0.854329405
+singletons  0.000000 0.050048131
+independent 0.000000 0.014290657
+shared025   0.000000 0.008001796
+shared05    0.000000 0.006456471
+shared075   0.000000 0.010226956
+shared1     0.690783 0.056646584
+
+[[8]]
+                 mash      mrmash
+null        0.2859918 0.895000474
+singletons  0.0000000 0.031510463
+independent 0.0000000 0.004925320
+shared025   0.0000000 0.004696887
+shared05    0.0000000 0.004603444
+shared075   0.0000000 0.004984347
+shared1     0.7140082 0.054279065
+
+[[9]]
+                 mash      mrmash
+null        0.3262577 0.935774421
+singletons  0.0000000 0.014894461
+independent 0.0000000 0.002687344
+shared025   0.0000000 0.002538386
+shared05    0.0000000 0.002396007
+shared075   0.0000000 0.002263794
+shared1     0.6737423 0.039445586
+
+[[10]]
+                 mash      mrmash
+null        0.3724092 0.850286737
+singletons  0.0000000 0.073581639
+independent 0.0000000 0.013227545
+shared025   0.0000000 0.005778783
+shared05    0.0000000 0.004094717
+shared075   0.0000000 0.003203485
+shared1     0.6275908 0.049827094</code></pre>
+<pre class="r"><code>rep &lt;- 1
+shared1_mash_index &lt;- grep(&quot;shared1&quot;, names(full_res_shared[[rep]]$mash), fixed=TRUE)
+shared1_mrmash_index &lt;- grep(&quot;shared1&quot;, names(full_res_shared[[rep]]$mrmash), fixed=TRUE)
+cbind(mash=full_res_shared[[rep]]$mash[shared1_mash_index], mrmash=full_res_shared[[rep]]$mrmash[shared1_mrmash_index])</code></pre>
+<pre><code>                 mash       mrmash
+shared1.1  0.00000000 1.199888e-03
+shared1.2  0.00000000 9.150010e-04
+shared1.3  0.00000000 5.433266e-04
+shared1.4  0.00000000 2.111343e-04
+shared1.5  0.00000000 4.853021e-05
+shared1.6  0.00000000 1.022390e-05
+shared1.7  0.30916626 7.399424e-06
+shared1.8  0.32766242 5.306570e-05
+shared1.9  0.00000000 1.684667e-03
+shared1.10 0.00000000 2.215773e-02
+shared1.11 0.04285059 2.813144e-02
+shared1.12 0.00000000 3.041521e-03
+shared1.13 0.00000000 2.474187e-06
+shared1.14 0.00000000 6.545393e-12
+shared1.15 0.00000000 3.066194e-16
+shared1.16 0.00000000 1.677825e-16</code></pre>
+<pre class="r"><code>singleton_mrmash_index &lt;- grep(&quot;singleton&quot;, names(full_res_shared[[rep]]$mrmash), fixed=TRUE)
+mrmash_singletons &lt;- as.matrix(full_res_shared[[rep]]$mrmash[singleton_mrmash_index])
+colnames(mrmash_singletons) &lt;- &quot;mr.mash&quot;
+mrmash_singletons</code></pre>
+<pre><code>                       mr.mash
+singleton1_grid1  1.605991e-03
+singleton2_grid1  1.602982e-03
+singleton3_grid1  1.581394e-03
+singleton4_grid1  1.595225e-03
+singleton1_grid2  1.628144e-03
+singleton2_grid2  1.622513e-03
+singleton3_grid2  1.578508e-03
+singleton4_grid2  1.608383e-03
+singleton1_grid3  1.669894e-03
+singleton2_grid3  1.660179e-03
+singleton3_grid3  1.568911e-03
+singleton4_grid3  1.637407e-03
+singleton1_grid4  1.743112e-03
+singleton2_grid4  1.729936e-03
+singleton3_grid4  1.534967e-03
+singleton4_grid4  1.705922e-03
+singleton1_grid5  1.848176e-03
+singleton2_grid5  1.848463e-03
+singleton3_grid5  1.415075e-03
+singleton4_grid5  1.882556e-03
+singleton1_grid6  1.895308e-03
+singleton2_grid6  2.022816e-03
+singleton3_grid6  1.047953e-03
+singleton4_grid6  2.380027e-03
+singleton1_grid7  1.471954e-03
+singleton2_grid7  2.293878e-03
+singleton3_grid7  3.739509e-04
+singleton4_grid7  3.786255e-03
+singleton1_grid8  3.644497e-04
+singleton2_grid8  2.899588e-03
+singleton3_grid8  1.900740e-05
+singleton4_grid8  5.718521e-03
+singleton1_grid9  4.569486e-06
+singleton2_grid9  2.191265e-03
+singleton3_grid9  2.418008e-08
+singleton4_grid9  1.682016e-03
+singleton1_grid10 5.013887e-10
+singleton2_grid10 7.209455e-05
+singleton3_grid10 2.753999e-13
+singleton4_grid10 7.117995e-06
+singleton1_grid11 8.376134e-16
+singleton2_grid11 9.422352e-09
+singleton3_grid11 2.858790e-16
+singleton4_grid11 1.213237e-10
+singleton1_grid12 2.177151e-16
+singleton2_grid12 6.527713e-15
+singleton3_grid12 1.625995e-16
+singleton4_grid12 3.532881e-16
+singleton1_grid13 1.274597e-16
+singleton2_grid13 2.242013e-16
+singleton3_grid13 9.914684e-17
+singleton4_grid13 1.812530e-16
+singleton1_grid14 7.940255e-17
+singleton2_grid14 1.296163e-16
+singleton3_grid14 6.333439e-17
+singleton4_grid14 1.080391e-16
+singleton1_grid15 5.150367e-17
+singleton2_grid15 8.030402e-17
+singleton3_grid15 4.174786e-17
+singleton4_grid15 6.819531e-17
+singleton1_grid16 3.431721e-17
+singleton2_grid16 5.195392e-17
+singleton3_grid16 2.811397e-17
+singleton4_grid16 4.464824e-17</code></pre>
+<pre class="r"><code>cat(&quot;grid\n&quot;, grid, &quot;\n&quot;)</code></pre>
+<pre><code>grid
+ 0.0007870123 0.001574025 0.003148049 0.006296098 0.0125922 0.02518439 0.05036879 0.1007376 0.2014751 0.4029503 0.8059006 1.611801 3.223602 6.447205 12.89441 25.78882 </code></pre>
+<pre class="r"><code>rep &lt;- 3
+shared1_mash_index &lt;- grep(&quot;shared1&quot;, names(full_res_shared[[rep]]$mash), fixed=TRUE)
+shared1_mrmash_index &lt;- grep(&quot;shared1&quot;, names(full_res_shared[[rep]]$mrmash), fixed=TRUE)
+cbind(mash=full_res_shared[[rep]]$mash[shared1_mash_index], mrmash=full_res_shared[[rep]]$mrmash[shared1_mrmash_index])</code></pre>
+<pre><code>                 mash       mrmash
+shared1.1  0.00000000 1.160198e-03
+shared1.2  0.00000000 9.770173e-04
+shared1.3  0.00000000 6.810810e-04
+shared1.4  0.00000000 3.185969e-04
+shared1.5  0.00000000 7.045753e-05
+shared1.6  0.00000000 6.288780e-06
+shared1.7  0.44821466 7.102922e-07
+shared1.8  0.17299465 1.249491e-06
+shared1.9  0.00000000 5.283854e-05
+shared1.10 0.00000000 3.682222e-03
+shared1.11 0.04096485 3.749967e-02
+shared1.12 0.00000000 4.527139e-03
+shared1.13 0.00000000 8.027861e-07
+shared1.14 0.00000000 3.065601e-13
+shared1.15 0.00000000 2.676584e-16
+shared1.16 0.00000000 1.499550e-16</code></pre>
+<pre class="r"><code>singleton_mrmash_index &lt;- grep(&quot;singleton&quot;, names(full_res_shared[[rep]]$mrmash), fixed=TRUE)
+mrmash_singletons &lt;- as.matrix(full_res_shared[[rep]]$mrmash[singleton_mrmash_index])
+colnames(mrmash_singletons) &lt;- &quot;mr.mash&quot;
+mrmash_singletons</code></pre>
+<pre><code>                       mr.mash
+singleton1_grid1  1.404434e-03
+singleton2_grid1  1.342123e-03
+singleton3_grid1  1.383597e-03
+singleton4_grid1  1.367811e-03
+singleton1_grid2  1.441948e-03
+singleton2_grid2  1.317579e-03
+singleton3_grid2  1.399932e-03
+singleton4_grid2  1.368160e-03
+singleton1_grid3  1.518280e-03
+singleton2_grid3  1.270515e-03
+singleton3_grid3  1.432994e-03
+singleton4_grid3  1.368692e-03
+singleton1_grid4  1.674964e-03
+singleton2_grid4  1.183315e-03
+singleton3_grid4  1.500435e-03
+singleton4_grid4  1.369075e-03
+singleton1_grid5  1.993313e-03
+singleton2_grid5  1.029535e-03
+singleton3_grid5  1.638289e-03
+singleton4_grid5  1.366693e-03
+singleton1_grid6  2.547934e-03
+singleton2_grid6  7.719050e-04
+singleton3_grid6  1.904714e-03
+singleton4_grid6  1.343177e-03
+singleton1_grid7  2.721278e-03
+singleton2_grid7  3.820672e-04
+singleton3_grid7  2.226894e-03
+singleton4_grid7  1.180342e-03
+singleton1_grid8  8.428067e-04
+singleton2_grid8  5.203269e-05
+singleton3_grid8  1.581478e-03
+singleton4_grid8  5.537255e-04
+singleton1_grid9  8.836198e-06
+singleton2_grid9  3.100257e-07
+singleton3_grid9  1.318769e-04
+singleton4_grid9  2.847388e-05
+singleton1_grid10 4.819858e-10
+singleton2_grid10 1.353526e-11
+singleton3_grid10 1.180123e-07
+singleton4_grid10 1.666166e-08
+singleton1_grid11 5.432036e-16
+singleton2_grid11 3.662664e-16
+singleton3_grid11 3.877412e-13
+singleton4_grid11 4.155593e-14
+singleton1_grid12 2.164633e-16
+singleton2_grid12 1.990798e-16
+singleton3_grid12 2.909470e-16
+singleton4_grid12 2.730875e-16
+singleton1_grid13 1.266512e-16
+singleton2_grid13 1.185585e-16
+singleton3_grid13 1.628031e-16
+singleton4_grid13 1.550296e-16
+singleton1_grid14 7.890356e-17
+singleton2_grid14 7.455615e-17
+singleton3_grid14 9.865637e-17
+singleton4_grid14 9.465811e-17
+singleton1_grid15 5.119002e-17
+singleton2_grid15 4.863013e-17
+singleton3_grid15 6.287183e-17
+singleton4_grid15 6.058649e-17
+singleton1_grid16 3.411483e-17
+singleton2_grid16 3.251511e-17
+singleton3_grid16 4.140690e-17
+singleton4_grid16 4.000810e-17</code></pre>
+<pre class="r"><code>cat(&quot;grid\n&quot;, grid, &quot;\n&quot;)</code></pre>
+<pre><code>grid
+ 0.0007870123 0.001574025 0.003148049 0.006296098 0.0125922 0.02518439 0.05036879 0.1007376 0.2014751 0.4029503 0.8059006 1.611801 3.223602 6.447205 12.89441 25.78882 </code></pre>
+<p>Although the results may seem different at first, we can see that actually <em>mash</em> puts a lot of weight on shared matrices corresponding to small grid values. Also, <em>mr.mash</em> does something similar with the singletons (actually putting weight on very small grid values). So, in this scenario, the two methods perform pretty similarly.</p>
+</div>
+<div id="shared-effects-among-2-out-of-4-responses." class="section level3">
+<h3>Shared effects among 2 out of 4 responses.</h3>
+<p>A more challenging scenario is the one where 2 out of 4 responses have shared effects, and the other 2 responses have no effect. It is more challenging because we are not providing the two methods with the covariance matrix that describes this pattern of sharing.</p>
+<pre class="r"><code>full_res_group_shared &lt;- vector(&quot;list&quot;, nreps)
+group_comparisons_group_shared &lt;- vector(&quot;list&quot;, nreps)
+
+###Set parameters
+n &lt;- 600
+p &lt;- 1000
+p_causal &lt;- 50
+r &lt;- 4
+r_causal &lt;- list(1:2)
+
+set.seed(1)
+
+for(rep_i in 1:nreps){
+  ###Simulate V, B, X and Y
+  out &lt;- simulate_mr_mash_data(n, p, p_causal, r, r_causal, intercepts = rep(1, r),
+                               pve=0.5, B_cor=1, B_scale=1, X_cor=0, X_scale=1, V_cor=0)
+  colnames(out$Y) &lt;- paste0(&quot;Y&quot;, seq(1, r))
+  rownames(out$Y) &lt;- paste0(&quot;N&quot;, seq(1, n))
+  colnames(out$X) &lt;- paste0(&quot;X&quot;, seq(1, p))
+  rownames(out$X) &lt;- paste0(&quot;N&quot;, seq(1, n))
+  
+  ###Get the data
+  Y &lt;- out$Y
+  X &lt;- out$X
+  
+  ###Compute grid of variances
+  univ_sumstats &lt;- compute_univariate_sumstats(X, Y, standardize=FALSE, standardize.response=FALSE)
+  grid &lt;- autoselect.mixsd(univ_sumstats, mult=sqrt(2))^2
+  
+  ###Compute prior with only canonical matrices
+  S0_can &lt;- compute_canonical_covs(ncol(Y), singletons=TRUE, hetgrid=c(0, 0.25, 0.5, 0.75, 1))
+  S0 &lt;- expand_cov(S0_can, grid, zeromat=TRUE)
+  
+  ###Fit grop-lasso to initialize mr.mash
+  cvfit_glmnet &lt;- cv.glmnet(x=X, y=Y, family=&quot;mgaussian&quot;, alpha=1, standardize=FALSE)
+  coeff_glmnet &lt;- coef(cvfit_glmnet, s=&quot;lambda.min&quot;)
+  Bhat_glmnet &lt;- matrix(as.numeric(NA), nrow=p, ncol=r)
+  for(i in 1:length(coeff_glmnet)){
+    Bhat_glmnet[, i] &lt;- as.vector(coeff_glmnet[[i]])[-1]
+  }
+  prop_nonzero_glmnet &lt;- sum(Bhat_glmnet[, 1]!=0)/p
+  
+  ###Fit mr.mash
+  w0 &lt;- c((1-prop_nonzero_glmnet), rep(prop_nonzero_glmnet/(length(S0)-1), (length(S0)-1)))
+  
+  ##V diagonal fixed
+  fit_mrmash_fixVdiag &lt;- mr.mash(X, Y, S0, w0=w0, update_w0=TRUE, update_w0_method=&quot;EM&quot;, tol=1e-2,
+                                 convergence_criterion=&quot;ELBO&quot;, compute_ELBO=TRUE, standardize=FALSE, 
+                                 verbose=FALSE, update_V=FALSE, update_V_method=&quot;diagonal&quot;, e=1e-8,
+                                 mu1_init=Bhat_glmnet, w0_threshold=0)
+  
+  ###Fit mash
+  data &lt;- mashr::mash_set_data(univ_sumstats$Bhat, univ_sumstats$Shat)
+  m.c &lt;- mashr::mash(data, S0_can, grid=sqrt(grid))
+  
+  ###Comparisons of groups of effects
+  singletons_ind &lt;- grep(&quot;singleton&quot;, names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  independent_ind &lt;- grep(&quot;independent&quot;, names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared025_ind &lt;- grep(&quot;shared0.25&quot;, names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared05_ind &lt;- grep(&quot;shared0.5&quot;, names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared075_ind &lt;- grep(&quot;shared0.75&quot;, names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  shared1_ind &lt;- grep(&quot;shared1&quot;, names(fit_mrmash_fixVdiag$w0), fixed=TRUE)
+  
+  dat &lt;- cbind(mash=mashr::get_estimated_pi(m.c, dimension=&quot;all&quot;), mrmash=fit_mrmash_fixVdiag$w0)
+  
+  null &lt;- dat[1, ]
+  singletons &lt;- colSums(dat[singletons_ind, ])
+  independent &lt;- colSums(dat[independent_ind, ])
+  shared025 &lt;- colSums(dat[shared025_ind, ])
+  shared05 &lt;- colSums(dat[shared05_ind, ])
+  shared075 &lt;- colSums(dat[shared075_ind, ])
+  shared1 &lt;- colSums(dat[shared1_ind, ])
+  
+  all_effects_comparison &lt;- rbind(null, singletons, independent, shared025, shared05, shared075, shared1)
+  
+  ###Store the results
+  full_res_group_shared[[rep_i]] &lt;- list(grid=grid, mash=mashr::get_estimated_pi(m.c, dimension=&quot;all&quot;), mrmash=fit_mrmash_fixVdiag$w0)
+  group_comparisons_group_shared[[rep_i]] &lt;- all_effects_comparison
+}</code></pre>
+<pre class="r"><code>group_comparisons_group_shared</code></pre>
+<pre><code>[[1]]
+                   mash      mrmash
+null        0.928297926 0.835234132
+singletons  0.070340597 0.135150081
+independent 0.000000000 0.006228629
+shared025   0.000000000 0.010212117
+shared05    0.001361478 0.005156761
+shared075   0.000000000 0.004126225
+shared1     0.000000000 0.003892056
+
+[[2]]
+                   mash      mrmash
+null        0.879285762 0.902022278
+singletons  0.114912059 0.068097698
+independent 0.000000000 0.004263393
+shared025   0.000000000 0.011555071
+shared05    0.005802179 0.006769539
+shared075   0.000000000 0.003752222
+shared1     0.000000000 0.003539799
+
+[[3]]
+                   mash      mrmash
+null        0.863169360 0.810863304
+singletons  0.099972880 0.142764905
+independent 0.000000000 0.006410659
+shared025   0.005613535 0.012886874
+shared05    0.000000000 0.009983555
+shared075   0.000000000 0.008262143
+shared1     0.031244224 0.008828560
+
+[[4]]
+                  mash      mrmash
+null        0.87588445 0.805589180
+singletons  0.09796843 0.140965201
+independent 0.00000000 0.007195538
+shared025   0.00452016 0.017890762
+shared05    0.00000000 0.009910354
+shared075   0.00000000 0.009296777
+shared1     0.02162696 0.009152188
+
+[[5]]
+                  mash      mrmash
+null        0.94439827 0.908692609
+singletons  0.04773445 0.064684269
+independent 0.00000000 0.002783679
+shared025   0.00786728 0.010834784
+shared05    0.00000000 0.005708702
+shared075   0.00000000 0.003442114
+shared1     0.00000000 0.003853843
+
+[[6]]
+                   mash      mrmash
+null        0.901303846 0.815397670
+singletons  0.093035537 0.153523108
+independent 0.000000000 0.006148604
+shared025   0.005660616 0.010339913
+shared05    0.000000000 0.007439841
+shared075   0.000000000 0.003701149
+shared1     0.000000000 0.003449715
+
+[[7]]
+                   mash      mrmash
+null        0.930456311 0.816205838
+singletons  0.053844464 0.133556736
+independent 0.000000000 0.008297632
+shared025   0.005598917 0.016761635
+shared05    0.000000000 0.010584781
+shared075   0.000000000 0.007726427
+shared1     0.010100308 0.006866951
+
+[[8]]
+                   mash      mrmash
+null        0.855825504 0.846304309
+singletons  0.103385174 0.113905018
+independent 0.016219469 0.009602098
+shared025   0.004866378 0.012472593
+shared05    0.000000000 0.006403750
+shared075   0.000000000 0.005798032
+shared1     0.019703475 0.005514199
+
+[[9]]
+                   mash      mrmash
+null        0.845494230 0.767902081
+singletons  0.151293304 0.190952882
+independent 0.000000000 0.013976707
+shared025   0.003212466 0.010884246
+shared05    0.000000000 0.009603149
+shared075   0.000000000 0.003586780
+shared1     0.000000000 0.003094154
+
+[[10]]
+                   mash      mrmash
+null        0.831073635 0.799260719
+singletons  0.131421183 0.136759654
+independent 0.000000000 0.006418194
+shared025   0.005834057 0.011451908
+shared05    0.000000000 0.017516808
+shared075   0.000000000 0.011855197
+shared1     0.031671125 0.016737519</code></pre>
+<pre class="r"><code>rep &lt;- 1
+shared1_mash_index &lt;- grep(&quot;shared1&quot;, names(full_res_group_shared[[rep]]$mash), fixed=TRUE)
+shared1_mrmash_index &lt;- grep(&quot;shared1&quot;, names(full_res_group_shared[[rep]]$mrmash), fixed=TRUE)
+cbind(mash=full_res_group_shared[[rep]]$mash[shared1_mash_index], mrmash=full_res_group_shared[[rep]]$mrmash[shared1_mrmash_index])</code></pre>
+<pre><code>           mash       mrmash
+shared1.1     0 5.804524e-04
+shared1.2     0 5.841355e-04
+shared1.3     0 5.904487e-04
+shared1.4     0 5.988450e-04
+shared1.5     0 5.991376e-04
+shared1.6     0 5.439875e-04
+shared1.7     0 3.327333e-04
+shared1.8     0 6.156989e-05
+shared1.9     0 7.456100e-07
+shared1.10    0 8.991629e-11
+shared1.11    0 5.131231e-16
+shared1.12    0 2.522618e-16
+shared1.13    0 1.465779e-16
+shared1.14    0 9.053202e-17
+shared1.15    0 5.829978e-17
+shared1.16    0 3.863100e-17
+shared1.17    0 2.610576e-17
+shared1.18    0 1.788299e-17
+shared1.19    0 1.236661e-17
+shared1.20    0 8.608553e-18
+shared1.21    0 6.020339e-18
+shared1.22    0 4.224011e-18
+shared1.23    0 2.970461e-18</code></pre>
+<pre class="r"><code>singleton_mash_index &lt;- grep(&quot;singleton&quot;, names(full_res_group_shared[[rep]]$mash), fixed=TRUE)
+singleton_mrmash_index &lt;- grep(&quot;singleton&quot;, names(full_res_group_shared[[rep]]$mrmash), fixed=TRUE)
+cbind(mash=full_res_group_shared[[rep]]$mash[singleton_mash_index], mrmash=full_res_group_shared[[rep]]$mrmash[singleton_mrmash_index])</code></pre>
+<pre><code>                     mash       mrmash
+singleton1.1  0.000000000 5.764636e-04
+singleton2.1  0.000000000 5.765507e-04
+singleton3.1  0.000000000 5.774814e-04
+singleton4.1  0.000000000 5.813787e-04
+singleton1.2  0.000000000 5.765062e-04
+singleton2.2  0.000000000 5.766803e-04
+singleton3.2  0.000000000 5.784997e-04
+singleton4.2  0.000000000 5.863808e-04
+singleton1.3  0.000000000 5.765914e-04
+singleton2.3  0.000000000 5.769396e-04
+singleton3.3  0.000000000 5.804102e-04
+singleton4.3  0.000000000 5.965186e-04
+singleton1.4  0.000000000 5.767617e-04
+singleton2.4  0.000000000 5.774585e-04
+singleton3.4  0.000000000 5.837287e-04
+singleton4.4  0.000000000 6.173339e-04
+singleton1.5  0.000000000 5.771022e-04
+singleton2.5  0.000000000 5.784974e-04
+singleton3.5  0.000000000 5.883735e-04
+singleton4.5  0.000000000 6.611580e-04
+singleton1.6  0.000000000 5.777830e-04
+singleton2.6  0.000000000 5.805799e-04
+singleton3.6  0.000000000 5.899701e-04
+singleton4.6  0.000000000 7.578118e-04
+singleton1.7  0.000000000 5.791437e-04
+singleton2.7  0.000000000 5.847632e-04
+singleton3.7  0.000000000 5.661458e-04
+singleton4.7  0.000000000 9.879034e-04
+singleton1.8  0.000000000 5.818611e-04
+singleton2.8  0.000000000 5.932037e-04
+singleton3.8  0.000000000 4.515696e-04
+singleton4.8  0.000000000 1.575315e-03
+singleton1.9  0.000000000 5.872782e-04
+singleton2.9  0.000000000 6.103828e-04
+singleton3.9  0.000000000 2.072121e-04
+singleton4.9  0.002143455 2.653733e-03
+singleton1.10 0.000000000 5.980265e-04
+singleton2.10 0.000000000 6.459591e-04
+singleton3.10 0.000000000 2.772324e-05
+singleton4.10 0.000000000 1.373454e-03
+singleton1.11 0.000000000 6.190773e-04
+singleton2.11 0.000000000 7.221862e-04
+singleton3.11 0.000000000 3.021797e-07
+singleton4.11 0.000000000 1.205659e-05
+singleton1.12 0.000000000 6.587657e-04
+singleton2.12 0.000000000 8.966020e-04
+singleton3.12 0.000000000 3.260508e-11
+singleton4.12 0.000000000 1.622409e-10
+singleton1.13 0.000000000 7.262007e-04
+singleton2.13 0.000000000 1.347409e-03
+singleton3.13 0.000000000 5.098678e-16
+singleton4.13 0.000000000 4.495585e-16
+singleton1.14 0.000000000 8.255872e-04
+singleton2.14 0.000000000 2.784863e-03
+singleton3.14 0.000000000 2.614697e-16
+singleton4.14 0.000000000 2.283779e-16
+singleton1.15 0.000000000 1.130979e-03
+singleton2.15 0.000000000 8.990092e-03
+singleton3.15 0.000000000 1.504553e-16
+singleton4.15 0.000000000 1.318129e-16
+singleton1.16 0.000000000 4.337453e-03
+singleton2.16 0.000000000 3.439298e-02
+singleton3.16 0.000000000 9.244449e-17
+singleton4.16 0.000000000 8.156312e-17
+singleton1.17 0.006000800 3.046440e-02
+singleton2.17 0.039376288 1.712125e-02
+singleton3.17 0.000000000 5.936272e-17
+singleton4.17 0.000000000 5.271942e-17
+singleton1.18 0.013361854 3.244618e-03
+singleton2.18 0.009458199 2.449626e-05
+singleton3.18 0.000000000 3.927188e-17
+singleton4.18 0.000000000 3.505787e-17
+singleton1.19 0.000000000 1.267160e-07
+singleton2.19 0.000000000 2.366637e-11
+singleton3.19 0.000000000 2.651334e-17
+singleton4.19 0.000000000 2.375996e-17
+singleton1.20 0.000000000 4.339162e-15
+singleton2.20 0.000000000 3.252442e-16
+singleton3.20 0.000000000 1.815136e-17
+singleton4.20 0.000000000 1.631217e-17
+singleton1.21 0.000000000 2.483216e-16
+singleton2.21 0.000000000 1.769258e-16
+singleton3.21 0.000000000 1.254739e-17
+singleton4.21 0.000000000 1.129885e-17
+singleton1.22 0.000000000 1.404672e-16
+singleton2.22 0.000000000 1.056926e-16
+singleton3.22 0.000000000 8.732201e-18
+singleton4.22 0.000000000 7.874664e-18
+singleton1.23 0.000000000 8.603417e-17
+singleton2.23 0.000000000 6.682164e-17
+singleton3.23 0.000000000 6.105780e-18
+singleton4.23 0.000000000 5.511834e-18</code></pre>
+<pre class="r"><code>cat(&quot;grid\n&quot;, grid, &quot;\n&quot;)</code></pre>
+<pre><code>grid
+ 1.001633e-05 2.003266e-05 4.006532e-05 8.013064e-05 0.0001602613 0.0003205226 0.0006410451 0.00128209 0.00256418 0.005128361 0.01025672 0.02051344 0.04102689 0.08205377 0.1641075 0.3282151 0.6564302 1.31286 2.625721 5.251442 10.50288 21.00577 42.01153 </code></pre>
+<pre class="r"><code>rep &lt;- 3
+shared1_mash_index &lt;- grep(&quot;shared1&quot;, names(full_res_group_shared[[rep]]$mash), fixed=TRUE)
+shared1_mrmash_index &lt;- grep(&quot;shared1&quot;, names(full_res_group_shared[[rep]]$mrmash), fixed=TRUE)
+cbind(mash=full_res_group_shared[[rep]]$mash[shared1_mash_index], mrmash=full_res_group_shared[[rep]]$mrmash[shared1_mrmash_index])</code></pre>
+<pre><code>                 mash       mrmash
+shared1.1  0.00000000 7.292007e-04
+shared1.2  0.00000000 7.456985e-04
+shared1.3  0.00000000 7.797634e-04
+shared1.4  0.00000000 8.520617e-04
+shared1.5  0.00000000 1.011874e-03
+shared1.6  0.00000000 1.370860e-03
+shared1.7  0.03124422 1.961326e-03
+shared1.8  0.00000000 1.338088e-03
+shared1.9  0.00000000 3.968567e-05
+shared1.10 0.00000000 2.400590e-09
+shared1.11 0.00000000 6.589887e-16
+shared1.12 0.00000000 2.750390e-16
+shared1.13 0.00000000 1.551721e-16
+shared1.14 0.00000000 9.453068e-17
+shared1.15 0.00000000 6.045326e-17
+shared1.16 0.00000000 3.990753e-17
+shared1.17 0.00000000 2.691019e-17
+shared1.18 0.00000000 1.841003e-17
+shared1.19 0.00000000 1.272066e-17
+shared1.20 0.00000000 8.850328e-18
+shared1.21 0.00000000 6.187253e-18
+shared1.22 0.00000000 4.340094e-18
+shared1.23 0.00000000 3.051601e-18</code></pre>
+<pre class="r"><code>singleton_mash_index &lt;- grep(&quot;singleton&quot;, names(full_res_group_shared[[rep]]$mash), fixed=TRUE)
+singleton_mrmash_index &lt;- grep(&quot;singleton&quot;, names(full_res_group_shared[[rep]]$mrmash), fixed=TRUE)
+cbind(mash=full_res_group_shared[[rep]]$mash[singleton_mash_index], mrmash=full_res_group_shared[[rep]]$mrmash[singleton_mrmash_index])</code></pre>
+<pre><code>                     mash       mrmash
+singleton1.1  0.000000000 7.128997e-04
+singleton2.1  0.000000000 7.131125e-04
+singleton3.1  0.000000000 7.062703e-04
+singleton4.1  0.000000000 7.224671e-04
+singleton1.2  0.000000000 7.127369e-04
+singleton2.2  0.000000000 7.131623e-04
+singleton3.2  0.000000000 6.995716e-04
+singleton4.2  0.000000000 7.319820e-04
+singleton1.3  0.000000000 7.124116e-04
+singleton2.3  0.000000000 7.132620e-04
+singleton3.3  0.000000000 6.864550e-04
+singleton4.3  0.000000000 7.513437e-04
+singleton1.4  0.000000000 7.117617e-04
+singleton2.4  0.000000000 7.134614e-04
+singleton3.4  0.000000000 6.613452e-04
+singleton4.4  0.000000000 7.914022e-04
+singleton1.5  0.000000000 7.104654e-04
+singleton2.5  0.000000000 7.138598e-04
+singleton3.5  0.000000000 6.155808e-04
+singleton4.5  0.000000000 8.768876e-04
+singleton1.6  0.000000000 7.078867e-04
+singleton2.6  0.000000000 7.146560e-04
+singleton3.6  0.000000000 5.411546e-04
+singleton4.6  0.000000000 1.069087e-03
+singleton1.7  0.000000000 7.027843e-04
+singleton2.7  0.000000000 7.162452e-04
+singleton3.7  0.000000000 4.517846e-04
+singleton4.7  0.000000000 1.527611e-03
+singleton1.8  0.000000000 6.927950e-04
+singleton2.8  0.000000000 7.194106e-04
+singleton3.8  0.000000000 4.486044e-04
+singleton4.8  0.000000000 2.509898e-03
+singleton1.9  0.000000000 6.736470e-04
+singleton2.9  0.000000000 7.256888e-04
+singleton3.9  0.000000000 1.124191e-03
+singleton4.9  0.000000000 2.587961e-03
+singleton1.10 0.000000000 6.384382e-04
+singleton2.10 0.000000000 7.380281e-04
+singleton3.10 0.011571742 6.361897e-03
+singleton4.10 0.000000000 1.939127e-04
+singleton1.11 0.000000000 5.787306e-04
+singleton2.11 0.000000000 7.617994e-04
+singleton3.11 0.000000000 1.431522e-03
+singleton4.11 0.000000000 4.255691e-08
+singleton1.12 0.000000000 4.921179e-04
+singleton2.12 0.000000000 8.056010e-04
+singleton3.12 0.000000000 1.215718e-07
+singleton4.12 0.000000000 6.738458e-15
+singleton1.13 0.000000000 4.009638e-04
+singleton2.13 0.000000000 8.800421e-04
+singleton3.13 0.000000000 3.193461e-15
+singleton4.13 0.000000000 3.143761e-16
+singleton1.14 0.000000000 3.818772e-04
+singleton2.14 0.000000000 1.013642e-03
+singleton3.14 0.000000000 2.755916e-16
+singleton4.14 0.000000000 1.731001e-16
+singleton1.15 0.000000000 7.683530e-04
+singleton2.15 0.000000000 1.558500e-03
+singleton3.15 0.000000000 1.536670e-16
+singleton4.15 0.000000000 1.039770e-16
+singleton1.16 0.000000000 6.125854e-03
+singleton2.16 0.000000000 6.793033e-03
+singleton3.16 0.000000000 9.325122e-17
+singleton4.16 0.000000000 6.591760e-17
+singleton1.17 0.045191638 4.409961e-02
+singleton2.17 0.024325769 3.480306e-02
+singleton3.17 0.000000000 5.956683e-17
+singleton4.17 0.000000000 4.327097e-17
+singleton1.18 0.009726944 2.257997e-03
+singleton2.18 0.009156788 1.395876e-03
+singleton3.18 0.000000000 3.931524e-17
+singleton4.18 0.000000000 2.906963e-17
+singleton1.19 0.000000000 2.245349e-08
+singleton2.19 0.000000000 1.007169e-08
+singleton3.19 0.000000000 2.651435e-17
+singleton4.19 0.000000000 1.983726e-17
+singleton1.20 0.000000000 5.669077e-16
+singleton2.20 0.000000000 4.816579e-16
+singleton3.20 0.000000000 1.814301e-17
+singleton4.20 0.000000000 1.368315e-17
+singleton1.21 0.000000000 2.405718e-16
+singleton2.21 0.000000000 2.293477e-16
+singleton3.21 0.000000000 1.253867e-17
+singleton4.21 0.000000000 9.508590e-18
+singleton1.22 0.000000000 1.371514e-16
+singleton2.22 0.000000000 1.317577e-16
+singleton3.22 0.000000000 8.725155e-18
+singleton4.22 0.000000000 6.641906e-18
+singleton1.23 0.000000000 8.433136e-17
+singleton2.23 0.000000000 8.138273e-17
+singleton3.23 0.000000000 6.100529e-18
+singleton4.23 0.000000000 4.656299e-18</code></pre>
+<pre class="r"><code>cat(&quot;grid\n&quot;, grid, &quot;\n&quot;)</code></pre>
+<pre><code>grid
+ 1.001633e-05 2.003266e-05 4.006532e-05 8.013064e-05 0.0001602613 0.0003205226 0.0006410451 0.00128209 0.00256418 0.005128361 0.01025672 0.02051344 0.04102689 0.08205377 0.1641075 0.3282151 0.6564302 1.31286 2.625721 5.251442 10.50288 21.00577 42.01153 </code></pre>
+<p>Again, the two methods seem to perform similarly by trying to “reconstruct” the that pattern of sharing by using singleton matrices, and loading on other matrices only with very small or small grid values</p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.5.1 (2018-07-02)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Scientific Linux 7.4 (Nitrogen)
+
+Matrix products: default
+BLAS/LAPACK: /software/openblas-0.2.19-el7-x86_64/lib/libopenblas_haswellp-r0.2.19.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] glmnet_2.0-16        foreach_1.4.4        Matrix_1.2-15       
+[4] mr.mash.alpha_0.1-96
+
+loaded via a namespace (and not attached):
+ [1] MBSP_1.0           Rcpp_1.0.4.6       plyr_1.8.6        
+ [4] compiler_3.5.1     mashr_0.2.38       later_0.7.5       
+ [7] git2r_0.26.1       workflowr_1.6.2    iterators_1.0.10  
+[10] tools_3.5.1        digest_0.6.25      evaluate_0.14     
+[13] lattice_0.20-38    GIGrvg_0.5         yaml_2.2.1        
+[16] mvtnorm_1.1-1      SparseM_1.77       invgamma_1.1      
+[19] coda_0.19-3        stringr_1.4.0      knitr_1.20        
+[22] fs_1.3.1           MatrixModels_0.4-1 rprojroot_1.3-2   
+[25] grid_3.5.1         glue_1.4.1         R6_2.4.1          
+[28] rmarkdown_1.10     mixsqp_0.3-44      rmeta_3.0         
+[31] irlba_2.3.3        ashr_2.2-50        magrittr_1.5      
+[34] whisker_0.3-2      codetools_0.2-15   matrixStats_0.56.0
+[37] backports_1.1.8    promises_1.0.1     htmltools_0.3.6   
+[40] mcmc_0.9-6         MASS_7.3-51.1      assertthat_0.2.1  
+[43] abind_1.4-5        httpuv_1.4.5       quantreg_5.36     
+[46] stringi_1.4.6      MCMCpack_1.4-4     truncnorm_1.0-8   
+[49] SQUAREM_2020.3    </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

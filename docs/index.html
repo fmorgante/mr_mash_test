@@ -260,7 +260,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-06-05
+<strong>Last updated:</strong> 2020-07-01
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -270,7 +270,7 @@ $(document).ready(function () {
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.1). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -291,16 +291,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeb3c50728d8b623e4b2413c6dea6d8a4191c97f1ftargetblankb3c5072a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/b3c50728d8b623e4b2413c6dea6d8a4191c97f1f" target="_blank">b3c5072</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree29d5be51934b08cdd45e2af73cb07603a868e2ebtargetblank29d5be5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/29d5be51934b08cdd45e2af73cb07603a868e2eb" target="_blank">29d5be5</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeb3c50728d8b623e4b2413c6dea6d8a4191c97f1ftargetblankb3c5072a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree29d5be51934b08cdd45e2af73cb07603a868e2ebtargetblank29d5be5a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/b3c50728d8b623e4b2413c6dea6d8a4191c97f1f" target="_blank">b3c5072</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/29d5be51934b08cdd45e2af73cb07603a868e2eb" target="_blank">29d5be5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -326,6 +326,7 @@ Ignored files:
     Ignored:    output/test_sparse_issue.rds
 
 Untracked files:
+    Untracked:  analysis/dense_issue_investigation2/
     Untracked:  code/plot_test.R
 
 Unstaged changes:
@@ -368,6 +369,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/29d5be51934b08cdd45e2af73cb07603a868e2eb/analysis/index.Rmd" target="_blank">29d5be5</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-07-01
+</td>
+<td>
+Add mash vs mr.mash comparison
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/fb32d537120cc1e5732397175910192e456a5e63/docs/index.html" target="_blank">fb32d53</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-06-05
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1426,10 +1461,8 @@ Start workflowr project.
 <li><a href="results_highcorrX_lowcorrV_sharedB_05_18_20.html">Highly correlated predictors, shared effects, lowly correlated residuals.</a></li>
 <li><a href="results_highcorrX_lowcorrV_indepB_05_18_20.html">Highly correlated predictors, independent effects, lowly correlated residuals.</a></li>
 <li><a href="two_active_responses_issue.html">Case study with only two causal responses out of five total.</a></li>
-<li><a href="dense_scenario_issue.html">Case study with dense scenarios.</a></li>
-<li><a href="dense_scenario_issue_larger_sample.html">Case study with dense scenarios and larger sample size.</a></li>
-<li><a href="dense_scenario_issue_univariate.html">Case study with dense scenarios and univariate analysis.</a></li>
 </ul>
+<p>Other investigations + <a href="dense_scenario_issue.html">Case study with dense scenarios.</a> + <a href="dense_scenario_issue_larger_sample.html">Case study with dense scenarios and larger sample size.</a> + <a href="dense_scenario_issue_univariate.html">Case study with dense scenarios and univariate analysis.</a> + <a href="mash_vs_mrmash.html"><em>mash</em> vs <em>mr.mash</em>.</a></p>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
