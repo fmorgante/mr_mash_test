@@ -133,9 +133,13 @@ for(rep_i in 1:nreps){
 }
 ```
 
+The mixture weights estimated by the two methods, summed over grid values are below.
 ```{r shared effects results}
 group_comparisons_shared
+```
 
+We will now look at replicate 1 more in-depth.
+```{r shared effects results rep 1}
 rep <- 1
 shared1_mash_index <- grep("shared1", names(full_res_shared[[rep]]$mash), fixed=TRUE)
 shared1_mrmash_index <- grep("shared1", names(full_res_shared[[rep]]$mrmash), fixed=TRUE)
@@ -147,7 +151,10 @@ colnames(mrmash_singletons) <- "mr.mash"
 mrmash_singletons
 
 cat("grid\n", grid, "\n")
+```
 
+We will now look at replicate 3 more in-depth.
+```{r shared effects results rep 3}
 rep <- 3
 shared1_mash_index <- grep("shared1", names(full_res_shared[[rep]]$mash), fixed=TRUE)
 shared1_mrmash_index <- grep("shared1", names(full_res_shared[[rep]]$mrmash), fixed=TRUE)
@@ -247,9 +254,13 @@ for(rep_i in 1:nreps){
 }
 ```
 
+The mixture weights estimated by the two methods, summed over grid values are below.
 ```{r group-shared effects results}
 group_comparisons_group_shared
+```
 
+We will now look at replicate 1 more in-depth.
+```{r group-shared effects results rep 1}
 rep <- 1
 shared1_mash_index <- grep("shared1", names(full_res_group_shared[[rep]]$mash), fixed=TRUE)
 shared1_mrmash_index <- grep("shared1", names(full_res_group_shared[[rep]]$mrmash), fixed=TRUE)
@@ -260,7 +271,10 @@ singleton_mrmash_index <- grep("singleton", names(full_res_group_shared[[rep]]$m
 cbind(mash=full_res_group_shared[[rep]]$mash[singleton_mash_index], mrmash=full_res_group_shared[[rep]]$mrmash[singleton_mrmash_index])
 
 cat("grid\n", grid, "\n")
+```
 
+We will now look at replicate 3 more in-depth.
+```{r group-shared effects results rep 3}
 rep <- 3
 shared1_mash_index <- grep("shared1", names(full_res_group_shared[[rep]]$mash), fixed=TRUE)
 shared1_mrmash_index <- grep("shared1", names(full_res_group_shared[[rep]]$mrmash), fixed=TRUE)
