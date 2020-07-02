@@ -1,0 +1,355 @@
+---
+title: "Two active responses case - continued"
+author: "Fabio Morgante"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  workflowr::wflow_html:
+    toc: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r set opts}
+library(mr.mash.alpha)
+library(glmnet)
+
+###Set options
+options(stringsAsFactors = FALSE)
+
+###Functions to compute accuracy and adjusted univariate sumstats
+compute_accuracy <- function(Y, Yhat) {
+  bias <- rep(as.numeric(NA), ncol(Y))
+  r2 <- rep(as.numeric(NA), ncol(Y))
+  mse <- rep(as.numeric(NA), ncol(Y))
+  
+  for(i in 1:ncol(Y)){
+    fit  <- lm(Y[, i] ~ Yhat[, i])
+    bias[i] <- coef(fit)[2] 
+    r2[i] <- summary(fit)$r.squared
+    mse[i] <- mean((Y[, i] - Yhat[, i])^2)
+  }
+  
+  return(list(bias=bias, r2=r2, mse=mse))
+}
+compute_univariate_sumstats_adj <- function(X, Y, B, standardize=FALSE, standardize.response=FALSE){
+  r <- ncol(Y)
+  p <- ncol(X)
+  Bhat <- matrix(as.numeric(NA), nrow=p, ncol=r)
+  Shat <- matrix(as.numeric(NA), nrow=p, ncol=r)
+  
+  X <- scale(X, center=TRUE, scale=standardize) 
+  Y <- scale(Y, center=TRUE, scale=standardize.response)
+  
+  if(standardize)
+    B <- B*attr(X,"scaled:scale")
+  
+  for(i in 1:r){
+    for(j in 1:p){
+      Rij <- Y[, i] - X[, -j]%*%B[-j, i]
+      fit <- lm(Rij ~ X[, j]-1)
+      Bhat[j, i] <- coef(fit)
+      Shat[j, i] <- summary(fit)$coefficients[1, 2]
+    }
+  }
+  
+  return(list(Bhat=Bhat, Shat=Shat))
+}
+```
+
+We simulate data with n=600, p=1,000, p_causal=50, r=6, PVE=0.5, 2 causal responses with shared effects, independent predictors, and independent residuals. The models will be fitted to the training data (80% of the full data), and .
+
+```{r simulate data, results="hide"}
+###Set seed
+set.seed(123)
+###Set parameters
+n <- 600
+p <- 1000
+p_causal <- 50
+r <- 6
+r_causal <- list(1:2)
+B_cor <- 1
+B_scale <- 1
+w <- 1
+
+###Simulate V, B, X and Y
+out <- simulate_mr_mash_data(n, p, p_causal, r, r_causal, intercepts = rep(1, r),
+                            pve=0.5, B_cor=B_cor, B_scale=B_scale, w=w,
+                            X_cor=0, X_scale=1, V_cor=0)
+colnames(out$Y) <- paste0("Y", seq(1, r))
+rownames(out$Y) <- paste0("N", seq(1, n))
+colnames(out$X) <- paste0("X", seq(1, p))
+rownames(out$X) <- paste0("N", seq(1, n))
+
+###Split the data in training and test sets
+test_set <- sort(sample(x=c(1:n), size=round(n*0.2), replace=FALSE))
+Ytrain <- out$Y[-test_set, ]
+Xtrain <- out$X[-test_set, ]
+Ytest <- out$Y[test_set, ]
+Xtest <- out$X[test_set, ]
+```
+
+We build the mixture prior as usual including zero matrix, identity matrix, rank-1 matrices, and shared matrix, each scaled by a grid computed from univariate summary statistics.
+
+```{r build prior, results="hide"}
+###Compute grid of variances
+univ_sumstats <- compute_univariate_sumstats(Xtrain, Ytrain, standardize=FALSE, standardize.response=FALSE)
+grid <- autoselect.mixsd(univ_sumstats, mult=sqrt(2))^2
+
+###Compute prior with only canonical matrices
+S0_can <- compute_canonical_covs(ncol(Ytrain), singletons=TRUE, hetgrid=c(0, 0.5, 1))
+S0 <- expand_covs(S0_can, grid, zeromat=TRUE)
+```
+
+We run *glmnet* with $\alpha=1$ to obtain an inital estimate for the regression coefficients to provide to *mr.mash*, and for comparison.
+
+```{r fit glmnet, results="hide"}
+###Fit grop-lasso to initialize mr.mash
+cvfit_glmnet <- cv.glmnet(x=Xtrain, y=Ytrain, family="mgaussian", alpha=1, standardize=FALSE)
+coeff_glmnet <- coef(cvfit_glmnet, s="lambda.min")
+Bhat_glmnet <- matrix(as.numeric(NA), nrow=p, ncol=r)
+for(i in 1:length(coeff_glmnet)){
+  Bhat_glmnet[, i] <- as.vector(coeff_glmnet[[i]])[-1]
+}
+Yhat_glmnet <- drop(predict(cvfit_glmnet, newx=Xtest, s="lambda.min"))
+prop_nonzero_glmnet <- sum(Bhat_glmnet[, 1]!=0)/p
+```
+
+We run *mr.mash* with EM updates of the mixture weights, updating V (imposing a diagonal structure), and initializing the regression coefficients with the estimates from *glmnet*.
+
+```{r fit mr.mash, results="hide"}
+w0 <- c((1-prop_nonzero_glmnet), rep(prop_nonzero_glmnet/(length(S0)-1), (length(S0)-1)))
+fit_mrmash <- mr.mash(Xtrain, Ytrain, S0, w0=w0, update_w0=TRUE, update_w0_method="EM", tol=1e-2,
+                      convergence_criterion="ELBO", compute_ELBO=TRUE, standardize=FALSE, 
+                      verbose=FALSE, update_V=TRUE, update_V_method="diagonal", e=1e-8,
+                      mu1_init=Bhat_glmnet, w0_threshold=0)
+Yhat_mrmash <- predict(fit_mrmash, Xtest)
+```
+
+We now compare the results.
+
+```{r plot results, fig.height=12, fig.width=15}
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                0, 3, 3, 0,
+                0, 3, 3, 0), 4, 4, byrow = TRUE))
+
+###Plot estimated vs true coeffcients
+##mr.mash
+plot(out$B, fit_mrmash$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+##glmnet
+plot(out$B, Bhat_glmnet, main="glmnet", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+
+###Plot mr.mash vs glmnet estimated coeffcients
+colorz <- matrix("black", nrow=p, ncol=r)
+zeros <- apply(out$B, 2, function(x) x==0)
+for(i in 1:ncol(colorz)){
+  colorz[zeros[, i], i] <- "red"
+}
+
+plot(Bhat_glmnet, fit_mrmash$mu1, main="mr.mash vs glmnet", 
+     xlab="glmnet estimated coefficients", ylab="mr.mash estimated coefficients",
+     col=colorz, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+legend("topleft", 
+       legend = c("Non-zero", "Zero"), 
+       col = c("black", "red"), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=2) 
+
+cat("Prediction MSE of glmnet\n")
+compute_accuracy(Ytest, Yhat_glmnet)$mse
+
+cat("Prediction MSE of mr.mash\n")
+compute_accuracy(Ytest, Yhat_mrmash)$mse
+```
+As we can see, *mr.mash* performs pretty poorly. 
+
+Let's now try to repeate the simulation above but with 4 causal reponses with shared effects.
+```{r analysis r_causal_4}
+###Set seed
+set.seed(123)
+###Set parameters
+n <- 600
+p <- 1000
+p_causal <- 50
+r <- 6
+r_causal <- list(1:4)
+B_cor <- 1
+B_scale <- 1
+w <- 1
+
+###Simulate V, B, X and Y
+out <- simulate_mr_mash_data(n, p, p_causal, r, r_causal, intercepts = rep(1, r),
+                            pve=0.5, B_cor=B_cor, B_scale=B_scale, w=w,
+                            X_cor=0, X_scale=1, V_cor=0)
+colnames(out$Y) <- paste0("Y", seq(1, r))
+rownames(out$Y) <- paste0("N", seq(1, n))
+colnames(out$X) <- paste0("X", seq(1, p))
+rownames(out$X) <- paste0("N", seq(1, n))
+
+###Split the data in training and test sets
+test_set <- sort(sample(x=c(1:n), size=round(n*0.2), replace=FALSE))
+Ytrain <- out$Y[-test_set, ]
+Xtrain <- out$X[-test_set, ]
+Ytest <- out$Y[test_set, ]
+Xtest <- out$X[test_set, ]
+
+###Compute grid of variances
+univ_sumstats <- compute_univariate_sumstats(Xtrain, Ytrain, standardize=FALSE, standardize.response=FALSE)
+grid <- autoselect.mixsd(univ_sumstats, mult=sqrt(2))^2
+
+###Compute prior with only canonical matrices
+S0_can <- compute_canonical_covs(ncol(Ytrain), singletons=TRUE, hetgrid=c(0, 0.5, 1))
+S0 <- expand_covs(S0_can, grid, zeromat=TRUE)
+
+###Fit grop-lasso to initialize mr.mash
+cvfit_glmnet <- cv.glmnet(x=Xtrain, y=Ytrain, family="mgaussian", alpha=1, standardize=FALSE)
+coeff_glmnet <- coef(cvfit_glmnet, s="lambda.min")
+Bhat_glmnet <- matrix(as.numeric(NA), nrow=p, ncol=r)
+for(i in 1:length(coeff_glmnet)){
+  Bhat_glmnet[, i] <- as.vector(coeff_glmnet[[i]])[-1]
+}
+Yhat_glmnet <- drop(predict(cvfit_glmnet, newx=Xtest, s="lambda.min"))
+prop_nonzero_glmnet <- sum(Bhat_glmnet[, 1]!=0)/p
+
+###Fit mr.mash
+w0 <- c((1-prop_nonzero_glmnet), rep(prop_nonzero_glmnet/(length(S0)-1), (length(S0)-1)))
+fit_mrmash <- mr.mash(Xtrain, Ytrain, S0, w0=w0, update_w0=TRUE, update_w0_method="EM", tol=1e-2,
+                      convergence_criterion="ELBO", compute_ELBO=TRUE, standardize=FALSE, 
+                      verbose=FALSE, update_V=TRUE, update_V_method="diagonal", e=1e-8,
+                      mu1_init=Bhat_glmnet, w0_threshold=0)
+Yhat_mrmash <- predict(fit_mrmash, Xtest)
+
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                0, 3, 3, 0,
+                0, 3, 3, 0), 4, 4, byrow = TRUE))
+
+###Plot estimated vs true coeffcients
+##mr.mash
+plot(out$B, fit_mrmash$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+##glmnet
+plot(out$B, Bhat_glmnet, main="glmnet", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+
+###Plot mr.mash vs glmnet estimated coeffcients
+colorz <- matrix("black", nrow=p, ncol=r)
+zeros <- apply(out$B, 2, function(x) x==0)
+for(i in 1:ncol(colorz)){
+  colorz[zeros[, i], i] <- "red"
+}
+
+plot(Bhat_glmnet, fit_mrmash$mu1, main="mr.mash vs glmnet", 
+     xlab="glmnet estimated coefficients", ylab="mr.mash estimated coefficients",
+     col=colorz, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+legend("topleft", 
+       legend = c("Non-zero", "Zero"), 
+       col = c("black", "red"), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=2) 
+
+cat("Prediction MSE of glmnet\n")
+compute_accuracy(Ytest, Yhat_glmnet)$mse
+
+cat("Prediction MSE of mr.mash\n")
+compute_accuracy(Ytest, Yhat_mrmash)$mse
+```
+Here, we can see that mr.mash performs better.
+
+We will now see what happens if repeate the analysis above but with 2 groups of 2 causal reponses with shared effects and a group of 2 responses with no effect. The variables come from each of the two mixture components with equal probability.
+```{r analysis r_causal_2plus2}
+###Set seed
+set.seed(123)
+###Set parameters
+n <- 600
+p <- 1000
+p_causal <- 50
+r <- 6
+r_causal <- list(1:2, 3:4)
+B_cor <- c(1, 1)
+B_scale <- c(1, 1)
+w <- c(0.5, 0.5)
+
+###Simulate V, B, X and Y
+out <- simulate_mr_mash_data(n, p, p_causal, r, r_causal, intercepts = rep(1, r),
+                            pve=0.5, B_cor=B_cor, B_scale=B_scale, w=w,
+                            X_cor=0, X_scale=1, V_cor=0)
+colnames(out$Y) <- paste0("Y", seq(1, r))
+rownames(out$Y) <- paste0("N", seq(1, n))
+colnames(out$X) <- paste0("X", seq(1, p))
+rownames(out$X) <- paste0("N", seq(1, n))
+
+###Split the data in training and test sets
+test_set <- sort(sample(x=c(1:n), size=round(n*0.2), replace=FALSE))
+Ytrain <- out$Y[-test_set, ]
+Xtrain <- out$X[-test_set, ]
+Ytest <- out$Y[test_set, ]
+Xtest <- out$X[test_set, ]
+
+###Compute grid of variances
+univ_sumstats <- compute_univariate_sumstats(Xtrain, Ytrain, standardize=FALSE, standardize.response=FALSE)
+grid <- autoselect.mixsd(univ_sumstats, mult=sqrt(2))^2
+
+###Compute prior with only canonical matrices
+S0_can <- compute_canonical_covs(ncol(Ytrain), singletons=TRUE, hetgrid=c(0, 0.5, 1))
+S0 <- expand_covs(S0_can, grid, zeromat=TRUE)
+
+###Fit grop-lasso to initialize mr.mash
+cvfit_glmnet <- cv.glmnet(x=Xtrain, y=Ytrain, family="mgaussian", alpha=1, standardize=FALSE)
+coeff_glmnet <- coef(cvfit_glmnet, s="lambda.min")
+Bhat_glmnet <- matrix(as.numeric(NA), nrow=p, ncol=r)
+for(i in 1:length(coeff_glmnet)){
+  Bhat_glmnet[, i] <- as.vector(coeff_glmnet[[i]])[-1]
+}
+Yhat_glmnet <- drop(predict(cvfit_glmnet, newx=Xtest, s="lambda.min"))
+prop_nonzero_glmnet <- sum(Bhat_glmnet[, 1]!=0)/p
+
+###Fit mr.mash
+w0 <- c((1-prop_nonzero_glmnet), rep(prop_nonzero_glmnet/(length(S0)-1), (length(S0)-1)))
+fit_mrmash <- mr.mash(Xtrain, Ytrain, S0, w0=w0, update_w0=TRUE, update_w0_method="EM", tol=1e-2,
+                      convergence_criterion="ELBO", compute_ELBO=TRUE, standardize=FALSE, 
+                      verbose=FALSE, update_V=TRUE, update_V_method="diagonal", e=1e-8,
+                      mu1_init=Bhat_glmnet, w0_threshold=0)
+Yhat_mrmash <- predict(fit_mrmash, Xtest)
+
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                0, 3, 3, 0,
+                0, 3, 3, 0), 4, 4, byrow = TRUE))
+
+###Plot estimated vs true coeffcients
+##mr.mash
+plot(out$B, fit_mrmash$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+##glmnet
+plot(out$B, Bhat_glmnet, main="glmnet", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+
+###Plot mr.mash vs glmnet estimated coeffcients
+colorz <- matrix("black", nrow=p, ncol=r)
+zeros <- apply(out$B, 2, function(x) x==0)
+for(i in 1:ncol(colorz)){
+  colorz[zeros[, i], i] <- "red"
+}
+
+plot(Bhat_glmnet, fit_mrmash$mu1, main="mr.mash vs glmnet", 
+     xlab="glmnet estimated coefficients", ylab="mr.mash estimated coefficients",
+     col=colorz, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+legend("topleft", 
+       legend = c("Non-zero", "Zero"), 
+       col = c("black", "red"), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=2) 
+
+cat("Prediction MSE of glmnet\n")
+compute_accuracy(Ytest, Yhat_glmnet)$mse
+
+cat("Prediction MSE of mr.mash\n")
+compute_accuracy(Ytest, Yhat_mrmash)$mse
+```
+Surprisingly, mr.mash seems to do pretty well in this situation too.
