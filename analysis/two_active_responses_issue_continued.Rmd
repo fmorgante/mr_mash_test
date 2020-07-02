@@ -167,7 +167,7 @@ compute_accuracy(Ytest, Yhat_mrmash)$mse
 As we can see, *mr.mash* performs pretty poorly. 
 
 Let's now try to repeate the simulation above but with 4 causal reponses with shared effects.
-```{r analysis r_causal_4}
+```{r analysis r_causal_4, fig.height=12, fig.width=15}
 ###Set seed
 set.seed(123)
 ###Set parameters
@@ -261,7 +261,7 @@ compute_accuracy(Ytest, Yhat_mrmash)$mse
 Here, we can see that mr.mash performs better.
 
 We will now see what happens if repeate the analysis above but with 2 groups of 2 causal reponses with shared effects and a group of 2 responses with no effect. The variables come from each of the two mixture components with equal probability.
-```{r analysis r_causal_2plus2}
+```{r analysis r_causal_2plus2, fig.height=12, fig.width=15}
 ###Set seed
 set.seed(123)
 ###Set parameters
