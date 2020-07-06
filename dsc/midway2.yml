@@ -49,7 +49,7 @@ default:
   time_per_instance: 5m
 
 fit:
-  time_per_instance: 60m
+  time_per_instance: 240m
   instances_per_job: 20
   instances_per_node: 4
   mem_per_instance: 2G
