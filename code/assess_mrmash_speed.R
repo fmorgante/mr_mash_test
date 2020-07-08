@@ -20,11 +20,8 @@ compute_accuracy <- function(Y, Yhat) {
   
   return(list(bias=bias, r2=r2, mse=mse))
 }
-compute_univariate_sumstats_adj <- function(X, Y, B, standardize=FALSE, standardize.response=FALSE){
+compute_univariate_sumstats_adj <- function(X, Y, B, standardize=FALSE, standardize.response=FALSE, mc.cores=1){
   r <- ncol(Y)
-  p <- ncol(X)
-  Bhat <- matrix(as.numeric(NA), nrow=p, ncol=r)
-  Shat <- matrix(as.numeric(NA), nrow=p, ncol=r)
   
   X <- scale(X, center=TRUE, scale=standardize) 
   Y <- scale(Y, center=TRUE, scale=standardize.response)
@@ -32,16 +29,24 @@ compute_univariate_sumstats_adj <- function(X, Y, B, standardize=FALSE, standard
   if(standardize)
     B <- B*attr(X,"scaled:scale")
   
-  for(i in 1:r){
+  linreg <- function(i, X, Y, B){
+    p <- ncol(X)
+    bhat <- rep(as.numeric(NA), p)
+    shat <- rep(as.numeric(NA), p)
+    
     for(j in 1:p){
       Rij <- Y[, i] - X[, -j]%*%B[-j, i]
       fit <- lm(Rij ~ X[, j]-1)
-      Bhat[j, i] <- coef(fit)
-      Shat[j, i] <- summary(fit)$coefficients[1, 2]
+      bhat[j] <- coef(fit)
+      shat[j] <- summary(fit)$coefficients[1, 2]
     }
+    
+    return(list(bhat=bhat, shat=shat))
   }
   
-  return(list(Bhat=Bhat, Shat=Shat))
+  out <- parallel::mclapply(1:r, linreg, X, Y, B, mc.cores=mc.cores)
+  
+  return(list(Bhat=sapply(out,"[[","bhat"), Shat=sapply(out,"[[","shat")))
 }
 
 ###Parse command line arguments
@@ -104,7 +109,8 @@ prop_nonzero_glmnet <- sum(Bhat_glmnet[, 1]!=0)/p
 
 ###Compute grid of variances
 tic <- Sys.time()
-univ_sumstats <- compute_univariate_sumstats(Xtrain, Ytrain, standardize=standardize, standardize.response=FALSE)
+univ_sumstats <- compute_univariate_sumstats(Xtrain, Ytrain, standardize=standardize, 
+                                             standardize.response=FALSE, mc.cores=nthreads)
 grid <- autoselect.mixsd(univ_sumstats, mult=sqrt(2))^2
 toc <- Sys.time()
 
@@ -113,7 +119,8 @@ cat("grid of variances computed in", difftime(toc, tic, units="mins"),
 
 ###Compute prior with both canonical and data-driven covariance matrices
 tic <- Sys.time()
-univ_sumstats_adj <- compute_univariate_sumstats_adj(Xtrain, Ytrain, Bhat_glmnet, standardize=standardize, standardize.response=FALSE)
+univ_sumstats_adj <- compute_univariate_sumstats_adj(Xtrain, Ytrain, Bhat_glmnet, standardize=standardize, 
+                                                     standardize.response=FALSE, mc.cores=nthreads)
 res_cor <- mashr::estimate_null_correlation_simple(mashr::mash_set_data(univ_sumstats_adj$Bhat, univ_sumstats_adj$Shat))
 S0_datadriven <- compute_data_driven_covs(univ_sumstats_adj, subset_thresh=0.05, n_pcs=3, 
                                           non_singleton=FALSE, Gamma=res_cor)

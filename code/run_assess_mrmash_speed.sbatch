@@ -3,7 +3,7 @@
 #SBATCH --job-name=assess_mrmash_speed
 #SBATCH --output=assess_mrmash_speed.%j.out
 #SBATCH --error=assess_mrmash_speed.%j.err
-#SBATCH --time=24:00:00
+#SBATCH --time=12:00:00
 #SBATCH --partition=broadwl
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=4
@@ -22,7 +22,7 @@ export LIBRARY_PATH=$RHOME/lib64/R/lib:$LIBRARY_PATH
 ##No singletons
 Rscript assess_mrmash_speed.R --nthreads 4 --standardize FALSE --w0_threshold 1e-8 --singletons FALSE
                      
-echo -e "\n\n\n NO SINGLETON ANALYSIS FINISHED \n\n\n"
+echo -e "\n\n\nNO SINGLETON ANALYSIS FINISHED \n\n\n"
 
 ##With singletons
 Rscript assess_mrmash_speed.R --nthreads 4 --standardize FALSE --w0_threshold 1e-8 --singletons TRUE
