@@ -44,8 +44,13 @@ compute_univariate_sumstats_adj <- function(X, Y, B, standardize=FALSE, standard
     return(list(bhat=bhat, shat=shat))
   }
   
-  out <- parallel::mclapply(1:r, linreg, X, Y, B, mc.cores=mc.cores)
-  
+  ###mclapply is a little faster but uses more memory
+  # out <- parallel::mclapply(1:r, linreg, X, Y, B, mc.cores=mc.cores)
+   
+  cl <- parallel::makeCluster(mc.cores)
+  out <- parallel::parLapply(cl, 1:r, linreg, X, Y, B)
+  parallel::stopCluster(cl)
+
   return(list(Bhat=sapply(out,"[[","bhat"), Shat=sapply(out,"[[","shat")))
 }
 

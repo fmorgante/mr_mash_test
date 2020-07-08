@@ -3,11 +3,11 @@
 #SBATCH --job-name=assess_mrmash_speed
 #SBATCH --output=assess_mrmash_speed.%j.out
 #SBATCH --error=assess_mrmash_speed.%j.err
-#SBATCH --time=12:00:00
+#SBATCH --time=08:00:00
 #SBATCH --partition=broadwl
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=4G
+#SBATCH --mem=12G
 #SBATCH --account=pi-yangili1
 
 ###Load necessary modules
