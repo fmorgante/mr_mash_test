@@ -10,5 +10,5 @@ compute_accuracy <- function(Y, Yhat) {
     mse[i] <- mean((Y[, i] - Yhat[, i])^2)
   }
   
-  return(list(bias=bias, r2=r2, mse=mse))
+  return(list(bias=bias, r2=r2, mse=mse, scaled_mse=mse/matrixStats::colVars(Y)))
 }

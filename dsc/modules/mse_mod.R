@@ -1,1 +1,1 @@
-err <- compute_accuracy(Y, Yhat)$mse
+err <- compute_accuracy(Y, Yhat)$scaled_mse
