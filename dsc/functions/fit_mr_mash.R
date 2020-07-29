@@ -2,13 +2,14 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
                         w0_threshold, convergence_criterion, tol, singletons, hetgrid, data_driven_mats, 
                         subset_thresh, nthreads){
   
+  ###Get number of responses and number of variables
   r <- ncol(Y)
   p <- ncol(X)
   
   time1 <- proc.time()
   
   ##Fit group-lasso
-  cvfit_glmnet <- glmnet::cv.glmnet(x=X, y=Y, family="mgaussian", alpha=1)
+  cvfit_glmnet <- glmnet::cv.glmnet(x=X, y=Y, family="mgaussian", alpha=1, standardize=standardize)
   coeff_glmnet <- coef(cvfit_glmnet, s="lambda.min")
     
   ##Build matrix of initial estimates for mr.mash
@@ -25,7 +26,7 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
   grid <- mr.mash.alpha::autoselect.mixsd(univ_sumstats, mult=sqrt(2))^2
   
   ###Compute canonical matrices
-  S0_raw <- mr.mash.alpha::compute_canonical_covs(ncol(Y), singletons=singletons, hetgrid=hetgrid)
+  S0_raw <- mr.mash.alpha::compute_canonical_covs(r, singletons=singletons, hetgrid=hetgrid)
   
   ###Compute data-driven covariance matrices
   if(data_driven_mats){
