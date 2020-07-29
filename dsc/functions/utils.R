@@ -1,5 +1,5 @@
 ###Functions to compute adjusted univariate sumstats
-compute_univariate_sumstats_adj <- function(X, Y, B, a, standardize=FALSE, standardize.response=FALSE, mc.cores=1){
+compute_univariate_sumstats_adj <- function(X, Y, B, a, standardize=standardize, standardize.response=FALSE, mc.cores=1){
   r <- ncol(Y)
   
   X <- scale(X, center=TRUE, scale=standardize) 
