@@ -1,1 +1,1 @@
-out <- fit_mglmnet(X, Y, alpha)
+out <- fit_mglmnet(X, Y, alpha, standardize)
