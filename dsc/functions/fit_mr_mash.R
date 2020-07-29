@@ -5,6 +5,8 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
   r <- ncol(Y)
   p <- ncol(X)
   
+  time1 <- proc.time()
+  
   ##Fit group-lasso
   cvfit_glmnet <- glmnet::cv.glmnet(x=X, y=Y, family="mgaussian", alpha=1)
   coeff_glmnet <- coef(cvfit_glmnet, s="lambda.min")
@@ -42,8 +44,6 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
   w0 <- c((1-prop_nonzero_glmnet), rep(prop_nonzero_glmnet/(length(S0)-1), (length(S0)-1)))
 
   ###Fit mr.mash
-  time1 <- proc.time()
-  
   fit <- mr.mash.alpha::mr.mash(X=X, Y=Y, S0=S0, w0=w0, update_w0=update_w0, update_w0_method=update_w0_method,
                                 compute_ELBO=TRUE, standardize=standardize, verbose=FALSE, update_V=update_V,
                                 update_V_method=update_V_method, ca_update_order=ca_update_order, mu1_init=mu1_init, 
