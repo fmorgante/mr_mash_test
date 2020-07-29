@@ -1,7 +1,7 @@
-fit_mglmnet <- function(X, Y, alpha){
+fit_mglmnet <- function(X, Y, alpha, standardize){
   time1 <- proc.time()
   
-  cvfit <- glmnet::cv.glmnet(x=X, y=Y, family="mgaussian", alpha=alpha)
+  cvfit <- glmnet::cv.glmnet(x=X, y=Y, family="mgaussian", alpha=alpha, standardize=standardize)
   coeffic <- coef(cvfit, s="lambda.min")
   
   time2 <- proc.time()
