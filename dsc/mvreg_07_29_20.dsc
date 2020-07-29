@@ -8,9 +8,11 @@ DSC:
   exec_path: modules
   replicate: 2
   define:
-    simulate: indepX_indepV_indepB_allr_norm, corrX_indepV_indepB, highcorrX_indepV_indepB, 
-              indepX_indepV_sharedB, corrX_indepV_sharedB, highcorrX_indepV_sharedB
+    simulate: indepX_indepV_indepB_allr_norm, corrX_indepV_indepB_allr_norm, highcorrX_indepV_indepB_allr_norm, 
+              indepX_indepV_sharedB_allr_norm, corrX_indepV_sharedB_allr_norm, highcorrX_indepV_sharedB_allr_norm,
+              indepX_indepV_indepB_2blocksr_norm
     fit:      mr_mash_em_singletons_no_datadriven, mr_mash_em_singletons_no_datadriven_drop_w0,
+              mr_mash_em_no_singletons_datadriven, mr_mash_em_no_singletons_datadriven_drop_w0,
               mlasso, mridge, menet
     predict:  predict_linear
     score:    r2, scaled_mse, bias
@@ -24,11 +26,12 @@ indepX_indepV_indepB_allr_norm: simulate_data_mod.R
   p:        50
   p_causal: 5
   r:        5
-  r_causal: 5
+  r_causal: raw(list(1:5))
   pve:      0.15
-  B_cor:    0
-  B_scale:  1
-  w:        1
+  B_cor:    raw(list(0))
+  B_scale:  raw(list(1))
+  w:        raw(list(1))
+  wb:       1
   X_cor:    0
   X_scale:  1
   V_cor:    0
@@ -42,29 +45,38 @@ indepX_indepV_indepB_allr_norm: simulate_data_mod.R
 #Correlated predictors, independent residuals, independent effects from a single normal,
 #all resposens are causal
 corrX_indepV_indepB_allr_norm(indepX_indepV_indepB_allr_norm):
-  X_cor:   0.5
+  X_cor:    0.5
   
 #Higly correlated predictors, independent residuals, independent effects from a single normal,
 #all resposens are causal
 highcorrX_indepV_indepB_allr_norm(indepX_indepV_indepB_allr_norm):
-  X_cor:   0.8
+  X_cor:    0.8
   
 #Independent predictors, independent residuals, shared effects from a single normal,
 #all resposens are causal
 indepX_indepV_sharedB_allr_norm(indepX_indepV_indepB_allr_norm):
-  B_cor:   1
+  B_cor:    raw(list(1))
 
 #Correlated predictors, independent residuals, shared effects from a single normal,
 #all resposens are causal
 corrX_indepV_sharedB_allr_norm(indepX_indepV_indepB_allr_norm):
-  B_cor:   1
-  X_cor:   0.5
+  B_cor:    raw(list(1))
+  X_cor:    0.5
 
 #Higly correlated predictors, independent residuals, shared effects from a single normal,
 #all resposens are causal
 highcorrX_indepV_sharedB_allr_norm(indepX_indepV_indepB_allr_norm):
-  B_cor:   1
-  X_cor:   0.8
+  B_cor:    raw(list(1))
+  X_cor:    0.8
+  
+#Independent predictors, independent residuals, independent effects from a 2-component mixture
+#of normals, all resposens are causal with a 2-block structure
+indepX_indepV_indepB_2blocksr_norm(indepX_indepV_indepB_allr_norm):
+  r_causal: raw(list(1:2,3:5))
+  B_scale:  raw(list(1,1))
+  B_cor:    raw(list(1,1))
+  w:        raw(list(1,1))
+  wb:       (0.5,0.5)
 
 
 ## Fit modules
@@ -83,9 +95,9 @@ mr_mash_em_singletons_no_datadriven: fit_mr_mash_mod.R
   convergence_criterion:  "ELBO"
   tol:                    1e-2
   singletons:             TRUE
-  hetgrid:                (0, 0.5, 1)
+  hetgrid:                (0,0.5,1)
   data_driven_mats:       FALSE
-  subset_thresh:          0.05
+  subset_thresh:          0.7
   nthreads:               1
   $fit_obj:               out$fit
   $B_est:                 out$B_est
@@ -95,7 +107,21 @@ mr_mash_em_singletons_no_datadriven: fit_mr_mash_mod.R
 #EM w0 updates, drop w0 < 1e-8, standardize X, update V (constrained diagonal),
 #singletons, no data-driven matrices
 mr_mash_em_singletons_no_datadriven_drop_w0(mr_mash_em_singletons_no_datadriven):
-  w0_threshold: 1e-8
+  w0_threshold:           1e-8
+  
+#EM w0 updates, standardize X, update V (constrained diagonal),
+#no singletons, data-driven matrices
+mr_mash_em_no_singletons_datadriven(mr_mash_em_singletons_no_datadriven):
+  singletons:             FALSE
+  data_driven_mats:       TRUE
+  
+#EM w0 updates, drop w0 < 1e-8, standardize X, update V (constrained diagonal),
+#no singletons, data-driven matrices
+mr_mash_em_no_singletons_datadriven_drop_w0(mr_mash_em_singletons_no_datadriven):
+  w0_threshold:           1e-8
+  singletons:             FALSE
+  data_driven_mats:       TRUE
+
   
 #Multivariate LASSO  
 mlasso: fit_mglmnet_mod.R
