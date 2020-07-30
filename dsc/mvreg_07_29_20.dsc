@@ -23,10 +23,10 @@ DSC:
 #all resposens are causal
 indepX_indepV_indepB_allr_norm: simulate_data_mod.R
   n:        900
-  p:        50
-  p_causal: 5
-  r:        5
-  r_causal: raw(list(1:5))
+  p:        5000
+  p_causal: 50
+  r:        50
+  r_causal: raw(list(1:50))
   pve:      0.15
   B_cor:    raw(list(0))
   B_scale:  raw(list(1))
@@ -72,7 +72,7 @@ highcorrX_indepV_sharedB_allr_norm(indepX_indepV_indepB_allr_norm):
 #Independent predictors, independent residuals, independent effects from a 2-component mixture
 #of normals, all resposens are causal with a 2-block structure
 indepX_indepV_indepB_2blocksr_norm(indepX_indepV_indepB_allr_norm):
-  r_causal: raw(list(1:2,3:5))
+  r_causal: raw(list(1:10,11:50))
   B_scale:  raw(list(1,1))
   B_cor:    raw(list(1,1))
   w:        raw(list(1,1))
@@ -97,8 +97,8 @@ mr_mash_em_singletons_no_datadriven: fit_mr_mash_mod.R
   singletons:             TRUE
   hetgrid:                (0,0.5,1)
   data_driven_mats:       FALSE
-  subset_thresh:          0.7
-  nthreads:               1
+  subset_thresh:          0.1
+  nthreads:               4
   $fit_obj:               out$fit
   $B_est:                 out$B_est
   $intercept_est:         out$intercept_est
