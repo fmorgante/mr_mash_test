@@ -46,7 +46,7 @@ default:
   instances_per_node: 8
   cpus_per_instance: 1
   mem_per_instance: 2G
-  time_per_instance: 5m
+  time_per_instance: 7m
 
 fit:
   time_per_instance: 20m
