@@ -12,6 +12,8 @@ analysis/site_libs
 code/*.out
 code/*.err
 dsc/outfiles
+dsc/*.err
+dsc/*.out
 output/*
 
 **/.sos
