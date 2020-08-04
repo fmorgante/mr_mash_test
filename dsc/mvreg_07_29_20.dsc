@@ -6,12 +6,12 @@ DSC:
   R_libs: mr.mash.alpha, glmnet
   lib_path: functions
   exec_path: modules
-  replicate: 2
+  replicate: 1
   define:
-    simulate: indepX_indepV_indepB_allr_norm, corrX_indepV_indepB_allr_norm, highcorrX_indepV_indepB_allr_norm, 
+    simulate: #indepX_indepV_indepB_allr_norm, corrX_indepV_indepB_allr_norm, highcorrX_indepV_indepB_allr_norm, 
               indepX_indepV_sharedB_allr_norm, corrX_indepV_sharedB_allr_norm, highcorrX_indepV_sharedB_allr_norm,
               indepX_indepV_indepB_2blocksr_norm
-    fit:      mr_mash_em_singletons_no_datadriven, mr_mash_em_singletons_no_datadriven_drop_w0,
+    fit:      #mr_mash_em_singletons_no_datadriven, mr_mash_em_singletons_no_datadriven_drop_w0,
               mr_mash_em_no_singletons_datadriven, mr_mash_em_no_singletons_datadriven_drop_w0,
               mlasso, mridge, menet
     predict:  predict_linear
