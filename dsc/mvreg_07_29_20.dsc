@@ -8,12 +8,12 @@ DSC:
   exec_path: modules
   replicate: 1
   define:
-    simulate: #indepX_indepV_indepB_allr_norm, corrX_indepV_indepB_allr_norm, highcorrX_indepV_indepB_allr_norm, 
-              indepX_indepV_sharedB_allr_norm, corrX_indepV_sharedB_allr_norm, highcorrX_indepV_sharedB_allr_norm,
+    simulate: indepX_indepV_sharedB_allr_norm, corrX_indepV_sharedB_allr_norm, highcorrX_indepV_sharedB_allr_norm,
               indepX_indepV_indepB_2blocksr_norm
-    fit:      #mr_mash_em_singletons_no_datadriven, mr_mash_em_singletons_no_datadriven_drop_w0,
-              mr_mash_em_no_singletons_datadriven, mr_mash_em_no_singletons_datadriven_drop_w0,
+              #indepX_indepV_indepB_allr_norm, corrX_indepV_indepB_allr_norm, highcorrX_indepV_indepB_allr_norm, 
+    fit:      mr_mash_em_no_singletons_datadriven, mr_mash_em_no_singletons_datadriven_drop_w0,
               mlasso, mridge, menet
+              #mr_mash_em_singletons_no_datadriven, mr_mash_em_singletons_no_datadriven_drop_w0,
     predict:  predict_linear
     score:    r2, scaled_mse, bias
   run: simulate * fit * predict * score
@@ -28,10 +28,9 @@ indepX_indepV_indepB_allr_norm: simulate_data_mod.R
   r:        50
   r_causal: raw(list(1:50))
   pve:      0.15
-  B_cor:    raw(list(0))
-  B_scale:  raw(list(1))
-  w:        raw(list(1))
-  wb:       1
+  B_cor:    0
+  B_scale:  1
+  w:        1
   X_cor:    0
   X_scale:  1
   V_cor:    0
@@ -55,28 +54,27 @@ highcorrX_indepV_indepB_allr_norm(indepX_indepV_indepB_allr_norm):
 #Independent predictors, independent residuals, shared effects from a single normal,
 #all resposens are causal
 indepX_indepV_sharedB_allr_norm(indepX_indepV_indepB_allr_norm):
-  B_cor:    raw(list(1))
+  B_cor:    1
 
 #Correlated predictors, independent residuals, shared effects from a single normal,
 #all resposens are causal
 corrX_indepV_sharedB_allr_norm(indepX_indepV_indepB_allr_norm):
-  B_cor:    raw(list(1))
+  B_cor:    1
   X_cor:    0.5
 
 #Higly correlated predictors, independent residuals, shared effects from a single normal,
 #all resposens are causal
 highcorrX_indepV_sharedB_allr_norm(indepX_indepV_indepB_allr_norm):
-  B_cor:    raw(list(1))
+  B_cor:    1
   X_cor:    0.8
   
 #Independent predictors, independent residuals, independent effects from a 2-component mixture
 #of normals, all resposens are causal with a 2-block structure
 indepX_indepV_indepB_2blocksr_norm(indepX_indepV_indepB_allr_norm):
   r_causal: raw(list(1:10,11:50))
-  B_scale:  raw(list(1,1))
-  B_cor:    raw(list(1,1))
-  w:        raw(list(1,1))
-  wb:       (0.5,0.5)
+  B_scale:  (1,1)
+  B_cor:    (1,0.5)
+  w:        (0.5,0.5)
 
 
 ## Fit modules
