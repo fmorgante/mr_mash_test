@@ -1,0 +1,1 @@
+out <- get_univ_sumstats(X, Y, standardize, zscores, nthreads)
