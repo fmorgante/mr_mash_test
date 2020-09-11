@@ -39,9 +39,9 @@ extract_one_data = function(infile, n_random) {
   # If cannot read the input for some reason then let it go. I dont care losing one.
   dat = tryCatch(readRDS(infile)$sumstats, error = function(e) return(NULL))
   if (is.null(dat)) return(NULL)
-  z = abs(dat$bhat/dat$shat)
+  z = abs(dat$Bhat/dat$Shat)
   max_idx = matxMax(z)
-  strong = list(bhat = dat$bhat[max_idx[1],,drop=FALSE], shat= dat$shat[max_idx[1],,drop=FALSE])
+  strong = list(bhat = dat$Bhat[max_idx[1],,drop=FALSE], shat= dat$Shat[max_idx[1],,drop=FALSE])
   if (max_idx[1] == 1) {
     sample_idx = 2:nrow(z)
   } else if (max_idx[1] == nrow(z)) {
@@ -50,7 +50,7 @@ extract_one_data = function(infile, n_random) {
     sample_idx = c(1:(max_idx[1]-1), (max_idx[1]+1):nrow(z))
   }
   random_idx = sample(sample_idx, n_random, replace = TRUE)
-  random = list(bhat = dat$bhat[random_idx,,drop=FALSE], shat = dat$shat[random_idx,,drop=FALSE])
+  random = list(bhat = dat$Bhat[random_idx,,drop=FALSE], shat = dat$Shat[random_idx,,drop=FALSE])
   return(list(random = remove_rownames(random),  strong = remove_rownames(strong)))
 }
 
