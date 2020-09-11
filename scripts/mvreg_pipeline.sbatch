@@ -15,7 +15,7 @@ source activate py37dsc
 ###Set variables
 dsc_outname=dsc_test
 dsc_outdir="../output/${dsc_outname}"
-prior_outdir="../output/${dsc_outname}_prior"
+inter_outdir="../output/${dsc_outname}_inter"
 
 ###Load necessary version of R
 module load gcc/6.2 texlive/2017 java/1.8 curl/7.50 mkl/2019.up1
@@ -25,31 +25,36 @@ export PATH=$RHOME/bin:$PATH
 export LD_LIBRARY_PATH=$RHOME/lib64/R/lib:$LD_LIBRARY_PATH
 export LIBRARY_PATH=$RHOME/lib64/R/lib:$LIBRARY_PATH
 
+###Make some necessary directories
+mkdir -p "${inter_outdir}/prior/sumstats"
+mkdir -p "${inter_outdir}/prior/matrices"
+mkdir -p "${inter_outdir}/misc"
+
 ###Run dsc to simulate genes and process data for data-driven covariance estimation
 cd ../dsc
-Rscript ../code/sample_testset_indeces.R --output "${dsc_outdir}_testset_index.rds" \
+Rscript ../code/sample_testset_indeces.R --output "${inter_outdir}/misc/testset_indeces.rds" \
                                          --n 90 \
                                          --prop_testset 0.2
                                          
-./simulate_process_data_for_mvreg_09_09_20.dsc -o "${dsc_outdir}" -c 4 --target sim_proc --replicate 50
+./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" -c 4 --target sim_proc --replicate 50
 
 ###Prepare summary stats for data-driven covariance estimation
-mkdir -p "${prior_outdir}/sumstats"
-mkdir -p "${prior_outdir}/matrices"
 Rscript ../code/prepare_sumstats_for_ED_prior.R --input_path "${dsc_outdir}/univ_sumstats" \
-                                                --output "${prior_outdir}/sumstats/effects_for_ED_prior.rds" \
+                                                --output "${inter_outdir}/prior/sumstats/${dsc_outname}_effects_for_ED_prior.rds" \
                                                 --n_random 4
                                                 
 ###Run GTEx pipeline to compute the prior covariance matrices
 sos run /project2/mstephens/fmorgante/gtexresults/workflows/mashr_flashr_workflow.ipynb prior \
         -j 4 \
-        --cwd "${prior_outdir}/matrices" \
-        --data "${prior_outdir}/sumstats/effects_for_ED_prior.rds"
+        --cwd "${inter_outdir}/prior/matrices" \
+        --data "${inter_outdir}/prior/sumstats/${dsc_outname}_effects_for_ED_prior.rds" \
+        --output-prefix "${dsc_outname}"
 
 ###Run dsc to simulate genes and process data for data-driven covariance estimation
-./simulate_process_data_for_mvreg_09_09_20.dsc -o "${dsc_outdir}" -c 4 --target fit_pred_score -s existing --replicate 10
+./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" -c 4 --target fit_pred_score -s existing --replicate 10
 
-                                   
+cd ../scripts
+
 ###Deactivate the environment
 source deactivate
 

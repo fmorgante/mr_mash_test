@@ -9,8 +9,8 @@ DSC:
   define:
     simulate: indepX_indepV_sharedB_allr_norm
     process: univ_sumstats
-    fit:      mr_mash_em_datadriven, mr_mash_em_no_datadriven
-              #mlasso, mridge, menet
+    fit:      mr_mash_em_datadriven, mr_mash_em_no_datadriven,
+              mlasso, mridge, menet
     predict:  predict_linear
     score:    r2, scaled_mse, bias
   run: 
@@ -26,19 +26,18 @@ indepX_indepV_indepB_allr_norm: simulate_data_all_genes_prior_mod.R
   p_causal:       10
   r:              5
   r_causal:       raw(list(1:5))
-  pve:            0.5
+  pve:            0.2
   B_cor:          0
   B_scale:        1
   w:              1
   X_cor:          0
   X_scale:        1
   V_cor:          0
-  testset_index:  "../output/dsc_test_testset_index.rds"
+  testset_index:  "../output/dsc_test_inter/misc/testset_indeces.rds"
   $Xtrain: out$Xtrain
   $Ytrain: out$Ytrain
   $Xtest:  out$Xtest
   $Ytest:  out$Ytest
-  $B_true: out$B_true
  
 #Correlated predictors, independent residuals, independent effects from a single normal,
 #all resposens are causal
@@ -102,6 +101,8 @@ mr_mash_em_no_datadriven: fit_mr_mash_all_genes_prior_mod.R
   ca_update_order:        "consecutive"
   convergence_criterion:  "ELBO"
   tol:                    1e-2
+  singletons:             TRUE
+  hetgrid:                (0, 0.25, 0.5, 0.75, 1)
   sumstats:               $sumstats
   data_driven_mats:       NULL
   nthreads:               1
@@ -113,8 +114,7 @@ mr_mash_em_no_datadriven: fit_mr_mash_all_genes_prior_mod.R
 #EM w0 updates, standardize X, update V (constrained diagonal),
 #data-driven matrices
 mr_mash_em_datadriven(mr_mash_em_no_datadriven):
-  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/dsc_test_prior/matrices/effects_for_ED_prior.EZ.FL_PC3.rds"
-
+  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/dsc_test_inter/prior/matrices/dsc_test.EZ.FL_PC3.rds"
 
 #Multivariate LASSO  
 mlasso: fit_mglmnet_mod.R
