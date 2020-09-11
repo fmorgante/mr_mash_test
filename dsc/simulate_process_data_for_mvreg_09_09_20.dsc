@@ -6,7 +6,6 @@ DSC:
   R_libs: mr.mash.alpha, glmnet, mashr
   lib_path: functions
   exec_path: modules
-  replicate: 50
   define:
     simulate: indepX_indepV_sharedB_allr_norm
     process: univ_sumstats
@@ -21,20 +20,20 @@ DSC:
 ## Simulate modules
 #Independent predictors, independent residuals, independent effects from a single normal,
 #all resposens are causal
-indepX_indepV_indepB_allr_norm: simulate_data_mod.R
-  n:        90
-  p:        500
-  p_causal: 10
-  r:        5
-  r_causal: raw(list(1:5))
-  pve:      0.5
-  B_cor:    0
-  B_scale:  1
-  w:        1
-  X_cor:    0
-  X_scale:  1
-  V_cor:    0
-  prop_testset: 0.2
+indepX_indepV_indepB_allr_norm: simulate_data_all_genes_prior_mod.R
+  n:              90
+  p:              500
+  p_causal:       10
+  r:              5
+  r_causal:       raw(list(1:5))
+  pve:            0.5
+  B_cor:          0
+  B_scale:        1
+  w:              1
+  X_cor:          0
+  X_scale:        1
+  V_cor:          0
+  testset_index:  "../output/dsc_test_testset_index.rds"
   $Xtrain: out$Xtrain
   $Ytrain: out$Ytrain
   $Xtest:  out$Xtest

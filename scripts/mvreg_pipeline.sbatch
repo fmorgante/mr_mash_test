@@ -25,9 +25,13 @@ export PATH=$RHOME/bin:$PATH
 export LD_LIBRARY_PATH=$RHOME/lib64/R/lib:$LD_LIBRARY_PATH
 export LIBRARY_PATH=$RHOME/lib64/R/lib:$LIBRARY_PATH
 
-###Run dsc to simulate genes
+###Run dsc to simulate genes and process data for data-driven covariance estimation
 cd ../dsc
-./simulate_process_data_for_mvreg_09_09_20.dsc -o "${dsc_outdir}" -c 4 
+Rscript ../code/sample_testset_indeces.R --output "${dsc_outdir}_testset_index.rds" \
+                                         --n 90 \
+                                         --prop_testset 0.2
+                                         
+./simulate_process_data_for_mvreg_09_09_20.dsc -o "${dsc_outdir}" -c 4 --target sim_proc --replicate 50
 
 ###Prepare summary stats for data-driven covariance estimation
 mkdir -p "${prior_outdir}/sumstats"
@@ -41,7 +45,11 @@ sos run /project2/mstephens/fmorgante/gtexresults/workflows/mashr_flashr_workflo
         -j 4 \
         --cwd "${prior_outdir}/matrices" \
         --data "${prior_outdir}/sumstats/effects_for_ED_prior.rds"
-                                        
+
+###Run dsc to simulate genes and process data for data-driven covariance estimation
+./simulate_process_data_for_mvreg_09_09_20.dsc -o "${dsc_outdir}" -c 4 --target fit_pred_score -s existing --replicate 10
+
+                                   
 ###Deactivate the environment
 source deactivate
 
