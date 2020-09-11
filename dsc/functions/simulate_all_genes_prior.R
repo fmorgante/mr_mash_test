@@ -8,6 +8,11 @@ simulate_data_all_genes_prior <- function(n, p, p_causal, r, r_causal,
                                                w=w, X_cor=X_cor, X_scale=X_scale,
                                                V_cor=V_cor)
   
+  colnames(dat$Y) <- paste0("Y", seq(1, r))
+  rownames(dat$Y) <- paste0("N", seq(1, n))
+  colnames(dat$X) <- paste0("X", seq(1, p))
+  rownames(dat$X) <- paste0("N", seq(1, n))
+  
   test_set <- readRDS(testset_index)
   Ytrain <- dat$Y[-test_set, ]
   Xtrain <- dat$X[-test_set, ]
