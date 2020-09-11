@@ -3,14 +3,20 @@
 ## A DSC for evaluating prediction accuracy of
 ## mr.mash in different scenarios.
 DSC:
-  R_libs: mr.mash.alpha
+  R_libs: mr.mash.alpha, glmnet, mashr
   lib_path: functions
   exec_path: modules
   replicate: 50
   define:
     simulate: indepX_indepV_sharedB_allr_norm
     process: univ_sumstats
-  run: simulate * process
+    fit:      mr_mash_em_datadriven, mr_mash_em_no_datadriven
+              #mlasso, mridge, menet
+    predict:  predict_linear
+    score:    r2, scaled_mse, bias
+  run: 
+    sim_proc: simulate * process
+    fit_pred_score: simulate * process * fit * predict * score
 
 ## Simulate modules
 #Independent predictors, independent residuals, independent effects from a single normal,
@@ -71,6 +77,7 @@ indepX_indepV_indepB_2blocksr_norm(indepX_indepV_indepB_allr_norm):
   w:        (0.5,0.5)
 
 
+##Process modules
 #Compute univariate summary statistics
 univ_sumstats: get_univ_sumstats_mod.R
   X:            $Xtrain
@@ -79,6 +86,82 @@ univ_sumstats: get_univ_sumstats_mod.R
   standardize:  TRUE
   nthreads:     1
   $sumstats:    out
+  
+
+## Fit modules
+#EM w0 updates, no drop w0, standardize X, update V (constrained diagonal),
+#no data-driven matrices
+mr_mash_em_no_datadriven: fit_mr_mash_all_genes_prior_mod.R
+  X:                      $Xtrain
+  Y:                      $Ytrain
+  update_w0:              TRUE
+  update_w0_method:       "EM"
+  w0_threshold:           0
+  standardize:            TRUE
+  update_V:               TRUE
+  update_V_method:        "diagonal"
+  ca_update_order:        "consecutive"
+  convergence_criterion:  "ELBO"
+  tol:                    1e-2
+  sumstats:               $sumstats
+  data_driven_mats:       NULL
+  nthreads:               1
+  $fit_obj:               out$fit
+  $B_est:                 out$B_est
+  $intercept_est:         out$intercept_est
+  $time:                  out$elapsed_time
+
+#EM w0 updates, standardize X, update V (constrained diagonal),
+#data-driven matrices
+mr_mash_em_datadriven(mr_mash_em_no_datadriven):
+  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/dsc_test_prior/matrices/effects_for_ED_prior.EZ.FL_PC3.rds"
+
+
+#Multivariate LASSO  
+mlasso: fit_mglmnet_mod.R
+  X:                    $Xtrain
+  Y:                    $Ytrain
+  alpha:                1
+  standardize:          TRUE
+  $fit_obj:             out$fit
+  $B_est:               out$B_est
+  $intercept_est:       out$intercept_est
+  $time:                out$elapsed_time
+
+#Multivariate ridge  
+mridge(mlasso):
+  alpha:                0
+
+#Multivariate enet  
+menet(mlasso):
+  alpha:                0.5
+
+
+## Predict module
+predict_linear: predict_mod.R
+  B:         $B_est
+  intercept: $intercept_est
+  X:         $Xtest
+  $Yhattest: Yhattest
+
+## Score modules
+#r^2
+r2: r2_mod.R
+  Y:    $Ytest
+  Yhat: $Yhattest 
+  $err: err
+
+#MSE scaled by var(y)
+scaled_mse: scaled_mse_mod.R
+  Y:    $Ytest
+  Yhat: $Yhattest 
+  $err: err
+
+#Slope of y~yhat  
+bias: bias_mod.R
+  Y:    $Ytest
+  Yhat: $Yhattest 
+  $err: err
   
 
 
