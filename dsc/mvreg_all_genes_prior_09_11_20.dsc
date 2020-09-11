@@ -82,7 +82,7 @@ univ_sumstats: get_univ_sumstats_mod.R
   Y:            $Ytrain
   zscores:      FALSE
   standardize:  TRUE
-  nthreads:     1
+  nthreads:     2
   $sumstats:    out
   
 
@@ -105,7 +105,7 @@ mr_mash_em_no_datadriven: fit_mr_mash_all_genes_prior_mod.R
   hetgrid:                (0, 0.25, 0.5, 0.75, 1)
   sumstats:               $sumstats
   data_driven_mats:       NULL
-  nthreads:               1
+  nthreads:               4
   $fit_obj:               out$fit
   $B_est:                 out$B_est
   $intercept_est:         out$intercept_est
@@ -162,6 +162,3 @@ bias: bias_mod.R
   Yhat: $Yhattest 
   $err: err
   
-
-
-

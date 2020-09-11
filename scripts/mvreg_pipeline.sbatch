@@ -36,7 +36,7 @@ Rscript ../code/sample_testset_indeces.R --output "${inter_outdir}/misc/testset_
                                          --n 90 \
                                          --prop_testset 0.2
                                          
-./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" -c 4 --target sim_proc --replicate 50
+./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" -c 4 --target sim_proc --replicate 50 --host midway2.yml
 
 ###Prepare summary stats for data-driven covariance estimation
 Rscript ../code/prepare_sumstats_for_ED_prior.R --input_path "${dsc_outdir}/univ_sumstats" \
@@ -51,7 +51,7 @@ sos run /project2/mstephens/fmorgante/gtexresults/workflows/mashr_flashr_workflo
         --output-prefix "${dsc_outname}"
 
 ###Run dsc to simulate genes and process data for data-driven covariance estimation
-./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" -c 4 --target fit_pred_score -s existing --replicate 10
+./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" -c 4 --target fit_pred_score -s existing --replicate 10 -host midway2.yml
 
 cd ../scripts
 
