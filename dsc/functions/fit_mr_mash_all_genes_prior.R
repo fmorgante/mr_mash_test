@@ -9,7 +9,13 @@ fit_mr_mash_all_genes_prior <- function(X, Y, update_w0, update_w0_method, stand
   time1 <- proc.time()
   
   ##Fit group-lasso
-  cvfit_glmnet <- glmnet::cv.glmnet(x=X, y=Y, family="mgaussian", alpha=1, standardize=standardize)
+  f(nthreads>1){
+    doMC::registerDoMC(nthreads)
+    paral <- TRUE
+  } else {
+    paral <- FALSE
+  }
+  cvfit_glmnet <- glmnet::cv.glmnet(x=X, y=Y, family="mgaussian", alpha=1, standardize=standardize, parallel=paral)
   coeff_glmnet <- coef(cvfit_glmnet, s="lambda.min")
     
   ##Build matrix of initial estimates for mr.mash

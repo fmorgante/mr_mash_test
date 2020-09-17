@@ -1,7 +1,15 @@
-fit_mglmnet <- function(X, Y, alpha, standardize){
+fit_mglmnet <- function(X, Y, alpha, standardize, nthreads){
+  
+  if(nthreads>1){
+    doMC::registerDoMC(nthreads)
+    paral <- TRUE
+  } else {
+    paral <- FALSE
+  }
+  
   time1 <- proc.time()
   
-  cvfit <- glmnet::cv.glmnet(x=X, y=Y, family="mgaussian", alpha=alpha, standardize=standardize)
+  cvfit <- glmnet::cv.glmnet(x=X, y=Y, family="mgaussian", alpha=alpha, standardize=standardize, parallel=paral)
   coeffic <- coef(cvfit, s="lambda.min")
   
   time2 <- proc.time()

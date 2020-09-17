@@ -1,1 +1,1 @@
-out <- fit_mglmnet(X, Y, alpha, standardize)
+out <- fit_mglmnet(X, Y, alpha, standardize, nthreads)
