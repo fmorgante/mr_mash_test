@@ -3,7 +3,7 @@
 ## A DSC for evaluating prediction accuracy of
 ## mr.mash in different scenarios.
 DSC:
-  R_libs: mr.mash.alpha, glmnet, mashr
+  R_libs: mr.mash.alpha, glmnet, mashr, doMC
   lib_path: functions
   exec_path: modules
   define:
@@ -70,8 +70,8 @@ highcorrX_indepV_sharedB_allr_norm(indepX_indepV_indepB_allr_norm):
 #of normals, all resposens are causal with a 2-block structure
 indepX_indepV_indepB_2blocksr_norm(indepX_indepV_indepB_allr_norm):
   r_causal: raw(list(1:10,11:50))
-  B_scale:  (1,1)
-  B_cor:    (1,0.5)
+  B_scale:  (0.8,1)
+  B_cor:    (1,1)
   w:        (0.5,0.5)
 
 
@@ -122,6 +122,7 @@ mlasso: fit_mglmnet_mod.R
   Y:                    $Ytrain
   alpha:                1
   standardize:          TRUE
+  nthreads:             4
   $fit_obj:             out$fit
   $B_est:               out$B_est
   $intercept_est:       out$intercept_est
