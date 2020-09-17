@@ -2,8 +2,8 @@ DSC:
   midway2:
     description: UChicago RCC cluster Midway 2
     queue_type: pbs
-    status_check_interval: 60
-    max_running_jobs: 30
+    status_check_interval: 30
+    max_running_jobs: 50
     max_cores: 40
     max_walltime: "36:00:00"
     max_mem: 64G
@@ -26,7 +26,7 @@ DSC:
       export LD_LIBRARY_PATH=$RHOME/lib64/R/lib:$LD_LIBRARY_PATH
       export LIBRARY_PATH=$RHOME/lib64/R/lib:$LIBRARY_PATH
     partition: "SBATCH --partition=broadwl"
-    account: "SBATCH --account=pi-mstephens"
+    account: ""
     submit_cmd: sbatch {job_file}
     submit_cmd_output: "Submitted batch job {job_id}"
     status_cmd: squeue --job {job_id}
@@ -41,11 +41,11 @@ DSC:
 
 default:
   queue: midway2
-  instances_per_job: 100
+  instances_per_job: 200
   nodes_per_job: 1
   instances_per_node: 8
   cpus_per_instance: 1
-  mem_per_instance: 0.5G
+  mem_per_instance: 1G
   time_per_instance: 2m
   
 process:
@@ -55,6 +55,6 @@ process:
 fit:
   time_per_instance: 10m
   instances_per_job: 4
-  instances_per_node: 4
+  instances_per_node: 2
   mem_per_instance: 3G
   cpus_per_instance: 4

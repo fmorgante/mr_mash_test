@@ -82,7 +82,7 @@ univ_sumstats: get_univ_sumstats_mod.R
   Y:            $Ytrain
   zscores:      FALSE
   standardize:  TRUE
-  nthreads:     2
+  nthreads:     1
   $sumstats:    out
   
 
@@ -105,7 +105,7 @@ mr_mash_em_no_datadriven: fit_mr_mash_all_genes_prior_mod.R
   hetgrid:                (0, 0.25, 0.5, 0.75, 1)
   sumstats:               $sumstats
   data_driven_mats:       NULL
-  nthreads:               4
+  nthreads:               1
   $fit_obj:               out$fit
   $B_est:                 out$B_est
   $intercept_est:         out$intercept_est
@@ -122,7 +122,7 @@ mlasso: fit_mglmnet_mod.R
   Y:                    $Ytrain
   alpha:                1
   standardize:          TRUE
-  nthreads:             4
+  nthreads:             1
   $fit_obj:             out$fit
   $B_est:               out$B_est
   $intercept_est:       out$intercept_est

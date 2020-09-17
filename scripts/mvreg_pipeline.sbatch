@@ -16,6 +16,9 @@ source activate py37dsc
 dsc_outname=dsc_test
 dsc_outdir="../output/${dsc_outname}"
 inter_outdir="../output/${dsc_outname}_inter"
+n_ind=90 ###needs to match the value in dsc
+total_genes=50
+pred_genes=10
 
 ###Load necessary version of R
 module load gcc/6.2 texlive/2017 java/1.8 curl/7.50 mkl/2019.up1
@@ -33,10 +36,10 @@ mkdir -p "${inter_outdir}/misc"
 ###Run dsc to simulate genes and process data for data-driven covariance estimation
 cd ../dsc
 Rscript ../code/sample_testset_indeces.R --output "${inter_outdir}/misc/testset_indeces.rds" \
-                                         --n 90 \
+                                         --n "${n_ind}" \
                                          --prop_testset 0.2
                                          
-./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" -c 4 --target sim_proc --replicate 50 --host midway2.yml
+./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" --target sim_proc --replicate "${total_genes}" -c 4 #--host midway2.yml
 
 ###Prepare summary stats for data-driven covariance estimation
 Rscript ../code/prepare_sumstats_for_ED_prior.R --input_path "${dsc_outdir}/univ_sumstats" \
@@ -45,13 +48,14 @@ Rscript ../code/prepare_sumstats_for_ED_prior.R --input_path "${dsc_outdir}/univ
                                                 
 ###Run GTEx pipeline to compute the prior covariance matrices
 sos run /project2/mstephens/fmorgante/gtexresults/workflows/mashr_flashr_workflow.ipynb prior \
-        -j 4 \
+        -c midway2.yml \
+        -q fit \
         --cwd "${inter_outdir}/prior/matrices" \
         --data "${inter_outdir}/prior/sumstats/${dsc_outname}_effects_for_ED_prior.rds" \
         --output-prefix "${dsc_outname}"
 
 ###Run dsc to simulate genes and process data for data-driven covariance estimation
-./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" -c 4 --target fit_pred_score -s existing --replicate 10 -host midway2.yml
+./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" --target fit_pred_score -s existing --replicate "${pred_genes}" -c 4 #-host midway2.yml
 
 cd ../scripts
 
