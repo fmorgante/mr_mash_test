@@ -9,7 +9,7 @@ fit_mr_mash_all_genes_prior <- function(X, Y, update_w0, update_w0_method, stand
   time1 <- proc.time()
   
   ##Fit group-lasso
-  f(nthreads>1){
+  if(nthreads>1){
     doMC::registerDoMC(nthreads)
     paral <- TRUE
   } else {
