@@ -45,13 +45,12 @@ default:
   nodes_per_job: 1
   instances_per_node: 8
   cpus_per_instance: 1
-  mem_per_instance: 2G
-  time_per_instance: 5m
+  mem_per_instance: 0.5G
+  time_per_instance: 2m
   
 process:
-  instances_per_job: 8
-  cpus_per_instance: 2
-  mem_per_instance: 3G
+  instances_per_job: 20
+  mem_per_instance: 2G
 
 fit:
   time_per_instance: 10m
