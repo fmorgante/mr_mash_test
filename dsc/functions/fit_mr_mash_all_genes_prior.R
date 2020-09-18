@@ -1,6 +1,6 @@
 fit_mr_mash_all_genes_prior <- function(X, Y, update_w0, update_w0_method, standardize, update_V, update_V_method, ca_update_order,
                                         w0_threshold, convergence_criterion, tol, singletons, hetgrid, data_driven_mats, sumstats, 
-                                        nthreads){
+                                        nthreads, mu1_init){
   
   ###Get number of responses and number of variables
   r <- ncol(Y)
@@ -8,23 +8,23 @@ fit_mr_mash_all_genes_prior <- function(X, Y, update_w0, update_w0_method, stand
   
   time1 <- proc.time()
   
-  ##Fit group-lasso
-  if(nthreads>1){
-    doMC::registerDoMC(nthreads)
-    paral <- TRUE
-  } else {
-    paral <- FALSE
-  }
-  cvfit_glmnet <- glmnet::cv.glmnet(x=X, y=Y, family="mgaussian", alpha=1, standardize=standardize, parallel=paral)
-  coeff_glmnet <- coef(cvfit_glmnet, s="lambda.min")
-    
-  ##Build matrix of initial estimates for mr.mash
-  mu1_init <- matrix(as.numeric(NA), nrow=p, ncol=r)
-  intercept <- rep(as.numeric(NA), r)
-  for(i in 1:length(coeff_glmnet)){
-    mu1_init[, i] <- as.vector(coeff_glmnet[[i]])[-1]
-    intercept[i] <- as.vector(coeff_glmnet[[i]])[1]
-  }
+  # ##Fit group-lasso
+  # if(nthreads>1){
+  #   doMC::registerDoMC(nthreads)
+  #   paral <- TRUE
+  # } else {
+  #   paral <- FALSE
+  # }
+  # cvfit_glmnet <- glmnet::cv.glmnet(x=X, y=Y, family="mgaussian", alpha=1, standardize=standardize, parallel=paral)
+  # coeff_glmnet <- coef(cvfit_glmnet, s="lambda.min")
+  #   
+  # ##Build matrix of initial estimates for mr.mash
+  # mu1_init <- matrix(as.numeric(NA), nrow=p, ncol=r)
+  # intercept <- rep(as.numeric(NA), r)
+  # for(i in 1:length(coeff_glmnet)){
+  #   mu1_init[, i] <- as.vector(coeff_glmnet[[i]])[-1]
+  #   intercept[i] <- as.vector(coeff_glmnet[[i]])[1]
+  # }
   
   ##Compute grid of scaling factors
   grid <- mr.mash.alpha::autoselect.mixsd(sumstats, mult=sqrt(2))^2

@@ -9,7 +9,9 @@ DSC:
   define:
     simulate: indepX_indepV_indepB_2blocksr_norm
     process: univ_sumstats
-    fit:      mr_mash_em_datadriven, mr_mash_em_no_datadriven,
+    mr_mash_em_datadriven_mlasso: mlasso * mr_mash_em_datadriven
+    mr_mash_em_no_datadriven_mlasso: mlasso * mr_mash_em_no_datadriven
+    fit:      mr_mash_em_datadriven_mlasso, mr_mash_em_no_datadriven_mlasso,
               mlasso, mridge, menet
     predict:  predict_linear
     score:    r2, scaled_mse, bias
@@ -101,11 +103,12 @@ mr_mash_em_no_datadriven: fit_mr_mash_all_genes_prior_mod.R
   ca_update_order:        "consecutive"
   convergence_criterion:  "ELBO"
   tol:                    1e-2
+  mu1_init:               $B_est
   singletons:             TRUE
   hetgrid:                (0, 0.25, 0.5, 0.75, 1)
   sumstats:               $sumstats
   data_driven_mats:       NULL
-  nthreads:               4
+  nthreads:               1
   $fit_obj:               out$fit
   $B_est:                 out$B_est
   $intercept_est:         out$intercept_est
@@ -122,7 +125,7 @@ mlasso: fit_mglmnet_mod.R
   Y:                    $Ytrain
   alpha:                1
   standardize:          TRUE
-  nthreads:             4
+  nthreads:             1
   $fit_obj:             out$fit
   $B_est:               out$B_est
   $intercept_est:       out$intercept_est
