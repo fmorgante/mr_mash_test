@@ -7,7 +7,7 @@ DSC:
   lib_path: functions
   exec_path: modules
   define:
-    simulate: indepX_indepV_sharedB_allr_norm
+    simulate: indepX_indepV_indepB_2blocksr_norm
     process: univ_sumstats
     fit:      mr_mash_em_datadriven, mr_mash_em_no_datadriven,
               mlasso, mridge, menet
@@ -23,9 +23,9 @@ DSC:
 indepX_indepV_indepB_allr_norm: simulate_data_all_genes_prior_mod.R
   n:              90
   p:              500
-  p_causal:       10
-  r:              5
-  r_causal:       raw(list(1:5))
+  p_causal:       5
+  r:              10
+  r_causal:       raw(list(1:10))
   pve:            0.2
   B_cor:          0
   B_scale:        1
@@ -69,7 +69,7 @@ highcorrX_indepV_sharedB_allr_norm(indepX_indepV_indepB_allr_norm):
 #Independent predictors, independent residuals, independent effects from a 2-component mixture
 #of normals, all resposens are causal with a 2-block structure
 indepX_indepV_indepB_2blocksr_norm(indepX_indepV_indepB_allr_norm):
-  r_causal: raw(list(1:10,11:50))
+  r_causal: raw(list(1:3,4:10))
   B_scale:  (0.8,1)
   B_cor:    (1,1)
   w:        (0.5,0.5)
@@ -105,7 +105,7 @@ mr_mash_em_no_datadriven: fit_mr_mash_all_genes_prior_mod.R
   hetgrid:                (0, 0.25, 0.5, 0.75, 1)
   sumstats:               $sumstats
   data_driven_mats:       NULL
-  nthreads:               1
+  nthreads:               4
   $fit_obj:               out$fit
   $B_est:                 out$B_est
   $intercept_est:         out$intercept_est
@@ -122,7 +122,7 @@ mlasso: fit_mglmnet_mod.R
   Y:                    $Ytrain
   alpha:                1
   standardize:          TRUE
-  nthreads:             1
+  nthreads:             4
   $fit_obj:             out$fit
   $B_est:               out$B_est
   $intercept_est:       out$intercept_est

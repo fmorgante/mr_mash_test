@@ -3,7 +3,7 @@
 #SBATCH --job-name=mvreg_pipeline
 #SBATCH --output=mvreg_pipeline.%j.out
 #SBATCH --error=mvreg_pipeline.%j.err
-#SBATCH --time=01:00:00
+#SBATCH --time=02:00:00
 #SBATCH --partition=mstephens
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=4
@@ -17,7 +17,7 @@ dsc_outname=dsc_test
 dsc_outdir="../output/${dsc_outname}"
 inter_outdir="../output/${dsc_outname}_inter"
 n_ind=90 ###needs to match the value in dsc
-total_genes=50
+total_genes=100
 pred_genes=10
 
 ###Load necessary version of R
@@ -39,7 +39,7 @@ Rscript ../code/sample_testset_indeces.R --output "${inter_outdir}/misc/testset_
                                          --n "${n_ind}" \
                                          --prop_testset 0.2
                                          
-./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" --target sim_proc --replicate "${total_genes}" -c 4 #--host midway2.yml
+./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" --target sim_proc --replicate "${total_genes}" --host midway2.yml
 
 ###Prepare summary stats for data-driven covariance estimation
 Rscript ../code/prepare_sumstats_for_ED_prior.R --input_path "${dsc_outdir}/univ_sumstats" \
@@ -48,14 +48,14 @@ Rscript ../code/prepare_sumstats_for_ED_prior.R --input_path "${dsc_outdir}/univ
                                                 
 ###Run GTEx pipeline to compute the prior covariance matrices
 sos run /project2/mstephens/fmorgante/gtexresults/workflows/mashr_flashr_workflow.ipynb prior \
-        -c midway2.yml \
-        -q fit \
+        -c ../scripts/midway2_sos.yml \
+        -q midway2 \
         --cwd "${inter_outdir}/prior/matrices" \
         --data "${inter_outdir}/prior/sumstats/${dsc_outname}_effects_for_ED_prior.rds" \
         --output-prefix "${dsc_outname}"
 
 ###Run dsc to simulate genes and process data for data-driven covariance estimation
-./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" --target fit_pred_score -s existing --replicate "${pred_genes}" -c 4 #-host midway2.yml
+./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" --target fit_pred_score -s existing --replicate "${pred_genes}" --host midway2.yml
 
 cd ../scripts
 
