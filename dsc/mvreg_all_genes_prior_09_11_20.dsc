@@ -3,7 +3,7 @@
 ## A DSC for evaluating prediction accuracy of
 ## mr.mash in different scenarios.
 DSC:
-  R_libs: mr.mash.alpha, glmnet, mashr, doMC
+  R_libs: mr.mash.alpha, glmnet, doMC
   lib_path: functions
   exec_path: modules
   define:
@@ -21,8 +21,8 @@ DSC:
 #Independent predictors, independent residuals, independent effects from a single normal,
 #all resposens are causal
 indepX_indepV_indepB_allr_norm: simulate_data_all_genes_prior_mod.R
-  n:              90
-  p:              500
+  n:              900
+  p:              5000
   p_causal:       5
   r:              10
   r_causal:       raw(list(1:10))
@@ -33,7 +33,7 @@ indepX_indepV_indepB_allr_norm: simulate_data_all_genes_prior_mod.R
   X_cor:          0
   X_scale:        1
   V_cor:          0
-  testset_index:  "../output/dsc_test_inter/misc/testset_indeces.rds"
+  testset_index:  "../output/mvreg_all_genes_prior_2blocksr10_inter/misc/testset_indeces.rds"
   $Xtrain: out$Xtrain
   $Ytrain: out$Ytrain
   $Xtest:  out$Xtest
@@ -114,7 +114,7 @@ mr_mash_em_no_datadriven: fit_mr_mash_all_genes_prior_mod.R
 #EM w0 updates, standardize X, update V (constrained diagonal),
 #data-driven matrices
 mr_mash_em_datadriven(mr_mash_em_no_datadriven):
-  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/dsc_test_inter/prior/matrices/dsc_test.EZ.FL_PC3.rds"
+  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_2blocksr10_inter/prior/matrices/mvreg_all_genes_prior_2blocksr10.EZ.FL_PC3.rds"
 
 #Multivariate LASSO  
 mlasso: fit_mglmnet_mod.R
