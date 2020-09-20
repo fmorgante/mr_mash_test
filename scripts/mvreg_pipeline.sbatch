@@ -53,9 +53,6 @@ then
                                            --n "${n_ind}" \
                                            --prop_testset 0.2
                                            
-  ###Run dsc to simulate genes and process data for data-driven covariance estimation                                       
-  ./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" --target sim_proc --replicate "${total_genes}" --host midway2.yml
-  
   echo "${step} done!"
 fi
 
@@ -65,6 +62,22 @@ fi
 ################
 
 if [ "${step}" = step2 ]
+then
+  echo "Running ${step} ..."
+  cd ../dsc
+  
+  ###Run dsc to simulate genes and process data for data-driven covariance estimation                                       
+  ./mvreg_all_genes_prior_09_11_20.dsc -o "${dsc_outdir}" --target sim_proc --replicate "${total_genes}" --host midway2.yml
+  
+  echo "${step} done!"
+fi
+
+
+################
+####Step 3
+################
+
+if [ "${step}" = step3 ]
 then
   echo "Running ${step} ..."
   cd ../dsc
@@ -87,10 +100,10 @@ fi
 
 
 ################
-####Step 3
+####Step 4
 ################
 
-if [ "${step}" = step3 ]
+if [ "${step}" = step4 ]
 then
   echo "Running ${step} ..."
   cd ../dsc
