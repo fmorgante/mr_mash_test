@@ -22,7 +22,7 @@ dsc_outname=mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10
 dsc_outdir="../output/${dsc_outname}"
 inter_outdir="../output/${dsc_outname}_inter"
 n_ind=900 ###needs to match the value in dsc
-total_genes=2500
+total_genes=2000
 pred_genes=50
 
 ###Load necessary version of R
