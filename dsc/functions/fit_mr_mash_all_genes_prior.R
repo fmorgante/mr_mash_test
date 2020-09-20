@@ -1,5 +1,5 @@
 fit_mr_mash_all_genes_prior <- function(X, Y, update_w0, update_w0_method, standardize, update_V, update_V_method, ca_update_order,
-                                        w0_threshold, convergence_criterion, tol, singletons, hetgrid, data_driven_mats, sumstats, 
+                                        w0_threshold, convergence_criterion, tol, canonical_mats, singletons, hetgrid, data_driven_mats, sumstats, 
                                         nthreads){
   
   ###Get number of responses and number of variables
@@ -30,13 +30,19 @@ fit_mr_mash_all_genes_prior <- function(X, Y, update_w0, update_w0_method, stand
   grid <- mr.mash.alpha::autoselect.mixsd(sumstats, mult=sqrt(2))^2
   
   ###Compute canonical matrices
-  S0_raw <- mr.mash.alpha::compute_canonical_covs(r, singletons=singletons, hetgrid=hetgrid)
+  if(canonical_mats){
+    S0_raw <- mr.mash.alpha::compute_canonical_covs(r, singletons=singletons, hetgrid=hetgrid)
+  }
   
   ###Load and extract data-driven matrices, if requested
   if(!is.null(data_driven_mats)){
     S0_data <- readRDS(data_driven_mats)
     S0_data[c("identity", paste0("Y", 1:r), "equal_effects", "simple_het_1", "simple_het_2", "simple_het_3")] <- NULL
-    S0_raw <- c(S0_raw, S0_data)
+    if(canonical_mats){
+      S0_raw <- c(S0_raw, S0_data)
+    } else {
+      S0_raw <- S0_data
+    }
   }
   
   ###Compute prior covariance and weights
