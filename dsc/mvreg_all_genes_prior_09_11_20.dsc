@@ -130,7 +130,7 @@ mr_mash_em_data(mr_mash_em_can):
 
 #EM w0 updates, standardize X, update V (constrained diagonal),
 #canonical and data-driven matrices
-mr_mash_em_data(mr_mash_em_can):
+mr_mash_em_dataAndcan(mr_mash_em_can):
   data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_inter/prior/matrices/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10.EZ.FL_PC3.rds"
 
 #Multivariate LASSO  
