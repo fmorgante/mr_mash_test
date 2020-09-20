@@ -18,7 +18,7 @@ source activate py37dsc
 
 ###Set variables
 step="${1}"
-dsc_outname=mvreg_all_genes_prior_2blocksr10
+dsc_outname=mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10
 dsc_outdir="../output/${dsc_outname}"
 inter_outdir="../output/${dsc_outname}_inter"
 n_ind=900 ###needs to match the value in dsc
