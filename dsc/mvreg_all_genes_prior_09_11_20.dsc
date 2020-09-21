@@ -169,7 +169,7 @@ r2: r2_mod.R
   $err: err
 
 #MSE scaled by var(y)
-scaled_mse: scaled_mse_mod.R
+scaled_mse: scaled_rmse_mod.R
   Y:    $Ytest
   Yhat: $Yhattest 
   $err: err

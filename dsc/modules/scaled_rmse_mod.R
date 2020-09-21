@@ -1,0 +1,1 @@
+err <- compute_accuracy(Y, Yhat)$scaled_rmse
