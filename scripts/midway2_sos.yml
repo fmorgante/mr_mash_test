@@ -21,8 +21,8 @@ hosts:
       #SBATCH --cpus-per-task={cores}
       #SBATCH --mem={mem//10**9}G
       #SBATCH --job-name={job_name}
-      #SBATCH --output={cur_dir}/{job_name}.out
-      #SBATCH --error={cur_dir}/{job_name}.err
+      #SBATCH --output={cur_dir}/outfiles/{job_name}.out
+      #SBATCH --error={cur_dir}/outfiles/{job_name}.err
       cd {cur_dir}
       module load gcc/6.2 texlive/2017 java/1.8 curl/7.50 mkl/2019.up1
       export MKL_NUM_THREADS=1
