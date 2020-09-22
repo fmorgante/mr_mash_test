@@ -3,8 +3,8 @@
 #SBATCH --job-name=mvreg_pipeline_indepX
 #SBATCH --output=mvreg_pipeline_indepX.%j.out
 #SBATCH --error=mvreg_pipeline_indepX.%j.err
-#SBATCH --time=96:00:00
-#SBATCH --partition=mstephens
+#SBATCH --time=04:00:00
+#SBATCH --partition=broadwl
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=6G
@@ -67,7 +67,7 @@ then
   cd ../dsc
   
   ###Run dsc to simulate genes and process data for data-driven covariance estimation                                       
-  ./mvreg_all_genes_prior_indepX.dsc -o "${dsc_outdir}" --target sim_proc --replicate "${total_genes}" --host midway2.yml
+  ./mvreg_all_genes_prior_indepX.dsc -o "${dsc_outdir}" --target sim_proc --replicate "${total_genes}" -c 4 --host midway2.yml
   
   echo "${step} done!"
 fi
@@ -109,7 +109,7 @@ then
   cd ../dsc
 
   ###Run dsc to fit the models and do prediction
-  ./mvreg_all_genes_prior_indepX.dsc -o "${dsc_outdir}" --target fit_pred_score -s existing --replicate "${pred_genes}" --host midway2.yml
+  ./mvreg_all_genes_prior_indepX.dsc -o "${dsc_outdir}" --target fit_pred_score -s existing --replicate "${pred_genes}" -c 4 --host midway2.yml
 
   cd ../scripts
   echo "${step} done!"
