@@ -9,11 +9,8 @@ DSC:
   define:
     simulate: indepX_indepV_sharedB_2blocksr
     process: univ_sumstats
-    mr_mash_em_can_mlasso: mlasso * mr_mash_em_can
-    mr_mash_em_data_mlasso: mlasso * mr_mash_em_data
-    mr_mash_em_dataAndcan_mlasso: mlasso * mr_mash_em_dataAndcan
-    fit:      mr_mash_em_dataAndcan_mlasso, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso,
-              mridge, menet
+    fit:      mr_mash_em_dataAndcan, mr_mash_em_can, mr_mash_em_data,
+              mlasso, mridge, menet
     predict:  predict_linear
     score:    r2, scaled_mse, bias
   run: 
@@ -120,7 +117,6 @@ mr_mash_em_can: fit_mr_mash_all_genes_prior_mod.R
   sumstats:               $sumstats
   data_driven_mats:       NULL
   nthreads:               4
-  mu1_init:               $B_est
   $fit_obj:               out$fit
   $B_est:                 out$B_est
   $intercept_est:         out$intercept_est
