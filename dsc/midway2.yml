@@ -41,8 +41,15 @@ DSC:
 
 default:
   queue: midway2
-  instances_per_job: 200
+  instances_per_job: 4
   nodes_per_job: 1
+  instances_per_node: 2
+  cpus_per_instance: 4
+  mem_per_instance: 4G
+  time_per_instance: 10m
+  
+simulate:
+  instances_per_job: 200
   instances_per_node: 8
   cpus_per_instance: 1
   mem_per_instance: 2G
@@ -50,11 +57,24 @@ default:
   
 process:
   instances_per_job: 20
+  instances_per_node: 8
+  cpus_per_instance: 1
   mem_per_instance: 2G
+  time_per_instance: 2m
 
-fit:
-  time_per_instance: 10m
-  instances_per_job: 4
-  instances_per_node: 2
-  mem_per_instance: 4G
-  cpus_per_instance: 4
+predict:
+  instances_per_job: 200
+  instances_per_node: 8
+  cpus_per_instance: 1
+  mem_per_instance: 2G
+  time_per_instance: 2m
+
+score:
+  instances_per_job: 200
+  instances_per_node: 8
+  cpus_per_instance: 1
+  mem_per_instance: 2G
+  time_per_instance: 2m
+
+
+
