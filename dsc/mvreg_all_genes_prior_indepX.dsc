@@ -9,11 +9,12 @@ DSC:
   define:
     simulate: indepX_indepV_sharedB_2blocksr
     process: univ_sumstats
-    mr_mash_em_can_mlasso: mlasso * mr_mash_em_can
-    mr_mash_em_data_mlasso: mlasso * mr_mash_em_data
-    mr_mash_em_dataAndcan_mlasso: mlasso * mr_mash_em_dataAndcan
-    fit:      mr_mash_em_dataAndcan_mlasso, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso,
-              mridge, menet
+    mr_mash_em_can_mlasso: mlasso_init * mr_mash_em_can
+    mr_mash_em_data_mlasso: mlasso_init * mr_mash_em_data
+    mr_mash_em_dataAndcan_mlasso: mlasso_init * mr_mash_em_dataAndcan
+    mlasso_out: mlasso_init * mlasso
+    fit: mr_mash_em_dataAndcan_mlasso, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso,
+         mlasso_out, mridge, menet
     predict:  predict_linear
     score:    r2, scaled_mse, bias
   run: 
@@ -120,7 +121,7 @@ mr_mash_em_can: fit_mr_mash_all_genes_prior_mod.R
   sumstats:               $sumstats
   data_driven_mats:       NULL
   nthreads:               4
-  mu1_init:               $B_est
+  mu1_init:               $B_est_init
   $fit_obj:               out$fit
   $B_est:                 out$B_est
   $intercept_est:         out$intercept_est
@@ -138,10 +139,30 @@ mr_mash_em_dataAndcan(mr_mash_em_can):
   data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_inter/prior/matrices/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10.EZ.FL_PC3.rds"
 
 #Multivariate LASSO  
-mlasso: fit_mglmnet_mod.R
+mlasso_init: fit_mglmnet_mod.R
   X:                    $Xtrain
   Y:                    $Ytrain
   alpha:                1
+  standardize:          TRUE
+  nthreads:             4
+  $fit_obj:             out$fit
+  $B_est_init:          out$B_est
+  $intercept_est_init:  out$intercept_est
+  $time_init:           out$elapsed_time
+  
+mlasso: R(B_est <- B_in; intercept_est <- intercept_in; time <- time_in)
+  B_in:                 $B_est_init
+  intercept_in:         $intercept_est_init
+  time_in:              $time_init
+  $B_est:               B_est
+  $intercept_est:       intercept_est
+  $time:                time
+
+#Multivariate ridge  
+mridge: fit_mglmnet_mod.R
+  X:                    $Xtrain
+  Y:                    $Ytrain
+  alpha:                0
   standardize:          TRUE
   nthreads:             4
   $fit_obj:             out$fit
@@ -149,12 +170,8 @@ mlasso: fit_mglmnet_mod.R
   $intercept_est:       out$intercept_est
   $time:                out$elapsed_time
 
-#Multivariate ridge  
-mridge(mlasso):
-  alpha:                0
-
 #Multivariate enet  
-menet(mlasso):
+menet(mridge):
   alpha:                0.5
 
 
