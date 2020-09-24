@@ -7,7 +7,7 @@ DSC:
   lib_path: functions
   exec_path: modules
   define:
-    simulate: indepX_indepV_sharedB_2blocksr
+    simulate: highcorrX_indepV_sharedB_2blocksr
     process: univ_sumstats
     mr_mash_em_can_mlasso: mlasso_init * mr_mash_em_can
     mr_mash_em_data_mlasso: mlasso_init * mr_mash_em_data
@@ -22,71 +22,26 @@ DSC:
     fit_pred_score: simulate * process * fit * predict * score
 
 ## Simulate modules
-#Independent predictors, independent residuals, independent effects from a single normal,
-#all resposens are causal
-indepX_indepV_indepB_allr: simulate_data_all_genes_prior_mod.R
+#Highly correlated predictors, independent residuals, shared effects from a 2-component mixture
+#of normals, all resposens are causal with a 2-block structure
+highcorrX_indepV_sharedB_2blocksr:
   n:              900
   p:              5000
   p_causal:       5
   r:              10
-  r_causal:       raw(list(1:10))
+  r_causal:       raw(list(1:3,4:10))
+  B_scale:        (0.8,1)
+  B_cor:          (1,1)
+  w:              (0.5,0.5)
   pve:            0.2
-  B_cor:          0
-  B_scale:        1
-  w:              1
-  X_cor:          0
+  X_cor:          0.8
   X_scale:        1
   V_cor:          0
-  testset_index:  "../output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_inter/misc/testset_indeces.rds"
+  testset_index:  "../output/mvreg_all_genes_prior_highcorrX_indepV_sharedB_2blocksr10_inter/misc/testset_indeces.rds"
   $Xtrain: out$Xtrain
   $Ytrain: out$Ytrain
   $Xtest:  out$Xtest
   $Ytest:  out$Ytest
- 
-#Correlated predictors, independent residuals, independent effects from a single normal,
-#all resposens are causal
-corrX_indepV_indepB_allr(indepX_indepV_indepB_allr):
-  X_cor:    0.5
-  
-#Higly correlated predictors, independent residuals, independent effects from a single normal,
-#all resposens are causal
-highcorrX_indepV_indepB_allr(indepX_indepV_indepB_allr):
-  X_cor:    0.8
-  
-#Independent predictors, independent residuals, shared effects from a single normal,
-#all resposens are causal
-indepX_indepV_sharedB_allr(indepX_indepV_indepB_allr):
-  B_cor:    1
-
-#Correlated predictors, independent residuals, shared effects from a single normal,
-#all resposens are causal
-corrX_indepV_sharedB_allr(indepX_indepV_indepB_allr):
-  B_cor:    1
-  X_cor:    0.5
-
-#Higly correlated predictors, independent residuals, shared effects from a single normal,
-#all resposens are causal
-highcorrX_indepV_sharedB_allr(indepX_indepV_indepB_allr):
-  B_cor:    1
-  X_cor:    0.8
-  
-#Independent predictors, independent residuals, shared effects from a 2-component mixture
-#of normals, all resposens are causal with a 2-block structure
-indepX_indepV_sharedB_2blocksr(indepX_indepV_indepB_allr):
-  r_causal: raw(list(1:3,4:10))
-  B_scale:  (0.8,1)
-  B_cor:    (1,1)
-  w:        (0.5,0.5)
-  
-#Correlated predictors, independent residuals, shared effects from a 2-component mixture
-#of normals, all resposens are causal with a 2-block structure
-corrX_indepV_sharedB_2blocksr(indepX_indepV_sharedB_2blocksr):
-  X_cor:    0.5
-
-#Highly correlated predictors, independent residuals, shared effects from a 2-component mixture
-#of normals, all resposens are causal with a 2-block structure
-highcorrX_indepV_sharedB_2blocksr(indepX_indepV_sharedB_2blocksr):
-  X_cor:    0.8
 
 
 ##Process modules
@@ -131,12 +86,12 @@ mr_mash_em_can: fit_mr_mash_all_genes_prior_mod.R
 #data-driven matrices
 mr_mash_em_data(mr_mash_em_can):
   canonical_mats:         FALSE
-  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_inter/prior/matrices/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10.EZ.FL_PC3.rds"
+  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_highcorrX_indepV_sharedB_2blocksr10_inter/prior/matrices/mvreg_all_genes_prior_highcorrX_indepV_sharedB_2blocksr10.EZ.FL_PC3.rds"
 
 #EM w0 updates, standardize X, update V (constrained diagonal),
 #canonical and data-driven matrices
 mr_mash_em_dataAndcan(mr_mash_em_can):
-  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_inter/prior/matrices/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10.EZ.FL_PC3.rds"
+  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_highcorrX_indepV_sharedB_2blocksr10_inter/prior/matrices/mvreg_all_genes_prior_highcorrX_indepV_sharedB_2blocksr10.EZ.FL_PC3.rds"
 
 #Multivariate LASSO  
 mlasso_init: fit_mglmnet_mod.R
@@ -182,6 +137,7 @@ predict_linear: predict_mod.R
   X:         $Xtest
   $Yhattest: Yhattest
 
+
 ## Score modules
 #r^2
 r2: r2_mod.R
@@ -189,7 +145,7 @@ r2: r2_mod.R
   Yhat: $Yhattest 
   $err: err
 
-#MSE scaled by var(y)
+#RMSE scaled by sd(y)
 scaled_mse: scaled_rmse_mod.R
   Y:    $Ytest
   Yhat: $Yhattest 

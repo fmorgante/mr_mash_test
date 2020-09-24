@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#SBATCH --job-name=mvreg_pipeline_indepX
-#SBATCH --output=mvreg_pipeline_indepX.%j.out
-#SBATCH --error=mvreg_pipeline_indepX.%j.err
+#SBATCH --job-name=mvreg_all_genes_prior_highcorrX_indepV_sharedB_2blocksr10_pipeline
+#SBATCH --output=mvreg_all_genes_prior_highcorrX_indepV_sharedB_2blocksr10_pipeline.%j.out
+#SBATCH --error=mvreg_all_genes_prior_highcorrX_indepV_sharedB_2blocksr10_pipeline.%j.err
 #SBATCH --time=04:00:00
 #SBATCH --partition=broadwl
 #SBATCH --nodes=1
@@ -18,12 +18,13 @@ source activate py37dsc
 
 ###Set variables
 step="${1}"
-dsc_outname=mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10
+dsc_outname=mvreg_all_genes_prior_highcorrX_indepV_sharedB_2blocksr10
 dsc_outdir="../output/${dsc_outname}"
 inter_outdir="../output/${dsc_outname}_inter"
 n_ind=900 ###needs to match the value in dsc
 total_genes=2000
 pred_genes=50
+ranseed=1234
 
 ###Load necessary version of R
 module load gcc/6.2 texlive/2017 java/1.8 curl/7.50 mkl/2019.up1
@@ -51,7 +52,8 @@ then
   ###Sample training and test set indeces
   Rscript ../code/sample_testset_indeces.R --output "${inter_outdir}/misc/testset_indeces.rds" \
                                            --n "${n_ind}" \
-                                           --prop_testset 0.2
+                                           --prop_testset 0.2 \
+                                           --seed "${ranseed}"
                                            
   echo "${step} done!"
 fi
@@ -67,7 +69,8 @@ then
   cd ../dsc
   
   ###Run dsc to simulate genes and process data for data-driven covariance estimation                                       
-  ./mvreg_all_genes_prior_indepX.dsc -o "${dsc_outdir}" --target sim_proc --replicate "${total_genes}" -c 4 --host midway2.yml
+  ./mvreg_all_genes_prior_highcorrX_indepV_sharedB_2blocksr10.dsc -o "${dsc_outdir}" --target sim_proc --replicate "${total_genes}" \
+                                                                  -c 4 --host midway2.yml
   
   echo "${step} done!"
 fi
@@ -85,7 +88,8 @@ then
   ###Prepare summary stats for data-driven covariance estimation
   Rscript ../code/prepare_sumstats_for_ED_prior.R --input_path "${dsc_outdir}/univ_sumstats" \
                                                   --output "${inter_outdir}/prior/sumstats/${dsc_outname}_effects_for_ED_prior.rds" \
-                                                  --n_random 4
+                                                  --n_random 4 \
+                                                  --seed "${ranseed}"
 
   ###Run GTEx pipeline to compute the prior covariance matrices
   sos run /project2/mstephens/fmorgante/gtexresults/workflows/mashr_flashr_workflow.ipynb prior \
@@ -109,7 +113,8 @@ then
   cd ../dsc
 
   ###Run dsc to fit the models and do prediction
-  ./mvreg_all_genes_prior_indepX.dsc -o "${dsc_outdir}" --target fit_pred_score -s existing --replicate "${pred_genes}" -c 4 --host midway2.yml
+  ./mvreg_all_genes_prior_highcorrX_indepV_sharedB_2blocksr10.dsc -o "${dsc_outdir}" --target fit_pred_score -s existing --replicate "${pred_genes}" \
+                                                                  -c 4 --host midway2.yml
 
   cd ../scripts
   echo "${step} done!"
