@@ -5,9 +5,6 @@
 ###Set options
 options(stringsAsFactors = FALSE)
 
-###Set seed
-set.seed(123)
-
 ###Load libraries
 library(optparse)
 
@@ -16,11 +13,16 @@ parser <- OptionParser()
 parser <- add_option(parser, c("--input_path"), type="character")
 parser <- add_option(parser, c("--output"), type="character")
 parser <- add_option(parser, c("--n_random"), type="integer", default=4)
+parser <- add_option(parser, c("--seed"), type="integer")
 outparse <- parse_args(parser)
 
 input_path <- outparse$input_path
 output <- outparse$output
 num_random <- outparse$n_random
+ranseed <- outparse$seed
+
+###Set seed
+set.seed(ranseed)
 
 ###Functions required for the actual step
 matxMax <- function(mtx) {
