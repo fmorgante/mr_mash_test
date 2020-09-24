@@ -24,7 +24,7 @@ DSC:
 ## Simulate modules
 #Independent predictors, independent residuals, shared effects from a 2-component mixture
 #of normals, all resposens are causal with a 2-block structure
-indepX_indepV_sharedB_2blocksr:
+indepX_indepV_sharedB_2blocksr: simulate_data_all_genes_prior_mod.R
   n:              900
   p:              5000
   p_causal:       5
