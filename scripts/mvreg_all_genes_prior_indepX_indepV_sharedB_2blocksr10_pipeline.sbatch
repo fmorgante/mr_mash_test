@@ -77,6 +77,23 @@ fi
 
 
 ################
+####Step 2a
+################
+
+if [ "${step}" = step2a ]
+then
+  echo "Running ${step} ..."
+  cd ../dsc
+  
+  ###Run dsc to simulate genes and process data for data-driven covariance estimation                                       
+  ./mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10.dsc -o "${dsc_outdir}" --target sim_proc --replicate "${total_genes}" \
+                                                               -c 4 --host midway2.yml -s existing
+  
+  echo "${step} done!"
+fi
+
+
+################
 ####Step 3
 ################
 
