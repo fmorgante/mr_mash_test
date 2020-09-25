@@ -41,6 +41,12 @@ Results for meeting on 05/27/2020. Assessment of prediction accuracy and run tim
 + [Highly correlated predictors, independent effects, lowly correlated residuals.](results_highcorrX_lowcorrV_indepB_05_18_20.html)
 + [Case study with only two causal responses out of five total.](two_active_responses_issue.html)
 
+Results for meeting on 09/29/2020. Assessment of prediction accuracy and run time of *mr.mash* with different prior specifications against the multivariate versions of LASSO, Elastic Net, and Ridge regression in GTEx-like scenarios:
+
++ [Independent predictors, two blocks of responses (shared effects within block), independent residuals.](results_mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10.html)
+
+
+
 Other investigations:
 
 + [Case study with dense scenarios.](dense_scenario_issue.html)
