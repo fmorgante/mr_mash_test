@@ -126,7 +126,7 @@ dsc_out <- dscquery("output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr
                       "simulate.B_scale", "simulate.X_cor", "simulate.X_scale",
                       "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"), 
                     groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mlasso, mridge, menet", 
-                    verbose=TRUE)
+                    verbose=FALSE)
 
 ###Obtain simulation parameters
 prop_testset <- 0.2
@@ -176,7 +176,7 @@ Here, we evaluate the accuracy of prediction assessed by $r^2$ and bias (slope) 
 
 Here, we compare *mr.mash* to the multivariate versions of LASSO, Elastic Net ($\alpha = 0.5$), and Ridge Regression as implemented in *glmnet*. The form of the penalty id the following: $\lambda[(1-\alpha)/2 ||\mathbf{\beta}_j||^2_2 + \alpha ||\mathbf{\beta}_j||_2]$. $\lambda$ is chosen by cross-validation in the training set. All the methods were using 4 threads -- *mr.mash* loops over the mixture components in parallel, *glmnet* loops over folds in parallel.
 
-```{r accuracy vs others indepX, fig.height=12, fig.width=15}
+```{r accuracy vs others indepX, fig.height=12, fig.width=15, message=FALSE}
 ###Convert from list to data.frame for plotting
 dsc_plots <- convert_dsc_to_dataframe(dsc_out)
 
@@ -212,7 +212,7 @@ shift_legend(p)
 
 Let's now remove outliers from the plots to make things a little clearer.
 
-```{r accuracy no outliers indepX, fig.height=12, fig.width=15}
+```{r accuracy no outliers indepX, fig.height=12, fig.width=15, message=FALSE}
 ###Create plots
 p_nooutliers <- ggplot(dsc_plots, aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
     Ipaper::geom_boxplot2(color = "black", width = 0.85, width.errorbar = 0) +
@@ -229,7 +229,7 @@ shift_legend(p_nooutliers)
 
 Here, we look at the elapsed time ($log_{10}$ seconds) of each method. Note that the *mr.mash* run time does not include the run time of group-LASSO (but should be considered since we used it to initialize *mr.mash*).
 
-```{r run time indepX, fig.height=12, fig.width=15}
+```{r run time indepX, fig.height=12, fig.width=15, message=FALSE}
 dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="r2"), 
                           -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))]
 
@@ -259,7 +259,7 @@ dsc_out <- dscquery("output/mvreg_all_genes_prior_corrX_indepV_sharedB_2blocksr1
                       "simulate.B_scale", "simulate.X_cor", "simulate.X_scale",
                       "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"), 
                     groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mlasso, mridge, menet", 
-                    verbose=TRUE)
+                    verbose=FALSE)
 
 ###Obtain simulation parameters
 prop_testset <- 0.2
@@ -292,7 +292,7 @@ This simulation is exactly as above, except that variables, X, were drawn from M
 
 The fitting and prediction scheme and methods are as described above. Let's look at $r^2$, bias and rRMSE.
 
-```{r accuracy vs others corrX, fig.height=12, fig.width=15}
+```{r accuracy vs others corrX, fig.height=12, fig.width=15, message=FALSE}
 ###Convert from list to data.frame for plotting
 dsc_plots <- convert_dsc_to_dataframe(dsc_out)
 
@@ -328,7 +328,7 @@ shift_legend(p)
 
 Let's now remove outliers from the plots to make things a little clearer.
 
-```{r accuracy no outliers corrX, fig.height=12, fig.width=15}
+```{r accuracy no outliers corrX, fig.height=12, fig.width=15, message=FALSE}
 ###Create plots
 p_nooutliers <- ggplot(dsc_plots, aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
     Ipaper::geom_boxplot2(color = "black", width = 0.85, width.errorbar = 0) +
@@ -345,7 +345,7 @@ shift_legend(p_nooutliers)
 
 Here, we look at the elapsed time ($log_{10}$ seconds) of each method. Note that the *mr.mash* run time does not include the run time of group-LASSO (but should be considered since we used it to initialize *mr.mash*).
 
-```{r run time corrX, fig.height=12, fig.width=15}
+```{r run time corrX, fig.height=12, fig.width=15, message=FALSE}
 dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="r2"), 
                           -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))]
 
@@ -375,7 +375,7 @@ dsc_out <- dscquery("output/mvreg_all_genes_prior_highcorrX_indepV_sharedB_2bloc
                       "simulate.B_scale", "simulate.X_cor", "simulate.X_scale",
                       "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"), 
                     groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mlasso, mridge, menet", 
-                    verbose=TRUE)
+                    verbose=FALSE)
 
 ###Obtain simulation parameters
 prop_testset <- 0.2
@@ -408,7 +408,7 @@ This simulation is exactly as above, except that variables, X, were drawn from M
 
 The fitting and prediction scheme and methods are as described above. Let's look at $r^2$, bias and rRMSE.
 
-```{r accuracy vs others highcorrX, fig.height=12, fig.width=15}
+```{r accuracy vs others highcorrX, fig.height=12, fig.width=15, message=FALSE}
 ###Convert from list to data.frame for plotting
 dsc_plots <- convert_dsc_to_dataframe(dsc_out)
 
@@ -444,7 +444,7 @@ shift_legend(p)
 
 Let's now remove outliers from the plots to make things a little clearer.
 
-```{r accuracy no outliers highcorrX, fig.height=12, fig.width=15}
+```{r accuracy no outliers highcorrX, fig.height=12, fig.width=15, message=FALSE}
 ###Create plots
 p_nooutliers <- ggplot(dsc_plots, aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
     Ipaper::geom_boxplot2(color = "black", width = 0.85, width.errorbar = 0) +
@@ -461,7 +461,7 @@ shift_legend(p_nooutliers)
 
 Here, we look at the elapsed time ($log_{10}$ seconds) of each method. Note that the *mr.mash* run time does not include the run time of group-LASSO (but should be considered since we used it to initialize *mr.mash*).
 
-```{r run time highcorrX, fig.height=12, fig.width=15}
+```{r run time highcorrX, fig.height=12, fig.width=15, message=FALSE}
 dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="r2"), 
                           -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))]
 
@@ -478,4 +478,4 @@ p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill =
 print(p_time)
 ```
 
-In summary, *mr.mash* with the data-driven covariance matrices does very well and runs pretty fast. Using only the canonical covariance matrices is not as effective (as expected) in this case, but it's not terrible. Using both types of covariance matrices does not add anything in terms of performance to using only the data-driven matrices. However, it makes the method much slower to run.
+In summary, *mr.mash* with the data-driven covariance matrices does very well and runs pretty fast. Using only the canonical covariance matrices is not as effective (as expected) in this case, but it's still good. Using both types of covariance matrices does not add anything in terms of performance to using only the data-driven matrices. However, it makes the method much slower to run.
