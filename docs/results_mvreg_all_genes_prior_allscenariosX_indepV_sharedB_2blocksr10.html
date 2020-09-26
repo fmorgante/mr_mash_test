@@ -453,16 +453,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree63758cee0c8ccf9b60fce61d3244860354cee203targetblank63758cea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/63758cee0c8ccf9b60fce61d3244860354cee203" target="_blank">63758ce</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree3fc1b7012068ae7c36c8e9012b3956efeb0a77f8targetblank3fc1b70a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/3fc1b7012068ae7c36c8e9012b3956efeb0a77f8" target="_blank">3fc1b70</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree63758cee0c8ccf9b60fce61d3244860354cee203targetblank63758cea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree3fc1b7012068ae7c36c8e9012b3956efeb0a77f8targetblank3fc1b70a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/63758cee0c8ccf9b60fce61d3244860354cee203" target="_blank">63758ce</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/3fc1b7012068ae7c36c8e9012b3956efeb0a77f8" target="_blank">3fc1b70</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -607,6 +607,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/3fc1b7012068ae7c36c8e9012b3956efeb0a77f8/analysis/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd" target="_blank">3fc1b70</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-26
+</td>
+<td>
+Minor changes
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/e2b7e5db63aab90ae3cc652cd24ccd1bc39cceb1/docs/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.html" target="_blank">e2b7e5d</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/63758cee0c8ccf9b60fce61d3244860354cee203/analysis/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd" target="_blank">63758ce</a>
 </td>
 <td>
@@ -739,10 +773,9 @@ dsc_out &lt;- dscquery(&quot;output/mvreg_all_genes_prior_indepX_indepV_sharedB_
                       &quot;simulate.B_scale&quot;, &quot;simulate.X_cor&quot;, &quot;simulate.X_scale&quot;,
                       &quot;simulate.V_cor&quot;, &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
                     groups=&quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mlasso, mridge, menet&quot;, 
-                    verbose=TRUE)</code></pre>
-<pre><code>Calling: dsc-query output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10 -o /tmp/jobs/5387239/RtmpT9ubmb/filebaaa574c8926.csv --target &quot;simulate.n simulate.p simulate.p_causal simulate.r simulate.w simulate.r_causal simulate.pve simulate.B_cor simulate.B_scale simulate.X_cor simulate.X_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mlasso, mridge, menet&quot; 
-Loaded dscquery output table with 900 rows and 21 columns.</code></pre>
-<pre class="r"><code>###Obtain simulation parameters
+                    verbose=FALSE)
+
+###Obtain simulation parameters
 prop_testset &lt;- 0.2
 n &lt;- unique(dsc_out$simulate.n)
 p &lt;- unique(dsc_out$simulate.p)
@@ -810,12 +843,44 @@ p &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = &quot;score
           plot.title = element_text(hjust = 0.5))
 
 shift_legend(p)</code></pre>
-<pre><code>
-Attaching package: &#39;lemon&#39;</code></pre>
-<pre><code>The following object is masked from &#39;package:ggplot2&#39;:
-
-    element_render</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/accuracy%20vs%20others%20indepX-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-vs-others-indepX-1">
+Past versions of “accuracy vs others indepX-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-vs-others-indepX-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/e2b7e5db63aab90ae3cc652cd24ccd1bc39cceb1/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/accuracy vs others indepX-1.png" target="_blank">e2b7e5d</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Let’s now remove outliers from the plots to make things a little clearer.</p>
 <pre class="r"><code>###Create plots
 p_nooutliers &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
@@ -830,6 +895,43 @@ p_nooutliers &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = 
 
 shift_legend(p_nooutliers)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/accuracy%20no%20outliers%20indepX-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-no-outliers-indepX-1">
+Past versions of “accuracy no outliers indepX-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-no-outliers-indepX-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/e2b7e5db63aab90ae3cc652cd24ccd1bc39cceb1/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/accuracy no outliers indepX-1.png" target="_blank">e2b7e5d</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Here, we look at the elapsed time (<span class="math">\(log_{10}\)</span> seconds) of each method. Note that the <em>mr.mash</em> run time does not include the run time of group-LASSO (but should be considered since we used it to initialize <em>mr.mash</em>).</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;r2&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -846,6 +948,43 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
 
 print(p_time)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/run%20time%20indepX-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-run-time-indepX-1">
+Past versions of “run time indepX-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-run-time-indepX-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/e2b7e5db63aab90ae3cc652cd24ccd1bc39cceb1/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/run time indepX-1.png" target="_blank">e2b7e5d</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="correlated-predictors" class="section level1">
@@ -859,10 +998,9 @@ dsc_out &lt;- dscquery(&quot;output/mvreg_all_genes_prior_corrX_indepV_sharedB_2
                       &quot;simulate.B_scale&quot;, &quot;simulate.X_cor&quot;, &quot;simulate.X_scale&quot;,
                       &quot;simulate.V_cor&quot;, &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
                     groups=&quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mlasso, mridge, menet&quot;, 
-                    verbose=TRUE)</code></pre>
-<pre><code>Calling: dsc-query output/mvreg_all_genes_prior_corrX_indepV_sharedB_2blocksr10 -o /tmp/jobs/5387239/RtmpT9ubmb/filebaaa599c231d.csv --target &quot;simulate.n simulate.p simulate.p_causal simulate.r simulate.w simulate.r_causal simulate.pve simulate.B_cor simulate.B_scale simulate.X_cor simulate.X_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mlasso, mridge, menet&quot; 
-Loaded dscquery output table with 900 rows and 21 columns.</code></pre>
-<pre class="r"><code>###Obtain simulation parameters
+                    verbose=FALSE)
+
+###Obtain simulation parameters
 prop_testset &lt;- 0.2
 n &lt;- unique(dsc_out$simulate.n)
 p &lt;- unique(dsc_out$simulate.p)
@@ -922,6 +1060,43 @@ p &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = &quot;score
 
 shift_legend(p)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/accuracy%20vs%20others%20corrX-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-vs-others-corrX-1">
+Past versions of “accuracy vs others corrX-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-vs-others-corrX-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/e2b7e5db63aab90ae3cc652cd24ccd1bc39cceb1/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/accuracy vs others corrX-1.png" target="_blank">e2b7e5d</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Let’s now remove outliers from the plots to make things a little clearer.</p>
 <pre class="r"><code>###Create plots
 p_nooutliers &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
@@ -936,6 +1111,43 @@ p_nooutliers &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = 
 
 shift_legend(p_nooutliers)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/accuracy%20no%20outliers%20corrX-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-no-outliers-corrX-1">
+Past versions of “accuracy no outliers corrX-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-no-outliers-corrX-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/e2b7e5db63aab90ae3cc652cd24ccd1bc39cceb1/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/accuracy no outliers corrX-1.png" target="_blank">e2b7e5d</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Here, we look at the elapsed time (<span class="math">\(log_{10}\)</span> seconds) of each method. Note that the <em>mr.mash</em> run time does not include the run time of group-LASSO (but should be considered since we used it to initialize <em>mr.mash</em>).</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;r2&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -952,6 +1164,43 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
 
 print(p_time)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/run%20time%20corrX-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-run-time-corrX-1">
+Past versions of “run time corrX-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-run-time-corrX-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/e2b7e5db63aab90ae3cc652cd24ccd1bc39cceb1/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/run time corrX-1.png" target="_blank">e2b7e5d</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="highly-correlated-predictors" class="section level1">
@@ -965,10 +1214,9 @@ dsc_out &lt;- dscquery(&quot;output/mvreg_all_genes_prior_highcorrX_indepV_share
                       &quot;simulate.B_scale&quot;, &quot;simulate.X_cor&quot;, &quot;simulate.X_scale&quot;,
                       &quot;simulate.V_cor&quot;, &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
                     groups=&quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mlasso, mridge, menet&quot;, 
-                    verbose=TRUE)</code></pre>
-<pre><code>Calling: dsc-query output/mvreg_all_genes_prior_highcorrX_indepV_sharedB_2blocksr10 -o /tmp/jobs/5387239/RtmpT9ubmb/filebaaa56e81596.csv --target &quot;simulate.n simulate.p simulate.p_causal simulate.r simulate.w simulate.r_causal simulate.pve simulate.B_cor simulate.B_scale simulate.X_cor simulate.X_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mlasso, mridge, menet&quot; 
-Loaded dscquery output table with 900 rows and 21 columns.</code></pre>
-<pre class="r"><code>###Obtain simulation parameters
+                    verbose=FALSE)
+
+###Obtain simulation parameters
 prop_testset &lt;- 0.2
 n &lt;- unique(dsc_out$simulate.n)
 p &lt;- unique(dsc_out$simulate.p)
@@ -1028,6 +1276,43 @@ p &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = &quot;score
 
 shift_legend(p)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/accuracy%20vs%20others%20highcorrX-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-vs-others-highcorrX-1">
+Past versions of “accuracy vs others highcorrX-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-vs-others-highcorrX-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/e2b7e5db63aab90ae3cc652cd24ccd1bc39cceb1/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/accuracy vs others highcorrX-1.png" target="_blank">e2b7e5d</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Let’s now remove outliers from the plots to make things a little clearer.</p>
 <pre class="r"><code>###Create plots
 p_nooutliers &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
@@ -1042,6 +1327,43 @@ p_nooutliers &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = 
 
 shift_legend(p_nooutliers)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/accuracy%20no%20outliers%20highcorrX-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-no-outliers-highcorrX-1">
+Past versions of “accuracy no outliers highcorrX-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-no-outliers-highcorrX-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/e2b7e5db63aab90ae3cc652cd24ccd1bc39cceb1/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/accuracy no outliers highcorrX-1.png" target="_blank">e2b7e5d</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Here, we look at the elapsed time (<span class="math">\(log_{10}\)</span> seconds) of each method. Note that the <em>mr.mash</em> run time does not include the run time of group-LASSO (but should be considered since we used it to initialize <em>mr.mash</em>).</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;r2&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -1058,7 +1380,44 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
 
 print(p_time)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/run%20time%20highcorrX-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>In summary, <em>mr.mash</em> with the data-driven covariance matrices does very well and runs pretty fast. Using only the canonical covariance matrices is not as effective (as expected) in this case, but it’s not terrible. Using both types of covariance matrices does not add anything in terms of performance to using only the data-driven matrices. However, it makes the method much slower to run.</p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-run-time-highcorrX-1">
+Past versions of “run time highcorrX-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-run-time-highcorrX-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/e2b7e5db63aab90ae3cc652cd24ccd1bc39cceb1/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.Rmd/run time highcorrX-1.png" target="_blank">e2b7e5d</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>In summary, <em>mr.mash</em> with the data-driven covariance matrices does very well and runs pretty fast. Using only the canonical covariance matrices is not as effective (as expected) in this case, but it’s still good. Using both types of covariance matrices does not add anything in terms of performance to using only the data-driven matrices. However, it makes the method much slower to run.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
