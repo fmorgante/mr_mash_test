@@ -44,6 +44,7 @@ Results for meeting on 05/27/2020. Assessment of prediction accuracy and run tim
 Results for meeting on 09/29/2020. Assessment of prediction accuracy and run time of *mr.mash* with different prior specifications against the multivariate versions of LASSO, Elastic Net, and Ridge regression in GTEx-like scenarios:
 
 + [Three scenarios for predictors correlation, two blocks of responses (shared effects within block), independent residuals.](results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.html)
++ [Independent predictors, three causal responses (shared effects) out of ten, independent residuals.](results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.html)
 
 
 
