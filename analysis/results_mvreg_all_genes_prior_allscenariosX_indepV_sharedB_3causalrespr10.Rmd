@@ -162,6 +162,7 @@ The results below are based on simulations with `r n` samples, `r p` variables o
 2000 such datasets (i.e., "genes") were simulated and univariate summary statistics were obtained by simple linear regression in the training data (`r (1-prop_testset)*100`% of the data. To mirror what would happen in real data analysis, the indexes of the training-test individuals were the same for all the datasets. However, since these 2000 datasets were simulated independently, I do not think it matters). These regression coefficients and standard errors were used as input in the *mash* pipeline (from Gao) to compute data-driven covariance matrices (up to the ED step included). In particular, the top variable per dataset was used to define a "strong" set and 4 random variables per dataset were used to define a "random" set. Covariance matrices were estimated using *flash*, PCA (including the top 3 PCs), and the empirical covariance matrix.  
 
 The first 50 datasets were used for the prediction analysis. *mr.mash* was fitted to the training data, updating V (imposing a diagonal structure) and updating the prior weights using EM updates. The mixture prior consisted of components defined by:
+
 * canonical matrices correpsonding to different settings of effect sharing/specificity (i.e., singletons, independent, low heterogeneity, medium heterogeneity, high heterogeneity, shared) plus the spike. 
 * data-driven matrices estimated as described above plus the spike.
 * both canonical and data-driven matrices plus the spike.
