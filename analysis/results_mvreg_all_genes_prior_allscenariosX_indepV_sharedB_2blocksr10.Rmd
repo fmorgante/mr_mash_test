@@ -163,11 +163,11 @@ The results below are based on simulations with `r n` samples, `r p` variables o
 
 The first 50 datasets were used for the prediction analysis. *mr.mash* was fitted to the training data, updating V (imposing a diagonal structure) and updating the prior weights using EM updates. The mixture prior consisted of components defined by:
 
-  * canonical matrices correpsonding to different settings of effect sharing/specificity (i.e., singletons, independent, low heterogeneity, medium heterogeneity, high heterogeneity, shared) plus the spike. 
+* canonical matrices corresponding to different settings of effect sharing/specificity (i.e., singletons, independent, low heterogeneity, medium heterogeneity, high heterogeneity, shared) plus the spike. 
 
-  * data-driven matrices estimated as described above plus the spike.
+* data-driven matrices estimated as described above plus the spike.
 
-  * both canonical and data-driven matrices plus the spike.
+* both canonical and data-driven matrices plus the spike.
 
 The covariances matrices were scaled by a grid of values computed from the univariate summary statistics as in the *mash* paper. The posterior mean of the regression coefficients were initialized to the estimates of the group-LASSO. The mixture weights were initialized with the proportion of zero-coefficients from the group-LASSO estimate as the weight on the spike and the proportion of non-zero-coefficients split equally among the remaining components.Convergence was declared when the maximum difference in the ELBO between two successive iterations was smaller than 1e-2. 
 
