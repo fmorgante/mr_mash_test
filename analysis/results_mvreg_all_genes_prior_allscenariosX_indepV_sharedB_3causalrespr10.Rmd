@@ -174,7 +174,7 @@ Here, we evaluate the accuracy of prediction assessed by $r^2$ and bias (slope) 
 
 ## mr.mash vs other methods
 
-Here, we compare *mr.mash* to the multivariate versions of LASSO, Elastic Net ($\alpha = 0.5$), and Ridge Regression as implemented in *glmnet*. The form of the penalty id the following: $\lambda[(1-\alpha)/2 ||\mathbf{\beta}_j||^2_2 + \alpha ||\mathbf{\beta}_j||_2]$. $\lambda$ is chosen by cross-validation in the training set. All the methods were using 4 threads -- *mr.mash* loops over the mixture components in parallel, *glmnet* loops over folds in parallel.
+Here, we compare *mr.mash* to the multivariate versions of LASSO as implemented in *glmnet*. The form of the penalty id the following: $\lambda[(1-\alpha)/2 ||\mathbf{\beta}_j||^2_2 + \alpha ||\mathbf{\beta}_j||_2]$. $\lambda$ is chosen by cross-validation in the training set. All the methods were using 4 threads -- *mr.mash* loops over the mixture components in parallel, *glmnet* loops over folds in parallel.
 
 ```{r accuracy vs others indepX, fig.height=12, fig.width=15, message=FALSE}
 ###Convert from list to data.frame for plotting
@@ -186,12 +186,14 @@ dsc_plots <- rbind(dsc_plots, rrmse_dat)
 
 ###Remove mse from scores and keep only methods wanted
 dsc_plots <- dsc_plots[which(dsc_plots$score_metric!="scaled_mse" ), ]
+dsc_plots <- dsc_plots[which(dsc_plots$method %in% c("mr_mash_em_can", "mr_mash_em_data",
+                                                          "mr_mash_em_dataAndcan", "mlasso")), ]
 
 ###Create factor version of method
 dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_em_can", "mr_mash_em_data",
-                                                          "mr_mash_em_dataAndcan", "mlasso", "menet", "mridge"),
+                                                          "mr_mash_em_dataAndcan", "mlasso"),
                                                 labels=c("mr_mash_can", "mr_mash_data", "mr_mash_both",
-                                                         "mlasso", "menet", "mridge"))
+                                                         "mlasso"))
 
 ###Build data.frame with best accuracy achievable
 hlines <- data.frame(score_metric=c("r2", "bias", "rrmse"), max_val=c(unique(dsc_plots$pve), 1, 1))
@@ -202,7 +204,6 @@ dsc_plots$response_fac <- as.factor(dsc_plots$response)
 ###Plot bias
 p_bias <- ggplot(dsc_plots[which(dsc_plots$score_metric=="bias"), ], aes_string(x = "response_fac", y = "score_value", fill = "method")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  #geom_boxplot2(width.errorbar = 0, width = 0.85) +
   scale_fill_manual(values = colors) +
   labs(x = "Response", y = "Bias", title = "Bias", fill="Method") +
   geom_hline(data=hlines[which(hlines$score_metric=="bias"), ], aes(yintercept = max_val), linetype="dashed", size=1) +
@@ -214,7 +215,6 @@ print(p_bias)
 ###Plot r2
 p_r2 <- ggplot(dsc_plots[which(dsc_plots$score_metric=="r2"), ], aes_string(x = "response_fac", y = "score_value", fill = "method")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  #geom_boxplot2(width.errorbar = 0, width = 0.85) +
   scale_fill_manual(values = colors) +
   labs(x = "Response", y = "r2", title = "r2", fill="Method") +
   geom_hline(data=hlines[which(hlines$score_metric=="r2"), ], aes(yintercept = max_val), linetype="dashed", size=1) +
@@ -226,7 +226,6 @@ print(p_r2)
 ###Plot rrmse
 p_rrmse <- ggplot(dsc_plots[which(dsc_plots$score_metric=="rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  #geom_boxplot2(width.errorbar = 0, width = 0.85) +
   scale_fill_manual(values = colors) +
   labs(x = "Response", y = "rRMSE", title = "rMSE", fill="Method") +
   geom_hline(data=hlines[which(hlines$score_metric=="rrmse"), ], aes(yintercept = max_val), linetype="dashed", size=1) +
@@ -236,24 +235,44 @@ p_rrmse <- ggplot(dsc_plots[which(dsc_plots$score_metric=="rrmse"), ], aes_strin
 print(p_rrmse)
 ```
 
-<!-- Let's now remove outliers from the plots to make things a little clearer. -->
+Let's now remove outliers from the plots to make things a little clearer.
 
-<!-- ```{r accuracy no outliers indepX, fig.height=12, fig.width=15, message=FALSE} -->
-<!-- ###Create plots -->
-<!-- p_nooutliers <- ggplot(dsc_plots, aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) + -->
-<!--     Ipaper::geom_boxplot2(color = "black", width = 0.85, width.errorbar = 0) + -->
-<!--     facet_wrap(vars(score_metric), scales="free_y", ncol=2, labeller=labeller(score_metric=facet_labels)) + -->
-<!--     scale_fill_manual(values = colors) + -->
-<!--     labs(x = "", y = "Accuracy/Error", title = "Prediction performance", fill="Method") + -->
-<!--     geom_hline(data=hlines, aes(yintercept = max_val), linetype="dashed", size=1) + -->
-<!--     theme_cowplot(font_size = 20) + -->
-<!--     theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(), -->
-<!--           plot.title = element_text(hjust = 0.5)) -->
+```{r accuracy no outliers indepX, fig.height=12, fig.width=15, message=FALSE}
+###Plot bias
+p_bias <- ggplot(dsc_plots[which(dsc_plots$score_metric=="bias"), ], aes_string(x = "response_fac", y = "score_value", fill = "method")) +
+  Ipaper::geom_boxplot2(color = "black",width.errorbar = 0, width = 0.85) +  
+  scale_fill_manual(values = colors) +
+  labs(x = "Response", y = "Bias", title = "Bias", fill="Method") +
+  geom_hline(data=hlines[which(hlines$score_metric=="bias"), ], aes(yintercept = max_val), linetype="dashed", size=1) +
+  theme_cowplot(font_size = 20) +
+  theme(plot.title = element_text(hjust = 0.5))
 
-<!-- shift_legend(p_nooutliers) -->
-<!-- ``` -->
+print(p_bias)
 
-<!-- Here, we look at the elapsed time ($log_{10}$ seconds) of each method. Note that the *mr.mash* run time does not include the run time of group-LASSO (but should be considered since we used it to initialize *mr.mash*). -->
+###Plot r2
+p_r2 <- ggplot(dsc_plots[which(dsc_plots$score_metric=="r2"), ], aes_string(x = "response_fac", y = "score_value", fill = "method")) +
+  Ipaper::geom_boxplot2(color = "black",width.errorbar = 0, width = 0.85) +  
+  scale_fill_manual(values = colors) +
+  labs(x = "Response", y = "r2", title = "r2", fill="Method") +
+  geom_hline(data=hlines[which(hlines$score_metric=="r2"), ], aes(yintercept = max_val), linetype="dashed", size=1) +
+  theme_cowplot(font_size = 20) +
+  theme(plot.title = element_text(hjust = 0.5))
+
+print(p_r2)
+
+###Plot rrmse
+p_rrmse <- ggplot(dsc_plots[which(dsc_plots$score_metric=="rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method")) +
+  Ipaper::geom_boxplot2(color = "black",width.errorbar = 0, width = 0.85) +
+  scale_fill_manual(values = colors) +
+  labs(x = "Response", y = "rRMSE", title = "rMSE", fill="Method") +
+  geom_hline(data=hlines[which(hlines$score_metric=="rrmse"), ], aes(yintercept = max_val), linetype="dashed", size=1) +
+  theme_cowplot(font_size = 20) +
+  theme(plot.title = element_text(hjust = 0.5))
+
+print(p_rrmse)
+```
+
+Here, we look at the elapsed time ($log_{10}$ seconds) of each method. Note that the *mr.mash* run time does not include the run time of group-LASSO (but should be considered since we used it to initialize *mr.mash*).
 
 ```{r run time indepX, fig.height=12, fig.width=15, message=FALSE}
 dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="r2"), 
