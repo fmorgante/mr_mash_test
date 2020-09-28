@@ -202,7 +202,7 @@ hlines <- data.frame(score_metric=c("r2", "bias", "rrmse"), max_val=c(unique(dsc
 dsc_plots$response_fac <- as.factor(dsc_plots$response)
 
 ###Plot bias
-p_bias <- ggplot(dsc_plots[which(dsc_plots$score_metric=="bias"), ], aes_string(x = "response_fac", y = "score_value", fill = "method")) +
+p_bias <- ggplot(dsc_plots[which(dsc_plots$score_metric=="bias"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors) +
   labs(x = "Response", y = "Bias", title = "Bias", fill="Method") +
@@ -213,7 +213,7 @@ p_bias <- ggplot(dsc_plots[which(dsc_plots$score_metric=="bias"), ], aes_string(
 print(p_bias)
 
 ###Plot r2
-p_r2 <- ggplot(dsc_plots[which(dsc_plots$score_metric=="r2"), ], aes_string(x = "response_fac", y = "score_value", fill = "method")) +
+p_r2 <- ggplot(dsc_plots[which(dsc_plots$score_metric=="r2"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors) +
   labs(x = "Response", y = "r2", title = "r2", fill="Method") +
@@ -224,7 +224,7 @@ p_r2 <- ggplot(dsc_plots[which(dsc_plots$score_metric=="r2"), ], aes_string(x = 
 print(p_r2)
 
 ###Plot rrmse
-p_rrmse <- ggplot(dsc_plots[which(dsc_plots$score_metric=="rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method")) +
+p_rrmse <- ggplot(dsc_plots[which(dsc_plots$score_metric=="rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors) +
   labs(x = "Response", y = "rRMSE", title = "rMSE", fill="Method") +
@@ -239,7 +239,7 @@ Let's now remove outliers from the plots to make things a little clearer.
 
 ```{r accuracy no outliers indepX, fig.height=12, fig.width=15, message=FALSE}
 ###Plot bias
-p_bias <- ggplot(dsc_plots[which(dsc_plots$score_metric=="bias"), ], aes_string(x = "response_fac", y = "score_value", fill = "method")) +
+p_bias <- ggplot(dsc_plots[which(dsc_plots$score_metric=="bias"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   Ipaper::geom_boxplot2(color = "black",width.errorbar = 0, width = 0.85) +  
   scale_fill_manual(values = colors) +
   labs(x = "Response", y = "Bias", title = "Bias", fill="Method") +
@@ -250,7 +250,7 @@ p_bias <- ggplot(dsc_plots[which(dsc_plots$score_metric=="bias"), ], aes_string(
 print(p_bias)
 
 ###Plot r2
-p_r2 <- ggplot(dsc_plots[which(dsc_plots$score_metric=="r2"), ], aes_string(x = "response_fac", y = "score_value", fill = "method")) +
+p_r2 <- ggplot(dsc_plots[which(dsc_plots$score_metric=="r2"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   Ipaper::geom_boxplot2(color = "black",width.errorbar = 0, width = 0.85) +  
   scale_fill_manual(values = colors) +
   labs(x = "Response", y = "r2", title = "r2", fill="Method") +
@@ -261,7 +261,7 @@ p_r2 <- ggplot(dsc_plots[which(dsc_plots$score_metric=="r2"), ], aes_string(x = 
 print(p_r2)
 
 ###Plot rrmse
-p_rrmse <- ggplot(dsc_plots[which(dsc_plots$score_metric=="rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method")) +
+p_rrmse <- ggplot(dsc_plots[which(dsc_plots$score_metric=="rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   Ipaper::geom_boxplot2(color = "black",width.errorbar = 0, width = 0.85) +
   scale_fill_manual(values = colors) +
   labs(x = "Response", y = "rRMSE", title = "rMSE", fill="Method") +
