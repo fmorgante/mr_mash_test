@@ -453,16 +453,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeb7427f72f6b0c496e5d486b359da19e65a958930targetblankb7427f7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/b7427f72f6b0c496e5d486b359da19e65a958930" target="_blank">b7427f7</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree42661332a8dedcc7638fe2a1f5f45a63294cf073targetblank4266133a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/42661332a8dedcc7638fe2a1f5f45a63294cf073" target="_blank">4266133</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeb7427f72f6b0c496e5d486b359da19e65a958930targetblankb7427f7a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree42661332a8dedcc7638fe2a1f5f45a63294cf073targetblank4266133a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/b7427f72f6b0c496e5d486b359da19e65a958930" target="_blank">b7427f7</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/42661332a8dedcc7638fe2a1f5f45a63294cf073" target="_blank">4266133</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -602,6 +602,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/42661332a8dedcc7638fe2a1f5f45a63294cf073/analysis/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.Rmd" target="_blank">4266133</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-28
+</td>
+<td>
+Change order of methods
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/a91280e4bfab33231e678ca7e8a553da828aec0c/docs/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.html" target="_blank">a91280e</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -837,7 +871,7 @@ hlines &lt;- data.frame(score_metric=c(&quot;r2&quot;, &quot;bias&quot;, &quot;r
 dsc_plots$response_fac &lt;- as.factor(dsc_plots$response)
 
 ###Plot bias
-p_bias &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;bias&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method&quot;)) +
+p_bias &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;bias&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   geom_boxplot(color = &quot;black&quot;, outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors) +
   labs(x = &quot;Response&quot;, y = &quot;Bias&quot;, title = &quot;Bias&quot;, fill=&quot;Method&quot;) +
@@ -871,6 +905,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/a91280e4bfab33231e678ca7e8a553da828aec0c/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.Rmd/accuracy vs others indepX-1.png" target="_blank">a91280e</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-28
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/ec37fdebdc7a8fcc5c6faeff172283aaed40eef0/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.Rmd/accuracy vs others indepX-1.png" target="_blank">ec37fde</a>
 </td>
 <td>
@@ -885,7 +930,7 @@ fmorgante
 </div>
 </div>
 <pre class="r"><code>###Plot r2
-p_r2 &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;r2&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method&quot;)) +
+p_r2 &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;r2&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   geom_boxplot(color = &quot;black&quot;, outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors) +
   labs(x = &quot;Response&quot;, y = &quot;r2&quot;, title = &quot;r2&quot;, fill=&quot;Method&quot;) +
@@ -919,6 +964,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/a91280e4bfab33231e678ca7e8a553da828aec0c/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.Rmd/accuracy vs others indepX-2.png" target="_blank">a91280e</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-28
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/ec37fdebdc7a8fcc5c6faeff172283aaed40eef0/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.Rmd/accuracy vs others indepX-2.png" target="_blank">ec37fde</a>
 </td>
 <td>
@@ -933,7 +989,7 @@ fmorgante
 </div>
 </div>
 <pre class="r"><code>###Plot rrmse
-p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;rrmse&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method&quot;)) +
+p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;rrmse&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   geom_boxplot(color = &quot;black&quot;, outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors) +
   labs(x = &quot;Response&quot;, y = &quot;rRMSE&quot;, title = &quot;rMSE&quot;, fill=&quot;Method&quot;) +
@@ -967,6 +1023,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/a91280e4bfab33231e678ca7e8a553da828aec0c/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.Rmd/accuracy vs others indepX-3.png" target="_blank">a91280e</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-28
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/ec37fdebdc7a8fcc5c6faeff172283aaed40eef0/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.Rmd/accuracy vs others indepX-3.png" target="_blank">ec37fde</a>
 </td>
 <td>
@@ -982,7 +1049,7 @@ fmorgante
 </div>
 <p>Let’s now remove outliers from the plots to make things a little clearer.</p>
 <pre class="r"><code>###Plot bias
-p_bias &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;bias&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method&quot;)) +
+p_bias &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;bias&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;,width.errorbar = 0, width = 0.85) +  
   scale_fill_manual(values = colors) +
   labs(x = &quot;Response&quot;, y = &quot;Bias&quot;, title = &quot;Bias&quot;, fill=&quot;Method&quot;) +
@@ -992,8 +1059,45 @@ p_bias &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;bias&quot;), ]
 
 print(p_bias)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.Rmd/accuracy%20no%20outliers%20indepX-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-no-outliers-indepX-1">
+Past versions of “accuracy no outliers indepX-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-no-outliers-indepX-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/a91280e4bfab33231e678ca7e8a553da828aec0c/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.Rmd/accuracy no outliers indepX-1.png" target="_blank">a91280e</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>###Plot r2
-p_r2 &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;r2&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method&quot;)) +
+p_r2 &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;r2&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;,width.errorbar = 0, width = 0.85) +  
   scale_fill_manual(values = colors) +
   labs(x = &quot;Response&quot;, y = &quot;r2&quot;, title = &quot;r2&quot;, fill=&quot;Method&quot;) +
@@ -1003,8 +1107,45 @@ p_r2 &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;r2&quot;), ], ae
 
 print(p_r2)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.Rmd/accuracy%20no%20outliers%20indepX-2.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-no-outliers-indepX-2">
+Past versions of “accuracy no outliers indepX-2.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-no-outliers-indepX-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/a91280e4bfab33231e678ca7e8a553da828aec0c/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.Rmd/accuracy no outliers indepX-2.png" target="_blank">a91280e</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>###Plot rrmse
-p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;rrmse&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method&quot;)) +
+p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;rrmse&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;,width.errorbar = 0, width = 0.85) +
   scale_fill_manual(values = colors) +
   labs(x = &quot;Response&quot;, y = &quot;rRMSE&quot;, title = &quot;rMSE&quot;, fill=&quot;Method&quot;) +
@@ -1014,6 +1155,43 @@ p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;rrmse&quot;),
 
 print(p_rrmse)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.Rmd/accuracy%20no%20outliers%20indepX-3.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-no-outliers-indepX-3">
+Past versions of “accuracy no outliers indepX-3.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-no-outliers-indepX-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/a91280e4bfab33231e678ca7e8a553da828aec0c/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.Rmd/accuracy no outliers indepX-3.png" target="_blank">a91280e</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Here, we look at the elapsed time (<span class="math">\(log_{10}\)</span> seconds) of each method. Note that the <em>mr.mash</em> run time does not include the run time of group-LASSO (but should be considered since we used it to initialize <em>mr.mash</em>).</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;r2&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -1052,6 +1230,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/a91280e4bfab33231e678ca7e8a553da828aec0c/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.Rmd/run time indepX-1.png" target="_blank">a91280e</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-09-28
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/ec37fdebdc7a8fcc5c6faeff172283aaed40eef0/docs/figure/results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.Rmd/run time indepX-1.png" target="_blank">ec37fde</a>
