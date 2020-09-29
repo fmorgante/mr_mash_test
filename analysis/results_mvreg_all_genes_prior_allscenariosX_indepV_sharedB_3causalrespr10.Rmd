@@ -114,7 +114,7 @@ shift_legend <- function(p) {
 }
 
 ###Set some quantities used in the following plots
-colors <- c("skyblue", "dodgerblue", "limegreen", "green", "gold", "orange", "red", "firebrick", "darkmagenta", "mediumpurple")
+colors <- c("skyblue", "dodgerblue", "mediumblue", "limegreen", "green", "olivedrab1", "gold", "orange", "red", "firebrick", "darkmagenta", "mediumpurple")
 facet_labels <- c(r2 = "r2", bias = "bias", rrmse="rRMSE")
 ```
 
