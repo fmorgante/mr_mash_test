@@ -44,29 +44,29 @@ default:
   instances_per_job: 4
   nodes_per_job: 1
   instances_per_node: 2
-  cpus_per_instance: 4
+  cpus_per_instance: 1
   mem_per_instance: 4G
-  time_per_instance: 20m
+  time_per_instance: 70m
   
 simulate:
   instances_per_job: 200
   instances_per_node: 8
   cpus_per_instance: 1
-  mem_per_instance: 2G
-  time_per_instance: 2m
+  mem_per_instance: 4G
+  time_per_instance: 3m
   
 process:
   instances_per_job: 20
   instances_per_node: 8
   cpus_per_instance: 1
-  mem_per_instance: 2G
-  time_per_instance: 2m
+  mem_per_instance: 3G
+  time_per_instance: 3m
 
 predict:
   instances_per_job: 200
   instances_per_node: 8
   cpus_per_instance: 1
-  mem_per_instance: 2G
+  mem_per_instance: 3G
   time_per_instance: 2m
 
 score:
