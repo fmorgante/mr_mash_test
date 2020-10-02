@@ -15,7 +15,7 @@ parser <- add_option(parser, c("--output"), type="character")
 parser <- add_option(parser, c("--seed"), type="integer")
 outparse <- parse_args(parser)
 
-n_testset <- outparse$prop_testset
+n_testset <- outparse$n_testset
 n <- outparse$n
 output <- outparse$output
 ranseed <- outparse$seed
