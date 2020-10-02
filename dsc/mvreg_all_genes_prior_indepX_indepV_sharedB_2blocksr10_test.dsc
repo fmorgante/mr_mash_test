@@ -13,11 +13,15 @@ DSC:
     mr_mash_em_can_mlasso: mlasso_init * mr_mash_em_can
     mr_mash_em_data_mlasso: mlasso_init * mr_mash_em_data
     mr_mash_em_dataAndcan_mlasso: mlasso_init * mr_mash_em_dataAndcan
+    mr_mash_em_dataAndcan_dropcomp_mlasso: mlasso_init * mr_mash_em_dataAndcan_dropcomp
     mlasso_out: mlasso_init * mlasso
-    fit: mr_mash_em_dataAndcan_mlasso, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso,
-         mlasso_out, mridge, menet, mtlasso
-    predict:  predict_linear
-    score:    r2, scaled_mse, bias
+    mtlasso_enet: enet_init * mtlasso
+    enet_out: enet_init * enet
+    fit: mr_mash_em_dataAndcan_dropcomp_mlasso,mr_mash_em_dataAndcan_mlasso, 
+         mr_mash_em_can_mlasso, mr_mash_em_data_mlasso,
+         mlasso_out, mtlasso_enet, enet_out
+    predict: predict_linear
+    score: scaled_rmse
   run: 
     sim_proc: simulate * process
     fit_pred_score: simulate * process * fit * predict * score
@@ -26,13 +30,13 @@ DSC:
 #Independent predictors, independent residuals, shared effects from a 2-component mixture
 #of normals, all resposens are causal with a 2-block structure
 indepX_indepV_sharedB_2blocksr: simulate_data_all_genes_prior_mod.R
-  n:              90
-  p:              500
+  n:              10900
+  p:              50
   p_causal:       5
   r:              10
   r_causal:       raw(list(1:3,4:10))
   B_scale:        (0.8,1)
-  B_cor:          (1,1)
+  B_cor:          (0.5,0.75)
   w:              (0.5,0.5)
   pve:            0.2
   X_cor:          0
@@ -94,6 +98,12 @@ mr_mash_em_data(mr_mash_em_can):
 mr_mash_em_dataAndcan(mr_mash_em_can):
   data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test_inter/prior/matrices/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test.EZ.FL_PC3.rds"
 
+#EM w0 updates, standardize X, update V (constrained diagonal),
+#canonical and data-driven matrices
+mr_mash_em_dataAndcan_dropcomp(mr_mash_em_can):
+  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test_inter/prior/matrices/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test.EZ.FL_PC3.rds"
+  w0_threshold:           1e-04           
+  
 #Multivariate LASSO  
 mlasso_init: fit_mglmnet_mod.R
   X:                    $Xtrain
@@ -134,11 +144,34 @@ menet(mridge):
 mtlasso: fit_mtlasso.py + fit_mtlasso_mod.py
   X:                    $Xtrain
   Y:                    $Ytrain
-  standardize:          False
+  standardize:          True
   nfolds:               5
+  B_init:               $B_est_init
+  grid_limits:          $lambda_maxmin
+  grid_length:          5
   $B_est:               B_est
   $intercept_est:       intercept_est
   $time:                elapsed_time
+  
+#Univariate enet  
+enet_init: fit_glmnet_mod.R
+  X:                    $Xtrain
+  Y:                    $Ytrain
+  alpha:                0.5
+  standardize:          TRUE
+  nthreads:             1
+  $lambda_maxmin:       out$lambda_maxmin
+  $B_est_init:          out$B_est
+  $intercept_est_init:  out$intercept_est
+  $time_init:           out$elapsed_time
+  
+enet: R(B_est <- B_in; intercept_est <- intercept_in; time <- time_in)
+  B_in:                 $B_est_init
+  intercept_in:         $intercept_est_init
+  time_in:              $time_init
+  $B_est:               B_est
+  $intercept_est:       intercept_est
+  $time:                time
 
 
 ## Predict module
@@ -157,7 +190,7 @@ r2: r2_mod.R
   $err: err
 
 #RMSE scaled by sd(y)
-scaled_mse: scaled_rmse_mod.R
+scaled_rmse: scaled_rmse_mod.R
   Y:    $Ytest
   Yhat: $Yhattest 
   $err: err

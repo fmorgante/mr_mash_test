@@ -21,7 +21,8 @@ step="${1}"
 dsc_outname=mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test
 dsc_outdir="../output/${dsc_outname}"
 inter_outdir="../output/${dsc_outname}_inter"
-n_ind=90 ###needs to match the value in dsc
+n_ind=10900 ###needs to match the value in dsc
+n_testind=10000
 total_genes=20
 pred_genes=5
 ranseed=2
@@ -52,7 +53,7 @@ then
   ###Sample training and test set indeces
   Rscript ../code/sample_testset_indeces.R --output "${inter_outdir}/misc/testset_indeces.rds" \
                                            --n "${n_ind}" \
-                                           --prop_testset 0.2 \
+                                           --n_testset "${n_testind}" \
                                            --seed "${ranseed}"
                                            
   echo "${step} done!"
