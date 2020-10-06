@@ -31,18 +31,18 @@ DSC:
 #of normals, all resposens are causal with a 2-block structure
 indepX_indepV_sharedB_2blocksr: simulate_data_all_genes_prior_mod.R
   n:              10900
-  p:              50
+  p:              5000
   p_causal:       5
   r:              10
   r_causal:       raw(list(1:3,4:10))
   B_scale:        (0.8,1)
-  B_cor:          (0.5,0.75)
+  B_cor:          (0.9,0.75)
   w:              (0.5,0.5)
   pve:            0.2
   X_cor:          0
   X_scale:        1
   V_cor:          0
-  testset_index:  "../output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test_inter/misc/testset_indeces.rds"
+  testset_index:  "../output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_bigtestset_inter/misc/testset_indeces.rds"
   $Xtrain: out$Xtrain
   $Ytrain: out$Ytrain
   $Xtest:  out$Xtest
@@ -91,18 +91,18 @@ mr_mash_em_can: fit_mr_mash_all_genes_prior_mod.R
 #data-driven matrices
 mr_mash_em_data(mr_mash_em_can):
   canonical_mats:         FALSE
-  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test_inter/prior/matrices/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test.EZ.FL_PC3.rds"
+  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_bigtestset_inter/prior/matrices/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_bigtestset.EZ.FL_PC3.rds"
 
 #EM w0 updates, standardize X, update V (constrained diagonal),
 #canonical and data-driven matrices
 mr_mash_em_dataAndcan(mr_mash_em_can):
-  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test_inter/prior/matrices/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test.EZ.FL_PC3.rds"
+  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_bigtestset_inter/prior/matrices/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_bigtestset.EZ.FL_PC3.rds"
 
 #EM w0 updates, standardize X, update V (constrained diagonal),
 #canonical and data-driven matrices
 mr_mash_em_dataAndcan_dropcomp(mr_mash_em_can):
-  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test_inter/prior/matrices/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test.EZ.FL_PC3.rds"
-  w0_threshold:           1e-04           
+  data_driven_mats:       "/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_bigtestset_inter/prior/matrices/mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_bigtestset.EZ.FL_PC3.rds"
+  w0_threshold:           1e-08
   
 #Multivariate LASSO  
 mlasso_init: fit_mglmnet_mod.R
@@ -148,7 +148,7 @@ mtlasso: fit_mtlasso.py + fit_mtlasso_mod.py
   nfolds:               5
   B_init:               $B_est_init
   grid_limits:          $lambda_maxmin
-  grid_length:          5
+  grid_length:          10
   $B_est:               B_est
   $intercept_est:       intercept_est
   $time:                elapsed_time

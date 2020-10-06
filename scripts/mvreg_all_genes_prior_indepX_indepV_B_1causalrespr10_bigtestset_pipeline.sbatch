@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#SBATCH --job-name=mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test_pipeline
-#SBATCH --output=mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test_pipeline.%j.out
-#SBATCH --error=mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test_pipeline.%j.err
+#SBATCH --job-name=mvreg_all_genes_prior_indepX_indepV_B_1causalrespr10_bigtestset_pipeline
+#SBATCH --output=mvreg_all_genes_prior_indepX_indepV_B_1causalrespr10_bigtestset_pipeline.%j.out
+#SBATCH --error=mvreg_all_genes_prior_indepX_indepV_B_1causalrespr10_bigtestset_pipeline.%j.err
 #SBATCH --time=04:00:00
-#SBATCH --partition=broadwl
+#SBATCH --partition=mstephens
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=6G
@@ -18,14 +18,14 @@ source activate py37dsc
 
 ###Set variables
 step="${1}"
-dsc_outname=mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test
+dsc_outname=mvreg_all_genes_prior_indepX_indepV_B_1causalrespr10_bigtestset
 dsc_outdir="../output/${dsc_outname}"
 inter_outdir="../output/${dsc_outname}_inter"
 n_ind=10900 ###needs to match the value in dsc
 n_testind=10000
-total_genes=20
-pred_genes=5
-ranseed=2
+total_genes=2000
+pred_genes=50
+ranseed=29
 
 ###Load necessary version of R
 module load gcc/6.2 texlive/2017 java/1.8 curl/7.50 mkl/2019.up1
@@ -70,7 +70,7 @@ then
   cd ../dsc
   
   ###Run dsc to simulate genes and process data for data-driven covariance estimation                                       
-  ./mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test.dsc -o "${dsc_outdir}" --target sim_proc --replicate "${total_genes}" \
+  ./mvreg_all_genes_prior_indepX_indepV_B_1causalrespr10_bigtestset.dsc -o "${dsc_outdir}" --target sim_proc --replicate "${total_genes}" \
                                                                     -c 4 --host midway2.yml
   
   echo "${step} done!"
@@ -87,7 +87,7 @@ then
   cd ../dsc
   
   ###Run dsc to simulate genes and process data for data-driven covariance estimation                                       
-  ./mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test.dsc -o "${dsc_outdir}" --target sim_proc --replicate "${total_genes}" \
+  ./mvreg_all_genes_prior_indepX_indepV_B_1causalrespr10_bigtestset.dsc -o "${dsc_outdir}" --target sim_proc --replicate "${total_genes}" \
                                                                     -c 4 --host midway2.yml -s existing
   
   echo "${step} done!"
@@ -131,7 +131,7 @@ then
   cd ../dsc
 
   ###Run dsc to fit the models and do prediction
-  ./mvreg_all_genes_prior_indepX_indepV_sharedB_2blocksr10_test.dsc -o "${dsc_outdir}" --target fit_pred_score -s existing --replicate "${pred_genes}" \
+  ./mvreg_all_genes_prior_indepX_indepV_B_1causalrespr10_bigtestset.dsc -o "${dsc_outdir}" --target fit_pred_score -s existing --replicate "${pred_genes}" \
                                                                     -c 4 --host midway2.yml
 
   cd ../scripts
