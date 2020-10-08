@@ -7,7 +7,7 @@ def fit_sparse_multi_task_lasso(X, Y, standardize, nfolds, B_init, grid_limits, 
   import time
   
   if grid_limits is None:
-    grid = np.geomspace(.1, 1, 10) * X.shape[0]
+    grid = np.geomspace(.1, 1, grid_length) * X.shape[0]
   else:
     grid = np.linspace(start=grid_limits[1], stop=grid_limits[0], num=grid_length)
     
