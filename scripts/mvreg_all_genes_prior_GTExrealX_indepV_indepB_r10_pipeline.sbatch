@@ -18,8 +18,8 @@ source activate py37dsc
 
 ###Set variables
 step="${1}"
-dsc_outname=mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_pipeline
-dsc_script="./${dsc_outname}.dsc"
+dsc_script=./mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10.dsc
+dsc_outname=`echo "${dsc_script}" | cut -d'/' -f 2 | cut -d'.' -f 1`
 dsc_outdir="../output/${dsc_outname}"
 inter_outdir="../output/${dsc_outname}_inter"
 n_testind=168
