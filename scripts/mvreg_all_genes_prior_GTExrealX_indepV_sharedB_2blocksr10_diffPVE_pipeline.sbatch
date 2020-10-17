@@ -18,7 +18,8 @@ source activate py37dsc
 
 ###Set variables
 step="${1}"
-dsc_outname=mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE
+dsc_script=./mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE.dsc
+dsc_outname=`echo "${dsc_script}" | cut -d'/' -f 2 | cut -d'.' -f 1`
 dsc_outdir="../output/${dsc_outname}"
 inter_outdir="../output/${dsc_outname}_inter"
 n_testind=168
@@ -68,8 +69,8 @@ then
   cd ../dsc
   
   ###Run dsc to simulate genes and process data for data-driven covariance estimation                                       
-  ./mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.dsc -o "${dsc_outdir}" --target sim_proc --n_dataset "${total_genes}" \
-                                                                    -c 4 --host midway2.yml
+  "${dsc_script}" -o "${dsc_outdir}" --target sim_proc --n_dataset "${total_genes}" \
+                                    -c 4 --host midway2.yml
   
   echo "${step} done!"
 fi
@@ -85,8 +86,8 @@ then
   cd ../dsc
   
   ###Run dsc to simulate genes and process data for data-driven covariance estimation                                       
-  ./mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.dsc -o "${dsc_outdir}" --target sim_proc --n_dataset "${total_genes}" \
-                                                                    -c 4 --host midway2.yml -s existing
+  "${dsc_script}" -o "${dsc_outdir}" --target sim_proc --n_dataset "${total_genes}" \
+                                    -c 4 --host midway2.yml -s existing
   
   echo "${step} done!"
 fi
@@ -129,8 +130,8 @@ then
   cd ../dsc
 
   ###Run dsc to fit the models and do prediction
-  ./mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.dsc -o "${dsc_outdir}" --target fit_pred_score -s existing --n_dataset "${pred_genes}" \
-                                                                    -c 4 --host midway2.yml
+  "${dsc_script}" -o "${dsc_outdir}" --target fit_pred_score -s existing --n_dataset "${pred_genes}" \
+                                    -c 4 --host midway2.yml
 
   cd ../scripts
   echo "${step} done!"
