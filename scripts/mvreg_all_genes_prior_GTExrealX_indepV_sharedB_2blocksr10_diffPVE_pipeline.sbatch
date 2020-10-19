@@ -3,7 +3,7 @@
 #SBATCH --job-name=mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_pipeline
 #SBATCH --output=mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_pipeline.%j.out
 #SBATCH --error=mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_pipeline.%j.err
-#SBATCH --time=04:00:00
+#SBATCH --time=12:00:00
 #SBATCH --partition=mstephens
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=4
