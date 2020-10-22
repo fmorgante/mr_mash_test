@@ -50,6 +50,8 @@ Results for meeting on 10/22/2020. Assessment of prediction accuracy and run tim
 
 + [One causal response out of ten, independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.html)
 + [Three causal responses (with shared effects) out of ten, independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.html)
++ [Two blocks of responses (shared effects within block), independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.html)
+
 
 
 
