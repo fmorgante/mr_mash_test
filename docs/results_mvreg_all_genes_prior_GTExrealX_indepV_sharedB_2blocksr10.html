@@ -13,7 +13,7 @@
 
 <meta name="date" content="2020-10-22" />
 
-<title>Simulations with GTEx genotypes and 3 causal responses with shared effects</title>
+<title>Simulations with GTEx genotypes and effect structure similar to GTEx gene expression</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -335,7 +335,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Simulations with GTEx genotypes and 3 causal responses with shared effects</h1>
+<h1 class="title toc-ignore">Simulations with GTEx genotypes and effect structure similar to GTEx gene expression</h1>
 <h4 class="author"><em>Fabio Morgante</em></h4>
 <h4 class="date"><em>October 22, 2020</em></h4>
 
@@ -471,7 +471,6 @@ Note that you need to be careful to ensure that all relevant files for the analy
 Ignored files:
     Ignored:    .sos/
     Ignored:    analysis/.sos/
-    Ignored:    analysis/figure/
     Ignored:    code/assess_mrmash_speed.2835257.err
     Ignored:    code/assess_mrmash_speed.2835257.out
     Ignored:    code/assess_mrmash_speed.2914525.err
@@ -730,7 +729,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd</code>) and HTML (<code>docs/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.Rmd</code>) and HTML (<code>docs/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -759,7 +758,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/fbf086e7c196f5a99fc1be10a50f7aed3c1dc60a/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd" target="_blank">fbf086e</a>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/fbf086e7c196f5a99fc1be10a50f7aed3c1dc60a/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.Rmd" target="_blank">fbf086e</a>
 </td>
 <td>
 fmorgante
@@ -769,74 +768,6 @@ fmorgante
 </td>
 <td>
 Add new scenarios + fix bug
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/82e4357e36da943994148a9be08c5b5b6bd32441/docs/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.html" target="_blank">82e4357</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/a4bd2d0d46f4015888e35279a21d8ba2be9829a6/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd" target="_blank">a4bd2d0</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Fix a few things
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/65d78b27a790e128e58fb8cc24fd8b5d11fc19cd/docs/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.html" target="_blank">65d78b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/ea2f1f3a1027ea483d8d950e9ee2f433f7619897/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd" target="_blank">ea2f1f3</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Add new scenario
 </td>
 </tr>
 </tbody>
@@ -884,13 +815,13 @@ convert_dsc_to_dataframe_gtex &lt;- function(dsc){
   }
   
   ###Get number of genes
-  n_methods &lt;- length(unique(dsc_out$fit))
-  n_metrics &lt;- length(unique(dsc_out$score))
+  n_methods &lt;- length(unique(dsc$fit))
+  n_metrics &lt;- length(unique(dsc$score))
   n_genes &lt;- n_elem/n_methods/n_metrics
-  
+ 
   ###Compute replicates
   reptot &lt;- rep(rep(1:n_genes, each=dsc$simulate.r[1]), n_methods*n_metrics)
-   
+  
   dsc_df &lt;- data.frame(rep=reptot, dsc_df)
   
   return(dsc_df)
@@ -926,7 +857,7 @@ colors &lt;- c(&quot;cyan&quot;, &quot;skyblue&quot;, &quot;dodgerblue&quot;, &q
 <div id="pve0.2" class="section level1">
 <h1>PVE=0.2</h1>
 <pre class="r"><code>###Load the dsc results
-dsc_out &lt;- dscquery(&quot;output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10&quot;, 
+dsc_out &lt;- dscquery(&quot;output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10&quot;, 
                     c(&quot;simulate.p_causal&quot;, &quot;simulate.r&quot;, &quot;simulate.r_causal&quot;, &quot;simulate.pve&quot;, &quot;simulate.B_cor&quot;, &quot;simulate.w&quot;, 
                       &quot;simulate.B_scale&quot;, &quot;simulate.V_cor&quot;, &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
                     groups=&quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot;,
@@ -951,7 +882,7 @@ dsc_out$simulate.B_scale &lt;- NULL
 dsc_out$simulate.V_cor &lt;- NULL</code></pre>
 <div id="simulation-set-up" class="section level2">
 <h2>Simulation set up</h2>
-<p>The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with 5 causal variants, 10 responses with a per-response proportion of variance explained (PVE) of 0.2. Causal effects, B, were drawn from MVN(0, Sigma), Sigma is such that it achieves a correlation between responses of 1. Response 1, 2, 3 have causal effects while the remaining seven responses do not have any causal effect. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of 0 and a scale defined by PVE, in the case of cuasal responses. Non causal responses are from N(0, 1).</p>
+<p>The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with 5 causal variants, 10 responses with a per-response proportion of variance explained (PVE) of 0.2. Causal effects, B, were drawn from <span class="math">\(w_1 MVN(0, Sigma1) + w_2 MVN(0, Sigma2)\)</span>, where <span class="math">\(w_1\)</span> = 0.5 and <span class="math">\(w_2\)</span> = 0.5 Sigma1 is such that it achieves a correlation between responses of 0.9 and a scale of 0.8 and Sigma2 is such that it achieves a correlation between responses of 0.75 and a scale of 1. The first component of the mixture applies to responses 1, 2, 3 while the second component applies to responses 4, 5, 6, 7, 8, 9, 10. This structure is meant to mirror that of brain tissues and non-brain tissues in GTEx. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of 0 and a scale defined by PVE, in the case of cuasal responses. Non causal responses are from N(0, 1).</p>
 <p>2000 genes were simulated and univariate summary statistics were obtained by simple linear regression in the training data (80% of the data. The indexes of the training-test individuals were the same for all the datasets). These regression coefficients and standard errors were used as input in the <em>mash</em> pipeline (from Gao) to compute data-driven covariance matrices (up to the ED step included). In particular, the top variable per gene was used to define a “strong” set and 4 random variables per gene were used to define a “random” set. Covariance matrices were estimated using <em>flash</em>, PCA (including the top 3 PCs), and the empirical covariance matrix.</p>
 <p>The first 50 genes were used for the prediction analysis. <em>mr.mash</em> was fitted to the training data, updating V (imposing a diagonal structure) and updating the prior weights using EM updates. The mixture prior consisted of components defined by:</p>
 <ul>
@@ -997,44 +928,7 @@ p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&
   theme(plot.title = element_text(hjust = 0.5))
 
 print(p_rrmse)</code></pre>
-<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy%20vs%20others-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-vs-others-1">
-Past versions of “accuracy vs others-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-accuracy-vs-others-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/65d78b27a790e128e58fb8cc24fd8b5d11fc19cd/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy vs others-1.png" target="_blank">65d78b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.Rmd/accuracy%20vs%20others-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>Let’s now remove outliers from the plots to make things a little clearer.</p>
 <pre class="r"><code>p_rrmse_noout &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;,width.errorbar = 0, width = 0.85) +
@@ -1045,44 +939,7 @@ fmorgante
   theme(plot.title = element_text(hjust = 0.5))
 
 print(p_rrmse_noout)</code></pre>
-<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy%20no%20outliers-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-no-outliers-1">
-Past versions of “accuracy no outliers-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-accuracy-no-outliers-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/65d78b27a790e128e58fb8cc24fd8b5d11fc19cd/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy no outliers-1.png" target="_blank">65d78b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.Rmd/accuracy%20no%20outliers-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>Here, we look at the elapsed time (<span class="math">\(log_2\)</span> seconds) of each method. Note that the <em>mr.mash</em> run time does not include the run time of group-LASSO (but should be considered since we used it to initialize <em>mr.mash</em>).</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;scaled_rrmse&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -1098,50 +955,92 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
         plot.title = element_text(hjust = 0.5))
 
 print(p_time)</code></pre>
-<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/run%20time-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-run-time-1">
-Past versions of “run time-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-run-time-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/65d78b27a790e128e58fb8cc24fd8b5d11fc19cd/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/run time-1.png" target="_blank">65d78b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-</tr>
-</tbody>
-</table>
+<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.Rmd/run%20time-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<!-- # PVE=0.05 -->
+<!-- ```{r load data low pve, warning=FALSE, message=FALSE} -->
+<!-- ###Load the dsc results -->
+<!-- dsc_out <- dscquery("output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_lowPVE",  -->
+<!--                     c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w",  -->
+<!--                       "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"),  -->
+<!--                     groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet", -->
+<!--                     verbose=FALSE) -->
+<!-- ###Obtain simulation parameters -->
+<!-- prop_testset <- 0.2 -->
+<!-- p_causal <- unique(dsc_out$simulate.p_causal) -->
+<!-- r <- unique(dsc_out$simulate.r) -->
+<!-- r_causal <- eval(parse(text=unique(dsc_out$simulate.r_causal))) -->
+<!-- pve <- unique(dsc_out$simulate.pve) -->
+<!-- w <- eval(parse(text=unique(dsc_out$simulate.w))) -->
+<!-- B_cor <- eval(parse(text=unique(dsc_out$simulate.B_cor))) -->
+<!-- B_scale <- eval(parse(text=unique(dsc_out$simulate.B_scale))) -->
+<!-- V_cor <- unique(dsc_out$simulate.V_cor) -->
+<!-- ###Remove list elements that are not useful anymore -->
+<!-- dsc_out$simulate.r_causal <- NULL -->
+<!-- dsc_out$simulate.w <- NULL -->
+<!-- dsc_out$simulate.B_cor <- NULL -->
+<!-- dsc_out$simulate.B_scale <- NULL -->
+<!-- dsc_out$simulate.V_cor <- NULL -->
+<!-- ``` -->
+<!-- In this section the set up is exactly the same but with PVE=0.2. -->
+<!-- ## mr.mash vs other methods -->
+<!-- ```{r accuracy vs others low PVE, fig.height=12, fig.width=15, message=FALSE} -->
+<!-- ###Convert from list to data.frame for plotting -->
+<!-- dsc_plots <- convert_dsc_to_dataframe_gtex(dsc_out) -->
+<!-- ###Compute rmse score (relative to mr_mash_consec_em) and add it to the data -->
+<!-- rrmse_dat <- compute_rrmse(dsc_plots) -->
+<!-- dsc_plots <- rbind(dsc_plots, rrmse_dat) -->
+<!-- ###Remove mse from scores and keep only methods wanted -->
+<!-- dsc_plots <- dsc_plots[which(dsc_plots$score_metric!="scaled_rmse" ), ] -->
+<!-- ###Create factor version of method -->
+<!-- dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_em_can", "mr_mash_em_data", -->
+<!--                                                           "mr_mash_em_dataAndcan", "mr_mash_em_dataAndcan_dropcomp",  -->
+<!--                                                           "mlasso", "mtlasso", "enet"), -->
+<!--                                                 labels=c("mr_mash_can", "mr_mash_data", "mr_mash_both",  -->
+<!--                                                          "mr_mash_both_drop", "mlasso", "mtlasso", "enet")) -->
+<!-- ###Create factor version of response -->
+<!-- dsc_plots$response_fac <- as.factor(dsc_plots$response) -->
+<!-- ###Create plots -->
+<!-- p_rrmse <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) + -->
+<!--   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) + -->
+<!--   scale_fill_manual(values = colors) + -->
+<!--   labs(x = "Response", y = "Error", title = "rRMSE", fill="Method") + -->
+<!--   geom_hline(yintercept=1, linetype="dotted", size=1) + -->
+<!--   theme_cowplot(font_size = 20) + -->
+<!--   theme(plot.title = element_text(hjust = 0.5)) -->
+<!-- print(p_rrmse) -->
+<!-- ``` -->
+<!-- Let's now remove outliers from the plots to make things a little clearer. -->
+<!-- ```{r accuracy no outliers low PVE, fig.height=12, fig.width=15, message=FALSE} -->
+<!-- p_rrmse_noout <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) + -->
+<!--   Ipaper::geom_boxplot2(color = "black",width.errorbar = 0, width = 0.85) + -->
+<!--   scale_fill_manual(values = colors) + -->
+<!--   labs(x = "Response", y = "Error", title = "rRMSE", fill="Method") + -->
+<!--   geom_hline(yintercept=1, linetype="dotted", size=1) + -->
+<!--   theme_cowplot(font_size = 20) + -->
+<!--   theme(plot.title = element_text(hjust = 0.5)) -->
+<!-- print(p_rrmse_noout) -->
+<!-- ``` -->
+<!-- Here, we look at the elapsed time ($log_2$ seconds) of each method. Note that the *mr.mash* run time does not include the run time of group-LASSO (but should be considered since we used it to initialize *mr.mash*). -->
+<!-- ```{r run time low PVE, fig.height=12, fig.width=15, message=FALSE} -->
+<!-- dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="scaled_rrmse"),  -->
+<!--                           -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))] -->
+<!-- p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) + -->
+<!--   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) + -->
+<!--   scale_fill_manual(values = colors) + -->
+<!--   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x), -->
+<!--                      labels = trans_format("log2", math_format(2^.x))) + -->
+<!--   labs(x = "", y = "Elapsed time (seconds) in log2 scale", title = "Run time", fill="Method") + -->
+<!--   theme_cowplot(font_size = 20) + -->
+<!--   theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(), -->
+<!--         plot.title = element_text(hjust = 0.5)) -->
+<!-- print(p_time) -->
+<!-- ``` -->
 </div>
 </div>
-</div>
-</div>
-<div id="pve0.05" class="section level1">
-<h1>PVE=0.05</h1>
+<div id="different-pve" class="section level1">
+<h1>Different PVE</h1>
 <pre class="r"><code>###Load the dsc results
-dsc_out &lt;- dscquery(&quot;output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_lowPVE&quot;, 
+dsc_out &lt;- dscquery(&quot;output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE&quot;, 
                     c(&quot;simulate.p_causal&quot;, &quot;simulate.r&quot;, &quot;simulate.r_causal&quot;, &quot;simulate.pve&quot;, &quot;simulate.B_cor&quot;, &quot;simulate.w&quot;, 
                       &quot;simulate.B_scale&quot;, &quot;simulate.V_cor&quot;, &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
                     groups=&quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot;,
@@ -1152,7 +1051,7 @@ prop_testset &lt;- 0.2
 p_causal &lt;- unique(dsc_out$simulate.p_causal)
 r &lt;- unique(dsc_out$simulate.r)
 r_causal &lt;- eval(parse(text=unique(dsc_out$simulate.r_causal)))
-pve &lt;- unique(dsc_out$simulate.pve)
+pve &lt;- eval(parse(text=unique(dsc_out$simulate.pve)))
 w &lt;- eval(parse(text=unique(dsc_out$simulate.w)))
 B_cor &lt;- eval(parse(text=unique(dsc_out$simulate.B_cor)))
 B_scale &lt;- eval(parse(text=unique(dsc_out$simulate.B_scale)))
@@ -1164,7 +1063,7 @@ dsc_out$simulate.w &lt;- NULL
 dsc_out$simulate.B_cor &lt;- NULL
 dsc_out$simulate.B_scale &lt;- NULL
 dsc_out$simulate.V_cor &lt;- NULL</code></pre>
-<p>In this section the set up is exactly the same but with PVE=0.05.</p>
+<p>In this section the set up is exactly the same but with the first three responses having PVE=0.2 and the remaining seven responses having PVE=0.05.</p>
 <div id="mr.mash-vs-other-methods-1" class="section level2">
 <h2>mr.mash vs other methods</h2>
 <pre class="r"><code>###Convert from list to data.frame for plotting
@@ -1197,44 +1096,7 @@ p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&
   theme(plot.title = element_text(hjust = 0.5))
 
 print(p_rrmse)</code></pre>
-<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy%20vs%20others%20low%20PVE-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-vs-others-low-PVE-1">
-Past versions of “accuracy vs others low PVE-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-accuracy-vs-others-low-PVE-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/65d78b27a790e128e58fb8cc24fd8b5d11fc19cd/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy vs others low PVE-1.png" target="_blank">65d78b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.Rmd/accuracy%20vs%20others%20diff%20PVE-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>Let’s now remove outliers from the plots to make things a little clearer.</p>
 <pre class="r"><code>p_rrmse_noout &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;,width.errorbar = 0, width = 0.85) +
@@ -1245,44 +1107,7 @@ fmorgante
   theme(plot.title = element_text(hjust = 0.5))
 
 print(p_rrmse_noout)</code></pre>
-<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy%20no%20outliers%20low%20PVE-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-no-outliers-low-PVE-1">
-Past versions of “accuracy no outliers low PVE-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-accuracy-no-outliers-low-PVE-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/65d78b27a790e128e58fb8cc24fd8b5d11fc19cd/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy no outliers low PVE-1.png" target="_blank">65d78b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.Rmd/accuracy%20no%20outliers%20diff%20PVE-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>Here, we look at the elapsed time (<span class="math">\(log_2\)</span> seconds) of each method. Note that the <em>mr.mash</em> run time does not include the run time of group-LASSO (but should be considered since we used it to initialize <em>mr.mash</em>).</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;scaled_rrmse&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -1298,44 +1123,7 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
         plot.title = element_text(hjust = 0.5))
 
 print(p_time)</code></pre>
-<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/run%20time%20low%20PVE-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-run-time-low-PVE-1">
-Past versions of “run time low PVE-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-run-time-low-PVE-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/65d78b27a790e128e58fb8cc24fd8b5d11fc19cd/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/run time low PVE-1.png" target="_blank">65d78b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.Rmd/run%20time%20diff%20PVE-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
