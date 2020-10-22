@@ -49,11 +49,12 @@ convert_dsc_to_dataframe_gtex <- function(dsc){
   
   ###Get number of genes
   n_methods <- length(unique(dsc_out$fit))
-  n_genes <- n_elem/n_methods
+  n_metrics <- length(unique(dsc_out$score))
+  n_genes <- n_elem/n_methods/n_metrics
   
   ###Compute replicates
-  reptot <- rep(rep(1:n_genes, each=dsc$simulate.r[1]), n_methods)
-  
+  reptot <- rep(rep(1:n_genes, each=dsc$simulate.r[1]), n_methods*n_metrics)
+   
   dsc_df <- data.frame(rep=reptot, dsc_df)
   
   return(dsc_df)
@@ -211,8 +212,6 @@ print(p_time)
 ```
 
 
-In summary, all the methods perform pretty similarly. Any flavor of *mr.mash* is on the lower side of the error. Using data-driven matrices or canonical is equivalent in this situation.
-
 # PVE=0.05
 
 ```{r load data low pve, warning=FALSE, message=FALSE}
@@ -311,5 +310,3 @@ p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill =
 
 print(p_time)
 ```
-
-In summary, all the methods perform even more similarly. Any flavor of *mr.mash* is on the lower side of the error. Using data-driven matrices seems to be a little worse than using canonical matrices in this situation.
