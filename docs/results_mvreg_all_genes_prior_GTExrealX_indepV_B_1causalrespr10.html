@@ -453,16 +453,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree9754c9d5c9801239fcbdf630ee2ec4462866e34dtargetblank9754c9da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/9754c9d5c9801239fcbdf630ee2ec4462866e34d" target="_blank">9754c9d</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreea4bd2d0d46f4015888e35279a21d8ba2be9829a6targetblanka4bd2d0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/a4bd2d0d46f4015888e35279a21d8ba2be9829a6" target="_blank">a4bd2d0</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree9754c9d5c9801239fcbdf630ee2ec4462866e34dtargetblank9754c9da" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreea4bd2d0d46f4015888e35279a21d8ba2be9829a6targetblanka4bd2d0a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/9754c9d5c9801239fcbdf630ee2ec4462866e34d" target="_blank">9754c9d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/a4bd2d0d46f4015888e35279a21d8ba2be9829a6" target="_blank">a4bd2d0</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -772,6 +772,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/a4bd2d0d46f4015888e35279a21d8ba2be9829a6/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.Rmd" target="_blank">a4bd2d0</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-10-22
+</td>
+<td>
+Fix a few things
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/aa1982bfdff7dfb710ce031724310e898d5b5c3a/docs/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.html" target="_blank">aa1982b</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-10-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/9754c9d5c9801239fcbdf630ee2ec4462866e34d/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.Rmd" target="_blank">9754c9d</a>
 </td>
 <td>
@@ -973,7 +1007,8 @@ colors &lt;- c(&quot;cyan&quot;, &quot;skyblue&quot;, &quot;dodgerblue&quot;, &q
 <h1>PVE=0.2</h1>
 <pre class="r"><code>###Load the dsc results
 dsc_out &lt;- dscquery(&quot;output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10&quot;, 
-                    c(&quot;simulate.p_causal&quot;, &quot;simulate.r&quot;, &quot;simulate.pve&quot;, &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
+                    c(&quot;simulate.p_causal&quot;, &quot;simulate.r&quot;, &quot;simulate.r_causal&quot;, &quot;simulate.pve&quot;, &quot;simulate.B_cor&quot;, &quot;simulate.w&quot;, 
+                      &quot;simulate.B_scale&quot;, &quot;simulate.V_cor&quot;, &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
                     groups=&quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot;,
                     verbose=FALSE)
 
@@ -996,7 +1031,7 @@ dsc_out$simulate.B_scale &lt;- NULL
 dsc_out$simulate.V_cor &lt;- NULL</code></pre>
 <div id="simulation-set-up" class="section level2">
 <h2>Simulation set up</h2>
-<p>The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with 5 causal variants, 10 responses with a per-response proportion of variance explained (PVE) of 0.2. Causal effects, B, were drawn from MVN(0, Sigma), Sigma is such that it achieves a correlation between responses of . Response has causal effects while the remaining nine responses do not have any causal effect. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of and a scale defined by PVE, in the case of cuasal responses. Non causal responses are from N(0, 1).</p>
+<p>The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with 5 causal variants, 10 responses with a per-response proportion of variance explained (PVE) of 0.2. Causal effects, B, were drawn from MVN(0, Sigma), Sigma is such that it achieves a correlation between responses of 0. Response 1 has causal effects while the remaining nine responses do not have any causal effect. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of 0 and a scale defined by PVE, in the case of cuasal responses. Non causal responses are from N(0, 1).</p>
 <p>2000 genes were simulated and univariate summary statistics were obtained by simple linear regression in the training data (80% of the data. The indexes of the training-test individuals were the same for all the datasets). These regression coefficients and standard errors were used as input in the <em>mash</em> pipeline (from Gao) to compute data-driven covariance matrices (up to the ED step included). In particular, the top variable per gene was used to define a “strong” set and 4 random variables per gene were used to define a “random” set. Covariance matrices were estimated using <em>flash</em>, PCA (including the top 3 PCs), and the empirical covariance matrix.</p>
 <p>The first 50 genes were used for the prediction analysis. <em>mr.mash</em> was fitted to the training data, updating V (imposing a diagonal structure) and updating the prior weights using EM updates. The mixture prior consisted of components defined by:</p>
 <ul>
@@ -1221,7 +1256,8 @@ fmorgante
 <h1>PVE=0.05</h1>
 <pre class="r"><code>###Load the dsc results
 dsc_out &lt;- dscquery(&quot;output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_lowPVE&quot;, 
-                    c(&quot;simulate.p_causal&quot;, &quot;simulate.r&quot;, &quot;simulate.pve&quot;, &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
+                    c(&quot;simulate.p_causal&quot;, &quot;simulate.r&quot;, &quot;simulate.r_causal&quot;, &quot;simulate.pve&quot;, &quot;simulate.B_cor&quot;, &quot;simulate.w&quot;, 
+                      &quot;simulate.B_scale&quot;, &quot;simulate.V_cor&quot;, &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
                     groups=&quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot;,
                     verbose=FALSE)
 
