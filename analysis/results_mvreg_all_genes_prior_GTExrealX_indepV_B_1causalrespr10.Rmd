@@ -310,4 +310,4 @@ p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill =
 print(p_time)
 ```
 
-In summary, all the methods perform pretty similarly. Any flavor of *mr.mash* is on the lower side of the error. Using data-driven matrices or canonical is equivalent in this situation.
+In summary, all the methods perform even more similarly. Any flavor of *mr.mash* is on the lower side of the error. Using data-driven matrices seems to be a little worse than using canonical matrices in this situation.
