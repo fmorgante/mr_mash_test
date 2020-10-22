@@ -93,7 +93,8 @@ colors <- c("cyan", "skyblue", "dodgerblue", "mediumblue", "limegreen", "green",
 ```{r load data, warning=FALSE, message=FALSE}
 ###Load the dsc results
 dsc_out <- dscquery("output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10", 
-                    c("simulate.p_causal", "simulate.r", "simulate.pve", "simulate", "fit", "score", "score.err", "fit.time"), 
+                    c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w", 
+                      "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"), 
                     groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet",
                     verbose=FALSE)
 
@@ -217,7 +218,8 @@ In summary, all the methods perform pretty similarly. Any flavor of *mr.mash* is
 ```{r load data low pve, warning=FALSE, message=FALSE}
 ###Load the dsc results
 dsc_out <- dscquery("output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_lowPVE", 
-                    c("simulate.p_causal", "simulate.r", "simulate.pve", "simulate", "fit", "score", "score.err", "fit.time"), 
+                    c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w", 
+                      "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"), 
                     groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet",
                     verbose=FALSE)
 
