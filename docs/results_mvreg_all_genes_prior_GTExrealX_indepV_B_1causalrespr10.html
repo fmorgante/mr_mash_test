@@ -344,7 +344,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -353,7 +353,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -365,7 +365,7 @@ div.tocify {
 <strong>Last updated:</strong> 2020-10-22
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>mr_mash_test/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -441,52 +441,28 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
 </p>
 </div>
-<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
 <div class="panel-body">
-<p>
-Using absolute paths to the files within your workflowr project makes it difficult for you and others to run your code on a different machine. Change the absolute path(s) below to the suggested relative path(s) to make your code more reproducible.
-</p>
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th style="text-align:left;">
-absolute
-</th>
-<th style="text-align:left;">
-relative
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10
-</td>
-<td style="text-align:left;">
-output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10
-</td>
-</tr>
-</tbody>
-</table>
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree9fe619a57826ad8c415923fff66eb026f750b426targetblank9fe619aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/9fe619a57826ad8c415923fff66eb026f750b426" target="_blank">9fe619a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree547efa4e2d856e9fff7a7f8d158e615c9e14eae8targetblank547efa4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/547efa4e2d856e9fff7a7f8d158e615c9e14eae8" target="_blank">547efa4</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree9fe619a57826ad8c415923fff66eb026f750b426targetblank9fe619aa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree547efa4e2d856e9fff7a7f8d158e615c9e14eae8targetblank547efa4a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/9fe619a57826ad8c415923fff66eb026f750b426" target="_blank">9fe619a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/547efa4e2d856e9fff7a7f8d158e615c9e14eae8" target="_blank">547efa4</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -796,6 +772,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/547efa4e2d856e9fff7a7f8d158e615c9e14eae8/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.Rmd" target="_blank">547efa4</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-10-22
+</td>
+<td>
+Fix a few things
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/1f6cf753d37948dd72a53ffebff2b879423cbdad/docs/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.html" target="_blank">1f6cf75</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-10-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/9fe619a57826ad8c415923fff66eb026f750b426/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.Rmd" target="_blank">9fe619a</a>
 </td>
 <td>
@@ -890,9 +900,9 @@ compute_rrmse &lt;- function(dsc_plot, log10_scale=FALSE){
 }
 
 ###Set some quantities used in the following plots
-colors &lt;- c(&quot;skyblue&quot;, &quot;dodgerblue&quot;, &quot;mediumblue&quot;, &quot;limegreen&quot;, &quot;green&quot;, &quot;olivedrab1&quot;, &quot;gold&quot;, &quot;orange&quot;, &quot;red&quot;, &quot;firebrick&quot;, &quot;darkmagenta&quot;, &quot;mediumpurple&quot;)</code></pre>
+colors &lt;- c(&quot;cyan&quot;, &quot;skyblue&quot;, &quot;dodgerblue&quot;, &quot;mediumblue&quot;, &quot;limegreen&quot;, &quot;green&quot;, &quot;gold&quot;, &quot;orange&quot;, &quot;red&quot;, &quot;firebrick&quot;, &quot;darkmagenta&quot;, &quot;mediumpurple&quot;)</code></pre>
 <pre class="r"><code>###Load the dsc results
-dsc_out &lt;- dscquery(&quot;/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10&quot;, 
+dsc_out &lt;- dscquery(&quot;output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10&quot;, 
                     c(&quot;simulate.p_causal&quot;, &quot;simulate.r&quot;, &quot;simulate.pve&quot;, &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
                     groups=&quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot;,
                     verbose=FALSE)
@@ -923,7 +933,7 @@ dsc_out$simulate.V_cor &lt;- NULL</code></pre>
 <li><p>canonical matrices corresponding to different settings of effect sharing/specificity (i.e., singletons, independent, low heterogeneity, medium heterogeneity, high heterogeneity, shared) plus the spike.</p></li>
 <li><p>data-driven matrices estimated as described above plus the spike.</p></li>
 <li><p>both canonical and data-driven matrices plus the spike.</p></li>
-<li><p>both canonical and data-driven matrices plus the spike, dropping components with <span class="math">\(w0 &lt; 1e-8\)</span>.</p></li>
+<li><p>both canonical and data-driven matrices plus the spike, dropping components with <span class="math">\(w_0 &lt; 1e-8\)</span>.</p></li>
 </ul>
 <p>The covariances matrices were scaled by a grid of values computed from the univariate summary statistics as in the <em>mash</em> paper. The posterior mean of the regression coefficients were initialized to the estimates of the group-LASSO. The mixture weights were initialized with the proportion of zero-coefficients from the group-LASSO estimate as the weight on the spike and the proportion of non-zero-coefficients split equally among the remaining components.Convergence was declared when the maximum difference in the ELBO between two successive iterations was smaller than 1e-2.</p>
 <p>Then, responses were predicted on the test data (20% of the data).</p>
@@ -963,6 +973,43 @@ p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&
 
 print(p_rrmse)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.Rmd/accuracy%20vs%20others-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-vs-others-1">
+Past versions of “accuracy vs others-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-vs-others-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/1f6cf753d37948dd72a53ffebff2b879423cbdad/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.Rmd/accuracy vs others-1.png" target="_blank">1f6cf75</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-10-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Let’s now remove outliers from the plots to make things a little clearer.</p>
 <pre class="r"><code>p_rrmse_noout &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;,width.errorbar = 0, width = 0.85) +
@@ -974,6 +1021,43 @@ print(p_rrmse)</code></pre>
 
 print(p_rrmse_noout)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.Rmd/accuracy%20no%20outliers-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-no-outliers-1">
+Past versions of “accuracy no outliers-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-no-outliers-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/1f6cf753d37948dd72a53ffebff2b879423cbdad/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.Rmd/accuracy no outliers-1.png" target="_blank">1f6cf75</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-10-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Here, we look at the elapsed time (<span class="math">\(log_2\)</span> seconds) of each method. Note that the <em>mr.mash</em> run time does not include the run time of group-LASSO (but should be considered since we used it to initialize <em>mr.mash</em>).</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;scaled_rrmse&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -990,6 +1074,43 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
 
 print(p_time)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.Rmd/run%20time-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-run-time-1">
+Past versions of “run time-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-run-time-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/1f6cf753d37948dd72a53ffebff2b879423cbdad/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.Rmd/run time-1.png" target="_blank">1f6cf75</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-10-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>In summary, all the methods perform pretty similarly. Any flavor of <em>mr.mash</em> is on the lower side of the error. Using data-driven matrices or canonical is equivalent in this situation.</p>
 <br>
 <p>
@@ -1024,33 +1145,32 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] pkgload_1.1.0      jsonlite_1.6       foreach_1.4.4     
  [4] Ipaper_0.1.5       assertthat_0.2.1   sp_1.3-1          
- [7] highr_0.7          cellranger_1.1.0   remotes_2.1.0     
-[10] yaml_2.2.1         progress_1.2.2     sessioninfo_1.1.1 
-[13] pillar_1.4.6       backports_1.1.10   lattice_0.20-38   
-[16] glue_1.4.2         reticulate_1.10    digest_0.6.25     
-[19] RColorBrewer_1.1-2 promises_1.0.1     colorspace_1.4-1  
-[22] htmltools_0.3.6    httpuv_1.4.5       Matrix_1.2-15     
-[25] plyr_1.8.6         clipr_0.4.1        pkgconfig_2.0.3   
-[28] purrr_0.3.3        processx_3.4.4     whisker_0.3-2     
-[31] openxlsx_4.1.0     later_0.7.5        git2r_0.26.1      
-[34] tibble_3.0.4       farver_2.0.3       ellipsis_0.3.1    
-[37] withr_2.3.0        repr_0.17          cli_2.1.0         
-[40] crayon_1.3.4       readxl_1.1.0       memoise_1.1.0     
-[43] evaluate_0.14      ps_1.4.0           fs_1.3.1          
-[46] fansi_0.4.1        doParallel_1.0.14  xml2_1.2.0        
-[49] pkgbuild_1.1.0     tools_3.5.1        data.table_1.12.8 
-[52] prettyunits_1.1.1  hms_0.5.3          matrixStats_0.57.0
-[55] lifecycle_0.2.0    stringr_1.4.0      munsell_0.5.0     
-[58] zip_1.0.0          callr_3.5.1        compiler_3.5.1    
-[61] rlang_0.4.8        grid_3.5.1         rstudioapi_0.11   
-[64] iterators_1.0.10   base64enc_0.1-3    labeling_0.3      
-[67] rmarkdown_1.10     boot_1.3-20        testthat_2.3.2    
-[70] gtable_0.3.0       codetools_0.2-15   reshape2_1.4.4    
-[73] R6_2.4.1           lubridate_1.7.4    knitr_1.20        
-[76] dplyr_0.8.0.1      workflowr_1.6.2    rprojroot_1.3-2   
-[79] desc_1.2.0         stringi_1.4.6      parallel_3.5.1    
-[82] IRdisplay_0.6.1    Rcpp_1.0.5         vctrs_0.3.4       
-[85] tidyselect_0.2.5  </code></pre>
+ [7] cellranger_1.1.0   yaml_2.2.1         remotes_2.1.0     
+[10] progress_1.2.2     sessioninfo_1.1.1  pillar_1.4.6      
+[13] backports_1.1.10   lattice_0.20-38    glue_1.4.2        
+[16] reticulate_1.10    digest_0.6.25      RColorBrewer_1.1-2
+[19] promises_1.0.1     colorspace_1.4-1   htmltools_0.3.6   
+[22] httpuv_1.4.5       Matrix_1.2-15      plyr_1.8.6        
+[25] clipr_0.4.1        pkgconfig_2.0.3    purrr_0.3.3       
+[28] processx_3.4.4     whisker_0.3-2      openxlsx_4.1.0    
+[31] later_0.7.5        git2r_0.26.1       tibble_3.0.4      
+[34] farver_2.0.3       ellipsis_0.3.1     withr_2.3.0       
+[37] repr_0.17          cli_2.1.0          crayon_1.3.4      
+[40] readxl_1.1.0       memoise_1.1.0      evaluate_0.14     
+[43] ps_1.4.0           fs_1.3.1           fansi_0.4.1       
+[46] doParallel_1.0.14  xml2_1.2.0         pkgbuild_1.1.0    
+[49] tools_3.5.1        data.table_1.12.8  prettyunits_1.1.1 
+[52] hms_0.5.3          matrixStats_0.57.0 lifecycle_0.2.0   
+[55] stringr_1.4.0      munsell_0.5.0      zip_1.0.0         
+[58] callr_3.5.1        compiler_3.5.1     rlang_0.4.8       
+[61] grid_3.5.1         rstudioapi_0.11    iterators_1.0.10  
+[64] base64enc_0.1-3    labeling_0.3       rmarkdown_1.10    
+[67] boot_1.3-20        testthat_2.3.2     gtable_0.3.0      
+[70] codetools_0.2-15   reshape2_1.4.4     R6_2.4.1          
+[73] lubridate_1.7.4    knitr_1.20         dplyr_0.8.0.1     
+[76] workflowr_1.6.2    rprojroot_1.3-2    desc_1.2.0        
+[79] stringi_1.4.6      parallel_3.5.1     IRdisplay_0.6.1   
+[82] Rcpp_1.0.5         vctrs_0.3.4        tidyselect_0.2.5  </code></pre>
 </div>
 </div>
 
