@@ -85,12 +85,12 @@ compute_rrmse <- function(dsc_plot, log10_scale=FALSE){
 }
 
 ###Set some quantities used in the following plots
-colors <- c("skyblue", "dodgerblue", "mediumblue", "limegreen", "green", "olivedrab1", "gold", "orange", "red", "firebrick", "darkmagenta", "mediumpurple")
+colors <- c("cyan", "skyblue", "dodgerblue", "mediumblue", "limegreen", "green", "gold", "orange", "red", "firebrick", "darkmagenta", "mediumpurple")
 ```
 
 ```{r load data, warning=FALSE, message=FALSE}
 ###Load the dsc results
-dsc_out <- dscquery("/project2/mstephens/fmorgante/mr_mash_test/output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10", 
+dsc_out <- dscquery("output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10", 
                     c("simulate.p_causal", "simulate.r", "simulate.pve", "simulate", "fit", "score", "score.err", "fit.time"), 
                     groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet",
                     verbose=FALSE)
@@ -129,7 +129,7 @@ The first 50 genes were used for the prediction analysis. *mr.mash* was fitted t
 
 * both canonical and data-driven matrices plus the spike.
 
-* both canonical and data-driven matrices plus the spike, dropping components with $w0 < 1e-8$.
+* both canonical and data-driven matrices plus the spike, dropping components with $w_0 < 1e-8$.
 
 The covariances matrices were scaled by a grid of values computed from the univariate summary statistics as in the *mash* paper. The posterior mean of the regression coefficients were initialized to the estimates of the group-LASSO. The mixture weights were initialized with the proportion of zero-coefficients from the group-LASSO estimate as the weight on the spike and the proportion of non-zero-coefficients split equally among the remaining components.Convergence was declared when the maximum difference in the ELBO between two successive iterations was smaller than 1e-2. 
 
