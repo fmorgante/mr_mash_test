@@ -453,16 +453,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreebecde5fbc7e62c05fc5fa3057f3f63f6965657c7targetblankbecde5fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/becde5fbc7e62c05fc5fa3057f3f63f6965657c7" target="_blank">becde5f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree18f7be5bbf2f22c90049f7abe0dd28301d2b4e12targetblank18f7be5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/18f7be5bbf2f22c90049f7abe0dd28301d2b4e12" target="_blank">18f7be5</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreebecde5fbc7e62c05fc5fa3057f3f63f6965657c7targetblankbecde5fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree18f7be5bbf2f22c90049f7abe0dd28301d2b4e12targetblank18f7be5a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/becde5fbc7e62c05fc5fa3057f3f63f6965657c7" target="_blank">becde5f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/18f7be5bbf2f22c90049f7abe0dd28301d2b4e12" target="_blank">18f7be5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -767,6 +767,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/18f7be5bbf2f22c90049f7abe0dd28301d2b4e12/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.Rmd" target="_blank">18f7be5</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-10-23
+</td>
+<td>
+Uncomment some code
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/3ac4d6526ddcb4a6c3f33b66a9ebfb1cd2c1dca5/docs/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.html" target="_blank">3ac4d65</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2020-10-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1098,85 +1132,95 @@ fmorgante
 </table>
 </div>
 </div>
-<!-- # PVE=0.05 -->
-<!-- ```{r load data low pve, warning=FALSE, message=FALSE} -->
-<!-- ###Load the dsc results -->
-<!-- dsc_out <- dscquery("output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_lowPVE",  -->
-<!--                     c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w",  -->
-<!--                       "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"),  -->
-<!--                     groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet", -->
-<!--                     verbose=FALSE) -->
-<!-- ###Obtain simulation parameters -->
-<!-- prop_testset <- 0.2 -->
-<!-- p_causal <- unique(dsc_out$simulate.p_causal) -->
-<!-- r <- unique(dsc_out$simulate.r) -->
-<!-- r_causal <- eval(parse(text=unique(dsc_out$simulate.r_causal))) -->
-<!-- pve <- unique(dsc_out$simulate.pve) -->
-<!-- w <- eval(parse(text=unique(dsc_out$simulate.w))) -->
-<!-- B_cor <- eval(parse(text=unique(dsc_out$simulate.B_cor))) -->
-<!-- B_scale <- eval(parse(text=unique(dsc_out$simulate.B_scale))) -->
-<!-- V_cor <- unique(dsc_out$simulate.V_cor) -->
-<!-- ###Remove list elements that are not useful anymore -->
-<!-- dsc_out$simulate.r_causal <- NULL -->
-<!-- dsc_out$simulate.w <- NULL -->
-<!-- dsc_out$simulate.B_cor <- NULL -->
-<!-- dsc_out$simulate.B_scale <- NULL -->
-<!-- dsc_out$simulate.V_cor <- NULL -->
-<!-- ``` -->
-<!-- In this section the set up is exactly the same but with PVE=0.2. -->
-<!-- ## mr.mash vs other methods -->
-<!-- ```{r accuracy vs others low PVE, fig.height=12, fig.width=15, message=FALSE} -->
-<!-- ###Convert from list to data.frame for plotting -->
-<!-- dsc_plots <- convert_dsc_to_dataframe_gtex(dsc_out) -->
-<!-- ###Compute rmse score (relative to mr_mash_consec_em) and add it to the data -->
-<!-- rrmse_dat <- compute_rrmse(dsc_plots) -->
-<!-- dsc_plots <- rbind(dsc_plots, rrmse_dat) -->
-<!-- ###Remove mse from scores and keep only methods wanted -->
-<!-- dsc_plots <- dsc_plots[which(dsc_plots$score_metric!="scaled_rmse" ), ] -->
-<!-- ###Create factor version of method -->
-<!-- dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_em_can", "mr_mash_em_data", -->
-<!--                                                           "mr_mash_em_dataAndcan", "mr_mash_em_dataAndcan_dropcomp",  -->
-<!--                                                           "mlasso", "mtlasso", "enet"), -->
-<!--                                                 labels=c("mr_mash_can", "mr_mash_data", "mr_mash_both",  -->
-<!--                                                          "mr_mash_both_drop", "mlasso", "mtlasso", "enet")) -->
-<!-- ###Create factor version of response -->
-<!-- dsc_plots$response_fac <- as.factor(dsc_plots$response) -->
-<!-- ###Create plots -->
-<!-- p_rrmse <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) + -->
-<!--   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) + -->
-<!--   scale_fill_manual(values = colors) + -->
-<!--   labs(x = "Response", y = "Error", title = "rRMSE", fill="Method") + -->
-<!--   geom_hline(yintercept=1, linetype="dotted", size=1) + -->
-<!--   theme_cowplot(font_size = 20) + -->
-<!--   theme(plot.title = element_text(hjust = 0.5)) -->
-<!-- print(p_rrmse) -->
-<!-- ``` -->
-<!-- Let's now remove outliers from the plots to make things a little clearer. -->
-<!-- ```{r accuracy no outliers low PVE, fig.height=12, fig.width=15, message=FALSE} -->
-<!-- p_rrmse_noout <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) + -->
-<!--   Ipaper::geom_boxplot2(color = "black",width.errorbar = 0, width = 0.85) + -->
-<!--   scale_fill_manual(values = colors) + -->
-<!--   labs(x = "Response", y = "Error", title = "rRMSE", fill="Method") + -->
-<!--   geom_hline(yintercept=1, linetype="dotted", size=1) + -->
-<!--   theme_cowplot(font_size = 20) + -->
-<!--   theme(plot.title = element_text(hjust = 0.5)) -->
-<!-- print(p_rrmse_noout) -->
-<!-- ``` -->
-<!-- Here, we look at the elapsed time ($log_2$ seconds) of each method. Note that the *mr.mash* run time does not include the run time of group-LASSO (but should be considered since we used it to initialize *mr.mash*). -->
-<!-- ```{r run time low PVE, fig.height=12, fig.width=15, message=FALSE} -->
-<!-- dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="scaled_rrmse"),  -->
-<!--                           -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))] -->
-<!-- p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) + -->
-<!--   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) + -->
-<!--   scale_fill_manual(values = colors) + -->
-<!--   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x), -->
-<!--                      labels = trans_format("log2", math_format(2^.x))) + -->
-<!--   labs(x = "", y = "Elapsed time (seconds) in log2 scale", title = "Run time", fill="Method") + -->
-<!--   theme_cowplot(font_size = 20) + -->
-<!--   theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(), -->
-<!--         plot.title = element_text(hjust = 0.5)) -->
-<!-- print(p_time) -->
-<!-- ``` -->
+</div>
+</div>
+<div id="pve0.05" class="section level1">
+<h1>PVE=0.05</h1>
+<pre class="r"><code>###Load the dsc results
+dsc_out &lt;- dscquery(&quot;output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_lowPVE&quot;,
+                    c(&quot;simulate.p_causal&quot;, &quot;simulate.r&quot;, &quot;simulate.r_causal&quot;, &quot;simulate.pve&quot;, &quot;simulate.B_cor&quot;, &quot;simulate.w&quot;,
+                      &quot;simulate.B_scale&quot;, &quot;simulate.V_cor&quot;, &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;),
+                    groups=&quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot;,
+                    verbose=FALSE)
+
+###Obtain simulation parameters
+prop_testset &lt;- 0.2
+p_causal &lt;- unique(dsc_out$simulate.p_causal)
+r &lt;- unique(dsc_out$simulate.r)
+r_causal &lt;- eval(parse(text=unique(dsc_out$simulate.r_causal)))
+pve &lt;- unique(dsc_out$simulate.pve)
+w &lt;- eval(parse(text=unique(dsc_out$simulate.w)))
+B_cor &lt;- eval(parse(text=unique(dsc_out$simulate.B_cor)))
+B_scale &lt;- eval(parse(text=unique(dsc_out$simulate.B_scale)))
+V_cor &lt;- unique(dsc_out$simulate.V_cor)
+
+###Remove list elements that are not useful anymore
+dsc_out$simulate.r_causal &lt;- NULL
+dsc_out$simulate.w &lt;- NULL
+dsc_out$simulate.B_cor &lt;- NULL
+dsc_out$simulate.B_scale &lt;- NULL
+dsc_out$simulate.V_cor &lt;- NULL</code></pre>
+<p>In this section the set up is exactly the same but with PVE=0.05.</p>
+<div id="mr.mash-vs-other-methods-1" class="section level2">
+<h2>mr.mash vs other methods</h2>
+<pre class="r"><code>###Convert from list to data.frame for plotting
+dsc_plots &lt;- convert_dsc_to_dataframe_gtex(dsc_out)
+
+###Compute rmse score (relative to mr_mash_consec_em) and add it to the data
+rrmse_dat &lt;- compute_rrmse(dsc_plots)
+dsc_plots &lt;- rbind(dsc_plots, rrmse_dat)
+
+###Remove mse from scores and keep only methods wanted
+dsc_plots &lt;- dsc_plots[which(dsc_plots$score_metric!=&quot;scaled_rmse&quot; ), ]
+
+###Create factor version of method
+dsc_plots$method_fac &lt;- factor(dsc_plots$method, levels=c(&quot;mr_mash_em_can&quot;, &quot;mr_mash_em_data&quot;,
+                                                          &quot;mr_mash_em_dataAndcan&quot;, &quot;mr_mash_em_dataAndcan_dropcomp&quot;,
+                                                          &quot;mlasso&quot;, &quot;mtlasso&quot;, &quot;enet&quot;),
+                                                labels=c(&quot;mr_mash_can&quot;, &quot;mr_mash_data&quot;, &quot;mr_mash_both&quot;,
+                                                         &quot;mr_mash_both_drop&quot;, &quot;mlasso&quot;, &quot;mtlasso&quot;, &quot;enet&quot;))
+
+###Create factor version of response
+dsc_plots$response_fac &lt;- as.factor(dsc_plots$response)
+
+###Create plots
+p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
+  geom_boxplot(color = &quot;black&quot;, outlier.size = 1, width = 0.85) +
+  scale_fill_manual(values = colors) +
+  labs(x = &quot;Response&quot;, y = &quot;Error&quot;, title = &quot;rRMSE&quot;, fill=&quot;Method&quot;) +
+  geom_hline(yintercept=1, linetype=&quot;dotted&quot;, size=1) +
+  theme_cowplot(font_size = 20) +
+  theme(plot.title = element_text(hjust = 0.5))
+
+print(p_rrmse)</code></pre>
+<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.Rmd/accuracy%20vs%20others%20low%20PVE-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>Let’s now remove outliers from the plots to make things a little clearer.</p>
+<pre class="r"><code>p_rrmse_noout &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
+  Ipaper::geom_boxplot2(color = &quot;black&quot;,width.errorbar = 0, width = 0.85) +
+  scale_fill_manual(values = colors) +
+  labs(x = &quot;Response&quot;, y = &quot;Error&quot;, title = &quot;rRMSE&quot;, fill=&quot;Method&quot;) +
+  geom_hline(yintercept=1, linetype=&quot;dotted&quot;, size=1) +
+  theme_cowplot(font_size = 20) +
+  theme(plot.title = element_text(hjust = 0.5))
+
+print(p_rrmse_noout)</code></pre>
+<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.Rmd/accuracy%20no%20outliers%20low%20PVE-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>Here, we look at the elapsed time (<span class="math">\(log_2\)</span> seconds) of each method. Note that the <em>mr.mash</em> run time does not include the run time of group-LASSO (but should be considered since we used it to initialize <em>mr.mash</em>).</p>
+<pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;scaled_rrmse&quot;),
+                          -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
+
+p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &quot;time&quot;, fill = &quot;method_fac&quot;)) +
+  geom_boxplot(color = &quot;black&quot;, outlier.size = 1, width = 0.85) +
+  scale_fill_manual(values = colors) +
+  scale_y_continuous(trans=&quot;log2&quot;, breaks = trans_breaks(&quot;log2&quot;, function(x) 2^x),
+                     labels = trans_format(&quot;log2&quot;, math_format(2^.x))) +
+  labs(x = &quot;&quot;, y = &quot;Elapsed time (seconds) in log2 scale&quot;, title = &quot;Run time&quot;, fill=&quot;Method&quot;) +
+  theme_cowplot(font_size = 20) +
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+print(p_time)</code></pre>
+<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.Rmd/run%20time%20low%20PVE-1.png" width="1440" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="different-pve" class="section level1">
@@ -1206,7 +1250,7 @@ dsc_out$simulate.B_cor &lt;- NULL
 dsc_out$simulate.B_scale &lt;- NULL
 dsc_out$simulate.V_cor &lt;- NULL</code></pre>
 <p>In this section the set up is exactly the same but with the first three responses having PVE=0.2 and the remaining seven responses having PVE=0.05.</p>
-<div id="mr.mash-vs-other-methods-1" class="section level2">
+<div id="mr.mash-vs-other-methods-2" class="section level2">
 <h2>mr.mash vs other methods</h2>
 <pre class="r"><code>###Convert from list to data.frame for plotting
 dsc_plots &lt;- convert_dsc_to_dataframe_gtex(dsc_out)
