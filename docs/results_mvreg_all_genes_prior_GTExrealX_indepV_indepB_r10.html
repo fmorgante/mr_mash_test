@@ -13,7 +13,7 @@
 
 <meta name="date" content="2020-10-23" />
 
-<title>Simulations with GTEx genotypes and 3 causal responses with shared effects</title>
+<title>Simulations with GTEx genotypes and independent effects</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -335,7 +335,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Simulations with GTEx genotypes and 3 causal responses with shared effects</h1>
+<h1 class="title toc-ignore">Simulations with GTEx genotypes and independent effects</h1>
 <h4 class="author"><em>Fabio Morgante</em></h4>
 <h4 class="date"><em>October 23, 2020</em></h4>
 
@@ -743,7 +743,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd</code>) and HTML (<code>docs/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10.Rmd</code>) and HTML (<code>docs/results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -769,104 +769,19 @@ Message
 <tbody>
 <tr>
 <td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/ff09e303f39772edffc891610f22a669927d0026/docs/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.html" target="_blank">ff09e30</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
 Rmd
 </td>
 <td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/fbf086e7c196f5a99fc1be10a50f7aed3c1dc60a/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd" target="_blank">fbf086e</a>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/becde5fbc7e62c05fc5fa3057f3f63f6965657c7/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10.Rmd" target="_blank">becde5f</a>
 </td>
 <td>
 fmorgante
 </td>
 <td>
-2020-10-22
+2020-10-23
 </td>
 <td>
-Add new scenarios + fix bug
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/82e4357e36da943994148a9be08c5b5b6bd32441/docs/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.html" target="_blank">82e4357</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/a4bd2d0d46f4015888e35279a21d8ba2be9829a6/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd" target="_blank">a4bd2d0</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Fix a few things
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/65d78b27a790e128e58fb8cc24fd8b5d11fc19cd/docs/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.html" target="_blank">65d78b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/ea2f1f3a1027ea483d8d950e9ee2f433f7619897/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd" target="_blank">ea2f1f3</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Add new scenario
+Add new scenarios
 </td>
 </tr>
 </tbody>
@@ -956,7 +871,7 @@ colors &lt;- c(&quot;cyan&quot;, &quot;skyblue&quot;, &quot;dodgerblue&quot;, &q
 <div id="pve0.2" class="section level1">
 <h1>PVE=0.2</h1>
 <pre class="r"><code>###Load the dsc results
-dsc_out &lt;- dscquery(&quot;output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10&quot;, 
+dsc_out &lt;- dscquery(&quot;output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10&quot;, 
                     c(&quot;simulate.p_causal&quot;, &quot;simulate.r&quot;, &quot;simulate.r_causal&quot;, &quot;simulate.pve&quot;, &quot;simulate.B_cor&quot;, &quot;simulate.w&quot;, 
                       &quot;simulate.B_scale&quot;, &quot;simulate.V_cor&quot;, &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
                     groups=&quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot;,
@@ -981,7 +896,7 @@ dsc_out$simulate.B_scale &lt;- NULL
 dsc_out$simulate.V_cor &lt;- NULL</code></pre>
 <div id="simulation-set-up" class="section level2">
 <h2>Simulation set up</h2>
-<p>The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with 5 causal variants, 10 responses with a per-response proportion of variance explained (PVE) of 0.2. Causal effects, B, were drawn from MVN(0, Sigma), Sigma is such that it achieves a correlation between responses of 1. Response 1, 2, 3 have causal effects while the remaining seven responses do not have any causal effect. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of 0 and a scale defined by PVE, in the case of cuasal responses. Non causal responses are from N(0, 1).</p>
+<p>The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with 5 causal variants, 10 responses with a per-response proportion of variance explained (PVE) of 0.2. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of 0 and a scale of 1. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of 0 and a scale defined py PVE.</p>
 <p>2000 genes were simulated and univariate summary statistics were obtained by simple linear regression in the training data (80% of the data. The indexes of the training-test individuals were the same for all the datasets). These regression coefficients and standard errors were used as input in the <em>mash</em> pipeline (from Gao) to compute data-driven covariance matrices (up to the ED step included). In particular, the top variable per gene was used to define a “strong” set and 4 random variables per gene were used to define a “random” set. Covariance matrices were estimated using <em>flash</em>, PCA (including the top 3 PCs), and the empirical covariance matrix.</p>
 <p>The first 50 genes were used for the prediction analysis. <em>mr.mash</em> was fitted to the training data, updating V (imposing a diagonal structure) and updating the prior weights using EM updates. The mixture prior consisted of components defined by:</p>
 <ul>
@@ -1014,105 +929,28 @@ dsc_plots$method_fac &lt;- factor(dsc_plots$method, levels=c(&quot;mr_mash_em_ca
                                                 labels=c(&quot;mr_mash_can&quot;, &quot;mr_mash_data&quot;, &quot;mr_mash_both&quot;, 
                                                          &quot;mr_mash_both_drop&quot;, &quot;mlasso&quot;, &quot;mtlasso&quot;, &quot;enet&quot;))
 
-###Create factor version of response
-dsc_plots$response_fac &lt;- as.factor(dsc_plots$response)
-
 ###Create plots
-p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
+p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   geom_boxplot(color = &quot;black&quot;, outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors) +
-  labs(x = &quot;Response&quot;, y = &quot;Error&quot;, title = &quot;rRMSE&quot;, fill=&quot;Method&quot;) +
+  labs(x = &quot;&quot;, y = &quot;Error&quot;, title = &quot;rRMSE&quot;, fill=&quot;Method&quot;) +
   geom_hline(yintercept=1, linetype=&quot;dotted&quot;, size=1) +
   theme_cowplot(font_size = 20) +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
 
 print(p_rrmse)</code></pre>
-<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy%20vs%20others-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-vs-others-1">
-Past versions of “accuracy vs others-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-accuracy-vs-others-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/65d78b27a790e128e58fb8cc24fd8b5d11fc19cd/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy vs others-1.png" target="_blank">65d78b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10.Rmd/accuracy%20vs%20others-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>Let’s now remove outliers from the plots to make things a little clearer.</p>
-<pre class="r"><code>p_rrmse_noout &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
+<pre class="r"><code>p_rrmse_noout &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;,width.errorbar = 0, width = 0.85) +
   scale_fill_manual(values = colors) +
-  labs(x = &quot;Response&quot;, y = &quot;Error&quot;, title = &quot;rRMSE&quot;, fill=&quot;Method&quot;) +
+  labs(x = &quot;&quot;, y = &quot;Error&quot;, title = &quot;rRMSE&quot;, fill=&quot;Method&quot;) +
   geom_hline(yintercept=1, linetype=&quot;dotted&quot;, size=1) +
   theme_cowplot(font_size = 20) +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
 
 print(p_rrmse_noout)</code></pre>
-<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy%20no%20outliers-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-no-outliers-1">
-Past versions of “accuracy no outliers-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-accuracy-no-outliers-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/65d78b27a790e128e58fb8cc24fd8b5d11fc19cd/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy no outliers-1.png" target="_blank">65d78b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10.Rmd/accuracy%20no%20outliers-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>Here, we look at the elapsed time (<span class="math">\(log_2\)</span> seconds) of each method. Note that the <em>mr.mash</em> run time does not include the run time of group-LASSO (but should be considered since we used it to initialize <em>mr.mash</em>).</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;scaled_rrmse&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -1128,54 +966,17 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
         plot.title = element_text(hjust = 0.5))
 
 print(p_time)</code></pre>
-<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/run%20time-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-run-time-1">
-Past versions of “run time-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-run-time-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/65d78b27a790e128e58fb8cc24fd8b5d11fc19cd/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/run time-1.png" target="_blank">65d78b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10.Rmd/run%20time-1.png" width="1440" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="pve0.05" class="section level1">
 <h1>PVE=0.05</h1>
 <pre class="r"><code>###Load the dsc results
-dsc_out &lt;- dscquery(&quot;output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_lowPVE&quot;, 
+dsc_out &lt;- dscquery(&quot;output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_lowPVE&quot;, 
                     c(&quot;simulate.p_causal&quot;, &quot;simulate.r&quot;, &quot;simulate.r_causal&quot;, &quot;simulate.pve&quot;, &quot;simulate.B_cor&quot;, &quot;simulate.w&quot;, 
                       &quot;simulate.B_scale&quot;, &quot;simulate.V_cor&quot;, &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
                     groups=&quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot;,
-                    verbose=FALSE)
+                    verbose=FALSE, ignore.missing.files = TRUE)
 
 ###Obtain simulation parameters
 prop_testset &lt;- 0.2
@@ -1214,105 +1015,30 @@ dsc_plots$method_fac &lt;- factor(dsc_plots$method, levels=c(&quot;mr_mash_em_ca
                                                 labels=c(&quot;mr_mash_can&quot;, &quot;mr_mash_data&quot;, &quot;mr_mash_both&quot;, 
                                                          &quot;mr_mash_both_drop&quot;, &quot;mlasso&quot;, &quot;mtlasso&quot;, &quot;enet&quot;))
 
-###Create factor version of response
-dsc_plots$response_fac &lt;- as.factor(dsc_plots$response)
-
 ###Create plots
-p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
+p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   geom_boxplot(color = &quot;black&quot;, outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors) +
-  labs(x = &quot;Response&quot;, y = &quot;Error&quot;, title = &quot;rRMSE&quot;, fill=&quot;Method&quot;) +
+  labs(x = &quot;&quot;, y = &quot;Error&quot;, title = &quot;rRMSE&quot;, fill=&quot;Method&quot;) +
   geom_hline(yintercept=1, linetype=&quot;dotted&quot;, size=1) +
   theme_cowplot(font_size = 20) +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
 
 print(p_rrmse)</code></pre>
-<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy%20vs%20others%20low%20PVE-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-vs-others-low-PVE-1">
-Past versions of “accuracy vs others low PVE-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-accuracy-vs-others-low-PVE-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/65d78b27a790e128e58fb8cc24fd8b5d11fc19cd/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy vs others low PVE-1.png" target="_blank">65d78b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<pre><code>Warning: Removed 500 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10.Rmd/accuracy%20vs%20others%20low%20PVE-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>Let’s now remove outliers from the plots to make things a little clearer.</p>
-<pre class="r"><code>p_rrmse_noout &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
+<pre class="r"><code>p_rrmse_noout &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;,width.errorbar = 0, width = 0.85) +
   scale_fill_manual(values = colors) +
-  labs(x = &quot;Response&quot;, y = &quot;Error&quot;, title = &quot;rRMSE&quot;, fill=&quot;Method&quot;) +
+  labs(x = &quot;&quot;, y = &quot;Error&quot;, title = &quot;rRMSE&quot;, fill=&quot;Method&quot;) +
   geom_hline(yintercept=1, linetype=&quot;dotted&quot;, size=1) +
   theme_cowplot(font_size = 20) +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
 
 print(p_rrmse_noout)</code></pre>
-<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy%20no%20outliers%20low%20PVE-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-no-outliers-low-PVE-1">
-Past versions of “accuracy no outliers low PVE-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-accuracy-no-outliers-low-PVE-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/65d78b27a790e128e58fb8cc24fd8b5d11fc19cd/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/accuracy no outliers low PVE-1.png" target="_blank">65d78b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<pre><code>Warning: Removed 500 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10.Rmd/accuracy%20no%20outliers%20low%20PVE-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>Here, we look at the elapsed time (<span class="math">\(log_2\)</span> seconds) of each method. Note that the <em>mr.mash</em> run time does not include the run time of group-LASSO (but should be considered since we used it to initialize <em>mr.mash</em>).</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;scaled_rrmse&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -1328,44 +1054,8 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
         plot.title = element_text(hjust = 0.5))
 
 print(p_time)</code></pre>
-<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/run%20time%20low%20PVE-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-run-time-low-PVE-1">
-Past versions of “run time low PVE-1.png”
-</button>
-</p>
-<div id="fig-no-spaces-run-time-low-PVE-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/65d78b27a790e128e58fb8cc24fd8b5d11fc19cd/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.Rmd/run time low PVE-1.png" target="_blank">65d78b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<pre><code>Warning: Removed 7 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10.Rmd/run%20time%20low%20PVE-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
