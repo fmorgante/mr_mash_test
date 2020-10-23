@@ -212,104 +212,104 @@ print(p_time)
 ```
 
 
-<!-- # PVE=0.05 -->
+# PVE=0.05
 
-<!-- ```{r load data low pve, warning=FALSE, message=FALSE} -->
-<!-- ###Load the dsc results -->
-<!-- dsc_out <- dscquery("output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_lowPVE",  -->
-<!--                     c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w",  -->
-<!--                       "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"),  -->
-<!--                     groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet", -->
-<!--                     verbose=FALSE) -->
+```{r load data low pve, warning=FALSE, message=FALSE}
+###Load the dsc results
+dsc_out <- dscquery("output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_lowPVE",
+                    c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w",
+                      "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"),
+                    groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet",
+                    verbose=FALSE)
 
-<!-- ###Obtain simulation parameters -->
-<!-- prop_testset <- 0.2 -->
-<!-- p_causal <- unique(dsc_out$simulate.p_causal) -->
-<!-- r <- unique(dsc_out$simulate.r) -->
-<!-- r_causal <- eval(parse(text=unique(dsc_out$simulate.r_causal))) -->
-<!-- pve <- unique(dsc_out$simulate.pve) -->
-<!-- w <- eval(parse(text=unique(dsc_out$simulate.w))) -->
-<!-- B_cor <- eval(parse(text=unique(dsc_out$simulate.B_cor))) -->
-<!-- B_scale <- eval(parse(text=unique(dsc_out$simulate.B_scale))) -->
-<!-- V_cor <- unique(dsc_out$simulate.V_cor) -->
+###Obtain simulation parameters
+prop_testset <- 0.2
+p_causal <- unique(dsc_out$simulate.p_causal)
+r <- unique(dsc_out$simulate.r)
+r_causal <- eval(parse(text=unique(dsc_out$simulate.r_causal)))
+pve <- unique(dsc_out$simulate.pve)
+w <- eval(parse(text=unique(dsc_out$simulate.w)))
+B_cor <- eval(parse(text=unique(dsc_out$simulate.B_cor)))
+B_scale <- eval(parse(text=unique(dsc_out$simulate.B_scale)))
+V_cor <- unique(dsc_out$simulate.V_cor)
 
-<!-- ###Remove list elements that are not useful anymore -->
-<!-- dsc_out$simulate.r_causal <- NULL -->
-<!-- dsc_out$simulate.w <- NULL -->
-<!-- dsc_out$simulate.B_cor <- NULL -->
-<!-- dsc_out$simulate.B_scale <- NULL -->
-<!-- dsc_out$simulate.V_cor <- NULL -->
-<!-- ``` -->
+###Remove list elements that are not useful anymore
+dsc_out$simulate.r_causal <- NULL
+dsc_out$simulate.w <- NULL
+dsc_out$simulate.B_cor <- NULL
+dsc_out$simulate.B_scale <- NULL
+dsc_out$simulate.V_cor <- NULL
+```
 
-<!-- In this section the set up is exactly the same but with PVE=`r pve`. -->
+In this section the set up is exactly the same but with PVE=`r pve`.
 
-<!-- ## mr.mash vs other methods -->
+## mr.mash vs other methods
 
-<!-- ```{r accuracy vs others low PVE, fig.height=12, fig.width=15, message=FALSE} -->
-<!-- ###Convert from list to data.frame for plotting -->
-<!-- dsc_plots <- convert_dsc_to_dataframe_gtex(dsc_out) -->
+```{r accuracy vs others low PVE, fig.height=12, fig.width=15, message=FALSE}
+###Convert from list to data.frame for plotting
+dsc_plots <- convert_dsc_to_dataframe_gtex(dsc_out)
 
-<!-- ###Compute rmse score (relative to mr_mash_consec_em) and add it to the data -->
-<!-- rrmse_dat <- compute_rrmse(dsc_plots) -->
-<!-- dsc_plots <- rbind(dsc_plots, rrmse_dat) -->
+###Compute rmse score (relative to mr_mash_consec_em) and add it to the data
+rrmse_dat <- compute_rrmse(dsc_plots)
+dsc_plots <- rbind(dsc_plots, rrmse_dat)
 
-<!-- ###Remove mse from scores and keep only methods wanted -->
-<!-- dsc_plots <- dsc_plots[which(dsc_plots$score_metric!="scaled_rmse" ), ] -->
+###Remove mse from scores and keep only methods wanted
+dsc_plots <- dsc_plots[which(dsc_plots$score_metric!="scaled_rmse" ), ]
 
-<!-- ###Create factor version of method -->
-<!-- dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_em_can", "mr_mash_em_data", -->
-<!--                                                           "mr_mash_em_dataAndcan", "mr_mash_em_dataAndcan_dropcomp",  -->
-<!--                                                           "mlasso", "mtlasso", "enet"), -->
-<!--                                                 labels=c("mr_mash_can", "mr_mash_data", "mr_mash_both",  -->
-<!--                                                          "mr_mash_both_drop", "mlasso", "mtlasso", "enet")) -->
+###Create factor version of method
+dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_em_can", "mr_mash_em_data",
+                                                          "mr_mash_em_dataAndcan", "mr_mash_em_dataAndcan_dropcomp",
+                                                          "mlasso", "mtlasso", "enet"),
+                                                labels=c("mr_mash_can", "mr_mash_data", "mr_mash_both",
+                                                         "mr_mash_both_drop", "mlasso", "mtlasso", "enet"))
 
-<!-- ###Create factor version of response -->
-<!-- dsc_plots$response_fac <- as.factor(dsc_plots$response) -->
+###Create factor version of response
+dsc_plots$response_fac <- as.factor(dsc_plots$response)
 
-<!-- ###Create plots -->
-<!-- p_rrmse <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) + -->
-<!--   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) + -->
-<!--   scale_fill_manual(values = colors) + -->
-<!--   labs(x = "Response", y = "Error", title = "rRMSE", fill="Method") + -->
-<!--   geom_hline(yintercept=1, linetype="dotted", size=1) + -->
-<!--   theme_cowplot(font_size = 20) + -->
-<!--   theme(plot.title = element_text(hjust = 0.5)) -->
+###Create plots
+p_rrmse <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
+  geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
+  scale_fill_manual(values = colors) +
+  labs(x = "Response", y = "Error", title = "rRMSE", fill="Method") +
+  geom_hline(yintercept=1, linetype="dotted", size=1) +
+  theme_cowplot(font_size = 20) +
+  theme(plot.title = element_text(hjust = 0.5))
 
-<!-- print(p_rrmse) -->
-<!-- ``` -->
+print(p_rrmse)
+```
 
-<!-- Let's now remove outliers from the plots to make things a little clearer. -->
+Let's now remove outliers from the plots to make things a little clearer.
 
-<!-- ```{r accuracy no outliers low PVE, fig.height=12, fig.width=15, message=FALSE} -->
-<!-- p_rrmse_noout <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) + -->
-<!--   Ipaper::geom_boxplot2(color = "black",width.errorbar = 0, width = 0.85) + -->
-<!--   scale_fill_manual(values = colors) + -->
-<!--   labs(x = "Response", y = "Error", title = "rRMSE", fill="Method") + -->
-<!--   geom_hline(yintercept=1, linetype="dotted", size=1) + -->
-<!--   theme_cowplot(font_size = 20) + -->
-<!--   theme(plot.title = element_text(hjust = 0.5)) -->
+```{r accuracy no outliers low PVE, fig.height=12, fig.width=15, message=FALSE}
+p_rrmse_noout <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
+  Ipaper::geom_boxplot2(color = "black",width.errorbar = 0, width = 0.85) +
+  scale_fill_manual(values = colors) +
+  labs(x = "Response", y = "Error", title = "rRMSE", fill="Method") +
+  geom_hline(yintercept=1, linetype="dotted", size=1) +
+  theme_cowplot(font_size = 20) +
+  theme(plot.title = element_text(hjust = 0.5))
 
-<!-- print(p_rrmse_noout) -->
-<!-- ``` -->
+print(p_rrmse_noout)
+```
 
-<!-- Here, we look at the elapsed time ($log_2$ seconds) of each method. Note that the *mr.mash* run time does not include the run time of group-LASSO (but should be considered since we used it to initialize *mr.mash*). -->
+Here, we look at the elapsed time ($log_2$ seconds) of each method. Note that the *mr.mash* run time does not include the run time of group-LASSO (but should be considered since we used it to initialize *mr.mash*).
 
-<!-- ```{r run time low PVE, fig.height=12, fig.width=15, message=FALSE} -->
-<!-- dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="scaled_rrmse"),  -->
-<!--                           -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))] -->
+```{r run time low PVE, fig.height=12, fig.width=15, message=FALSE}
+dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="scaled_rrmse"),
+                          -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))]
 
-<!-- p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) + -->
-<!--   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) + -->
-<!--   scale_fill_manual(values = colors) + -->
-<!--   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x), -->
-<!--                      labels = trans_format("log2", math_format(2^.x))) + -->
-<!--   labs(x = "", y = "Elapsed time (seconds) in log2 scale", title = "Run time", fill="Method") + -->
-<!--   theme_cowplot(font_size = 20) + -->
-<!--   theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(), -->
-<!--         plot.title = element_text(hjust = 0.5)) -->
+p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
+  geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
+  scale_fill_manual(values = colors) +
+  scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x))) +
+  labs(x = "", y = "Elapsed time (seconds) in log2 scale", title = "Run time", fill="Method") +
+  theme_cowplot(font_size = 20) +
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        plot.title = element_text(hjust = 0.5))
 
-<!-- print(p_time) -->
-<!-- ``` -->
+print(p_time)
+```
 
 
 # Different PVE
