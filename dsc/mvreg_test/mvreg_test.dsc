@@ -51,7 +51,7 @@ extract_X: utils.R + R(data = readRDS(paste0("../../", dataset));
 #of normals, all resposens are causal with a 2-block structure
 indepV_sharedB: simulate_data_all_genes_prior_gtex_mod.R
   X:              $X
-  p_causal:       5
+  p_causal:       R(sample(x=1:10, size=1))
   r:              10
   r_causal:       raw(list(1:10))
   B_scale:        1
