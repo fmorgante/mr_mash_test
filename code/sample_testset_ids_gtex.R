@@ -10,12 +10,14 @@ library(optparse)
 ###Parse arguments
 parser <- OptionParser()
 parser <- add_option(parser, c("--n_testset"), type="integer")
+parser <- add_option(parser, c("--input"), type="character")
 parser <- add_option(parser, c("--output"), type="character")
 parser <- add_option(parser, c("--seed"), type="integer")
 outparse <- parse_args(parser)
 
 n_testset <- outparse$n_testset
 n <- outparse$n
+input <- outparse$input
 output <- outparse$output
 ranseed <- outparse$seed
 
@@ -23,7 +25,7 @@ ranseed <- outparse$seed
 set.seed(ranseed)
 
 ###Load the data
-ids <- read.table("../data/gtex-v8-ids.txt", header=FALSE, sep="\t")
+ids <- read.table(input, header=FALSE, sep="\t")
 ids <- ids[, 1]
 
 ###Sample indeces for test set individuals
