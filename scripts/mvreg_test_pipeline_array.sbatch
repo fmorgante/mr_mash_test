@@ -15,7 +15,7 @@
 ################
 
 ###Activate the environment
-source activate py37dsc
+source activate py38dsc
 
 ###Get replicate from array task id
 rep="${SLURM_ARRAY_TASK_ID}"
@@ -27,7 +27,7 @@ dsc_outdir="../output/${dsc_outname}"
 inter_outdir="../output/${dsc_outname}_inter"
 n_testind=168
 total_genes=10
-pred_genes=3
+pred_genes=1
 
 ###Load necessary version of R
 module load gcc/6.2 texlive/2017 java/1.8 curl/7.50 mkl/2019.up1
@@ -36,7 +36,6 @@ export RHOME=/project2/mstephens/software/R-3.5.3-mkl
 export PATH=$RHOME/bin:$PATH
 export LD_LIBRARY_PATH=$RHOME/lib64/R/lib:$LD_LIBRARY_PATH
 export LIBRARY_PATH=$RHOME/lib64/R/lib:$LIBRARY_PATH
-
 
 ###Set seed for R scripts
 ranseed=`expr 32 + ${rep}`
@@ -106,7 +105,7 @@ fi
 ####Step 3
 ################
 
-if [ "${step}" = step2a ]
+if [ "${step}" = step3 ]
 then
   echo "Running ${step} ..."
 
