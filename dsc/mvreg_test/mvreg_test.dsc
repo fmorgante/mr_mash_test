@@ -6,7 +6,7 @@ DSC:
   R_libs: mr.mash.alpha, glmnet, doMC, matrixStats, mvtnorm, MBSP
   python_modules: numpy, mtlasso, pandas, sklearn.model_selection, time
   lib_path: ../../functions
-  exec_path: ../../modules, ../../functions
+  exec_path: ../../modules
   global:
     data_file: ../../../data/gtex-v8-manifest-full-X.txt
     n_dataset: 1
@@ -36,7 +36,7 @@ DSC:
     
 ##Data module
 #Extract X for specified number of genes
-extract_X: utils.R + R(data = readRDS(paste0("../../", dataset));
+extract_X: ../../functions/utils.R + R(data = readRDS(paste0("../../", dataset));
             X = filter_X(data$X, missing_rate_cutoff, maf_cutoff, var_cutoff))
   dataset: Shell{get_seeded_random() { seed="$1" ; openssl enc -aes-256-ctr -pass pass:"$seed" -nosalt </dev/zero 2>/dev/null ; } ; 
     shuf -n ${n_dataset} ${data_file} --random-source=<(get_seeded_random ${randseed}) | sed 's/^/"/;s/$/"/'}
@@ -51,7 +51,7 @@ extract_X: utils.R + R(data = readRDS(paste0("../../", dataset));
 #of normals, all resposens are causal with a 2-block structure
 indepV_sharedB: simulate_data_all_genes_prior_gtex_mod.R
   X:              $X
-  p_causal:       R(sample(x=1:10, size=1))
+  p_causal:       "1:10"
   r:              10
   r_causal:       raw(list(1:10))
   B_scale:        1
@@ -157,7 +157,7 @@ menet(mridge):
   alpha:                0.5
   
 #Sparse multi-task LASSO (aka UTMOST)  
-mtlasso: fit_mtlasso.py + fit_mtlasso_mod.py
+mtlasso: fit_mtlasso_mod.py
   X:                    $Xtrain
   Y:                    $Ytrain
   standardize:          True
