@@ -19,5 +19,5 @@ scripts/*.out
 output/*
 data/*.txt
 data/cis_eqtl_analysis_ready
-
+dsc/functions/__pycache__/
 **/.sos
