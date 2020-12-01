@@ -1,14 +1,14 @@
 #!/bin/bash
 
-#SBATCH --job-name=mvreg_test_pipeline
-#SBATCH --output=mvreg_test_pipeline.%j.out
-#SBATCH --error=mvreg_test_pipeline.%j.err
+#SBATCH --job-name=mvreg_test_pipeline_array
+#SBATCH --output=mvreg_test_pipeline_array.%j.out
+#SBATCH --error=mvreg_test_pipeline_array.%j.err
 #SBATCH --time=08:00:00
 #SBATCH --partition=mstephens
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=6G
-#SBATCH --array=1-5
+#SBATCH --array=1-2
 
 ################
 ####Common steps
@@ -21,13 +21,14 @@ source activate py38dsc
 rep="${SLURM_ARRAY_TASK_ID}"
 
 ###Set variables
+step="${1}"
 dsc_script=../mvreg_test.dsc
 dsc_outname=`echo "${dsc_script}" | cut -d'/' -f 2 | cut -d'.' -f 1`
 dsc_outdir="../output/${dsc_outname}"
 inter_outdir="../output/${dsc_outname}_inter"
 n_testind=168
 total_genes=10
-pred_genes=1
+pred_genes=3
 
 ###Load necessary version of R
 module load gcc/6.2 texlive/2017 java/1.8 curl/7.50 mkl/2019.up1
@@ -45,6 +46,7 @@ mkdir -p "${inter_outdir}/rep${rep}/prior/sumstats"
 mkdir -p "${inter_outdir}/rep${rep}/prior/matrices"
 mkdir -p "${inter_outdir}/rep${rep}/misc"
 mkdir -p "../dsc/${dsc_outname}/rep${rep}"
+mkdir -p "../dsc/${dsc_outname}/rep${rep}/outfiles"
 
 cd "../dsc/${dsc_outname}/rep${rep}"
   
