@@ -14,7 +14,7 @@ code/*.err
 dsc/outfiles
 dsc/*.err
 dsc/*.out
-dsc/mvreg_*/
+dsc/mvreg_*/rep*/
 scripts/*.err
 scripts/*.out
 output/*
