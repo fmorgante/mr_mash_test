@@ -6,9 +6,8 @@
 #SBATCH --time=08:00:00
 #SBATCH --partition=mstephens
 #SBATCH --nodes=1
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=2
 #SBATCH --mem=6G
-#SBATCH --array=1-2
 
 ################
 ####Common steps
@@ -27,7 +26,7 @@ dsc_outname=`echo "${dsc_script}" | cut -d'/' -f 2 | cut -d'.' -f 1`
 dsc_outdir="../../output/${dsc_outname}"
 inter_outdir="../../output/${dsc_outname}_inter"
 n_testind=168
-total_genes=10
+total_genes=2000
 pred_genes=1
 
 ###Load necessary version of R
@@ -60,7 +59,7 @@ then
 
   ###Sample training and test set indeces
   Rscript ../../../code/sample_testset_ids_gtex.R --input ../../../data/gtex-v8-ids.txt \
-                                                  --output "../../${inter_outdir}/rep${rep}/misc/testset_ids.rds" \
+                                                  --output "../${inter_outdir}/rep${rep}/misc/testset_ids.rds" \
                                                   --n_testset "${n_testind}" \
                                                   --seed "${ranseed}"
                                                   
@@ -77,9 +76,9 @@ then
   echo "Running ${step} ..."
 
   ###Run dsc to simulate genes and process data for data-driven covariance estimation                                       
-  "${dsc_script}" -o "../../${dsc_outdir}/rep${rep}" --target sim_proc --n_dataset "${total_genes}" --randseed "${ranseed}" -c 4 --host ../../midway2.yml \
-                  --testset_ids "\"../../${inter_outdir}/rep${rep}/misc/testset_ids.rds\"" \
-                  --data_driven_mats_file "\"../../${inter_outdir}/rep${rep}/prior/matrices/${dsc_outname}.EZ.FL_PC3.rds\""
+  "${dsc_script}" -o "../${dsc_outdir}/rep${rep}" --target sim_proc --n_dataset "${total_genes}" --randseed "${ranseed}" -c 2 --host ../../midway2.yml \
+                  --testset_ids "\"../${inter_outdir}/rep${rep}/misc/testset_ids.rds\"" \
+                  --data_driven_mats_file "\"../${inter_outdir}/rep${rep}/prior/matrices/${dsc_outname}.EZ.FL_PC3.rds\""
 
   echo "${step} done!"
 fi
@@ -94,9 +93,9 @@ then
   echo "Running ${step} ..."
 
   ###Run dsc to simulate genes and process data for data-driven covariance estimation                                       
-  "${dsc_script}" -o "../../${dsc_outdir}/rep${rep}" --target sim_proc --n_dataset "${total_genes}" --randseed "${ranseed}" -c 4 --host ../../midway2.yml \
-                  --testset_ids "\"../../${inter_outdir}/rep${rep}/misc/testset_ids.rds\"" \
-                  --data_driven_mats_file "\"../../${inter_outdir}/rep${rep}/prior/matrices/${dsc_outname}.EZ.FL_PC3.rds\"" \
+  "${dsc_script}" -o "../${dsc_outdir}/rep${rep}" --target sim_proc --n_dataset "${total_genes}" --randseed "${ranseed}" -c 2 --host ../../midway2.yml \
+                  --testset_ids "\"../${inter_outdir}/rep${rep}/misc/testset_ids.rds\"" \
+                  --data_driven_mats_file "\"../${inter_outdir}/rep${rep}/prior/matrices/${dsc_outname}.EZ.FL_PC3.rds\"" \
                   -s existing
 
   echo "${step} done!"
@@ -112,8 +111,8 @@ then
   echo "Running ${step} ..."
 
   ###Prepare summary stats for data-driven covariance estimation
-  Rscript ../../../code/prepare_sumstats_for_ED_prior.R --input_path "../../${dsc_outdir}/rep${rep}/univ_sumstats" \
-                                                        --output "../../${inter_outdir}/rep${rep}/prior/sumstats/${dsc_outname}_effects_for_ED_prior.rds" \
+  Rscript ../../../code/prepare_sumstats_for_ED_prior.R --input_path "../${dsc_outdir}/rep${rep}/univ_sumstats" \
+                                                        --output "../${inter_outdir}/rep${rep}/prior/sumstats/${dsc_outname}_effects_for_ED_prior.rds" \
                                                         --n_random 4 \
                                                         --seed "${ranseed}"
 
@@ -121,8 +120,8 @@ then
   sos run /project2/mstephens/fmorgante/gtexresults/workflows/mashr_flashr_workflow.ipynb prior \
           -c ../../../scripts/midway2_sos.yml \
           -q midway2 \
-          --cwd "../../${inter_outdir}/rep${rep}/prior/matrices" \
-          --data "../../${inter_outdir}/rep${rep}/prior/sumstats/${dsc_outname}_effects_for_ED_prior.rds" \
+          --cwd "../${inter_outdir}/rep${rep}/prior/matrices" \
+          --data "../${inter_outdir}/rep${rep}/prior/sumstats/${dsc_outname}_effects_for_ED_prior.rds" \
           --output-prefix "${dsc_outname}"
           
   echo "${step} done!"
@@ -138,9 +137,9 @@ then
   echo "Running ${step} ..."
 
   ###Run dsc to fit the models and do prediction
-  "${dsc_script}" -o "../../${dsc_outdir}/rep${rep}" --target fit_pred_score -s existing --n_dataset "${pred_genes}" --randseed "${ranseed}" -c 4 --host ../../midway2.yml \
-                  --testset_ids "\"../../${inter_outdir}/rep${rep}/misc/testset_ids.rds\"" \
-                  --data_driven_mats_file "\"../../${inter_outdir}/rep${rep}/prior/matrices/${dsc_outname}.EZ.FL_PC3.rds\""
+  "${dsc_script}" -o "../${dsc_outdir}/rep${rep}" --target fit_pred_score -s existing --n_dataset "${pred_genes}" --randseed "${ranseed}" -c 2 --host ../../midway2.yml \
+                  --testset_ids "\"../${inter_outdir}/rep${rep}/misc/testset_ids.rds\"" \
+                  --data_driven_mats_file "\"../${inter_outdir}/rep${rep}/prior/matrices/${dsc_outname}.EZ.FL_PC3.rds\""
 
   echo "${step} done!"
 fi
