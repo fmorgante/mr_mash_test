@@ -15,8 +15,8 @@ dsc/outfiles
 dsc/*.err
 dsc/*.out
 dsc/mvreg_*/rep*/
-scripts/*.err
-scripts/*.out
+scripts/**/*.err
+scripts/**/*.out
 output/*
 data/*.txt
 data/cis_eqtl_analysis_ready
