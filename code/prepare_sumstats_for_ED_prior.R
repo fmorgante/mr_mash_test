@@ -25,11 +25,16 @@ ranseed <- outparse$seed
 set.seed(ranseed)
 
 ###Functions required for the actual step
+# matxMax <- function(mtx) {
+#   max_idx <- which.max(mtx)
+#   colmn <- max_idx %/% nrow(mtx) + 1
+#   row <- max_idx %% nrow(mtx)
+#   return( matrix(c(row, colmn), 1))
+# }
+
 matxMax <- function(mtx) {
-  max_idx <- which.max(mtx)
-  colmn <- max_idx %/% nrow(mtx) + 1
-  row <- max_idx %% nrow(mtx)
-  return( matrix(c(row, colmn), 1))
+  idxs <- arrayInd(which.max(mtx), dim(mtx))
+  return(idxs)
 }
 
 remove_rownames = function(x) {
