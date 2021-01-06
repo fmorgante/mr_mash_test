@@ -142,7 +142,7 @@ For each replicate:
 
 3. We estimated data-driven covariance matrices using the training set. This was done by computing univariate summary statistics by simple linear regression for each response. These regression coefficients and standard errors were used as input in the *mash* pipeline (from Gao) to compute data-driven covariance matrices (up to the ED step included). In particular, the top variable per gene was used to define a "strong" set and 4 random variables per gene were used to define a "random" set. Covariance matrices were estimated using *flash*, PCA (including the top 3 PCs), and the empirical covariance matrix.
 
-4. We fitted competing methods and *mr.mash* to the training set for the first gene. *mr.mash* was fitted updating V (imposing a diagonal structure) and updating the prior weights using EM updates. The mixture prior consisted of components defined by:
+4. We fitted competing methods and *mr.mash* to the training set for the first gene. *mr.mash* was fitted updating V (imposing a diagonal structure) and updating the prior weights using EM updates. The covariances matrices were scaled by a grid of values computed from the univariate summary statistics as in the *mash* paper. The posterior mean of the regression coefficients were initialized to the estimates of the group-LASSO. The mixture weights were initialized with the proportion of zero-coefficients from the group-LASSO estimate as the weight on the spike and the proportion of non-zero-coefficients split equally among the remaining components. Convergence was declared when the maximum difference in the ELBO between two successive iterations was smaller than 1e-2. Four settings of the mixture prior were used:
 
     + canonical matrices corresponding to different settings of effect sharing/specificity (i.e., singletons, independent, low heterogeneity, medium heterogeneity, high heterogeneity, shared) plus the spike. 
 
@@ -151,7 +151,7 @@ For each replicate:
     + both canonical and data-driven matrices plus the spike.
 
     + both canonical and data-driven matrices plus the spike, dropping components with $w_0 < 1e-8$.
-The covariances matrices were scaled by a grid of values computed from the univariate summary statistics as in the *mash* paper. The posterior mean of the regression coefficients were initialized to the estimates of the group-LASSO. The mixture weights were initialized with the proportion of zero-coefficients from the group-LASSO estimate as the weight on the spike and the proportion of non-zero-coefficients split equally among the remaining components.Convergence was declared when the maximum difference in the ELBO between two successive iterations was smaller than 1e-2.
+
 
 5. We predicted the responses in the test set of the same gene.
 
