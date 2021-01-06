@@ -102,7 +102,7 @@ for(repl in 1:20){
                       c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w", 
                         "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"), 
                       groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet",
-                      verbose=TRUE)
+                      verbose=FALSE)
   
   ###Convert from list to data.frame for plotting
   if(repl==1){
@@ -135,9 +135,13 @@ rm(dsc_out)
 The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with `r p_causal` causal variants, `r r` responses with a per-response proportion of variance explained (PVE) of `r pve`. Causal effects, B, were drawn from MVN(0, Sigma), Sigma is such that it achieves a correlation between responses of `r B_cor[1]`. Response `r r_causal[[1]]` has causal effects while the remaining nine responses do not have any causal effect. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of `r V_cor` and a scale defined by PVE, in the case of cuasal responses. Non causal responses are from N(0, 1).
 
 For each replicate:
+
 1. We simulated expression from actual GTEx genotypes for 2000 randomly sampled genes.
+
 2. We randomly splitted the data into training (80% of the data = 670 individuals) and test (20% of the data = 168 individuals) sets.
+
 3. We estimated data-driven covariance matrices using the training set. This was done by computing univariate summary statistics by simple linear regression for each response. These regression coefficients and standard errors were used as input in the *mash* pipeline (from Gao) to compute data-driven covariance matrices (up to the ED step included). In particular, the top variable per gene was used to define a "strong" set and 4 random variables per gene were used to define a "random" set. Covariance matrices were estimated using *flash*, PCA (including the top 3 PCs), and the empirical covariance matrix.
+
 4. We fitted competing methods and *mr.mash* to the training set for the first gene. *mr.mash* was fitted updating V (imposing a diagonal structure) and updating the prior weights using EM updates. The mixture prior consisted of components defined by:
 
   + canonical matrices corresponding to different settings of effect sharing/specificity (i.e., singletons, independent, low heterogeneity, medium heterogeneity, high heterogeneity, shared) plus the spike. 
@@ -148,8 +152,10 @@ For each replicate:
 
   + both canonical and data-driven matrices plus the spike, dropping components with $w_0 < 1e-8$.
 
-The covariances matrices were scaled by a grid of values computed from the univariate summary statistics as in the *mash* paper. The posterior mean of the regression coefficients were initialized to the estimates of the group-LASSO. The mixture weights were initialized with the proportion of zero-coefficients from the group-LASSO estimate as the weight on the spike and the proportion of non-zero-coefficients split equally among the remaining components.Convergence was declared when the maximum difference in the ELBO between two successive iterations was smaller than 1e-2.   
+The covariances matrices were scaled by a grid of values computed from the univariate summary statistics as in the *mash* paper. The posterior mean of the regression coefficients were initialized to the estimates of the group-LASSO. The mixture weights were initialized with the proportion of zero-coefficients from the group-LASSO estimate as the weight on the spike and the proportion of non-zero-coefficients split equally among the remaining components.Convergence was declared when the maximum difference in the ELBO between two successive iterations was smaller than 1e-2.
+
 5. We predicted the responses in the test set of the same gene.
+
 6. We evaluated the accuracy of prediction by the relative root mean square error (rRMSE) scaled by the standard deviation of the true responses in the test data.
 
 To obtain 20 truly independent replicates, we repeated 1-6 20 times. The boxplots are across replicates. 
