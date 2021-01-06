@@ -453,16 +453,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreed8e690d851f0589365ee62e6cd65271bae7f61fatargetblankd8e690da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/d8e690d851f0589365ee62e6cd65271bae7f61fa" target="_blank">d8e690d</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeef7257beb66c7b1bbe5aa7fd489954286099dc38targetblankef7257ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/ef7257beb66c7b1bbe5aa7fd489954286099dc38" target="_blank">ef7257b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreed8e690d851f0589365ee62e6cd65271bae7f61fatargetblankd8e690da" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeef7257beb66c7b1bbe5aa7fd489954286099dc38targetblankef7257ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/d8e690d851f0589365ee62e6cd65271bae7f61fa" target="_blank">d8e690d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/ef7257beb66c7b1bbe5aa7fd489954286099dc38" target="_blank">ef7257b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -1774,6 +1774,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/ef7257beb66c7b1bbe5aa7fd489954286099dc38/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps.Rmd" target="_blank">ef7257b</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-01-06
+</td>
+<td>
+Try fixing ordered list
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/ad676cc486d3a6f88556e2ad66e808884560086c/docs/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps.html" target="_blank">ad676cc</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-01-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/d8e690d851f0589365ee62e6cd65271bae7f61fa/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps.Rmd" target="_blank">d8e690d</a>
 </td>
 <td>
@@ -1882,7 +1916,7 @@ colors &lt;- c(&quot;cyan&quot;, &quot;skyblue&quot;, &quot;dodgerblue&quot;, &q
                       c(&quot;simulate.p_causal&quot;, &quot;simulate.r&quot;, &quot;simulate.r_causal&quot;, &quot;simulate.pve&quot;, &quot;simulate.B_cor&quot;, &quot;simulate.w&quot;, 
                         &quot;simulate.B_scale&quot;, &quot;simulate.V_cor&quot;, &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
                       groups=&quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot;,
-                      verbose=TRUE)
+                      verbose=FALSE)
   
   ###Convert from list to data.frame for plotting
   if(repl==1){
@@ -1893,48 +1927,9 @@ colors &lt;- c(&quot;cyan&quot;, &quot;skyblue&quot;, &quot;dodgerblue&quot;, &q
     tmp &lt;- cbind(rep=repl, tmp)
     dsc_plots &lt;- rbind(dsc_plots, tmp)
   }
-}</code></pre>
-<pre><code>Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep1 -o /tmp/RtmpFy4xge/file8a5b6861ad8.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep2 -o /tmp/RtmpFy4xge/file8a5b4cfec4e.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep3 -o /tmp/RtmpFy4xge/file8a5b7ee16fce.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep4 -o /tmp/RtmpFy4xge/file8a5b553627db.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep5 -o /tmp/RtmpFy4xge/file8a5b6b251f1a.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep6 -o /tmp/RtmpFy4xge/file8a5b658c2d8b.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep7 -o /tmp/RtmpFy4xge/file8a5b3ef41ea6.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep8 -o /tmp/RtmpFy4xge/file8a5b1d9ccf9d.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep9 -o /tmp/RtmpFy4xge/file8a5b76d02cb2.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep10 -o /tmp/RtmpFy4xge/file8a5b787717c4.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep11 -o /tmp/RtmpFy4xge/file8a5b11c29f4e.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep12 -o /tmp/RtmpFy4xge/file8a5b70534baa.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep13 -o /tmp/RtmpFy4xge/file8a5b64963742.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep14 -o /tmp/RtmpFy4xge/file8a5b2046417f.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep15 -o /tmp/RtmpFy4xge/file8a5b6cbbe5a2.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep16 -o /tmp/RtmpFy4xge/file8a5b1070019c.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep17 -o /tmp/RtmpFy4xge/file8a5b1ea97c1b.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep18 -o /tmp/RtmpFy4xge/file8a5b1ced23ad.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep19 -o /tmp/RtmpFy4xge/file8a5b6ead3968.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.
-Calling: dsc-query output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/rep20 -o /tmp/RtmpFy4xge/file8a5b7119179.csv --target &quot;simulate.p_causal simulate.r simulate.r_causal simulate.pve simulate.B_cor simulate.w simulate.B_scale simulate.V_cor simulate fit score score.err fit.time&quot; --force -g &quot;fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet&quot; 
-Loaded dscquery output table with 7 rows and 17 columns.</code></pre>
-<pre class="r"><code>###Obtain simulation parameters from last rep (they all should have the same params)
+}
+
+###Obtain simulation parameters from last rep (they all should have the same params)
 prop_testset &lt;- 0.2
 p_causal &lt;- unique(dsc_out$simulate.p_causal)
 r &lt;- unique(dsc_out$simulate.r)
@@ -1949,14 +1944,24 @@ rm(dsc_out)</code></pre>
 <div id="simulation-set-up" class="section level2">
 <h2>Simulation set up</h2>
 <p>The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with 1:10 causal variants, 10 responses with a per-response proportion of variance explained (PVE) of 0.2. Causal effects, B, were drawn from MVN(0, Sigma), Sigma is such that it achieves a correlation between responses of 0. Response 1 has causal effects while the remaining nine responses do not have any causal effect. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of 0 and a scale defined by PVE, in the case of cuasal responses. Non causal responses are from N(0, 1).</p>
-<p>For each replicate: 1. We simulated expression from actual GTEx genotypes for 2000 randomly sampled genes. 2. We randomly splitted the data into training (80% of the data = 670 individuals) and test (20% of the data = 168 individuals) sets. 3. We estimated data-driven covariance matrices using the training set. This was done by computing univariate summary statistics by simple linear regression for each response. These regression coefficients and standard errors were used as input in the <em>mash</em> pipeline (from Gao) to compute data-driven covariance matrices (up to the ED step included). In particular, the top variable per gene was used to define a “strong” set and 4 random variables per gene were used to define a “random” set. Covariance matrices were estimated using <em>flash</em>, PCA (including the top 3 PCs), and the empirical covariance matrix. 4. We fitted competing methods and <em>mr.mash</em> to the training set for the first gene. <em>mr.mash</em> was fitted updating V (imposing a diagonal structure) and updating the prior weights using EM updates. The mixture prior consisted of components defined by:</p>
+<p>For each replicate:</p>
+<ol style="list-style-type: decimal">
+<li><p>We simulated expression from actual GTEx genotypes for 2000 randomly sampled genes.</p></li>
+<li><p>We randomly splitted the data into training (80% of the data = 670 individuals) and test (20% of the data = 168 individuals) sets.</p></li>
+<li><p>We estimated data-driven covariance matrices using the training set. This was done by computing univariate summary statistics by simple linear regression for each response. These regression coefficients and standard errors were used as input in the <em>mash</em> pipeline (from Gao) to compute data-driven covariance matrices (up to the ED step included). In particular, the top variable per gene was used to define a “strong” set and 4 random variables per gene were used to define a “random” set. Covariance matrices were estimated using <em>flash</em>, PCA (including the top 3 PCs), and the empirical covariance matrix.</p></li>
+<li><p>We fitted competing methods and <em>mr.mash</em> to the training set for the first gene. <em>mr.mash</em> was fitted updating V (imposing a diagonal structure) and updating the prior weights using EM updates. The mixture prior consisted of components defined by:</p></li>
+</ol>
 <ul>
 <li><p>canonical matrices corresponding to different settings of effect sharing/specificity (i.e., singletons, independent, low heterogeneity, medium heterogeneity, high heterogeneity, shared) plus the spike.</p></li>
 <li><p>data-driven matrices estimated as described above plus the spike.</p></li>
 <li><p>both canonical and data-driven matrices plus the spike.</p></li>
 <li><p>both canonical and data-driven matrices plus the spike, dropping components with <span class="math">\(w_0 &lt; 1e-8\)</span>.</p></li>
 </ul>
-<p>The covariances matrices were scaled by a grid of values computed from the univariate summary statistics as in the <em>mash</em> paper. The posterior mean of the regression coefficients were initialized to the estimates of the group-LASSO. The mixture weights were initialized with the proportion of zero-coefficients from the group-LASSO estimate as the weight on the spike and the proportion of non-zero-coefficients split equally among the remaining components.Convergence was declared when the maximum difference in the ELBO between two successive iterations was smaller than 1e-2.<br />5. We predicted the responses in the test set of the same gene. 6. We evaluated the accuracy of prediction by the relative root mean square error (rRMSE) scaled by the standard deviation of the true responses in the test data.</p>
+<p>The covariances matrices were scaled by a grid of values computed from the univariate summary statistics as in the <em>mash</em> paper. The posterior mean of the regression coefficients were initialized to the estimates of the group-LASSO. The mixture weights were initialized with the proportion of zero-coefficients from the group-LASSO estimate as the weight on the spike and the proportion of non-zero-coefficients split equally among the remaining components.Convergence was declared when the maximum difference in the ELBO between two successive iterations was smaller than 1e-2.</p>
+<ol start="5" style="list-style-type: decimal">
+<li><p>We predicted the responses in the test set of the same gene.</p></li>
+<li><p>We evaluated the accuracy of prediction by the relative root mean square error (rRMSE) scaled by the standard deviation of the true responses in the test data.</p></li>
+</ol>
 <p>To obtain 20 truly independent replicates, we repeated 1-6 20 times. The boxplots are across replicates.</p>
 </div>
 <div id="mr.mash-vs-other-methods" class="section level2">
@@ -1990,6 +1995,43 @@ p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&
 
 print(p_rrmse)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps.Rmd/accuracy%20vs%20others-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-vs-others-1">
+Past versions of “accuracy vs others-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-vs-others-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/ad676cc486d3a6f88556e2ad66e808884560086c/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps.Rmd/accuracy vs others-1.png" target="_blank">ad676cc</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-01-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Let’s now remove outliers from the plots to make things a little clearer.</p>
 <pre class="r"><code>p_rrmse_noout &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;response_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;,width.errorbar = 0, width = 0.85) +
@@ -2001,6 +2043,43 @@ print(p_rrmse)</code></pre>
 
 print(p_rrmse_noout)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps.Rmd/accuracy%20no%20outliers-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-no-outliers-1">
+Past versions of “accuracy no outliers-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-no-outliers-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/ad676cc486d3a6f88556e2ad66e808884560086c/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps.Rmd/accuracy no outliers-1.png" target="_blank">ad676cc</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-01-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Here, we look at the elapsed time (<span class="math">\(log_2\)</span> seconds) of each method. Note that the <em>mr.mash</em> run time does not include the run time of group-LASSO (but should be considered since we used it to initialize <em>mr.mash</em>).</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;scaled_rrmse&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -2017,6 +2096,43 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
 
 print(p_time)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps.Rmd/run%20time-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-run-time-1">
+Past versions of “run time-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-run-time-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/ad676cc486d3a6f88556e2ad66e808884560086c/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps.Rmd/run time-1.png" target="_blank">ad676cc</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-01-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
