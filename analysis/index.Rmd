@@ -54,6 +54,11 @@ Results for meeting on 10/23/2020. Assessment of prediction accuracy and run tim
 + [Shared effects, independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10.html)
 + [Indpendent effects, independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10.html)
 
+Results for meeting on 01/08/2021. Assessment of prediction accuracy and run time of *mr.mash* with different prior specifications against the multivariate version of LASSO, UTMOST, and univariate Elastic Net in simulations based on GTEx v8 genotypes with truly independent replicates:
+
++ [One causal response out of ten, independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps.html)
+
+
 
 Other investigations:
 
