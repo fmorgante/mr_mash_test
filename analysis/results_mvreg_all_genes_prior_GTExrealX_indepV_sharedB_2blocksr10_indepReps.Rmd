@@ -1,5 +1,5 @@
 ---
-title: "Simulations with GTEx genotypes and effect structure similar to GTEx gene expression"
+title: "Simulations with GTEx genotypes and effect structure similar to GTEx gene expression -- independent replicates"
 author: "Fabio Morgante"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
@@ -132,7 +132,7 @@ rm(dsc_out)
 
 ## Simulation set up
 
-The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with `r p_causal` causal variants, `r r` responses with a per-response proportion of variance explained (PVE)=0.2 for the first three responses and PVE=0.05 for the remaining seven responses. Causal effects, B, were drawn from $w_1 MVN(0, Sigma1) + w_2 MVN(0, Sigma2)$, where $w_1$ = `r w[1]` and $w_2$ = `r w[2]` Sigma1 is such that it achieves a correlation between responses of `r B_cor[1]` and a scale of `r B_scale[1]` and Sigma2 is such that it achieves a correlation between responses of `r B_cor[2]` and a scale of `r B_scale[2]`. The first component of the mixture applies to responses `r r_causal[[1]]` while the second component applies to responses `r r_causal[[2]]`. This structure is meant to mirror that of brain tissues and non-brain tissues in GTEx. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of `r V_cor` and a scale defined by PVE, in the case of cuasal responses. Non causal responses are from N(0, 1).
+The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with causal variants randomly sampled in the range `r p_causal`, `r r` responses with a per-response proportion of variance explained (PVE)=0.2 for the first three responses and PVE=0.05 for the remaining seven responses. Causal effects, B, were drawn from $w_1 MVN(0, Sigma1) + w_2 MVN(0, Sigma2)$, where $w_1$ = `r w[1]` and $w_2$ = `r w[2]` Sigma1 is such that it achieves a correlation between responses of `r B_cor[1]` and a scale of `r B_scale[1]` and Sigma2 is such that it achieves a correlation between responses of `r B_cor[2]` and a scale of `r B_scale[2]`. The first component of the mixture applies to responses `r r_causal[[1]]` while the second component applies to responses `r r_causal[[2]]`. This structure is meant to mirror that of brain tissues and non-brain tissues in GTEx. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of `r V_cor` and a scale defined by PVE, in the case of cuasal responses. Non causal responses are from N(0, 1).
 
 For each replicate:
 

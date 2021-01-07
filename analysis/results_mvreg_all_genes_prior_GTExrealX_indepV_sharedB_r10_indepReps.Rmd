@@ -132,7 +132,7 @@ rm(dsc_out)
 
 ## Simulation set up
 
-The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with `r p_causal` causal variants, `r r` responses with a per-response proportion of variance explained (PVE) of `r pve`. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of `r B_cor` and a scale of `r B_scale`. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of `r V_cor` and a scale defined py PVE.
+The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with causal variants randomly sampled in the range `r p_causal`, `r r` responses with a per-response proportion of variance explained (PVE) of `r pve`. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of `r B_cor` and a scale of `r B_scale`. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of `r V_cor` and a scale defined py PVE.
 
 For each replicate:
 
