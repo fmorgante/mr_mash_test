@@ -1,0 +1,224 @@
+---
+title: "Simulations with GTEx genotypes and shared effects -- independent replicates"
+author: "Fabio Morgante"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  workflowr::wflow_html:
+    toc: true
+editor_options:
+  chunk_output_type: console
+---
+
+```{r set opts, warning=FALSE, message=FALSE}
+###Set options
+options(stringsAsFactors=FALSE)
+
+###Load libraries
+library(dscrutils)
+library(ggplot2)
+library(cowplot)
+library(scales)
+
+###Function to convert dscquery output from list to data.frame suitable for plotting
+convert_dsc_to_dataframe_gtex <- function(dsc){ ##add repli argument if wanting to have subrep rolling over from rep to rep
+  ###Data.frame to store the results after convertion
+  dsc_df <- data.frame()
+  
+  ###Get length of list elements 
+  n_elem <- length(dsc$DSC)
+  
+  ###Loop through the dsc list
+  for(i in 1:n_elem){
+    ##Prepare vectors making up the final data frame
+    r_scalar <- dsc$simulate.r[i]
+    p_causal <- rep(dsc$simulate.p_causal[i], times=r_scalar)
+    r <- rep(dsc$simulate.r[i], times=r_scalar)
+    response <- 1:r_scalar
+    pve <- rep(dsc$simulate.pve[i], times=r_scalar)
+    simulate <- rep(dsc$simulate[i], times=r_scalar)
+    fit <- rep(dsc$fit[i], times=r_scalar)
+    score <- rep(dsc$score[i], times=r_scalar)
+    score.err <- dsc$score.err[[i]]
+    timing <- rep(dsc$fit.time[i], times=r_scalar)
+    
+    ##Build the data frame
+    df <- data.frame(p_num_caus=p_causal, r=r, response=response, pve=pve,  
+                     scenario=simulate, method=fit, score_metric=score, score_value=score.err, time=timing)
+    dsc_df <- rbind(dsc_df, df)
+  }
+  
+  ###Get number of genes
+  n_methods <- length(unique(dsc$fit))
+  n_metrics <- length(unique(dsc$score))
+  n_genes <- n_elem/n_methods/n_metrics
+  
+  ###Compute replicates
+  # beginning <- (repli*n_genes)-(n_genes-1)
+  # ending <- repli*n_genes
+  beginning <- 1
+  ending <- n_genes
+  reptot <- rep(rep(beginning:ending, each=dsc$simulate.r[1]), n_methods*n_metrics)
+  
+  dsc_df <- data.frame(subrep=reptot, dsc_df)
+  
+  return(dsc_df)
+}
+
+###Function to compute rmse (relative to mr_mash_em_no_datadriven)
+compute_rrmse <- function(dsc_plot, log10_scale=FALSE){
+  dsc_plot <- transform(dsc_plot, experiment=paste(rep, subrep, response, scenario, sep="-"))
+  t <- 0
+  for (i in unique(dsc_plot$experiment)) {
+    t <- t+1
+    rmse_data  <- dsc_plot[which(dsc_plot$experiment == i & dsc_plot$score_metric=="scaled_rmse"), ]
+    mse_mr_mash_consec_em <- rmse_data[which(rmse_data$method=="mr_mash_em_can"), "score_value"]
+    if(!log10_scale)
+      rmse_data$score_value <- rmse_data$score_value/mse_mr_mash_consec_em
+    else
+      rmse_data$score_value <- log10(rmse_data$score_value/mse_mr_mash_consec_em)
+    rmse_data$score_metric <- "scaled_rrmse"
+    if(t>1){
+      rmse_data_tot <- rbind(rmse_data_tot, rmse_data)
+    } else if(t==1){
+      rmse_data_tot <- rmse_data
+    }
+  }
+  
+  rmse_data_tot$experiment <- NULL
+  
+  return(rmse_data_tot)
+}
+
+###Set some quantities used in the following plots
+colors <- c("cyan", "skyblue", "dodgerblue", "mediumblue", "limegreen", "green", "gold", "orange", "red", "firebrick", "darkmagenta", "mediumpurple")
+```
+
+# PVE=0.2
+
+```{r load data, warning=FALSE, message=FALSE}
+for(repl in 1:20){
+  ###Load the dsc results
+  dsc_out <- dscquery(paste0("output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep", repl), 
+                      c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w", 
+                        "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"), 
+                      groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mlasso, mtlasso, enet",
+                      verbose=FALSE)
+  
+  ###Convert from list to data.frame for plotting
+  if(repl==1){
+    dsc_plots <- convert_dsc_to_dataframe_gtex(dsc_out)
+    dsc_plots <- cbind(rep=repl, dsc_plots)
+  } else if(repl>1){
+    tmp <- convert_dsc_to_dataframe_gtex(dsc_out)
+    tmp <- cbind(rep=repl, tmp)
+    dsc_plots <- rbind(dsc_plots, tmp)
+  }
+}
+
+###Obtain simulation parameters from last rep (they all should have the same params)
+prop_testset <- 0.2
+p_causal <- unique(dsc_out$simulate.p_causal)
+r <- unique(dsc_out$simulate.r)
+r_causal <- eval(parse(text=unique(dsc_out$simulate.r_causal)))
+pve <- unique(dsc_out$simulate.pve)
+w <- eval(parse(text=unique(dsc_out$simulate.w)))
+B_cor <- eval(parse(text=unique(dsc_out$simulate.B_cor)))
+B_scale <- eval(parse(text=unique(dsc_out$simulate.B_scale)))
+V_cor <- unique(dsc_out$simulate.V_cor)
+
+rm(dsc_out)
+```
+
+
+## Simulation set up
+
+The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with `r p_causal` causal variants, `r r` responses with a per-response proportion of variance explained (PVE) of `r pve`. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of `r B_cor` and a scale of `r B_scale`. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of `r V_cor` and a scale defined py PVE.
+
+For each replicate:
+
+1. We simulated expression from actual GTEx genotypes for 2000 randomly sampled genes.
+
+2. We randomly splitted the data into training (80% of the data = 670 individuals) and test (20% of the data = 168 individuals) sets.
+
+3. We estimated data-driven covariance matrices using the training set. This was done by computing univariate summary statistics by simple linear regression for each response. These regression coefficients and standard errors were used as input in the *mash* pipeline (from Gao) to compute data-driven covariance matrices (up to the ED step included). In particular, the top variable per gene was used to define a "strong" set and 4 random variables per gene were used to define a "random" set. Covariance matrices were estimated using *flash*, PCA (including the top 3 PCs), and the empirical covariance matrix.
+
+4. We fitted competing methods and *mr.mash* to the training set for the first gene. *mr.mash* was fitted updating V (imposing a diagonal structure) and updating the prior weights using EM updates. The covariances matrices were scaled by a grid of values computed from the univariate summary statistics as in the *mash* paper. The posterior mean of the regression coefficients were initialized to the estimates of the group-LASSO. The mixture weights were initialized with the proportion of zero-coefficients from the group-LASSO estimate as the weight on the spike and the proportion of non-zero-coefficients split equally among the remaining components. Convergence was declared when the maximum difference in the ELBO between two successive iterations was smaller than 1e-2. Four settings of the mixture prior were used:
+
+    + canonical matrices corresponding to different settings of effect sharing/specificity (i.e., singletons, independent, low heterogeneity, medium heterogeneity, high heterogeneity, shared) plus the spike. 
+
+    + data-driven matrices estimated as described above plus the spike.
+
+    + both canonical and data-driven matrices plus the spike.
+
+    + both canonical and data-driven matrices plus the spike, dropping components with $w_0 < 1e-8$.
+
+
+5. We predicted the responses in the test set of the same gene.
+
+6. We evaluated the accuracy of prediction by the relative root mean square error (rRMSE) scaled by the standard deviation of the true responses in the test data.
+
+To obtain 20 truly independent replicates, we repeated 1-6 20 times. The boxplots are across replicates. 
+
+## mr.mash vs other methods
+
+Here, we compare *mr.mash* to the multivariate versions of LASSO as implemented in *glmnet*. The form of the penalty id the following: $\lambda[(1-\alpha)/2 ||\mathbf{\beta}_j||^2_2 + \alpha ||\mathbf{\beta}_j||_2]$. $\lambda$ is chosen by cross-validation in the training set. We also compare to the [*UTMOST* implementation](https://users.rcc.uchicago.edu/~aksarkar/gtex-pred/lasso.html) by Abhishek, and the response-by-response elastic net. All the methods were using 1 thread.
+
+```{r accuracy vs others, fig.height=12, fig.width=15, message=FALSE}
+###Compute rmse score (relative to mr_mash_consec_em) and add it to the data
+rrmse_dat <- compute_rrmse(dsc_plots)
+dsc_plots <- rbind(dsc_plots, rrmse_dat)
+
+###Remove mse from scores and keep only methods wanted
+dsc_plots <- dsc_plots[which(dsc_plots$score_metric!="scaled_rmse" ), ]
+
+###Create factor version of method
+dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_em_can", "mr_mash_em_data",
+                                                          "mr_mash_em_dataAndcan", "mr_mash_em_dataAndcan_dropcomp", 
+                                                          "mlasso", "mtlasso", "enet"),
+                                                labels=c("mr_mash_can", "mr_mash_data", "mr_mash_both", 
+                                                         "mr_mash_both_drop", "mlasso", "mtlasso", "enet"))
+
+###Create plots
+p_rrmse <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
+  geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
+  scale_fill_manual(values = colors) +
+  labs(x = "", y = "Error", title = "rRMSE", fill="Method") +
+  geom_hline(yintercept=1, linetype="dotted", size=1) +
+  theme_cowplot(font_size = 20) +
+  theme(plot.title = element_text(hjust = 0.5), axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+print(p_rrmse)
+```
+
+Let's now remove outliers from the plots to make things a little clearer.
+
+```{r accuracy no outliers, fig.height=12, fig.width=15, message=FALSE}
+p_rrmse_noout <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
+  Ipaper::geom_boxplot2(color = "black",width.errorbar = 0, width = 0.85) +
+  scale_fill_manual(values = colors) +
+  labs(x = "", y = "Error", title = "rRMSE", fill="Method") +
+  geom_hline(yintercept=1, linetype="dotted", size=1) +
+  theme_cowplot(font_size = 20) +
+  theme(plot.title = element_text(hjust = 0.5), axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+print(p_rrmse_noout)
+```
+
+Here, we look at the elapsed time ($log_2$ seconds) of each method. Note that the *mr.mash* run time does not include the run time of group-LASSO (but should be considered since we used it to initialize *mr.mash*).
+
+```{r run time, fig.height=12, fig.width=15, message=FALSE}
+dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="scaled_rrmse"), 
+                          -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))]
+
+p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
+  geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
+  scale_fill_manual(values = colors) +
+  scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x))) +
+  labs(x = "", y = "Elapsed time (seconds) in log2 scale", title = "Run time", fill="Method") +
+  theme_cowplot(font_size = 20) +
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        plot.title = element_text(hjust = 0.5))
+
+print(p_time)
+```
