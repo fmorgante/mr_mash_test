@@ -453,16 +453,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree9b465e3c2a2ff78f98c89b60ce8815196d6f2465targetblank9b465e3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/9b465e3c2a2ff78f98c89b60ce8815196d6f2465" target="_blank">9b465e3</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree8b1662a2916f1fc690b879feff14509f8ca64ee0targetblank8b1662aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/8b1662a2916f1fc690b879feff14509f8ca64ee0" target="_blank">8b1662a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree9b465e3c2a2ff78f98c89b60ce8815196d6f2465targetblank9b465e3a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree8b1662a2916f1fc690b879feff14509f8ca64ee0targetblank8b1662aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/9b465e3c2a2ff78f98c89b60ce8815196d6f2465" target="_blank">9b465e3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/8b1662a2916f1fc690b879feff14509f8ca64ee0" target="_blank">8b1662a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -1732,9 +1732,6 @@ Untracked files:
     Untracked:  code/plot_test.R
     Untracked:  dsc/mvreg_all_genes_prior_09_11_20_COPY.dsc
 
-Unstaged changes:
-    Modified:   analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_indepReps.Rmd
-
 </code></pre>
 <p>
 Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
@@ -1772,6 +1769,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/8b1662a2916f1fc690b879feff14509f8ca64ee0/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps.Rmd" target="_blank">8b1662a</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-01-07
+</td>
+<td>
+Fix number of causal variants
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/d8b892ab8deb17ddd6cbb47c3f54fd1605e2e53f/docs/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps.html" target="_blank">d8b892a</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-01-07
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1912,7 +1943,7 @@ V_cor &lt;- unique(dsc_out$simulate.V_cor)
 rm(dsc_out)</code></pre>
 <div id="simulation-set-up" class="section level2">
 <h2>Simulation set up</h2>
-<p>The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with 1:10 causal variants, 10 responses with a per-response proportion of variance explained (PVE) of 0.2. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of 1 and a scale of 1. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of 0 and a scale defined py PVE.</p>
+<p>The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with causal variants randomly sampled in the range 1:10, 10 responses with a per-response proportion of variance explained (PVE) of 0.2. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of 1 and a scale of 1. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of 0 and a scale defined py PVE.</p>
 <p>For each replicate:</p>
 <ol style="list-style-type: decimal">
 <li><p>We simulated expression from actual GTEx genotypes for 2000 randomly sampled genes.</p></li>
@@ -1958,6 +1989,43 @@ p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&
 
 print(p_rrmse)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps.Rmd/accuracy%20vs%20others-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-vs-others-1">
+Past versions of “accuracy vs others-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-vs-others-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/d8b892ab8deb17ddd6cbb47c3f54fd1605e2e53f/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps.Rmd/accuracy vs others-1.png" target="_blank">d8b892a</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-01-07
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Let’s now remove outliers from the plots to make things a little clearer.</p>
 <pre class="r"><code>p_rrmse_noout &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
   Ipaper::geom_boxplot2(color = &quot;black&quot;,width.errorbar = 0, width = 0.85) +
@@ -1969,6 +2037,43 @@ print(p_rrmse)</code></pre>
 
 print(p_rrmse_noout)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps.Rmd/accuracy%20no%20outliers-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-accuracy-no-outliers-1">
+Past versions of “accuracy no outliers-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-accuracy-no-outliers-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/d8b892ab8deb17ddd6cbb47c3f54fd1605e2e53f/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps.Rmd/accuracy no outliers-1.png" target="_blank">d8b892a</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-01-07
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Here, we look at the elapsed time (<span class="math">\(log_2\)</span> seconds) of each method. Note that the <em>mr.mash</em> run time does not include the run time of group-LASSO (but should be considered since we used it to initialize <em>mr.mash</em>).</p>
 <pre class="r"><code>dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1 &amp; dsc_plots$score_metric==&quot;scaled_rrmse&quot;), 
                           -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -1985,6 +2090,43 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method_fac&quot;, y = &
 
 print(p_time)</code></pre>
 <p><img src="figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps.Rmd/run%20time-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-run-time-1">
+Past versions of “run time-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-run-time-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/d8b892ab8deb17ddd6cbb47c3f54fd1605e2e53f/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps.Rmd/run time-1.png" target="_blank">d8b892a</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-01-07
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
