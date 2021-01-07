@@ -96,7 +96,7 @@ colors <- c("cyan", "skyblue", "dodgerblue", "mediumblue", "limegreen", "green",
 # PVE=0.2
 
 ```{r load data, warning=FALSE, message=FALSE}
-for(repl in c(1:13, 15:20)){
+for(repl in 1:20){
   ###Load the dsc results
   dsc_out <- dscquery(paste0("output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps/rep", repl), 
                       c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w", 
