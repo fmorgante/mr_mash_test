@@ -13,7 +13,7 @@ compute_coefficients_glasso <- function(X, Y, standardize, nthreads, version=c("
     Y_miss_patterns <- mr.mash.alpha:::extract_missing_Y_pattern(Y)
     
     ###Initialize missing Ys
-    muy <- colMeans(Y_miss, na.rm=TRUE)
+    muy <- colMeans(Y, na.rm=TRUE)
     for(l in 1:r){
       Y[is.na(Y[, l]), l] <- muy[l]
     }
