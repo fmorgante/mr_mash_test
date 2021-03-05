@@ -21,8 +21,6 @@ DSC:
     mr_mash_em_data_mlasso: mlasso_init * mr_mash_em_data
     mr_mash_em_dataAndcan_mlasso: mlasso_init * mr_mash_em_dataAndcan
     mr_mash_em_dataAndcan_dropcomp_mlasso: mlasso_init * mr_mash_em_dataAndcan_dropcomp
-    mtlasso: mtlasso
-    enet: enet
     fit: mr_mash_em_dataAndcan_dropcomp_mlasso,mr_mash_em_dataAndcan_mlasso, 
          mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mtlasso, enet
     predict: predict_linear
