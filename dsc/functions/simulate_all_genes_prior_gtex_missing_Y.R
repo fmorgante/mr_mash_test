@@ -21,7 +21,7 @@ simulate_data_all_genes_prior_gtex_missing_Y <- function(X, p_causal, r, r_causa
   
   Y_miss <- assign_NAs_random(Ytrain, prop_miss)
   all_miss <- which(apply(Y_miss, 1, function(x, r){sum(is.na(x))==r}, r))
-  if(length(all_miss>0)){
+  if(length(all_miss)>0){
     Xtrain <- Xtrain[-all_miss, ]
     Ytrain <- Y_miss[-all_miss, ]
   } else {
