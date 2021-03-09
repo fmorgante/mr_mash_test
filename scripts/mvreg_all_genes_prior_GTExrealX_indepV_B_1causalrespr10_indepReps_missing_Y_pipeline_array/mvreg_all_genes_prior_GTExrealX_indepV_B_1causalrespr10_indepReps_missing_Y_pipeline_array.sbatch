@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #SBATCH --job-name=mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array
-#SBATCH --output=mvreg_all_genes_prior_GTExrealX_indepV_sB_1causalrespr10_indepReps_missing_Y_pipeline_array.%j.out
-#SBATCH --error=mvreg_all_genes_prior_GTExrealX_indepV_sB_1causalrespr10_indepReps_missing_Y_pipeline_array.%j.err
+#SBATCH --output=mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.%j.out
+#SBATCH --error=mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.%j.err
 #SBATCH --time=08:00:00
 #SBATCH --partition=mstephens
 #SBATCH --nodes=1
