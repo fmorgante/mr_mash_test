@@ -60,6 +60,7 @@ indepV_B_1causalr: simulate_data_all_genes_prior_gtex_missing_Y_mod.R
   $Ytrain: out$Ytrain
   $Xtest:  out$Xtest
   $Ytest:  out$Ytest
+  $B_true: out$B_true
 
 
 ##Process modules
