@@ -1,5 +1,5 @@
 ---
-title: "Simulations with GTEx genotypes and 1 causal response -- independent replicates and missing values in Y"
+title: "Simulations with GTEx genotypes and effect structure similar to GTEx gene expression -- independent replicates and missing values in Y"
 author: "Fabio Morgante"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
@@ -93,12 +93,12 @@ compute_rrmse <- function(dsc_plot, log10_scale=FALSE){
 colors <- c("cyan", "skyblue", "dodgerblue", "mediumblue", "limegreen", "green", "gold", "orange", "red", "firebrick", "darkmagenta", "mediumpurple")
 ```
 
-# PVE=0.2
+# Different PVE
 
 ```{r load data, warning=FALSE, message=FALSE}
 for(repl in 1:20){
   ###Load the dsc results
-  dsc_out <- dscquery(paste0("output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y/rep", repl), 
+  dsc_out <- dscquery(paste0("output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_missing_Y/rep", repl), 
                       c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w", 
                         "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"), 
                       groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mtlasso, enet",
@@ -132,7 +132,7 @@ rm(dsc_out)
 
 ## Simulation set up
 
-The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with causal variants randomly sampled in the range `r p_causal`, `r r` responses with a per-response proportion of variance explained (PVE) of `r pve`. Causal effects, B, were drawn from MVN(0, Sigma), Sigma is such that it achieves a correlation between responses of `r B_cor[1]`. Response `r r_causal[[1]]` has causal effects while the remaining nine responses do not have any causal effect. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of `r V_cor` and a scale defined by PVE, in the case of cuasal responses. Non causal responses are from N(0, 1).
+The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with causal variants randomly sampled in the range `r p_causal`, `r r` responses with a per-response proportion of variance explained (PVE)=0.2 for the first three responses and PVE=0.05 for the remaining seven responses. Causal effects, B, were drawn from $w_1 MVN(0, Sigma1) + w_2 MVN(0, Sigma2)$, where $w_1$ = `r w[1]` and $w_2$ = `r w[2]` Sigma1 is such that it achieves a correlation between responses of `r B_cor[1]` and a scale of `r B_scale[1]` and Sigma2 is such that it achieves a correlation between responses of `r B_cor[2]` and a scale of `r B_scale[2]`. The first component of the mixture applies to responses `r r_causal[[1]]` while the second component applies to responses `r r_causal[[2]]`. This structure is meant to mirror that of brain tissues and non-brain tissues in GTEx. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of `r V_cor` and a scale defined by PVE, in the case of cuasal responses. Non causal responses are from N(0, 1).
 
 For each replicate:
 
@@ -165,8 +165,8 @@ To obtain 20 truly independent replicates, we repeated 1-7 20 times. The boxplot
 
 Here, we compare *mr.mash* to the [*UTMOST* implementation](https://users.rcc.uchicago.edu/~aksarkar/gtex-pred/lasso.html) by Abhishek, and the response-by-response elastic net. All the methods were using 1 thread.
 
-```{r accuracy vs others, fig.height=12, fig.width=15, message=FALSE}
-###Compute rmse score (relative to mr_mash_can) and add it to the data
+```{r accuracy vs others diff PVE, fig.height=12, fig.width=15, message=FALSE}
+###Compute rmse score (relative to mr_mash_consec_em) and add it to the data
 rrmse_dat <- compute_rrmse(dsc_plots)
 dsc_plots <- rbind(dsc_plots, rrmse_dat)
 
@@ -197,7 +197,7 @@ print(p_rrmse)
 
 Let's now remove outliers from the plots to make things a little clearer.
 
-```{r accuracy no outliers, fig.height=12, fig.width=15, message=FALSE}
+```{r accuracy no outliers diff PVE, fig.height=12, fig.width=15, message=FALSE}
 p_rrmse_noout <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   Ipaper::geom_boxplot2(color = "black",width.errorbar = 0, width = 0.85) +
   scale_fill_manual(values = colors) +
@@ -211,7 +211,7 @@ print(p_rrmse_noout)
 
 Here, we look at the elapsed time ($log_2$ seconds) of each method. Note that the *mr.mash* run time does not include the run time of group-LASSO (but should be considered since we used it to initialize *mr.mash*).
 
-```{r run time, fig.height=12, fig.width=15, message=FALSE}
+```{r run time diff PVE, fig.height=12, fig.width=15, message=FALSE}
 dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="scaled_rrmse"), 
                           -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))]
 
@@ -227,4 +227,3 @@ p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill =
 
 print(p_time)
 ```
-

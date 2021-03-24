@@ -65,10 +65,10 @@ Results for meeting on 01/08/2021. Assessment of prediction accuracy and run tim
 Results for meeting on 03/29/2021. Assessment of prediction accuracy and run time of *mr.mash* with different prior specifications against UTMOST, and univariate Elastic Net in simulations based on GTEx v8 genotypes with truly independent replicates and missing values in Y:
 
 + [One causal response out of ten, independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y.html)
-<!-- + [Three causal responses (with shared effects) out of ten, independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps.html) -->
-<!-- + [Two blocks of responses (shared effects within block), independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_indepReps.html) -->
-<!-- + [Shared effects, independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps.html) -->
-<!-- + [Indpendent effects, independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps.html) -->
++ [Three causal responses (with shared effects) out of ten, independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y.html)
++ [Two blocks of responses (shared effects within block), independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_indepReps.html)
++ [Shared effects, independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps.html)
++ [Indpendent effects, independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps.html)
 
 
 

@@ -1,5 +1,5 @@
 ---
-title: "Simulations with GTEx genotypes and 1 causal response -- independent replicates and missing values in Y"
+title: "Simulations with GTEx genotypes and 3 causal responses with shared effects -- independent replicates and missing values in Y"
 author: "Fabio Morgante"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
@@ -98,7 +98,7 @@ colors <- c("cyan", "skyblue", "dodgerblue", "mediumblue", "limegreen", "green",
 ```{r load data, warning=FALSE, message=FALSE}
 for(repl in 1:20){
   ###Load the dsc results
-  dsc_out <- dscquery(paste0("output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y/rep", repl), 
+  dsc_out <- dscquery(paste0("output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y/rep", repl), 
                       c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w", 
                         "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"), 
                       groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mtlasso, enet",
@@ -132,7 +132,7 @@ rm(dsc_out)
 
 ## Simulation set up
 
-The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with causal variants randomly sampled in the range `r p_causal`, `r r` responses with a per-response proportion of variance explained (PVE) of `r pve`. Causal effects, B, were drawn from MVN(0, Sigma), Sigma is such that it achieves a correlation between responses of `r B_cor[1]`. Response `r r_causal[[1]]` has causal effects while the remaining nine responses do not have any causal effect. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of `r V_cor` and a scale defined by PVE, in the case of cuasal responses. Non causal responses are from N(0, 1).
+The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with causal variants randomly sampled in the range `r p_causal`, `r r` responses with a per-response proportion of variance explained (PVE) of `r pve`. Causal effects, B, were drawn from MVN(0, Sigma), Sigma is such that it achieves a correlation between responses of `r B_cor[1]`. Response `r r_causal[[1]]` have causal effects while the remaining seven responses do not have any causal effect. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of `r V_cor` and a scale defined by PVE, in the case of cuasal responses. Non causal responses are from N(0, 1).
 
 For each replicate:
 
@@ -166,7 +166,7 @@ To obtain 20 truly independent replicates, we repeated 1-7 20 times. The boxplot
 Here, we compare *mr.mash* to the [*UTMOST* implementation](https://users.rcc.uchicago.edu/~aksarkar/gtex-pred/lasso.html) by Abhishek, and the response-by-response elastic net. All the methods were using 1 thread.
 
 ```{r accuracy vs others, fig.height=12, fig.width=15, message=FALSE}
-###Compute rmse score (relative to mr_mash_can) and add it to the data
+###Compute rmse score (relative to mr_mash_consec_em) and add it to the data
 rrmse_dat <- compute_rrmse(dsc_plots)
 dsc_plots <- rbind(dsc_plots, rrmse_dat)
 
@@ -227,4 +227,3 @@ p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill =
 
 print(p_time)
 ```
-

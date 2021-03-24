@@ -1,5 +1,5 @@
 ---
-title: "Simulations with GTEx genotypes and 1 causal response -- independent replicates and missing values in Y"
+title: "Simulations with GTEx genotypes and shared effects -- independent replicates and missing values in Y"
 author: "Fabio Morgante"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
@@ -98,7 +98,7 @@ colors <- c("cyan", "skyblue", "dodgerblue", "mediumblue", "limegreen", "green",
 ```{r load data, warning=FALSE, message=FALSE}
 for(repl in 1:20){
   ###Load the dsc results
-  dsc_out <- dscquery(paste0("output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y/rep", repl), 
+  dsc_out <- dscquery(paste0("output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y/rep", repl), 
                       c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w", 
                         "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"), 
                       groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mtlasso, enet",
@@ -132,7 +132,7 @@ rm(dsc_out)
 
 ## Simulation set up
 
-The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with causal variants randomly sampled in the range `r p_causal`, `r r` responses with a per-response proportion of variance explained (PVE) of `r pve`. Causal effects, B, were drawn from MVN(0, Sigma), Sigma is such that it achieves a correlation between responses of `r B_cor[1]`. Response `r r_causal[[1]]` has causal effects while the remaining nine responses do not have any causal effect. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of `r V_cor` and a scale defined by PVE, in the case of cuasal responses. Non causal responses are from N(0, 1).
+The results below are based on simulations with GTEx v8 cis-genotypes for 838 samples, with causal variants randomly sampled in the range `r p_causal`, `r r` responses with a per-response proportion of variance explained (PVE) of `r pve`. Causal effects, B, were drawn from MVN(0, Sigma), where Sigma is such that it achieves a correlation between responses of `r B_cor` and a scale of `r B_scale`. The responses, Y, were drawn from MN(XB, I, V), where V is such that it achieves a correlation between responses of `r V_cor` and a scale defined py PVE.
 
 For each replicate:
 
@@ -166,7 +166,7 @@ To obtain 20 truly independent replicates, we repeated 1-7 20 times. The boxplot
 Here, we compare *mr.mash* to the [*UTMOST* implementation](https://users.rcc.uchicago.edu/~aksarkar/gtex-pred/lasso.html) by Abhishek, and the response-by-response elastic net. All the methods were using 1 thread.
 
 ```{r accuracy vs others, fig.height=12, fig.width=15, message=FALSE}
-###Compute rmse score (relative to mr_mash_can) and add it to the data
+###Compute rmse score (relative to mr_mash_consec_em) and add it to the data
 rrmse_dat <- compute_rrmse(dsc_plots)
 dsc_plots <- rbind(dsc_plots, rrmse_dat)
 
@@ -180,17 +180,14 @@ dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_em_can", "mr_
                                                 labels=c("mr_mash_can", "mr_mash_data", "mr_mash_both", 
                                                          "mr_mash_both_drop", "mtlasso", "enet"))
 
-###Create factor version of response
-dsc_plots$response_fac <- as.factor(dsc_plots$response)
-
 ###Create plots
-p_rrmse <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
+p_rrmse <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors) +
-  labs(x = "Response", y = "Error", title = "rRMSE", fill="Method") +
+  labs(x = "", y = "Error", title = "rRMSE", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1) +
   theme_cowplot(font_size = 20) +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
 
 print(p_rrmse)
 ```
@@ -198,13 +195,13 @@ print(p_rrmse)
 Let's now remove outliers from the plots to make things a little clearer.
 
 ```{r accuracy no outliers, fig.height=12, fig.width=15, message=FALSE}
-p_rrmse_noout <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
+p_rrmse_noout <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
   Ipaper::geom_boxplot2(color = "black",width.errorbar = 0, width = 0.85) +
   scale_fill_manual(values = colors) +
-  labs(x = "Response", y = "Error", title = "rRMSE", fill="Method") +
+  labs(x = "", y = "Error", title = "rRMSE", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1) +
   theme_cowplot(font_size = 20) +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5), axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
 
 print(p_rrmse_noout)
 ```
@@ -227,4 +224,3 @@ p_time <- ggplot(dsc_plots_time, aes_string(x = "method_fac", y = "time", fill =
 
 print(p_time)
 ```
-
