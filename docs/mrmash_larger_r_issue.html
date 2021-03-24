@@ -9,9 +9,11 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Fabio Morgante" />
 
+<meta name="date" content="2021-03-24" />
 
-<title>Home</title>
+<title>mr.mash issue with larger number of conditions</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +21,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
@@ -279,6 +284,90 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -286,6 +375,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -337,7 +436,9 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">mr.mash issue with larger number of conditions</h1>
+<h4 class="author">Fabio Morgante</h4>
+<h4 class="date">March 24, 2021</h4>
 
 </div>
 
@@ -365,7 +466,7 @@ $(document).ready(function () {
 <strong>Last updated:</strong> 2021-03-24
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>mr_mash_test/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -393,6 +494,66 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200328code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200328)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200328code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200328)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
 <a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreed5846a6402dcab3793dec314cfa17efe0dc148f6targetblankd5846a6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/d5846a6402dcab3793dec314cfa17efe0dc148f6" target="_blank">d5846a6</a> </a>
 </p>
 </div>
@@ -411,7 +572,6 @@ Note that you need to be careful to ensure that all relevant files for the analy
 Ignored files:
     Ignored:    .sos/
     Ignored:    analysis/.sos/
-    Ignored:    analysis/figure/
     Ignored:    code/.sos/
     Ignored:    code/assess_mrmash_speed.2835257.err
     Ignored:    code/assess_mrmash_speed.2835257.out
@@ -2680,7 +2840,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML (<code>docs/index.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/mrmash_larger_r_issue.Rmd</code>) and HTML (<code>docs/mrmash_larger_r_issue.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -2709,7 +2869,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/d5846a6402dcab3793dec314cfa17efe0dc148f6/analysis/index.Rmd" target="_blank">d5846a6</a>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/d5846a6402dcab3793dec314cfa17efe0dc148f6/analysis/mrmash_larger_r_issue.Rmd" target="_blank">d5846a6</a>
 </td>
 <td>
 fmorgante
@@ -2721,1995 +2881,6 @@ fmorgante
 Add investigation on the issue with larger r
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/f339f54e3647409531652686582dd38d9bd3ccfe/docs/index.html" target="_blank">f339f54</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/cbdcee4babe7aee3c787e8391d9f73d8115838b2/analysis/index.Rmd" target="_blank">cbdcee4</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-Link the correct files
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/c1dee226a0700eb823741e7d1b7574341ea43305/docs/index.html" target="_blank">c1dee22</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/8bc09c46089fc9dce88728c4818714f2e8123923/analysis/index.Rmd" target="_blank">8bc09c4</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-Add all scenarios and improve text
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/20165ddac513d5ad6fe285b59b630e773a6b886a/docs/index.html" target="_blank">20165dd</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-03-23
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/d442d10566bcc321c6d1c8979452ee14e5ee2942/docs/index.html" target="_blank">d442d10</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-03-23
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/3ed1a8138a322d769420012dbeb84e631a3a325b/analysis/index.Rmd" target="_blank">3ed1a81</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-03-23
-</td>
-<td>
-Add 1 causal tissue scenario with missing Y
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/880e867251becb722cd4fbf29cff571773fbd085/docs/index.html" target="_blank">880e867</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/d8b892ab8deb17ddd6cbb47c3f54fd1605e2e53f/docs/index.html" target="_blank">d8b892a</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/9b465e3c2a2ff78f98c89b60ce8815196d6f2465/analysis/index.Rmd" target="_blank">9b465e3</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-07
-</td>
-<td>
-Add shared effects scenario
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/2879e7ab475932781df52345fb5ef0af6e3dacbc/docs/index.html" target="_blank">2879e7a</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/16c27414205c4752f2c381c498d226016492f488/analysis/index.Rmd" target="_blank">16c2741</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-07
-</td>
-<td>
-Add 2 blocks scenario
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/c73972e79a619f039fff9cfa6c33250b9b535c4f/docs/index.html" target="_blank">c73972e</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/c2f783ef7a5bb22edb57762de9010b2dc074ecc0/docs/index.html" target="_blank">c2f783e</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/e80c8c71cf583647a3188019278e1856f5d83dde/analysis/index.Rmd" target="_blank">e80c8c7</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-07
-</td>
-<td>
-Add independent effects scenario
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/17d148ddcdb404fbb95703e7de0b7656a147a4ea/docs/index.html" target="_blank">17d148d</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-06
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/3d7ccdf3b09a7f861c5160bd361f35eac993c0ae/analysis/index.Rmd" target="_blank">3d7ccdf</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-06
-</td>
-<td>
-Add 3 causal responses scenario
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/34010a9b0a4c4c1ffd14b4c2b0eee7c4a45c9c34/docs/index.html" target="_blank">34010a9</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-06
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/ada87f474f84963461ac7d302778f0be9203f377/docs/index.html" target="_blank">ada87f4</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-06
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/11ab38f9095b2c383e415eb313c71653a4ee2570/docs/index.html" target="_blank">11ab38f</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-06
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/cf00de2e5fd9911d44f6a83ad61cf2070cad12b4/docs/index.html" target="_blank">cf00de2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-06
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/ad676cc486d3a6f88556e2ad66e808884560086c/docs/index.html" target="_blank">ad676cc</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-06
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/d8e690d851f0589365ee62e6cd65271bae7f61fa/analysis/index.Rmd" target="_blank">d8e690d</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2021-01-06
-</td>
-<td>
-Add singleton scenario with independent replicates
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/3ac4d6526ddcb4a6c3f33b66a9ebfb1cd2c1dca5/docs/index.html" target="_blank">3ac4d65</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-23
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/becde5fbc7e62c05fc5fa3057f3f63f6965657c7/analysis/index.Rmd" target="_blank">becde5f</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-23
-</td>
-<td>
-Add new scenarios
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/9d79f36090ceddbf335b380899bf8020c4c6242e/docs/index.html" target="_blank">9d79f36</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/8882669cb8ee4cc27f5881a27e984c97faaebca9/analysis/index.Rmd" target="_blank">8882669</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Update index
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/65d78b27a790e128e58fb8cc24fd8b5d11fc19cd/docs/index.html" target="_blank">65d78b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/ea2f1f3a1027ea483d8d950e9ee2f433f7619897/analysis/index.Rmd" target="_blank">ea2f1f3</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Add new scenario
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/aa1982bfdff7dfb710ce031724310e898d5b5c3a/docs/index.html" target="_blank">aa1982b</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/b1d88f3ad459c4f72e36bd9a76f97997da01c32a/docs/index.html" target="_blank">b1d88f3</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/fd9907017e1a5764dff2dad4f1cfcb2235b7e586/docs/index.html" target="_blank">fd99070</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/1f6cf753d37948dd72a53ffebff2b879423cbdad/docs/index.html" target="_blank">1f6cf75</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/9fe619a57826ad8c415923fff66eb026f750b426/analysis/index.Rmd" target="_blank">9fe619a</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-10-22
-</td>
-<td>
-Add new results
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/df6c62c1704f509af2b4473614d03a4e41d29d6a/docs/index.html" target="_blank">df6c62c</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-09-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/f55e634e5d736cff111786562bce1bfad035f57b/docs/index.html" target="_blank">f55e634</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-09-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/f7971515817db6d6048409dbc590355f53ebb839/docs/index.html" target="_blank">f797151</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-09-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/a34b4868039e1f27a687833b8f2740a2fb745dcc/docs/index.html" target="_blank">a34b486</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-09-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/7a34e296a21c99410c5afaaf9c328ae621425fb4/docs/index.html" target="_blank">7a34e29</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-09-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/0cfeb33c07ebf8305ef2a9789909903401339550/docs/index.html" target="_blank">0cfeb33</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-09-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/98989fe28ddf6815852c685545d786f3e691a5de/docs/index.html" target="_blank">98989fe</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-09-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/d3995e40050a836320a32f18be6431f642049082/docs/index.html" target="_blank">d3995e4</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-09-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/a91280e4bfab33231e678ca7e8a553da828aec0c/docs/index.html" target="_blank">a91280e</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-09-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/ec37fdebdc7a8fcc5c6faeff172283aaed40eef0/docs/index.html" target="_blank">ec37fde</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-09-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/d6974b311ecdc29b284be91bc815204e0466d4d6/analysis/index.Rmd" target="_blank">d6974b3</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-09-28
-</td>
-<td>
-Add 3/10 causal responses results
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/2f036f9c0717acdc64662c48a68d83f26d76b208/docs/index.html" target="_blank">2f036f9</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-09-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/e2b7e5db63aab90ae3cc652cd24ccd1bc39cceb1/docs/index.html" target="_blank">e2b7e5d</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-09-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/63758cee0c8ccf9b60fce61d3244860354cee203/analysis/index.Rmd" target="_blank">63758ce</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-09-26
-</td>
-<td>
-Add results with effects from mixture
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/1acdd6499c5e79a2b11b6a26ef13ff6e3fe7facf/analysis/index.Rmd" target="_blank">1acdd64</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-09-25
-</td>
-<td>
-Add first batch of new results
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/e59305af78023200306632403e0ae1213cf3565c/docs/index.html" target="_blank">e59305a</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-07-02
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/c16a04362f5f1c696a766997273ff4a86c822c5b/docs/index.html" target="_blank">c16a043</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-07-02
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/fb4c6600b9e827b5f18757e52145e525b5c59c29/analysis/index.Rmd" target="_blank">fb4c660</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-07-02
-</td>
-<td>
-Add two_active_responses_issue_continued results
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/233be5cfdde57215ec7d87ea320b3eafc306a8c6/docs/index.html" target="_blank">233be5c</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-07-01
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/6cec9b6b1b8b529d8eec65ddb5138bee7c9207eb/analysis/index.Rmd" target="_blank">6cec9b6</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-07-01
-</td>
-<td>
-Fix formatting
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/701955c71039217f5f1e6123cd7569fb3947d992/docs/index.html" target="_blank">701955c</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-07-01
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/29d5be51934b08cdd45e2af73cb07603a868e2eb/analysis/index.Rmd" target="_blank">29d5be5</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-07-01
-</td>
-<td>
-Add mash vs mr.mash comparison
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/fb32d537120cc1e5732397175910192e456a5e63/docs/index.html" target="_blank">fb32d53</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-06-05
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/b3c50728d8b623e4b2413c6dea6d8a4191c97f1f/analysis/index.Rmd" target="_blank">b3c5072</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-06-05
-</td>
-<td>
-Add univariate results
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/01e3909675b70244bca8a6071a17ff6ae89d5812/docs/index.html" target="_blank">01e3909</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-06-03
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/33806cd40f09a60f031024b6bff93d7e547a66cf/analysis/index.Rmd" target="_blank">33806cd</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-06-03
-</td>
-<td>
-Add dense scenario with larger sample size
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/42ec51cccb6bdad3adfe121582e30dcf3a409008/docs/index.html" target="_blank">42ec51c</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-06-01
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/ceda27823b4d8ad4eb93fce2d909fe16c942d909/analysis/index.Rmd" target="_blank">ceda278</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-06-01
-</td>
-<td>
-Add case study with dense scenario
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/e5a7adc39bd0c35089a9cd6fb1efd4b1f2ec6a7d/docs/index.html" target="_blank">e5a7adc</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-27
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/6ccc7e2b6ddee1c2e98d1299d58d835b0c8fdd0b/analysis/index.Rmd" target="_blank">6ccc7e2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-27
-</td>
-<td>
-Fix typo
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/7dad46c90c5d4cd0cfb96fffe5058bb725c006f8/docs/index.html" target="_blank">7dad46c</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-27
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/465b10d8420fbe86031871bab5594631f3a246a4/analysis/index.Rmd" target="_blank">465b10d</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-27
-</td>
-<td>
-Add case study with only two causal tissues out of five
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/3f8349c355d684c63eae80dcc15bdbeae0bb001d/docs/index.html" target="_blank">3f8349c</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-25
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/9f85985e3af677465673ff2902d3f27020d25fa3/docs/index.html" target="_blank">9f85985</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-25
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/3002ada2c81359946171ac8548f5c9c93d5eb0ce/analysis/index.Rmd" target="_blank">3002ada</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-25
-</td>
-<td>
-Test glmnet comparison
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/24941d4b7ec5ebc3ad0d8eecbcbdf1c4ec82ffde/docs/index.html" target="_blank">24941d4</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/d423390569a3ef320046e61f489ad6f6e18c6236/analysis/index.Rmd" target="_blank">d423390</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-<td>
-Update index
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/841c8bf6a2a6ebe380b68d795d4ff206a6b55c82/docs/index.html" target="_blank">841c8bf</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/4263395553cfa9bc55ce3bda982dbcdf726b3f6a/docs/index.html" target="_blank">4263395</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/72c302a7331531632de0f72ee48e92a8525bce52/docs/index.html" target="_blank">72c302a</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/a54eba521d59cfdb654a8f45cef563b2f5d68b83/docs/index.html" target="_blank">a54eba5</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/8f33ab9b158fc4bc608944c45ebe6278dc780f6e/analysis/index.Rmd" target="_blank">8f33ab9</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-05-20
-</td>
-<td>
-Test new set of results
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/ef2ad76398e315eda83bd8fb90b96c0f30236e8c/docs/index.html" target="_blank">ef2ad76</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/9bdcd0205f9c62a7cb0a5f8386110d78ae064cd7/analysis/index.Rmd" target="_blank">9bdcd02</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-28
-</td>
-<td>
-Add highcorrX results
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/187bb2d3b01458969dec3a2dffb01368704b6075/analysis/index.Rmd" target="_blank">187bb2d</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-28
-</td>
-<td>
-Add highcorrX results
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/3d611827aa3afc267e193bfc19462cf1b2c32a9f/docs/index.html" target="_blank">3d61182</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/8ed3a7fccd4fc50f1c414708e2d150650ad275a5/docs/index.html" target="_blank">8ed3a7f</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/f2fa981076d47fb953d8ebb646db03b7bb5787df/docs/index.html" target="_blank">f2fa981</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/51cea81ba44b5faa2773245bd3cb3ec4e3534453/analysis/index.Rmd" target="_blank">51cea81</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-28
-</td>
-<td>
-Add newest results
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/e2c955012d581f53c8458f56ecd4537fe2dbee73/docs/index.html" target="_blank">e2c9550</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-16
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/2e37a1de68a7a26be769943fe4a87b093e7de7b5/analysis/index.Rmd" target="_blank">2e37a1d</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-16
-</td>
-<td>
-Add more results
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/161eea7fe812624d5a0d8de6cc07e8990222260b/docs/index.html" target="_blank">161eea7</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-16
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/dd40784d2ae214d373dec82194a7424f2e66c4b5/docs/index.html" target="_blank">dd40784</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-16
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/8f4456e501a4a2fc84ce79a22b019057373d7816/docs/index.html" target="_blank">8f4456e</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-16
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/f6f65c4002c019f7d899a4d79d28e91fff5847c2/analysis/index.Rmd" target="_blank">f6f65c4</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-16
-</td>
-<td>
-Fix index
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/422658efc6eb387028332a0bf0303947ad7aa593/docs/index.html" target="_blank">422658e</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-16
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/29dba0f25e4284b1c4f6faaba90d88fd53ab909b/analysis/index.Rmd" target="_blank">29dba0f</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-04-16
-</td>
-<td>
-Add indepX_lowcorrV_sharedB results
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/04f54858d49b2ad4dc58e7300b351fee1228d0c0/docs/index.html" target="_blank">04f5485</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/cc50c050968184c6639265b9e83881269fcfdd52/docs/index.html" target="_blank">cc50c05</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/378e278f9255c3a16056f8043e6241a435d26d54/docs/index.html" target="_blank">378e278</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/40cd0cf16dfe34ca00b5c9823c4015283c4aa557/docs/index.html" target="_blank">40cd0cf</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/b48d34d7880c26cda58f4afac0bb15422018c5f8/docs/index.html" target="_blank">b48d34d</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/7a2afe79917b474da63f04e00a46acf328372814/docs/index.html" target="_blank">7a2afe7</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/f7e2f68440b973890fa423712c66f77c41e0a09f/docs/index.html" target="_blank">f7e2f68</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/4f5c29188cc0e30ca968f949eb01f9e78a6b15c1/docs/index.html" target="_blank">4f5c291</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/8621d7dc49ed8b8187aeef7f7d366bf24bab6375/docs/index.html" target="_blank">8621d7d</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/d5773c96871d2f0faa40949fc3ed30f54dbf4a5f/docs/index.html" target="_blank">d5773c9</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/07a9b4d762fa5cc18135a39ac8a397d4fb85159b/docs/index.html" target="_blank">07a9b4d</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/f2c716ec77d2cfc136340bcb970ae161f557d6fd/docs/index.html" target="_blank">f2c716e</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/8e7a5b590b82ddbdc6268671174d26b15383c447/docs/index.html" target="_blank">8e7a5b5</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/4e9aad676c09457e52ca1c3f4eab794e38d9ec68/docs/index.html" target="_blank">4e9aad6</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/7911e818d17ae40c26440ff7820818799e60d6e1/docs/index.html" target="_blank">7911e81</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/e1707b25542c6074aa77585aadb5f27f29481c78/docs/index.html" target="_blank">e1707b2</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/f2451afab90d33836be3a7cbeb4062e6ec0f96df/docs/index.html" target="_blank">f2451af</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/2fe7214cc664463fa2e2c35fa3f0fb06c8d02701/docs/index.html" target="_blank">2fe7214</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/d43e6a6e6cc5515d7efcd263d801018873a5b6af/analysis/index.Rmd" target="_blank">d43e6a6</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-29
-</td>
-<td>
-Set current date automatically
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/dbf0d8e83f085b6c3689f1c4ff6fbf9198d390ba/docs/index.html" target="_blank">dbf0d8e</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/c71dfffafb5e290bed9c85c7dd720f343f86cba1/docs/index.html" target="_blank">c71dfff</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/796c93eeceabff6da7c0ec752a0e523e96bd4c7c/docs/index.html" target="_blank">796c93e</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/ed9843ab015f95b8b9182ac377c7980b4cee9b34/analysis/index.Rmd" target="_blank">ed9843a</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-29
-</td>
-<td>
-Add additional pages
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/b186ce3425de9dec706d11235f793d78c43f1e3f/docs/index.html" target="_blank">b186ce3</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/3b4bbc8366ed07bbabe241b6eb3f765bc1a665e0/analysis/index.Rmd" target="_blank">3b4bbc8</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-29
-</td>
-<td>
-Update Rmd files
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/2c2c4318e6a165b2c656fc58279230aef9fa664a/analysis/index.Rmd" target="_blank">2c2c431</a>
-</td>
-<td>
-fmorgante
-</td>
-<td>
-2020-03-28
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -4717,76 +2888,388 @@ Start workflowr project.
 </div>
 </div>
 </div>
-<p>This website includes analyses to assess the performance of <em>mr.mash</em>.</p>
-<p>Results for meeting on 03/30/2020.</p>
-<ul>
-<li><a href="results_accuracy.html">Assessment of prediction accuracy.</a></li>
-<li><a href="results_convergence.html">Assessment of convergence.</a></li>
-</ul>
-<p>Results for meeting on 04/16/2020. Assessment of prediction accuracy and run time of <em>mr.mash</em> with different options in the following simulation scenarios:</p>
-<ul>
-<li><a href="results_indepX_lowcorrV_sharedB_OLD.html">Independent predictors, shared effects, lowly correlated residuals.</a></li>
-<li><a href="results_indepX_lowcorrV_indepB_OLD.html">Independent predictors, independent effects, lowly correlated residuals.</a></li>
-<li><a href="results_corrX_lowcorrV_sharedB_OLD.html">Correlated predictors, shared effects, lowly correlated residuals.</a></li>
-<li><a href="results_corrX_lowcorrV_indepB_OLD.html">Correlated predictors, independent effects, lowly correlated residuals.</a></li>
-</ul>
-<p>Results for meeting on 04/30/2020. Assessment of prediction accuracy and run time of <em>mr.mash</em> with different options in the following simulation scenarios:</p>
-<ul>
-<li><a href="results_indepX_lowcorrV_sharedB.html">Independent predictors, shared effects, lowly correlated residuals.</a></li>
-<li><a href="results_indepX_lowcorrV_indepB.html">Independent predictors, independent effects, lowly correlated residuals.</a></li>
-<li><a href="results_corrX_lowcorrV_sharedB.html">Correlated predictors, shared effects, lowly correlated residuals.</a></li>
-<li><a href="results_corrX_lowcorrV_indepB.html">Correlated predictors, independent effects, lowly correlated residuals.</a></li>
-<li><a href="results_highcorrX_lowcorrV_sharedB.html">Highly correlated predictors, shared effects, lowly correlated residuals.</a></li>
-<li><a href="results_highcorrX_lowcorrV_indepB.html">Highly correlated predictors, independent effects, lowly correlated residuals.</a></li>
-</ul>
-<p>Results for meeting on 05/27/2020. Assessment of prediction accuracy and run time of <em>mr.mash</em> with different options against the multivariate versions of LASSO, Elastic Net, and Ridge regression in the following simulation scenarios:</p>
-<ul>
-<li><a href="results_indepX_lowcorrV_sharedB_05_18_20.html">Independent predictors, shared effects, lowly correlated residuals.</a></li>
-<li><a href="results_indepX_lowcorrV_indepB_05_18_20.html">Independent predictors, independent effects, lowly correlated residuals.</a></li>
-<li><a href="results_corrX_lowcorrV_sharedB_05_18_20.html">Correlated predictors, shared effects, lowly correlated residuals.</a></li>
-<li><a href="results_corrX_lowcorrV_indepB_05_18_20.html">Correlated predictors, independent effects, lowly correlated residuals.</a></li>
-<li><a href="results_highcorrX_lowcorrV_sharedB_05_18_20.html">Highly correlated predictors, shared effects, lowly correlated residuals.</a></li>
-<li><a href="results_highcorrX_lowcorrV_indepB_05_18_20.html">Highly correlated predictors, independent effects, lowly correlated residuals.</a></li>
-<li><a href="two_active_responses_issue.html">Case study with only two causal responses out of five total.</a></li>
-</ul>
-<p>Results for meeting on 09/29/2020. Assessment of prediction accuracy and run time of <em>mr.mash</em> with different prior specifications against the multivariate versions of LASSO, Elastic Net, and Ridge regression in GTEx-like scenarios:</p>
-<ul>
-<li><a href="results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_2blocksr10.html">Three scenarios for predictors correlation, two blocks of responses (shared effects within block), independent residuals.</a></li>
-<li><a href="results_mvreg_all_genes_prior_allscenariosX_indepV_sharedB_3causalrespr10.html">Independent predictors, three causal responses (shared effects) out of ten, independent residuals.</a></li>
-</ul>
-<p>Results for meeting on 10/23/2020. Assessment of prediction accuracy and run time of <em>mr.mash</em> with different prior specifications against the multivariate version of LASSO, UTMOST, and univariate Elastic Net in simulations based on GTEx v8 genotypes:</p>
-<ul>
-<li><a href="results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.html">One causal response out of ten, independent residuals.</a></li>
-<li><a href="results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.html">Three causal responses (with shared effects) out of ten, independent residuals.</a></li>
-<li><a href="results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.html">Two blocks of responses (shared effects within block), independent residuals.</a></li>
-<li><a href="results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10.html">Shared effects, independent residuals.</a></li>
-<li><a href="results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10.html">Indpendent effects, independent residuals.</a></li>
-</ul>
-<p>Results for meeting on 01/08/2021. Assessment of prediction accuracy and run time of <em>mr.mash</em> with different prior specifications against the multivariate version of LASSO, UTMOST, and univariate Elastic Net in simulations based on GTEx v8 genotypes with truly independent replicates:</p>
-<ul>
-<li><a href="results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps.html">One causal response out of ten, independent residuals.</a></li>
-<li><a href="results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps.html">Three causal responses (with shared effects) out of ten, independent residuals.</a></li>
-<li><a href="results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_indepReps.html">Two blocks of responses (shared effects within block), independent residuals.</a></li>
-<li><a href="results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps.html">Shared effects, independent residuals.</a></li>
-<li><a href="results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps.html">Indpendent effects, independent residuals.</a></li>
-</ul>
-<p>Results for meeting on 03/29/2021. Assessment of prediction accuracy and run time of <em>mr.mash</em> with different prior specifications against UTMOST, and univariate Elastic Net in simulations based on GTEx v8 genotypes with truly independent replicates and missing values in Y:</p>
-<ul>
-<li><a href="results_mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y.html">One causal response out of ten, independent residuals.</a></li>
-<li><a href="results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y.html">Three causal responses (with shared effects) out of ten, independent residuals.</a></li>
-<li><a href="results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_indepReps_missing_Y.html">Two blocks of responses (shared effects within block), independent residuals.</a></li>
-<li><a href="results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y.html">Shared effects, independent residuals.</a></li>
-<li><a href="results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y.html">Indpendent effects, independent residuals.</a></li>
-</ul>
-<p>Other investigations:</p>
-<ul>
-<li><a href="dense_scenario_issue.html">Case study with dense scenarios.</a></li>
-<li><a href="dense_scenario_issue_larger_sample.html">Case study with dense scenarios and larger sample size.</a></li>
-<li><a href="dense_scenario_issue_univariate.html">Case study with dense scenarios and univariate analysis.</a></li>
-<li><a href="mash_vs_mrmash.html"><em>mash</em> vs <em>mr.mash</em>.</a></li>
-<li><a href="two_active_responses_issue_continued.html">Case study with only two causal responses out of six total.</a></li>
-<li><a href="mrmash_larger_r_issue.html">Case study with larger number of conditions.</a></li>
-</ul>
+<pre class="r"><code>library(mr.mash.alpha)
+library(glmnet)
+
+options(stringsAsFactors = FALSE)
+
+###Functions to compute g-lasso coefficients
+compute_coefficients_glasso &lt;- function(X, Y, standardize, nthreads, version=c(&quot;Rcpp&quot;, &quot;R&quot;)){
+  
+  version &lt;- match.arg(version)
+  
+  n &lt;- nrow(X)
+  p &lt;- ncol(X)
+  r &lt;- ncol(Y)
+  Y_has_missing &lt;- any(is.na(Y))
+  
+  if(Y_has_missing){
+    ###Extract per-individual Y missingness patterns
+    Y_miss_patterns &lt;- mr.mash.alpha:::extract_missing_Y_pattern(Y)
+    
+    ###Initialize missing Ys
+    muy &lt;- colMeans(Y, na.rm=TRUE)
+    for(l in 1:r){
+      Y[is.na(Y[, l]), l] &lt;- muy[l]
+    }
+    
+    ###Compute V and its inverse
+    V &lt;- mr.mash.alpha:::compute_V_init(X, Y, matrix(0, p, r), method=&quot;flash&quot;)
+    Vinv &lt;- chol2inv(chol(V))
+    
+    ###Compute expected Y (assuming B=0)
+    mu &lt;- matrix(rep(muy, each=n), n, r)
+    
+    ###Impute missing Ys 
+    Y &lt;- mr.mash.alpha:::impute_missing_Y(Y=Y, mu=mu, Vinv=Vinv, miss=Y_miss_patterns$miss, non_miss=Y_miss_patterns$non_miss, 
+                                          version=version)$Y
+  }
+  
+  ##Fit group-lasso
+  if(nthreads&gt;1){
+    doMC::registerDoMC(nthreads)
+    paral &lt;- TRUE
+  } else {
+    paral &lt;- FALSE
+  }
+  
+  cvfit_glmnet &lt;- glmnet::cv.glmnet(x=X, y=Y, family=&quot;mgaussian&quot;, alpha=1, standardize=standardize, parallel=paral)
+  coeff_glmnet &lt;- coef(cvfit_glmnet, s=&quot;lambda.min&quot;)
+  
+  ##Build matrix of initial estimates for mr.mash
+  B &lt;- matrix(as.numeric(NA), nrow=p, ncol=r)
+  
+  for(i in 1:length(coeff_glmnet)){
+    B[, i] &lt;- as.vector(coeff_glmnet[[i]])[-1]
+  }
+  
+  return(list(B=B, Y=Y))
+}</code></pre>
+<p>In this website, we want to investigate an issue that happens with larger number of conditions than the 10 conditions we have used in the other investigations. The issue is that <em>mr.mash</em> fails to shrink to 0 coefficients that are actually 0. As we will see, some of them are pretty badly misestimated.</p>
+<p>Let’s look at an example with n=150, p=400, r=25, PVE=0.2, p_causal=5, independent residuals, independent predictors, and equal effects across conditions from a single multivariate normal with variance 1.</p>
+<pre class="r"><code>set.seed(12)
+
+n &lt;- 200
+ntest &lt;- 50
+p &lt;- 400
+p_causal &lt;- 5
+r &lt;- 25
+X_cor &lt;- 0
+pve &lt;- 0.2
+r_causal &lt;- list(1:r)
+B_cor &lt;- 1
+B_scale &lt;- 1
+w &lt;- 1
+
+###Simulate V, B, X and Y
+out &lt;- simulate_mr_mash_data(n, p, p_causal, r, r_causal, intercepts = rep(1, r),
+                             pve=pve, B_cor=B_cor, B_scale=B_scale, w=w,
+                             X_cor=X_cor, X_scale=1, V_cor=0)
+colnames(out$Y) &lt;- paste0(&quot;Y&quot;, seq(1, r))
+rownames(out$Y) &lt;- paste0(&quot;N&quot;, seq(1, n))
+colnames(out$X) &lt;- paste0(&quot;X&quot;, seq(1, p))
+rownames(out$X) &lt;- paste0(&quot;N&quot;, seq(1, n))
+
+###Split the data in training and test sets
+test_set &lt;- sort(sample(x=c(1:n), size=ntest, replace=FALSE))
+Ytrain &lt;- out$Y[-test_set, ]
+Xtrain &lt;- out$X[-test_set, ]
+Ytest &lt;- out$Y[test_set, ]
+Xtest &lt;- out$X[test_set, ]</code></pre>
+<p><em>mr.mash</em> is run standardizing X and dropping mixture components with weight less than <span class="math">\(1e-8\)</span>. However, the results look the same without dropping any component. The mixture prior consists only of canonical matrices, scaled by a grid computed as in the <em>mash</em> paper. group-LASSO is used to initialize <em>mr.mash</em> and as a comparison.</p>
+<pre class="r"><code>standardize &lt;- TRUE
+nthreads &lt;- 4
+w0_threshold &lt;- 1e-8
+
+S0_can &lt;- compute_canonical_covs(ncol(Ytrain), singletons=TRUE, hetgrid=c(0, 0.25, 0.5, 0.75, 1))
+
+####Complete data####
+###Compute grid of variances
+univ_sumstats &lt;- compute_univariate_sumstats(Xtrain, Ytrain, standardize=standardize, 
+                                             standardize.response=FALSE, mc.cores=nthreads)
+grid &lt;- autoselect.mixsd(univ_sumstats, mult=sqrt(2))^2
+
+###Compute prior with only canonical matrices
+S0 &lt;- expand_covs(S0_can, grid, zeromat=TRUE)
+
+###Fit mr.mash
+out_coeff &lt;- compute_coefficients_glasso(Xtrain, Ytrain, standardize=standardize, nthreads=nthreads, version=&quot;Rcpp&quot;)
+prop_nonzero_glmnet &lt;- sum(out_coeff$B[, 1]!=0)/p
+w0 &lt;- c((1-prop_nonzero_glmnet), rep(prop_nonzero_glmnet/(length(S0)-1), (length(S0)-1)))
+
+fit_mrmash &lt;- mr.mash(Xtrain, Ytrain, S0, w0=w0, update_w0=TRUE, update_w0_method=&quot;EM&quot;, tol=1e-2,
+                      convergence_criterion=&quot;ELBO&quot;, compute_ELBO=TRUE, standardize=standardize, 
+                      verbose=FALSE, update_V=TRUE, update_V_method=&quot;diagonal&quot;, e=1e-8,
+                      w0_threshold=w0_threshold, nthreads=nthreads, mu1_init=out_coeff$B)
+
+#####Coefficients plots######
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                0, 3, 3, 0,
+                0, 3, 3, 0), 4, 4, byrow = TRUE))
+
+###Plot estimated vs true coeffcients
+##mr.mash
+plot(out$B, fit_mrmash$mu1, main=&quot;mr.mash&quot;, xlab=&quot;True coefficients&quot;, ylab=&quot;Estimated coefficients&quot;,
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)
+##g-lasso
+plot(out$B, out_coeff$B, main=&quot;g-lasso&quot;, xlab=&quot;True coefficients&quot;, ylab=&quot;Estimated coefficients&quot;,
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)
+
+###Plot mr.mash vs g-lasso estimated coeffcients
+colorz &lt;- matrix(&quot;black&quot;, nrow=p, ncol=r)
+zeros &lt;- apply(out$B, 2, function(x) x==0)
+for(i in 1:ncol(colorz)){
+  colorz[zeros[, i], i] &lt;- &quot;red&quot;
+}
+
+plot(fit_mrmash$mu1, out_coeff$B, main=&quot;mr.mash vs g-lasso&quot;, 
+     xlab=&quot;mr.mash coefficients&quot;, ylab=&quot;g-lasso coefficients&quot;,
+     col=colorz, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)
+legend(&quot;topleft&quot;, 
+       legend = c(&quot;Non-zero&quot;, &quot;Zero&quot;), 
+       col = c(&quot;black&quot;, &quot;red&quot;), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=2) </code></pre>
+<p><img src="figure/mrmash_larger_r_issue.Rmd/shared%20effects%20fit-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>###Identify badly estimated variables
+bad_est_1 &lt;- which(out$B==0 &amp; fit_mrmash$mu1 &lt; -0.5, arr.ind = TRUE)
+bad_est_2 &lt;- which(out$B==0 &amp; fit_mrmash$mu1 &gt; 0.5, arr.ind = TRUE)
+bad_est &lt;- rbind(bad_est_1, bad_est_2)
+cat(&quot;Bad variables:\n&quot;)</code></pre>
+<pre><code>Bad variables:</code></pre>
+<pre class="r"><code>bad_est</code></pre>
+<pre><code>     row col
+X274 274  10
+X347 347  15
+X183 183  10
+X72   72  13</code></pre>
+<p><em>mr.mash</em> is much better than group-LASSO at correctly estimating the non-zero coefficients. However, it does much worse at shrinking the true null coefficients to 0. In particular, there are a few coeffcients that are pretty badly misestimated. We are going to look at those cases more closely.</p>
+<pre class="r"><code>###Estimated coefficients by mr.mash for the bad variables
+cat(&quot;mr.mash estimated coefficients:\n&quot;)</code></pre>
+<pre><code>mr.mash estimated coefficients:</code></pre>
+<pre class="r"><code>fit_mrmash$mu1[bad_est[, 1], ]</code></pre>
+<pre><code>                Y1            Y2            Y3            Y4            Y5
+X274 -2.642841e-05 -2.663867e-05 -2.335354e-05 -2.653733e-05 -2.613332e-05
+X347  6.491175e-07  2.916934e-06  1.739985e-06  2.150244e-06  2.321851e-06
+X183  1.133417e-04  1.284499e-04  1.203046e-04  1.115160e-04  1.203380e-04
+X72   9.529781e-06 -4.624202e-06  1.235475e-06  1.068643e-06  2.780234e-06
+                Y6            Y7            Y8            Y9           Y10
+X274 -2.233829e-05 -2.511605e-05 -2.896884e-05 -2.870533e-05 -9.092047e-01
+X347  1.451095e-06  6.299573e-06  3.501019e-06  6.391154e-07  6.646096e-05
+X183  1.200349e-04  1.184511e-04  1.168999e-04  9.990242e-05  5.354676e-01
+X72   1.060682e-05  1.326606e-05  7.372047e-06 -2.390740e-06 -6.613187e-04
+               Y11           Y12           Y13           Y14           Y15
+X274 -2.773517e-05 -2.442013e-05  8.829146e-05 -3.148464e-05  6.064451e-05
+X347  5.231139e-06 -3.038223e-05 -2.331779e-04  1.595482e-06 -1.003837e+00
+X183  1.290409e-04  1.330501e-04  3.121302e-04  1.422738e-04  3.496837e-04
+X72   9.218040e-06 -3.617465e-05  6.008830e-01 -6.688684e-06  1.265758e-03
+               Y16           Y17           Y18           Y19           Y20
+X274 -2.554938e-05 -2.579409e-05 -2.871577e-05 -2.471882e-05 -2.455460e-05
+X347  4.505555e-06  2.149654e-06  1.773809e-06  2.081464e-06 -8.069752e-08
+X183  1.223263e-04  1.269347e-04  1.225920e-04  1.272094e-04  1.296489e-04
+X72   5.131390e-06  3.996038e-06  2.568455e-06  4.814783e-06  9.623803e-06
+               Y21           Y22           Y23           Y24           Y25
+X274 -2.592537e-05  4.360263e-04 -2.732129e-05 -1.867228e-05 -2.871367e-05
+X347  9.000980e-06 -9.735566e-07  2.812928e-06  3.894336e-06  8.448670e-07
+X183  1.170115e-04 -1.310602e-04  1.225248e-04  1.238062e-04  9.362710e-05
+X72  -1.681922e-05  3.996730e-04  4.902352e-06  9.337151e-06  1.645090e-05</code></pre>
+<p>We can see that the estimated coefficients for each one of those variables look like a singleton structure, where there is an effect in one condition and nowhere else. When we look at the prior weights at convergence, we can see that those singleton matrices get relatively large weight (see below).</p>
+<pre class="r"><code>###Estimated prior weights by mr.mash for the bad variables
+cat(&quot;mr.mash estimated prior weights:\n&quot;)</code></pre>
+<pre><code>mr.mash estimated prior weights:</code></pre>
+<pre class="r"><code>head(sort(fit_mrmash$w0, decreasing=TRUE), 20)</code></pre>
+<pre><code>              null     shared1_grid11 singleton13_grid10 
+      0.9346759513       0.0086745867       0.0069429060 
+singleton10_grid10 singleton22_grid10 singleton10_grid11 
+      0.0065330516       0.0052718769       0.0051348432 
+singleton15_grid11 singleton15_grid10     shared1_grid10 
+      0.0049436750       0.0047741792       0.0034326125 
+ singleton22_grid9  singleton13_grid9 singleton13_grid11 
+      0.0030192287       0.0018686026       0.0014915698 
+ singleton15_grid9  singleton10_grid9  singleton22_grid8 
+      0.0004987422       0.0004802332       0.0003878599 
+ singleton13_grid8  singleton12_grid8  singleton24_grid8 
+      0.0003738464       0.0002453590       0.0001796324 
+ singleton12_grid7 singleton22_grid11 
+      0.0001623117       0.0001445351 </code></pre>
+<p>To see why that is happening, the next step will be to look at the data. While the best thing to do would be to look at the summary statistics from a simple multivariate regression with the same residual covariance matrix as in <em>mr.mash</em>, we are going to look at the univariate summary statistics that are readily available.</p>
+<pre class="r"><code>###Estimated coefficients and Z-scores by univariate regression for the bad variables
+rownames(univ_sumstats$Bhat) &lt;- colnames(out$X)
+colnames(univ_sumstats$Bhat) &lt;- colnames(out$Y)
+cat(&quot;SLR estimated coefficients:\n&quot;)</code></pre>
+<pre><code>SLR estimated coefficients:</code></pre>
+<pre class="r"><code>univ_sumstats$Bhat[bad_est[, 1], ]</code></pre>
+<pre><code>             Y1          Y2          Y3         Y4         Y5         Y6
+X274 -0.1325482 -0.09893288  0.61508065 -0.1165136 -0.1069066 0.35151305
+X347 -0.2427989  0.28123165  0.06309551  0.1649556  0.3030400 0.02980773
+X183 -0.2428503  0.49439918  0.20907556 -0.2292677  0.2192696 0.17487806
+X72   0.3468332 -0.38077183 -0.36862902 -0.2403712 -0.2716020 0.18512322
+            Y7           Y8          Y9        Y10        Y11        Y12
+X274 0.1024990 -0.454970612 -0.25909065 -1.0881426 -0.2781424  0.0916439
+X347 0.4888237  0.446450157 -0.08708036  0.2033015  0.6209967 -0.5022021
+X183 0.1270435  0.003659657 -0.29134310  1.1836731  0.5654748  0.3028926
+X72  0.2467956  0.150784203 -0.25086360 -0.1810409  0.2310031 -0.3425984
+            Y13         Y14        Y15         Y16         Y17         Y18
+X274  0.2435822 -0.39061436  0.2271793 0.071133592  0.01441381 -0.58419877
+X347 -0.3747620  0.04851022 -1.1350130 0.640749645  0.19264130  0.07550262
+X183  0.3618534  0.62647779  0.4556610 0.337172801  0.62552105  0.39018457
+X72   1.1717008 -0.33024120  0.5026009 0.009030604 -0.08879668 -0.23306137
+             Y19        Y20         Y21         Y22          Y23
+X274  0.23015756  0.1516004  0.02275088  0.52279901 -0.226039596
+X347  0.15321483 -0.1375850  0.51024287  0.07540335  0.296716744
+X183  0.54839476  0.4148681  0.10061303 -0.04286237  0.308742629
+X72  -0.01456058  0.1413060 -0.37970711  0.21641262 -0.006988736
+            Y24        Y25
+X274 0.32427352 -0.3004417
+X347 0.19882637 -0.0776774
+X183 0.22366030 -0.4267544
+X72  0.06677394  0.3970696</code></pre>
+<pre class="r"><code>###Estimated Z-scores by univariate regression for the bad variables
+Zscores &lt;- univ_sumstats$Bhat/univ_sumstats$Shat
+cat(&quot;SLR estimated Z-scores:\n&quot;)</code></pre>
+<pre><code>SLR estimated Z-scores:</code></pre>
+<pre class="r"><code>Zscores[bad_est[, 1], ]</code></pre>
+<pre><code>             Y1         Y2         Y3         Y4         Y5         Y6
+X274 -0.4365736 -0.3252120  1.7394660 -0.3690672 -0.3517424 1.11406779
+X347 -0.8009137  0.9267963  0.1766698  0.5227513  0.9999831 0.09408288
+X183 -0.8010841  1.6391949  0.5860324 -0.7271807  0.7224003 0.55252082
+X72   1.1466597 -1.2578544 -1.0357761 -0.7625325 -0.8956515 0.58496230
+            Y7          Y8         Y9        Y10        Y11        Y12
+X274 0.3267747 -1.44776342 -0.8270740 -3.3784413 -0.8473222  0.2965010
+X347 1.5706941  1.42027984 -0.2774153  0.6090926  1.9102079 -1.6389006
+X183 0.4051023  0.01156436 -0.9305960  3.7011173  1.7357935  0.9828482
+X72  0.7881596  0.47683468 -0.8006966 -0.5422600  0.7031937 -1.1126963
+           Y13        Y14       Y15        Y16         Y17        Y18
+X274  0.732031 -1.1812598  0.696065 0.23658439  0.04131068 -1.9612099
+X347 -1.129041  0.1460284 -3.621566 2.16389997  0.55268195  0.2503124
+X183  1.089836  1.9086398  1.403033 1.12595782  1.81241787  1.3006204
+X72   3.670433 -0.9973537  1.549786 0.03002948 -0.25454953 -0.7740532
+             Y19        Y20        Y21        Y22         Y23       Y24
+X274  0.71527253  0.4970719  0.0678337  1.7837366 -0.74185722 1.0726073
+X347  0.47569908 -0.4510520  1.5332637  0.2546203  0.97512125 0.6560840
+X183  1.71812707  1.3676601  0.3000724 -0.1447153  1.01491063 0.7383136
+X72  -0.04517348  0.4632679 -1.1370125  0.7319304 -0.02289468 0.2200577
+           Y25
+X274 -0.932783
+X347 -0.240511
+X183 -1.328901
+X72   1.235480</code></pre>
+<pre class="r"><code>plot(fit_mrmash$mu1[bad_est[, 1], ], univ_sumstats$Bhat[bad_est[, 1], ], main=&quot;mr.mash vs SLR -- bad variables&quot;, 
+     xlab=&quot;mr.mash coefficients&quot;, ylab=&quot;SLR coefficients&quot;,
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)</code></pre>
+<p><img src="figure/mrmash_larger_r_issue.Rmd/shared%20effects%20univariate%20coeff%20bad%20vars-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>The data (wrongly) supports the singleton structure (i.e., large effect in one condition and smaller effects in the other conditions). <em>mr.mash</em> then estimates the coefficients accordingly, by shrinking to 0 the coefficients in the conditions with smaller effects and leaving the coefficent in the one condition almost unshrunken for two variables and a little shrunken for the other two variables.</p>
+<p>If we do not include the singleton matrices in the prior, this behavior does not appear.</p>
+<pre class="r"><code>S0_can &lt;- compute_canonical_covs(ncol(Ytrain), singletons=FALSE, hetgrid=c(0, 0.25, 0.5, 0.75, 1))
+
+###Compute prior with only canonical matrices without singletons
+S0 &lt;- expand_covs(S0_can, grid, zeromat=TRUE)
+
+###Fit mr.mash
+w0 &lt;- c((1-prop_nonzero_glmnet), rep(prop_nonzero_glmnet/(length(S0)-1), (length(S0)-1)))
+
+fit_mrmash &lt;- mr.mash(Xtrain, Ytrain, S0, w0=w0, update_w0=TRUE, update_w0_method=&quot;EM&quot;, tol=1e-2,
+                      convergence_criterion=&quot;ELBO&quot;, compute_ELBO=TRUE, standardize=standardize, 
+                      verbose=FALSE, update_V=TRUE, update_V_method=&quot;diagonal&quot;, e=1e-8,
+                      w0_threshold=w0_threshold, nthreads=nthreads, mu1_init=out_coeff$B)
+
+#####Coefficients plots######
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                0, 3, 3, 0,
+                0, 3, 3, 0), 4, 4, byrow = TRUE))
+
+###Plot estimated vs true coeffcients
+##mr.mash
+plot(out$B, fit_mrmash$mu1, main=&quot;mr.mash&quot;, xlab=&quot;True coefficients&quot;, ylab=&quot;Estimated coefficients&quot;,
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)
+##g-lasso
+plot(out$B, out_coeff$B, main=&quot;g-lasso&quot;, xlab=&quot;True coefficients&quot;, ylab=&quot;Estimated coefficients&quot;,
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)
+
+###Plot mr.mash vs g-lasso estimated coeffcients
+colorz &lt;- matrix(&quot;black&quot;, nrow=p, ncol=r)
+zeros &lt;- apply(out$B, 2, function(x) x==0)
+for(i in 1:ncol(colorz)){
+  colorz[zeros[, i], i] &lt;- &quot;red&quot;
+}
+
+plot(fit_mrmash$mu1, out_coeff$B, main=&quot;mr.mash vs g-lasso&quot;, 
+     xlab=&quot;mr.mash coefficients&quot;, ylab=&quot;g-lasso coefficients&quot;,
+     col=colorz, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)
+legend(&quot;topleft&quot;, 
+       legend = c(&quot;Non-zero&quot;, &quot;Zero&quot;), 
+       col = c(&quot;black&quot;, &quot;red&quot;), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=2) </code></pre>
+<p><img src="figure/mrmash_larger_r_issue.Rmd/shared%20effects%20fit%20no%20singletons-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.6.1 (2019-07-05)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Scientific Linux 7.4 (Nitrogen)
+
+Matrix products: default
+BLAS/LAPACK: /software/openblas-0.2.19-el7-x86_64/lib/libopenblas_haswellp-r0.2.19.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] glmnet_3.0          Matrix_1.2-18       mr.mash.alpha_0.2-6
+
+loaded via a namespace (and not attached):
+ [1] foreach_1.4.4      RcppParallel_4.4.3 rmeta_3.0         
+ [4] assertthat_0.2.1   horseshoe_0.2.0    mixsqp_0.3-43     
+ [7] yaml_2.2.0         ebnm_0.1-35        pillar_1.4.2      
+[10] backports_1.1.4    lattice_0.20-38    quantreg_5.85     
+[13] glue_1.3.1         digest_0.6.20      promises_1.0.1    
+[16] colorspace_1.4-1   htmltools_0.3.6    httpuv_1.5.1      
+[19] plyr_1.8.6         conquer_1.0.2      pkgconfig_2.0.2   
+[22] invgamma_1.1       SparseM_1.81       purrr_0.3.4       
+[25] mvtnorm_1.1-1      scales_1.1.0       whisker_0.3-2     
+[28] later_0.8.0        MatrixModels_0.5-0 git2r_0.26.1      
+[31] tibble_2.1.3       ggplot2_3.2.1      ashr_2.2-51       
+[34] lazyeval_0.2.2     magrittr_1.5       crayon_1.3.4      
+[37] mcmc_0.9-7         evaluate_0.14      fs_1.3.1          
+[40] MASS_7.3-51.4      truncnorm_1.0-8    tools_3.6.1       
+[43] doMC_1.3.7         softImpute_1.4     lifecycle_0.1.0   
+[46] matrixStats_0.58.0 stringr_1.4.0      MCMCpack_1.5-0    
+[49] GIGrvg_0.5         trust_0.1-8        munsell_0.5.0     
+[52] flashier_0.2.7     MBSP_1.0           irlba_2.3.3       
+[55] compiler_3.6.1     rlang_0.4.10       grid_3.6.1        
+[58] iterators_1.0.10   rmarkdown_1.13     gtable_0.3.0      
+[61] codetools_0.2-16   abind_1.4-5        reshape2_1.4.3    
+[64] flashr_0.6-7       R6_2.4.0           knitr_1.23        
+[67] dplyr_0.8.3        workflowr_1.6.2    mashr_0.2.41      
+[70] rprojroot_1.3-2    shape_1.4.4        stringi_1.4.3     
+[73] parallel_3.6.1     SQUAREM_2021.1     Rcpp_1.0.6        
+[76] tidyselect_1.1.0   xfun_0.8           coda_0.19-4       </code></pre>
+</div>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
@@ -4802,6 +3285,8 @@ footer is added to webpages before the MathJax javascript. -->
 </script>
 
 
+</div>
+</div>
 
 </div>
 
