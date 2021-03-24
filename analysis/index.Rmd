@@ -79,3 +79,4 @@ Other investigations:
 + [Case study with dense scenarios and univariate analysis.](dense_scenario_issue_univariate.html)
 + [*mash* vs *mr.mash*.](mash_vs_mrmash.html)
 + [Case study with only two causal responses out of six total.](two_active_responses_issue_continued.html)
++ [Case study with larger number of conditions.](mrmash_larger_r_issue.html)

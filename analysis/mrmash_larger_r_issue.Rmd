@@ -1,0 +1,265 @@
+---
+title: "mr.mash issue with larger number of conditions"
+author: "Fabio Morgante"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  workflowr::wflow_html:
+    toc: true
+editor_options:
+  chunk_output_type: console
+---
+
+```{r set opts, message=FALSE}
+library(mr.mash.alpha)
+library(glmnet)
+
+options(stringsAsFactors = FALSE)
+
+###Functions to compute g-lasso coefficients
+compute_coefficients_glasso <- function(X, Y, standardize, nthreads, version=c("Rcpp", "R")){
+  
+  version <- match.arg(version)
+  
+  n <- nrow(X)
+  p <- ncol(X)
+  r <- ncol(Y)
+  Y_has_missing <- any(is.na(Y))
+  
+  if(Y_has_missing){
+    ###Extract per-individual Y missingness patterns
+    Y_miss_patterns <- mr.mash.alpha:::extract_missing_Y_pattern(Y)
+    
+    ###Initialize missing Ys
+    muy <- colMeans(Y, na.rm=TRUE)
+    for(l in 1:r){
+      Y[is.na(Y[, l]), l] <- muy[l]
+    }
+    
+    ###Compute V and its inverse
+    V <- mr.mash.alpha:::compute_V_init(X, Y, matrix(0, p, r), method="flash")
+    Vinv <- chol2inv(chol(V))
+    
+    ###Compute expected Y (assuming B=0)
+    mu <- matrix(rep(muy, each=n), n, r)
+    
+    ###Impute missing Ys 
+    Y <- mr.mash.alpha:::impute_missing_Y(Y=Y, mu=mu, Vinv=Vinv, miss=Y_miss_patterns$miss, non_miss=Y_miss_patterns$non_miss, 
+                                          version=version)$Y
+  }
+  
+  ##Fit group-lasso
+  if(nthreads>1){
+    doMC::registerDoMC(nthreads)
+    paral <- TRUE
+  } else {
+    paral <- FALSE
+  }
+  
+  cvfit_glmnet <- glmnet::cv.glmnet(x=X, y=Y, family="mgaussian", alpha=1, standardize=standardize, parallel=paral)
+  coeff_glmnet <- coef(cvfit_glmnet, s="lambda.min")
+  
+  ##Build matrix of initial estimates for mr.mash
+  B <- matrix(as.numeric(NA), nrow=p, ncol=r)
+  
+  for(i in 1:length(coeff_glmnet)){
+    B[, i] <- as.vector(coeff_glmnet[[i]])[-1]
+  }
+  
+  return(list(B=B, Y=Y))
+}
+```
+
+In this website, we want to investigate an issue that happens with larger number of conditions than the 10 conditions we have used in the other investigations. The issue is that *mr.mash* fails to shrink to 0 coefficients that are actually 0. As we will see, some of them are pretty badly misestimated. 
+
+Let's look at an example with n=150, p=400, r=25, PVE=0.2, p_causal=5, independent residuals, independent predictors, and equal effects across conditions from a single multivariate normal with variance 1. 
+
+```{r shared effects simulations, results='hide'}
+set.seed(12)
+
+n <- 200
+ntest <- 50
+p <- 400
+p_causal <- 5
+r <- 25
+X_cor <- 0
+pve <- 0.2
+r_causal <- list(1:r)
+B_cor <- 1
+B_scale <- 1
+w <- 1
+
+###Simulate V, B, X and Y
+out <- simulate_mr_mash_data(n, p, p_causal, r, r_causal, intercepts = rep(1, r),
+                             pve=pve, B_cor=B_cor, B_scale=B_scale, w=w,
+                             X_cor=X_cor, X_scale=1, V_cor=0)
+colnames(out$Y) <- paste0("Y", seq(1, r))
+rownames(out$Y) <- paste0("N", seq(1, n))
+colnames(out$X) <- paste0("X", seq(1, p))
+rownames(out$X) <- paste0("N", seq(1, n))
+
+###Split the data in training and test sets
+test_set <- sort(sample(x=c(1:n), size=ntest, replace=FALSE))
+Ytrain <- out$Y[-test_set, ]
+Xtrain <- out$X[-test_set, ]
+Ytest <- out$Y[test_set, ]
+Xtest <- out$X[test_set, ]
+```
+
+*mr.mash* is run standardizing X and dropping mixture components with weight less than $1e-8$. However, the results look the same without dropping any component. The mixture prior consists only of canonical matrices, scaled by a grid computed as in the *mash* paper. group-LASSO is used to initialize *mr.mash* and as a comparison.
+
+```{r shared effects fit, fig.height=12, fig.width=15}
+standardize <- TRUE
+nthreads <- 4
+w0_threshold <- 1e-8
+
+S0_can <- compute_canonical_covs(ncol(Ytrain), singletons=TRUE, hetgrid=c(0, 0.25, 0.5, 0.75, 1))
+
+####Complete data####
+###Compute grid of variances
+univ_sumstats <- compute_univariate_sumstats(Xtrain, Ytrain, standardize=standardize, 
+                                             standardize.response=FALSE, mc.cores=nthreads)
+grid <- autoselect.mixsd(univ_sumstats, mult=sqrt(2))^2
+
+###Compute prior with only canonical matrices
+S0 <- expand_covs(S0_can, grid, zeromat=TRUE)
+
+###Fit mr.mash
+out_coeff <- compute_coefficients_glasso(Xtrain, Ytrain, standardize=standardize, nthreads=nthreads, version="Rcpp")
+prop_nonzero_glmnet <- sum(out_coeff$B[, 1]!=0)/p
+w0 <- c((1-prop_nonzero_glmnet), rep(prop_nonzero_glmnet/(length(S0)-1), (length(S0)-1)))
+
+fit_mrmash <- mr.mash(Xtrain, Ytrain, S0, w0=w0, update_w0=TRUE, update_w0_method="EM", tol=1e-2,
+                      convergence_criterion="ELBO", compute_ELBO=TRUE, standardize=standardize, 
+                      verbose=FALSE, update_V=TRUE, update_V_method="diagonal", e=1e-8,
+                      w0_threshold=w0_threshold, nthreads=nthreads, mu1_init=out_coeff$B)
+
+#####Coefficients plots######
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                0, 3, 3, 0,
+                0, 3, 3, 0), 4, 4, byrow = TRUE))
+
+###Plot estimated vs true coeffcients
+##mr.mash
+plot(out$B, fit_mrmash$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)
+##g-lasso
+plot(out$B, out_coeff$B, main="g-lasso", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)
+
+###Plot mr.mash vs g-lasso estimated coeffcients
+colorz <- matrix("black", nrow=p, ncol=r)
+zeros <- apply(out$B, 2, function(x) x==0)
+for(i in 1:ncol(colorz)){
+  colorz[zeros[, i], i] <- "red"
+}
+
+plot(fit_mrmash$mu1, out_coeff$B, main="mr.mash vs g-lasso", 
+     xlab="mr.mash coefficients", ylab="g-lasso coefficients",
+     col=colorz, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)
+legend("topleft", 
+       legend = c("Non-zero", "Zero"), 
+       col = c("black", "red"), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=2) 
+
+###Identify badly estimated variables
+bad_est_1 <- which(out$B==0 & fit_mrmash$mu1 < -0.5, arr.ind = TRUE)
+bad_est_2 <- which(out$B==0 & fit_mrmash$mu1 > 0.5, arr.ind = TRUE)
+bad_est <- rbind(bad_est_1, bad_est_2)
+cat("Bad variables:\n")
+bad_est
+```
+
+*mr.mash* is much better than group-LASSO at correctly estimating the non-zero coefficients. However, it does much worse at shrinking the true null coefficients to 0. In particular, there are a few coeffcients that are pretty badly misestimated. We are going to look at those cases more closely.
+
+```{r shared effects mr.mash coeff bad vars}
+###Estimated coefficients by mr.mash for the bad variables
+cat("mr.mash estimated coefficients:\n")
+fit_mrmash$mu1[bad_est[, 1], ]
+```
+
+We can see that the estimated coefficients for each one of those variables look like a singleton structure, where there is an effect in one condition and nowhere else. When we look at the prior weights at convergence, we can see that those singleton matrices get relatively large weight (see below).
+
+```{r shared effects mr.mash weights bad vars}
+###Estimated prior weights by mr.mash for the bad variables
+cat("mr.mash estimated prior weights:\n")
+head(sort(fit_mrmash$w0, decreasing=TRUE), 20)
+```
+
+To see why that is happening, the next step will be to look at the data. While the best thing to do would be to look at the summary statistics from a simple multivariate regression with the same residual covariance matrix as in *mr.mash*, we are going to look at the univariate summary statistics that are readily available. 
+
+```{r shared effects univariate coeff bad vars, fig.height=12, fig.width=15}
+###Estimated coefficients and Z-scores by univariate regression for the bad variables
+rownames(univ_sumstats$Bhat) <- colnames(out$X)
+colnames(univ_sumstats$Bhat) <- colnames(out$Y)
+cat("SLR estimated coefficients:\n")
+univ_sumstats$Bhat[bad_est[, 1], ]
+
+###Estimated Z-scores by univariate regression for the bad variables
+Zscores <- univ_sumstats$Bhat/univ_sumstats$Shat
+cat("SLR estimated Z-scores:\n")
+Zscores[bad_est[, 1], ]
+
+plot(fit_mrmash$mu1[bad_est[, 1], ], univ_sumstats$Bhat[bad_est[, 1], ], main="mr.mash vs SLR -- bad variables", 
+     xlab="mr.mash coefficients", ylab="SLR coefficients",
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)
+```
+
+The data (wrongly) supports the singleton structure (i.e., large effect in one condition and smaller effects in the other conditions). *mr.mash* then estimates the coefficients accordingly, by shrinking to 0 the coefficients in the conditions with smaller effects and leaving the coefficent in the one condition almost unshrunken for two variables and a little shrunken for the other two variables. 
+
+If we do not include the singleton matrices in the prior, this behavior does not appear.
+
+```{r shared effects fit no singletons, fig.height=12, fig.width=15}
+S0_can <- compute_canonical_covs(ncol(Ytrain), singletons=FALSE, hetgrid=c(0, 0.25, 0.5, 0.75, 1))
+
+###Compute prior with only canonical matrices without singletons
+S0 <- expand_covs(S0_can, grid, zeromat=TRUE)
+
+###Fit mr.mash
+w0 <- c((1-prop_nonzero_glmnet), rep(prop_nonzero_glmnet/(length(S0)-1), (length(S0)-1)))
+
+fit_mrmash <- mr.mash(Xtrain, Ytrain, S0, w0=w0, update_w0=TRUE, update_w0_method="EM", tol=1e-2,
+                      convergence_criterion="ELBO", compute_ELBO=TRUE, standardize=standardize, 
+                      verbose=FALSE, update_V=TRUE, update_V_method="diagonal", e=1e-8,
+                      w0_threshold=w0_threshold, nthreads=nthreads, mu1_init=out_coeff$B)
+
+#####Coefficients plots######
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                0, 3, 3, 0,
+                0, 3, 3, 0), 4, 4, byrow = TRUE))
+
+###Plot estimated vs true coeffcients
+##mr.mash
+plot(out$B, fit_mrmash$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)
+##g-lasso
+plot(out$B, out_coeff$B, main="g-lasso", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)
+
+###Plot mr.mash vs g-lasso estimated coeffcients
+colorz <- matrix("black", nrow=p, ncol=r)
+zeros <- apply(out$B, 2, function(x) x==0)
+for(i in 1:ncol(colorz)){
+  colorz[zeros[, i], i] <- "red"
+}
+
+plot(fit_mrmash$mu1, out_coeff$B, main="mr.mash vs g-lasso", 
+     xlab="mr.mash coefficients", ylab="g-lasso coefficients",
+     col=colorz, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)
+legend("topleft", 
+       legend = c("Non-zero", "Zero"), 
+       col = c("black", "red"), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=2) 
+```
