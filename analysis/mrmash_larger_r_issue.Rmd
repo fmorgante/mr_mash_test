@@ -216,18 +216,18 @@ The data (wrongly) supports the singleton structure (i.e., large effect in one c
 If we do not include the singleton matrices in the prior, this behavior does not appear.
 
 ```{r shared effects fit no singletons, fig.height=12, fig.width=15}
-S0_can <- compute_canonical_covs(ncol(Ytrain), singletons=FALSE, hetgrid=c(0, 0.25, 0.5, 0.75, 1))
+S0_can_nosing <- compute_canonical_covs(ncol(Ytrain), singletons=FALSE, hetgrid=c(0, 0.25, 0.5, 0.75, 1))
 
 ###Compute prior with only canonical matrices without singletons
-S0 <- expand_covs(S0_can, grid, zeromat=TRUE)
+S0_nosing <- expand_covs(S0_can_nosing, grid, zeromat=TRUE)
 
 ###Fit mr.mash
-w0 <- c((1-prop_nonzero_glmnet), rep(prop_nonzero_glmnet/(length(S0)-1), (length(S0)-1)))
+w0_nosing <- c((1-prop_nonzero_glmnet), rep(prop_nonzero_glmnet/(length(S0_nosing)-1), (length(S0_nosing)-1)))
 
-fit_mrmash <- mr.mash(Xtrain, Ytrain, S0, w0=w0, update_w0=TRUE, update_w0_method="EM", tol=1e-2,
-                      convergence_criterion="ELBO", compute_ELBO=TRUE, standardize=standardize, 
-                      verbose=FALSE, update_V=TRUE, update_V_method="diagonal", e=1e-8,
-                      w0_threshold=w0_threshold, nthreads=nthreads, mu1_init=out_coeff$B)
+fit_mrmash_nosing <- mr.mash(Xtrain, Ytrain, S0_nosing, w0=w0_nosing, update_w0=TRUE, update_w0_method="EM", tol=1e-2,
+                              convergence_criterion="ELBO", compute_ELBO=TRUE, standardize=standardize, 
+                              verbose=FALSE, update_V=TRUE, update_V_method="diagonal", e=1e-8,
+                              w0_threshold=w0_threshold, nthreads=nthreads, mu1_init=out_coeff$B)
 
 #####Coefficients plots######
 layout(matrix(c(1, 1, 2, 2,
@@ -237,7 +237,7 @@ layout(matrix(c(1, 1, 2, 2,
 
 ###Plot estimated vs true coeffcients
 ##mr.mash
-plot(out$B, fit_mrmash$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients",
+plot(out$B, fit_mrmash_nosing$mu1, main="mr.mash", xlab="True coefficients", ylab="Estimated coefficients",
      cex=2, cex.lab=2, cex.main=2, cex.axis=2)
 abline(0, 1)
 ##g-lasso
@@ -252,7 +252,7 @@ for(i in 1:ncol(colorz)){
   colorz[zeros[, i], i] <- "red"
 }
 
-plot(fit_mrmash$mu1, out_coeff$B, main="mr.mash vs g-lasso", 
+plot(fit_mrmash_nosing$mu1, out_coeff$B, main="mr.mash vs g-lasso", 
      xlab="mr.mash coefficients", ylab="g-lasso coefficients",
      col=colorz, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
 abline(0, 1)
@@ -261,5 +261,31 @@ legend("topleft",
        col = c("black", "red"), 
        pch = c(1, 1), 
        horiz = FALSE,
-       cex=2) 
+       cex=2)
+```
+
+When comparing the ELBO of the two models, we can see that the ELBO for the model with the singletons is a little larger.
+
+```{r shared effects mr.mash ELBO comparison}
+###ELBO with singletons
+cat("mr.mash ELBO with singletons:\n")
+fit_mrmash$ELBO
+
+###ELBO with singletons
+cat("mr.mash ELBO without singletons:\n")
+fit_mrmash_nosing$ELBO
+
+```
+
+However, at least in this example, the variable/condition combinations displaying this problem are not so many. Interestingly, a few conditions (10, 13, 15, 22) are the only ones creating this issue.
+
+```{r shared effects mr.mash bad vars}
+badd <- which(abs(fit_mrmash$mu1 - out$B) > 0.05, arr.ind = TRUE)
+unique_vars <- unique(badd[,1])
+unique_vars <- unique_vars[-unique(which(out$B[unique_vars, ] !=0, arr.ind = TRUE)[, 1])]
+unique_vars_bad_y <- badd[which(badd[, 1] %in% unique_vars), ]
+
+unique_vars_bad_y
+
+plot(out$B[unique_vars_bad_y], fit_mrmash$mu1[unique_vars_bad_y], xlab="True coefficents", ylab="Estimated coefficients", main="mr.mash vs truth\nmost bad variables/conditions")
 ```
