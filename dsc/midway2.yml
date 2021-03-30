@@ -46,7 +46,7 @@ default:
   instances_per_node: 2
   cpus_per_instance: 1
   mem_per_instance: 4G
-  time_per_instance: 45m
+  time_per_instance: 40m
   
 data:
   instances_per_job: 200
