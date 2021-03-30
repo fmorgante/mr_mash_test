@@ -21,8 +21,10 @@ DSC:
     mr_mash_em_data_mlasso: mlasso_init * mr_mash_em_data
     mr_mash_em_dataAndcan_mlasso: mlasso_init * mr_mash_em_dataAndcan
     mr_mash_em_dataAndcan_dropcomp_mlasso: mlasso_init * mr_mash_em_dataAndcan_dropcomp
+    mr_mash_em_can_enet: enet_init * mr_mash_em_can
+    enet_out: enet_init * enet
     fit: mr_mash_em_dataAndcan_dropcomp_mlasso,mr_mash_em_dataAndcan_mlasso, 
-         mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mtlasso, enet
+         mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mtlasso, enet_out
     predict: predict_linear
     score: scaled_rmse
   run: 
@@ -139,16 +141,23 @@ mtlasso: fit_mtlasso_missing_Y_mod.py
   $time:                elapsed_time
   
 #Univariate enet  
-enet: fit_glmnet_missing_Y_mod.R
+enet_init: fit_glmnet_missing_Y_mod.R
   X:                    $Xtrain
   Y:                    $Ytrain
   alpha:                0.5
   standardize:          TRUE
   nthreads:             1
-  $B_est:               out$B_est
-  $intercept_est:       out$intercept_est
-  $time:                out$elapsed_time
+  $B_est_init:          out$B_est
+  $intercept_est_init:  out$intercept_est
+  $time_init:           out$elapsed_time
   
+enet: R(B_est <- B_in; intercept_est <- intercept_in; time <- time_in)
+  B_in:                 $B_est_init
+  intercept_in:         $intercept_est_init
+  time_in:              $time_init
+  $B_est:               B_est
+  $intercept_est:       intercept_est
+  $time:                time
 
 ## Predict module
 predict_linear: predict_mod.R
