@@ -12,15 +12,15 @@ compute_coefficients_glasso <- function(X, Y, standardize, nthreads, version=c("
     ###Extract per-individual Y missingness patterns
     Y_miss_patterns <- mr.mash.alpha:::extract_missing_Y_pattern(Y)
     
+    ###Compute V and its inverse
+    V <- mr.mash.alpha:::compute_V_init(X, Y, matrix(0, p, r), method="flash")
+    Vinv <- chol2inv(chol(V))
+    
     ###Initialize missing Ys
     muy <- colMeans(Y, na.rm=TRUE)
     for(l in 1:r){
       Y[is.na(Y[, l]), l] <- muy[l]
     }
-    
-    ###Compute V and its inverse
-    V <- mr.mash.alpha:::compute_V_init(X, Y, matrix(0, p, r), method="flash")
-    Vinv <- chol2inv(chol(V))
     
     ###Compute expected Y (assuming B=0)
     mu <- matrix(rep(muy, each=n), n, r)
