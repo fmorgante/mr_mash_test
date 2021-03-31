@@ -26,7 +26,7 @@ dsc_outname=`echo "${dsc_script}" | cut -d'/' -f 2 | cut -d'.' -f 1`
 dsc_outdir="../../output/${dsc_outname}"
 inter_outdir="../../output/${dsc_outname}_inter"
 n_testind=168
-total_genes=20
+total_genes=2000
 pred_genes=1
 
 ###Load necessary version of R
