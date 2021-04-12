@@ -17,12 +17,15 @@ DSC:
     data: extract_X
     simulate: indepV_sharedB_subsetcausalr
     process: univ_sumstats
-    mr_mash_em_can_mlasso: mlasso_init * mr_mash_em_can
-    mr_mash_em_data_mlasso: mlasso_init * mr_mash_em_data
-    mr_mash_em_dataAndcan_mlasso: mlasso_init * mr_mash_em_dataAndcan
-    mr_mash_em_dataAndcan_dropcomp_mlasso: mlasso_init * mr_mash_em_dataAndcan_dropcomp
-    fit: mr_mash_em_dataAndcan_dropcomp_mlasso,mr_mash_em_dataAndcan_mlasso, 
-         mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mtlasso, enet
+    mr_mash_em_can_mlasso_out: mlasso_init * mr_mash_em_can_mlasso
+    mr_mash_em_data_mlasso_out: mlasso_init * mr_mash_em_data_mlasso
+    mr_mash_em_dataAndcan_mlasso_out: mlasso_init * mr_mash_em_dataAndcan_mlasso
+    mr_mash_em_dataAndcan_dropcomp_mlasso_out: mlasso_init * mr_mash_em_dataAndcan_dropcomp_mlasso
+    mr_mash_em_can_enet_out: enet_init * mr_mash_em_can_enet
+    enet_out: enet_init * enet
+    fit: mr_mash_em_dataAndcan_dropcomp_mlasso_out, mr_mash_em_dataAndcan_mlasso_out, 
+         mr_mash_em_can_mlasso_out, mr_mash_em_can_enet_out, mr_mash_em_data_mlasso_out, 
+         mtlasso, enet_out
     predict: predict_linear
     score: scaled_rmse
   run: 
@@ -95,28 +98,38 @@ mr_mash_em_can: fit_mr_mash_all_genes_prior_mod.R
   sumstats:               $sumstats
   data_driven_mats:       NULL
   nthreads:               1
-  mu1_init:               $B_est_init
+  mu1_init:               NULL
   $fit_obj:               out$fit
   $B_est:                 out$B_est
   $intercept_est:         out$intercept_est
   $time:                  out$elapsed_time
+  
+#EM w0 updates, standardize X, update V (constrained diagonal),
+#data-driven matrices, mlasso initialization
+mr_mash_em_can_mlasso(mr_mash_em_can):
+  mu1_init:               $B_est_init
 
 #EM w0 updates, standardize X, update V (constrained diagonal),
-#data-driven matrices
-mr_mash_em_data(mr_mash_em_can):
+#data-driven matrices, mlasso initialization
+mr_mash_em_data_mlasso(mr_mash_em_can_mlasso):
   canonical_mats:         FALSE
   data_driven_mats:       ${data_driven_mats_file}
 
 #EM w0 updates, standardize X, update V (constrained diagonal),
-#canonical and data-driven matrices
-mr_mash_em_dataAndcan(mr_mash_em_data):
+#canonical and data-driven matrices, mlasso initialization
+mr_mash_em_dataAndcan_mlasso(mr_mash_em_data_mlasso):
   canonical_mats:         TRUE
   
 #EM w0 updates, standardize X, update V (constrained diagonal),
-#canonical and data-driven matrices
-mr_mash_em_dataAndcan_dropcomp(mr_mash_em_dataAndcan):
+#canonical and data-driven matrices, mlasso initialization
+mr_mash_em_dataAndcan_dropcomp_mlasso(mr_mash_em_dataAndcan_mlasso):
   w0_threshold:           1e-08
-  
+
+#EM w0 updates, standardize X, update V (constrained diagonal),
+#data-driven matrices, enet initialization
+mr_mash_em_can_enet(mr_mash_em_can):
+  mu1_init:               $B_est_init
+
 #Multivariate LASSO estimates  
 mlasso_init: compute_coefficients_mlasso_missing_Y_mod.R
   X:                    $Xtrain
@@ -139,15 +152,23 @@ mtlasso: fit_mtlasso_missing_Y_mod.py
   $time:                elapsed_time
   
 #Univariate enet  
-enet: fit_glmnet_missing_Y_mod.R
+enet_init: fit_glmnet_missing_Y_mod.R
   X:                    $Xtrain
   Y:                    $Ytrain
   alpha:                0.5
   standardize:          TRUE
   nthreads:             1
-  $B_est:               out$B_est
-  $intercept_est:       out$intercept_est
-  $time:                out$elapsed_time
+  $B_est_init:          out$B_est
+  $intercept_est_init:  out$intercept_est
+  $time_init:           out$elapsed_time
+  
+enet: R(B_est <- B_in; intercept_est <- intercept_in; time <- time_in)
+  B_in:                 $B_est_init
+  intercept_in:         $intercept_est_init
+  time_in:              $time_init
+  $B_est:               B_est
+  $intercept_est:       intercept_est
+  $time:                time
   
 
 ## Predict module
