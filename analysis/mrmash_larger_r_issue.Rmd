@@ -12,6 +12,7 @@ editor_options:
 ```{r set opts, message=FALSE}
 library(mr.mash.alpha)
 library(glmnet)
+library(mashr)
 
 options(stringsAsFactors = FALSE)
 
@@ -185,7 +186,7 @@ fit_mrmash$mu1[bad_est[, 1], ]
 
 We can see that the estimated coefficients for each one of those variables look like a singleton structure, where there is an effect in one condition and nowhere else. When we look at the prior weights at convergence, we can see that those singleton matrices get relatively large weight (see below).
 
-```{r shared effects mr.mash weights bad vars}
+```{r shared effects mr.mash weights}
 ###Estimated prior weights by mr.mash for the bad variables
 cat("mr.mash estimated prior weights:\n")
 head(sort(fit_mrmash$w0, decreasing=TRUE), 20)
@@ -279,7 +280,7 @@ fit_mrmash_nosing$ELBO
 
 However, at least in this example, the variable/condition combinations displaying this problem are not so many. Interestingly, a few conditions (10, 13, 15, 22) are the only ones creating this issue.
 
-```{r shared effects mr.mash bad vars}
+```{r shared effects mr.mash bad vars, fig.height=12, fig.width=15}
 badd <- which(abs(fit_mrmash$mu1 - out$B) > 0.05, arr.ind = TRUE)
 unique_vars <- unique(badd[,1])
 unique_vars <- unique_vars[-unique(which(out$B[unique_vars, ] !=0, arr.ind = TRUE)[, 1])]
@@ -288,4 +289,23 @@ unique_vars_bad_y <- badd[which(badd[, 1] %in% unique_vars), ]
 unique_vars_bad_y
 
 plot(out$B[unique_vars_bad_y], fit_mrmash$mu1[unique_vars_bad_y], xlab="True coefficents", ylab="Estimated coefficients", main="mr.mash vs truth\nmost bad variables/conditions")
+```
+
+Let's what happens if we run *mash* on the summary statistics. Since predictors are independent, so we should roughly get the same results as *mr.mash*.
+
+```{r shared effects mash posterior means bad vars}
+dat_mash <- mash_set_data(univ_sumstats$Bhat, univ_sumstats$Shat)
+mash_obj <- mash(dat_mash, S0_can)
+mash_pm <- get_pm(mash_obj)
+
+cat("mash estimated coefficients:\n")
+mash_pm[bad_est[, 1], ]
+```
+
+*mash* seems to have a different problem -- it estimates that the effects of variables X274, X347, and X183 to be equal across conditions. However, similar behavior to *mr.mash* is shown for variable X72. Checking the prior weights, we can see that *mash* wrongly puts a lot of weight on equal effects components. 
+
+```{r shared effects mash weights}
+###Estimated prior weights by mr.mash for the bad variables
+cat("mr.mash estimated prior weights:\n")
+head(sort(get_estimated_pi(mash_obj, "all"), decreasing=TRUE), 20)
 ```
