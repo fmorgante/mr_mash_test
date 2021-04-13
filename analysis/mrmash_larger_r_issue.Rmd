@@ -309,3 +309,29 @@ mash_pm[bad_est[, 1], ]
 cat("mr.mash estimated prior weights:\n")
 head(sort(get_estimated_pi(mash_obj, "all"), decreasing=TRUE), 20)
 ```
+
+Let's now look at the estimated effects from *mash*, and compare them to those from *mr.mash*.
+
+```{r shared effects mr.mash vs mash, fig.height=12, fig.width=15}
+#####Coefficients plots######
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2), 2, 4, byrow = TRUE))
+##mash
+plot(out$B, mash_pm, main="mash", xlab="True coefficients", ylab="Estimated coefficients",
+     cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)
+
+##mr.mash vs mash
+plot(fit_mrmash$mu1, mash_pm, main="mr.mash vs mash -- all variables", 
+     xlab="mr.mash coefficients", ylab="mash coefficients",
+     col=colorz, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+abline(0, 1)
+legend("topleft", 
+       legend = c("Non-zero", "Zero"), 
+       col = c("black", "red"), 
+       pch = c(1, 1), 
+       horiz = FALSE,
+       cex=2)
+```
+
+In general, *mash* seems to have more difficulty to shrink true 0 coefficients.
