@@ -293,7 +293,7 @@ plot(out$B[unique_vars_bad_y], fit_mrmash$mu1[unique_vars_bad_y], xlab="True coe
 
 Let's what happens if we run *mash* on the summary statistics. Since predictors are independent, so we should roughly get the same results as *mr.mash*.
 
-```{r shared effects mash posterior means bad vars}
+```{r shared effects mash posterior means bad vars, message=FALSE}
 dat_mash <- mash_set_data(univ_sumstats$Bhat, univ_sumstats$Shat)
 mash_obj <- mash(dat_mash, S0_can)
 mash_pm <- get_pm(mash_obj)
@@ -338,10 +338,10 @@ In general, *mash* seems to have more difficulty to shrink true 0 coefficients.
 
 Let's now compare the two methods on completely null data.
 
-```{r null data mash vs mr.mash, fig.height=12, fig.width=15}
+```{r null data mash vs mr.mash, message=FALSE, fig.height=12, fig.width=15}
 nreps <- 4
 mrmash_null_coeff <- vector("list", nreps)
-mash_null_pm <- vector("list", nreps)
+mash_obj_null <- vector("list", nreps)
 
 for(i in 1:nreps){
   ###Simulate null phenotypes
@@ -364,13 +364,11 @@ for(i in 1:nreps){
                         convergence_criterion="ELBO", compute_ELBO=TRUE, standardize=standardize, 
                         verbose=FALSE, update_V=TRUE, update_V_method="diagonal", e=1e-8,
                         w0_threshold=w0_threshold, nthreads=nthreads, mu1_init=out_coeff_null$B)
-  mrmash_null_coeff[[i]] <- fit_mrmash_null$mu1
+  mrmash_null_coeff[[i]] <- fit_mrmash_null
 
   ###Fit mash
   dat_mash_null <- mash_set_data(univ_sumstats_null$Bhat, univ_sumstats_null$Shat)
-  mash_obj_null <- mash(dat_mash_null, S0_can)
-  mash_null_pm[[i]] <- get_pm(mash_obj_null)
-
+  mash_obj_null[[i]] <- mash(dat_mash_null, S0_can)
 }
 
 #####Coefficients plots######
@@ -381,11 +379,17 @@ layout(matrix(c(1, 1, 2, 2,
 
 for(i in 1:nreps){
   ##mr.mash vs mash
-  plot(mrmash_null_coeff[[i]], mash_null_pm[[i]], 
+  plot(mrmash_null_coeff[[i]][[1]], get_pm(mash_obj_null[[i]]), 
        xlab="mr.mash coefficients", ylab="mash coefficients",
        col="red", cex=2, cex.lab=2, cex.main=2, cex.axis=2)
   abline(0, 1)
 }
 ```
 
-It turns out that *mr.mash* does not seem to give more false pasitives than *mash* -- it is actually the opposite.  
+It turns out that *mr.mash* does not seem to give more false pasitives than *mash* -- it is actually the opposite. However, the lfsr might be informative about actual false positives in *mash*.
+
+```{r null data mash lfsr}
+for(i in 1:nreps){
+  print(summary(get_lfsr(mash_obj_null[[i]])))
+}
+```
