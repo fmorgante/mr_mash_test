@@ -554,16 +554,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree0091cf6ca4eebca0a614c0010e56033495f0dc14targetblank0091cf6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/0091cf6ca4eebca0a614c0010e56033495f0dc14" target="_blank">0091cf6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreec544bf2682a5cfa887aca53c4e01c1ee0d63a551targetblankc544bf2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/c544bf2682a5cfa887aca53c4e01c1ee0d63a551" target="_blank">c544bf2</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree0091cf6ca4eebca0a614c0010e56033495f0dc14targetblank0091cf6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreec544bf2682a5cfa887aca53c4e01c1ee0d63a551targetblankc544bf2a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/0091cf6ca4eebca0a614c0010e56033495f0dc14" target="_blank">0091cf6</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/c544bf2682a5cfa887aca53c4e01c1ee0d63a551" target="_blank">c544bf2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -881,6 +881,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/c544bf2682a5cfa887aca53c4e01c1ee0d63a551/analysis/mrmash_larger_r_issue.Rmd" target="_blank">c544bf2</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-04-13
+</td>
+<td>
+Add null data results
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/2034558eca7019a488b23a739e1c54dafb94118d/docs/mrmash_larger_r_issue.html" target="_blank">2034558</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-04-13
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1532,9 +1566,9 @@ fmorgante
 <pre class="r"><code>dat_mash &lt;- mash_set_data(univ_sumstats$Bhat, univ_sumstats$Shat)
 mash_obj &lt;- mash(dat_mash, S0_can)</code></pre>
 <pre><code> - Computing 400 x 451 likelihood matrix.
- - Likelihood calculations took 1.52 seconds.
+ - Likelihood calculations took 1.56 seconds.
  - Fitting model with 451 mixture components.
- - Model fitting took 3.01 seconds.
+ - Model fitting took 3.23 seconds.
  - Computing posterior matrices.
  - Computation allocated took 0.10 seconds.</code></pre>
 <pre class="r"><code>mash_pm &lt;- get_pm(mash_obj)
@@ -1601,7 +1635,117 @@ legend(&quot;topleft&quot;,
        horiz = FALSE,
        cex=2)</code></pre>
 <p><img src="figure/mrmash_larger_r_issue.Rmd/shared%20effects%20mr.mash%20vs%20mash-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-shared-effects-mr.mash-vs-mash-1">
+Past versions of “shared effects mr.mash vs mash-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-shared-effects-mr.mash-vs-mash-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/2034558eca7019a488b23a739e1c54dafb94118d/docs/figure/mrmash_larger_r_issue.Rmd/shared effects mr.mash vs mash-1.png" target="_blank">2034558</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-04-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>In general, <em>mash</em> seems to have more difficulty to shrink true 0 coefficients.</p>
+<p>Let’s now compare the two methods on completely null data.</p>
+<pre class="r"><code>nreps &lt;- 4
+mrmash_null_coeff &lt;- vector(&quot;list&quot;, nreps)
+mash_null_pm &lt;- vector(&quot;list&quot;, nreps)
+
+for(i in 1:nreps){
+  ###Simulate null phenotypes
+  Ytrain_null &lt;- matrix(rnorm((n-ntest)*r), nrow=(n-ntest), ncol=r)
+
+  ###Compute grid of variances
+  univ_sumstats_null &lt;- compute_univariate_sumstats(Xtrain, Ytrain_null, standardize=standardize, 
+                                               standardize.response=FALSE, mc.cores=nthreads)
+  grid_null &lt;- autoselect.mixsd(univ_sumstats_null, mult=sqrt(2))^2
+
+  ###Compute prior with only canonical matrices
+  S0_null &lt;- expand_covs(S0_can, grid_null, zeromat=TRUE)
+
+  ###Fit mr.mash
+  out_coeff_null &lt;- compute_coefficients_glasso(Xtrain, Ytrain_null, standardize=standardize, nthreads=nthreads, version=&quot;Rcpp&quot;)
+  prop_nonzero_glmnet_null &lt;- sum(out_coeff_null$B[, 1]!=0)/p
+  w0_null &lt;- c((1-prop_nonzero_glmnet_null), rep(prop_nonzero_glmnet_null/(length(S0_null)-1), (length(S0_null)-1)))
+
+  fit_mrmash_null &lt;- mr.mash(Xtrain, Ytrain_null, S0_null, w0=w0_null, update_w0=TRUE, update_w0_method=&quot;EM&quot;, tol=1e-2,
+                        convergence_criterion=&quot;ELBO&quot;, compute_ELBO=TRUE, standardize=standardize, 
+                        verbose=FALSE, update_V=TRUE, update_V_method=&quot;diagonal&quot;, e=1e-8,
+                        w0_threshold=w0_threshold, nthreads=nthreads, mu1_init=out_coeff_null$B)
+  mrmash_null_coeff[[i]] &lt;- fit_mrmash_null$mu1
+
+  ###Fit mash
+  dat_mash_null &lt;- mash_set_data(univ_sumstats_null$Bhat, univ_sumstats_null$Shat)
+  mash_obj_null &lt;- mash(dat_mash_null, S0_can)
+  mash_null_pm[[i]] &lt;- get_pm(mash_obj_null)
+
+}</code></pre>
+<pre><code> - Computing 400 x 451 likelihood matrix.
+ - Likelihood calculations took 1.51 seconds.
+ - Fitting model with 451 mixture components.
+ - Model fitting took 4.44 seconds.
+ - Computing posterior matrices.
+ - Computation allocated took 0.17 seconds.
+ - Computing 400 x 451 likelihood matrix.
+ - Likelihood calculations took 1.48 seconds.
+ - Fitting model with 451 mixture components.
+ - Model fitting took 3.31 seconds.
+ - Computing posterior matrices.
+ - Computation allocated took 0.14 seconds.
+ - Computing 400 x 451 likelihood matrix.
+ - Likelihood calculations took 1.56 seconds.
+ - Fitting model with 451 mixture components.
+ - Model fitting took 3.89 seconds.
+ - Computing posterior matrices.
+ - Computation allocated took 0.14 seconds.
+ - Computing 400 x 451 likelihood matrix.
+ - Likelihood calculations took 1.46 seconds.
+ - Fitting model with 451 mixture components.
+ - Model fitting took 3.95 seconds.
+ - Computing posterior matrices.
+ - Computation allocated took 0.14 seconds.</code></pre>
+<pre class="r"><code>#####Coefficients plots######
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                3, 3, 4, 4,
+                3, 3, 4, 4), 4, 4, byrow = TRUE))
+
+for(i in 1:nreps){
+  ##mr.mash vs mash
+  plot(mrmash_null_coeff[[i]], mash_null_pm[[i]], 
+       xlab=&quot;mr.mash coefficients&quot;, ylab=&quot;mash coefficients&quot;,
+       col=&quot;red&quot;, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+  abline(0, 1)
+}</code></pre>
+<p><img src="figure/mrmash_larger_r_issue.Rmd/null%20data%20mash%20vs%20mr.mash-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>It turns out that <em>mr.mash</em> does not seem to give more false pasitives than <em>mash</em> – it is actually the opposite.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
