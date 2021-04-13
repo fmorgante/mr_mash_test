@@ -554,16 +554,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreec544bf2682a5cfa887aca53c4e01c1ee0d63a551targetblankc544bf2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/c544bf2682a5cfa887aca53c4e01c1ee0d63a551" target="_blank">c544bf2</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreebf711b82132f2a5114fae66e3503df66157b653ftargetblankbf711b8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/bf711b82132f2a5114fae66e3503df66157b653f" target="_blank">bf711b8</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreec544bf2682a5cfa887aca53c4e01c1ee0d63a551targetblankc544bf2a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreebf711b82132f2a5114fae66e3503df66157b653ftargetblankbf711b8a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/c544bf2682a5cfa887aca53c4e01c1ee0d63a551" target="_blank">c544bf2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/bf711b82132f2a5114fae66e3503df66157b653f" target="_blank">bf711b8</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -881,6 +881,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/bf711b82132f2a5114fae66e3503df66157b653f/analysis/mrmash_larger_r_issue.Rmd" target="_blank">bf711b8</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-04-13
+</td>
+<td>
+Add null data lfsr
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/f3b730ac7b4138bf1d01761aa9dc82a80f117b1a/docs/mrmash_larger_r_issue.html" target="_blank">f3b730a</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-04-13
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1566,11 +1600,11 @@ fmorgante
 <pre class="r"><code>dat_mash &lt;- mash_set_data(univ_sumstats$Bhat, univ_sumstats$Shat)
 mash_obj &lt;- mash(dat_mash, S0_can)</code></pre>
 <pre><code> - Computing 400 x 451 likelihood matrix.
- - Likelihood calculations took 1.56 seconds.
+ - Likelihood calculations took 1.44 seconds.
  - Fitting model with 451 mixture components.
- - Model fitting took 3.23 seconds.
+ - Model fitting took 3.03 seconds.
  - Computing posterior matrices.
- - Computation allocated took 0.10 seconds.</code></pre>
+ - Computation allocated took 0.09 seconds.</code></pre>
 <pre class="r"><code>mash_pm &lt;- get_pm(mash_obj)
 
 cat(&quot;mash estimated coefficients:\n&quot;)</code></pre>
@@ -1676,7 +1710,7 @@ fmorgante
 <p>Let’s now compare the two methods on completely null data.</p>
 <pre class="r"><code>nreps &lt;- 4
 mrmash_null_coeff &lt;- vector(&quot;list&quot;, nreps)
-mash_null_pm &lt;- vector(&quot;list&quot;, nreps)
+mash_obj_null &lt;- vector(&quot;list&quot;, nreps)
 
 for(i in 1:nreps){
   ###Simulate null phenotypes
@@ -1699,38 +1733,36 @@ for(i in 1:nreps){
                         convergence_criterion=&quot;ELBO&quot;, compute_ELBO=TRUE, standardize=standardize, 
                         verbose=FALSE, update_V=TRUE, update_V_method=&quot;diagonal&quot;, e=1e-8,
                         w0_threshold=w0_threshold, nthreads=nthreads, mu1_init=out_coeff_null$B)
-  mrmash_null_coeff[[i]] &lt;- fit_mrmash_null$mu1
+  mrmash_null_coeff[[i]] &lt;- fit_mrmash_null
 
   ###Fit mash
   dat_mash_null &lt;- mash_set_data(univ_sumstats_null$Bhat, univ_sumstats_null$Shat)
-  mash_obj_null &lt;- mash(dat_mash_null, S0_can)
-  mash_null_pm[[i]] &lt;- get_pm(mash_obj_null)
-
+  mash_obj_null[[i]] &lt;- mash(dat_mash_null, S0_can)
 }</code></pre>
 <pre><code> - Computing 400 x 451 likelihood matrix.
- - Likelihood calculations took 1.51 seconds.
+ - Likelihood calculations took 1.41 seconds.
  - Fitting model with 451 mixture components.
- - Model fitting took 4.44 seconds.
+ - Model fitting took 4.28 seconds.
  - Computing posterior matrices.
  - Computation allocated took 0.17 seconds.
  - Computing 400 x 451 likelihood matrix.
- - Likelihood calculations took 1.48 seconds.
+ - Likelihood calculations took 1.45 seconds.
  - Fitting model with 451 mixture components.
- - Model fitting took 3.31 seconds.
+ - Model fitting took 3.14 seconds.
  - Computing posterior matrices.
- - Computation allocated took 0.14 seconds.
+ - Computation allocated took 0.13 seconds.
  - Computing 400 x 451 likelihood matrix.
- - Likelihood calculations took 1.56 seconds.
+ - Likelihood calculations took 1.41 seconds.
  - Fitting model with 451 mixture components.
- - Model fitting took 3.89 seconds.
+ - Model fitting took 3.70 seconds.
  - Computing posterior matrices.
- - Computation allocated took 0.14 seconds.
+ - Computation allocated took 0.13 seconds.
  - Computing 400 x 451 likelihood matrix.
- - Likelihood calculations took 1.46 seconds.
+ - Likelihood calculations took 1.42 seconds.
  - Fitting model with 451 mixture components.
- - Model fitting took 3.95 seconds.
+ - Model fitting took 3.78 seconds.
  - Computing posterior matrices.
- - Computation allocated took 0.14 seconds.</code></pre>
+ - Computation allocated took 0.13 seconds.</code></pre>
 <pre class="r"><code>#####Coefficients plots######
 layout(matrix(c(1, 1, 2, 2,
                 1, 1, 2, 2,
@@ -1739,13 +1771,249 @@ layout(matrix(c(1, 1, 2, 2,
 
 for(i in 1:nreps){
   ##mr.mash vs mash
-  plot(mrmash_null_coeff[[i]], mash_null_pm[[i]], 
+  plot(mrmash_null_coeff[[i]][[1]], get_pm(mash_obj_null[[i]]), 
        xlab=&quot;mr.mash coefficients&quot;, ylab=&quot;mash coefficients&quot;,
        col=&quot;red&quot;, cex=2, cex.lab=2, cex.main=2, cex.axis=2)
   abline(0, 1)
 }</code></pre>
 <p><img src="figure/mrmash_larger_r_issue.Rmd/null%20data%20mash%20vs%20mr.mash-1.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>It turns out that <em>mr.mash</em> does not seem to give more false pasitives than <em>mash</em> – it is actually the opposite.</p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-null-data-mash-vs-mr.mash-1">
+Past versions of “null data mash vs mr.mash-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-null-data-mash-vs-mr.mash-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/f3b730ac7b4138bf1d01761aa9dc82a80f117b1a/docs/figure/mrmash_larger_r_issue.Rmd/null data mash vs mr.mash-1.png" target="_blank">f3b730a</a>
+</td>
+<td>
+fmorgante
+</td>
+<td>
+2021-04-13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>It turns out that <em>mr.mash</em> does not seem to give more false pasitives than <em>mash</em> – it is actually the opposite. However, the lfsr might be informative about actual false positives in <em>mash</em>.</p>
+<pre class="r"><code>for(i in 1:nreps){
+  print(summary(get_lfsr(mash_obj_null[[i]])))
+}</code></pre>
+<pre><code>       V1               V2               V3               V4        
+ Min.   :0.1418   Min.   :0.1999   Min.   :0.1391   Min.   :0.1767  
+ 1st Qu.:0.9292   1st Qu.:0.9337   1st Qu.:0.9359   1st Qu.:0.9350  
+ Median :0.9520   Median :0.9563   Median :0.9551   Median :0.9571  
+ Mean   :0.9244   Mean   :0.9293   Mean   :0.9294   Mean   :0.9296  
+ 3rd Qu.:0.9627   3rd Qu.:0.9662   3rd Qu.:0.9670   3rd Qu.:0.9663  
+ Max.   :0.9879   Max.   :0.9871   Max.   :0.9884   Max.   :0.9859  
+       V5                V6               V7               V8        
+ Min.   :0.08579   Min.   :0.2306   Min.   :0.1092   Min.   :0.2326  
+ 1st Qu.:0.88698   1st Qu.:0.9128   1st Qu.:0.9328   1st Qu.:0.9107  
+ Median :0.92359   Median :0.9430   Median :0.9560   Median :0.9398  
+ Mean   :0.88916   Mean   :0.9135   Mean   :0.9307   Mean   :0.9112  
+ 3rd Qu.:0.94137   3rd Qu.:0.9571   3rd Qu.:0.9672   3rd Qu.:0.9547  
+ Max.   :0.98829   Max.   :0.9881   Max.   :0.9864   Max.   :0.9894  
+       V9              V10              V11               V12        
+ Min.   :0.1544   Min.   :0.1193   Min.   :0.08225   Min.   :0.2153  
+ 1st Qu.:0.9354   1st Qu.:0.9345   1st Qu.:0.93602   1st Qu.:0.9340  
+ Median :0.9555   Median :0.9561   Median :0.95659   Median :0.9553  
+ Mean   :0.9299   Mean   :0.9294   Mean   :0.93056   Mean   :0.9286  
+ 3rd Qu.:0.9669   3rd Qu.:0.9665   3rd Qu.:0.96674   3rd Qu.:0.9661  
+ Max.   :0.9850   Max.   :0.9893   Max.   :0.98796   Max.   :0.9871  
+      V13              V14              V15               V16         
+ Min.   :0.2457   Min.   :0.1506   Min.   :0.02006   Min.   :0.07406  
+ 1st Qu.:0.9340   1st Qu.:0.8032   1st Qu.:0.93549   1st Qu.:0.92717  
+ Median :0.9563   Median :0.8677   Median :0.95685   Median :0.95107  
+ Mean   :0.9305   Mean   :0.8252   Mean   :0.93087   Mean   :0.92229  
+ 3rd Qu.:0.9657   3rd Qu.:0.8995   3rd Qu.:0.96693   3rd Qu.:0.96176  
+ Max.   :0.9884   Max.   :0.9869   Max.   :0.98593   Max.   :0.98606  
+      V17              V18               V19              V20        
+ Min.   :0.2025   Min.   :0.03426   Min.   :0.2216   Min.   :0.2060  
+ 1st Qu.:0.9361   1st Qu.:0.92685   1st Qu.:0.9341   1st Qu.:0.9348  
+ Median :0.9562   Median :0.95293   Median :0.9560   Median :0.9581  
+ Mean   :0.9314   Mean   :0.92342   Mean   :0.9310   Mean   :0.9307  
+ 3rd Qu.:0.9661   3rd Qu.:0.96426   3rd Qu.:0.9671   3rd Qu.:0.9669  
+ Max.   :0.9864   Max.   :0.98517   Max.   :0.9881   Max.   :0.9872  
+      V21              V22              V23              V24        
+ Min.   :0.2022   Min.   :0.2143   Min.   :0.1581   Min.   :0.1300  
+ 1st Qu.:0.9201   1st Qu.:0.9343   1st Qu.:0.9330   1st Qu.:0.9205  
+ Median :0.9442   Median :0.9562   Median :0.9560   Median :0.9474  
+ Mean   :0.9144   Mean   :0.9308   Mean   :0.9299   Mean   :0.9165  
+ 3rd Qu.:0.9577   3rd Qu.:0.9663   3rd Qu.:0.9664   3rd Qu.:0.9606  
+ Max.   :0.9855   Max.   :0.9895   Max.   :0.9883   Max.   :0.9875  
+      V25        
+ Min.   :0.2032  
+ 1st Qu.:0.9352  
+ Median :0.9559  
+ Mean   :0.9300  
+ 3rd Qu.:0.9664  
+ Max.   :0.9846  
+       V1               V2               V3               V4        
+ Min.   :0.0947   Min.   :0.8252   Min.   :0.6955   Min.   :0.8246  
+ 1st Qu.:0.9116   1st Qu.:0.9933   1st Qu.:0.9712   1st Qu.:0.9934  
+ Median :0.9430   Median :0.9957   Median :0.9791   Median :0.9957  
+ Mean   :0.9147   Mean   :0.9930   Mean   :0.9697   Mean   :0.9929  
+ 3rd Qu.:0.9565   3rd Qu.:0.9967   3rd Qu.:0.9844   3rd Qu.:0.9966  
+ Max.   :0.9997   Max.   :1.0000   Max.   :0.9999   Max.   :1.0000  
+       V5               V6               V7               V8        
+ Min.   :0.8203   Min.   :0.8258   Min.   :0.8232   Min.   :0.8253  
+ 1st Qu.:0.9868   1st Qu.:0.9933   1st Qu.:0.9934   1st Qu.:0.9932  
+ Median :0.9915   Median :0.9958   Median :0.9957   Median :0.9957  
+ Mean   :0.9872   Mean   :0.9929   Mean   :0.9929   Mean   :0.9929  
+ 3rd Qu.:0.9934   3rd Qu.:0.9967   3rd Qu.:0.9966   3rd Qu.:0.9966  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+       V9              V10              V11              V12        
+ Min.   :0.8253   Min.   :0.8253   Min.   :0.8242   Min.   :0.7842  
+ 1st Qu.:0.9932   1st Qu.:0.9934   1st Qu.:0.9933   1st Qu.:0.9909  
+ Median :0.9957   Median :0.9957   Median :0.9958   Median :0.9939  
+ Mean   :0.9929   Mean   :0.9929   Mean   :0.9930   Mean   :0.9904  
+ 3rd Qu.:0.9966   3rd Qu.:0.9967   3rd Qu.:0.9967   3rd Qu.:0.9953  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+      V13               V14              V15              V16        
+ Min.   :0.07464   Min.   :0.8269   Min.   :0.8268   Min.   :0.8209  
+ 1st Qu.:0.96251   1st Qu.:0.9934   1st Qu.:0.9934   1st Qu.:0.9892  
+ Median :0.97618   Median :0.9958   Median :0.9957   Median :0.9929  
+ Mean   :0.96119   Mean   :0.9930   Mean   :0.9929   Mean   :0.9895  
+ 3rd Qu.:0.98213   3rd Qu.:0.9966   3rd Qu.:0.9967   3rd Qu.:0.9945  
+ Max.   :0.99993   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+      V17              V18              V19              V20        
+ Min.   :0.8242   Min.   :0.8260   Min.   :0.8254   Min.   :0.8249  
+ 1st Qu.:0.9934   1st Qu.:0.9933   1st Qu.:0.9934   1st Qu.:0.9934  
+ Median :0.9957   Median :0.9958   Median :0.9957   Median :0.9957  
+ Mean   :0.9929   Mean   :0.9930   Mean   :0.9929   Mean   :0.9930  
+ 3rd Qu.:0.9966   3rd Qu.:0.9966   3rd Qu.:0.9966   3rd Qu.:0.9967  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+      V21                V22              V23              V24        
+ Min.   :0.002521   Min.   :0.8237   Min.   :0.8254   Min.   :0.8251  
+ 1st Qu.:0.973019   1st Qu.:0.9933   1st Qu.:0.9933   1st Qu.:0.9935  
+ Median :0.981149   Median :0.9957   Median :0.9957   Median :0.9957  
+ Mean   :0.966744   Mean   :0.9929   Mean   :0.9929   Mean   :0.9930  
+ 3rd Qu.:0.986189   3rd Qu.:0.9967   3rd Qu.:0.9966   3rd Qu.:0.9966  
+ Max.   :0.996424   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+      V25        
+ Min.   :0.8245  
+ 1st Qu.:0.9933  
+ Median :0.9958  
+ Mean   :0.9929  
+ 3rd Qu.:0.9967  
+ Max.   :1.0000  
+       V1               V2                 V3               V4        
+ Min.   :0.4998   Min.   :0.008582   Min.   :0.0923   Min.   :0.5022  
+ 1st Qu.:0.9514   1st Qu.:0.939807   1st Qu.:0.9442   1st Qu.:0.9310  
+ Median :0.9658   Median :0.959550   Median :0.9602   Median :0.9478  
+ Mean   :0.9524   Mean   :0.942474   Mean   :0.9460   Mean   :0.9327  
+ 3rd Qu.:0.9730   3rd Qu.:0.968575   3rd Qu.:0.9701   3rd Qu.:0.9593  
+ Max.   :0.9996   Max.   :0.994603   Max.   :0.9997   Max.   :0.9995  
+       V5               V6               V7               V8        
+ Min.   :0.4986   Min.   :0.5173   Min.   :0.4560   Min.   :0.4758  
+ 1st Qu.:0.9527   1st Qu.:0.9530   1st Qu.:0.9207   1st Qu.:0.9478  
+ Median :0.9660   Median :0.9667   Median :0.9447   Median :0.9639  
+ Mean   :0.9530   Mean   :0.9538   Mean   :0.9260   Mean   :0.9501  
+ 3rd Qu.:0.9722   3rd Qu.:0.9729   3rd Qu.:0.9562   3rd Qu.:0.9711  
+ Max.   :0.9997   Max.   :0.9996   Max.   :0.9995   Max.   :0.9996  
+       V9              V10              V11              V12        
+ Min.   :0.5261   Min.   :0.3935   Min.   :0.5017   Min.   :0.5258  
+ 1st Qu.:0.9511   1st Qu.:0.9399   1st Qu.:0.9505   1st Qu.:0.9499  
+ Median :0.9665   Median :0.9580   Median :0.9664   Median :0.9661  
+ Mean   :0.9530   Mean   :0.9423   Mean   :0.9528   Mean   :0.9527  
+ 3rd Qu.:0.9729   3rd Qu.:0.9657   3rd Qu.:0.9726   3rd Qu.:0.9733  
+ Max.   :0.9997   Max.   :0.9995   Max.   :0.9997   Max.   :0.9996  
+      V13              V14              V15              V16        
+ Min.   :0.4916   Min.   :0.4014   Min.   :0.5037   Min.   :0.5218  
+ 1st Qu.:0.9500   1st Qu.:0.9282   1st Qu.:0.9497   1st Qu.:0.9516  
+ Median :0.9659   Median :0.9524   Median :0.9657   Median :0.9665  
+ Mean   :0.9528   Mean   :0.9340   Mean   :0.9525   Mean   :0.9532  
+ 3rd Qu.:0.9729   3rd Qu.:0.9620   3rd Qu.:0.9727   3rd Qu.:0.9731  
+ Max.   :0.9996   Max.   :0.9995   Max.   :0.9996   Max.   :0.9997  
+      V17              V18              V19              V20        
+ Min.   :0.5375   Min.   :0.5035   Min.   :0.4859   Min.   :0.5072  
+ 1st Qu.:0.9475   1st Qu.:0.9501   1st Qu.:0.9502   1st Qu.:0.9503  
+ Median :0.9623   Median :0.9658   Median :0.9662   Median :0.9671  
+ Mean   :0.9499   Mean   :0.9534   Mean   :0.9526   Mean   :0.9530  
+ 3rd Qu.:0.9712   3rd Qu.:0.9729   3rd Qu.:0.9731   3rd Qu.:0.9728  
+ Max.   :0.9997   Max.   :0.9997   Max.   :0.9996   Max.   :0.9996  
+      V21              V22              V23              V24        
+ Min.   :0.4975   Min.   :0.4823   Min.   :0.5121   Min.   :0.5127  
+ 1st Qu.:0.9510   1st Qu.:0.9498   1st Qu.:0.9513   1st Qu.:0.9504  
+ Median :0.9665   Median :0.9659   Median :0.9656   Median :0.9661  
+ Mean   :0.9532   Mean   :0.9534   Mean   :0.9526   Mean   :0.9531  
+ 3rd Qu.:0.9733   3rd Qu.:0.9733   3rd Qu.:0.9731   3rd Qu.:0.9725  
+ Max.   :0.9997   Max.   :0.9996   Max.   :0.9996   Max.   :0.9997  
+      V25        
+ Min.   :0.5104  
+ 1st Qu.:0.9488  
+ Median :0.9662  
+ Mean   :0.9530  
+ 3rd Qu.:0.9731  
+ Max.   :0.9996  
+       V1               V2               V3               V4         
+ Min.   :0.7763   Min.   :0.7834   Min.   :0.7880   Min.   :0.07595  
+ 1st Qu.:0.9137   1st Qu.:0.9197   1st Qu.:0.9167   1st Qu.:0.90631  
+ Median :0.9351   Median :0.9378   Median :0.9354   Median :0.92710  
+ Mean   :0.9285   Mean   :0.9319   Mean   :0.9297   Mean   :0.91690  
+ 3rd Qu.:0.9496   3rd Qu.:0.9510   3rd Qu.:0.9501   3rd Qu.:0.94315  
+ Max.   :0.9839   Max.   :0.9819   Max.   :0.9818   Max.   :0.98285  
+       V5               V6               V7               V8        
+ Min.   :0.7734   Min.   :0.7562   Min.   :0.2977   Min.   :0.8238  
+ 1st Qu.:0.9110   1st Qu.:0.9143   1st Qu.:0.9129   1st Qu.:0.9162  
+ Median :0.9321   Median :0.9352   Median :0.9337   Median :0.9361  
+ Mean   :0.9254   Mean   :0.9281   Mean   :0.9250   Mean   :0.9304  
+ 3rd Qu.:0.9470   3rd Qu.:0.9498   3rd Qu.:0.9468   3rd Qu.:0.9503  
+ Max.   :0.9847   Max.   :0.9816   Max.   :0.9856   Max.   :0.9850  
+       V9              V10              V11              V12        
+ Min.   :0.8145   Min.   :0.7682   Min.   :0.7521   Min.   :0.7331  
+ 1st Qu.:0.9169   1st Qu.:0.9143   1st Qu.:0.9162   1st Qu.:0.9187  
+ Median :0.9367   Median :0.9363   Median :0.9349   Median :0.9348  
+ Mean   :0.9312   Mean   :0.9287   Mean   :0.9300   Mean   :0.9303  
+ 3rd Qu.:0.9494   3rd Qu.:0.9495   3rd Qu.:0.9486   3rd Qu.:0.9499  
+ Max.   :0.9860   Max.   :0.9856   Max.   :0.9827   Max.   :0.9855  
+      V13              V14              V15              V16        
+ Min.   :0.4343   Min.   :0.7583   Min.   :0.4274   Min.   :0.7685  
+ 1st Qu.:0.8873   1st Qu.:0.9167   1st Qu.:0.8618   1st Qu.:0.9177  
+ Median :0.9143   Median :0.9362   Median :0.8942   Median :0.9364  
+ Mean   :0.8980   Mean   :0.9300   Mean   :0.8812   Mean   :0.9298  
+ 3rd Qu.:0.9327   3rd Qu.:0.9502   3rd Qu.:0.9153   3rd Qu.:0.9497  
+ Max.   :0.9824   Max.   :0.9858   Max.   :0.9820   Max.   :0.9860  
+      V17              V18              V19              V20        
+ Min.   :0.7392   Min.   :0.8013   Min.   :0.8169   Min.   :0.6024  
+ 1st Qu.:0.9170   1st Qu.:0.9184   1st Qu.:0.9173   1st Qu.:0.9069  
+ Median :0.9351   Median :0.9360   Median :0.9372   Median :0.9309  
+ Mean   :0.9303   Mean   :0.9305   Mean   :0.9315   Mean   :0.9223  
+ 3rd Qu.:0.9494   3rd Qu.:0.9499   3rd Qu.:0.9498   3rd Qu.:0.9452  
+ Max.   :0.9825   Max.   :0.9842   Max.   :0.9835   Max.   :0.9826  
+      V21              V22              V23              V24         
+ Min.   :0.7855   Min.   :0.5693   Min.   :0.7650   Min.   :0.03912  
+ 1st Qu.:0.9183   1st Qu.:0.8637   1st Qu.:0.9188   1st Qu.:0.90507  
+ Median :0.9345   Median :0.8996   Median :0.9364   Median :0.92537  
+ Mean   :0.9295   Mean   :0.8830   Mean   :0.9301   Mean   :0.91677  
+ 3rd Qu.:0.9498   3rd Qu.:0.9224   3rd Qu.:0.9496   3rd Qu.:0.94356  
+ Max.   :0.9817   Max.   :0.9803   Max.   :0.9829   Max.   :0.98370  
+      V25        
+ Min.   :0.7727  
+ 1st Qu.:0.9164  
+ Median :0.9347  
+ Mean   :0.9284  
+ 3rd Qu.:0.9482  
+ Max.   :0.9849  </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
