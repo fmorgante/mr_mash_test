@@ -335,3 +335,57 @@ legend("topleft",
 ```
 
 In general, *mash* seems to have more difficulty to shrink true 0 coefficients.
+
+Let's now compare the two methods on completely null data.
+
+```{r null data mash vs mr.mash, fig.height=12, fig.width=15}
+nreps <- 4
+mrmash_null_coeff <- vector("list", nreps)
+mash_null_pm <- vector("list", nreps)
+
+for(i in 1:nreps){
+  ###Simulate null phenotypes
+  Ytrain_null <- matrix(rnorm((n-ntest)*r), nrow=(n-ntest), ncol=r)
+
+  ###Compute grid of variances
+  univ_sumstats_null <- compute_univariate_sumstats(Xtrain, Ytrain_null, standardize=standardize, 
+                                               standardize.response=FALSE, mc.cores=nthreads)
+  grid_null <- autoselect.mixsd(univ_sumstats_null, mult=sqrt(2))^2
+
+  ###Compute prior with only canonical matrices
+  S0_null <- expand_covs(S0_can, grid_null, zeromat=TRUE)
+
+  ###Fit mr.mash
+  out_coeff_null <- compute_coefficients_glasso(Xtrain, Ytrain_null, standardize=standardize, nthreads=nthreads, version="Rcpp")
+  prop_nonzero_glmnet_null <- sum(out_coeff_null$B[, 1]!=0)/p
+  w0_null <- c((1-prop_nonzero_glmnet_null), rep(prop_nonzero_glmnet_null/(length(S0_null)-1), (length(S0_null)-1)))
+
+  fit_mrmash_null <- mr.mash(Xtrain, Ytrain_null, S0_null, w0=w0_null, update_w0=TRUE, update_w0_method="EM", tol=1e-2,
+                        convergence_criterion="ELBO", compute_ELBO=TRUE, standardize=standardize, 
+                        verbose=FALSE, update_V=TRUE, update_V_method="diagonal", e=1e-8,
+                        w0_threshold=w0_threshold, nthreads=nthreads, mu1_init=out_coeff_null$B)
+  mrmash_null_coeff[[i]] <- fit_mrmash_null$mu1
+
+  ###Fit mash
+  dat_mash_null <- mash_set_data(univ_sumstats_null$Bhat, univ_sumstats_null$Shat)
+  mash_obj_null <- mash(dat_mash_null, S0_can)
+  mash_null_pm[[i]] <- get_pm(mash_obj_null)
+
+}
+
+#####Coefficients plots######
+layout(matrix(c(1, 1, 2, 2,
+                1, 1, 2, 2,
+                3, 3, 4, 4,
+                3, 3, 4, 4), 4, 4, byrow = TRUE))
+
+for(i in 1:nreps){
+  ##mr.mash vs mash
+  plot(mrmash_null_coeff[[i]], mash_null_pm[[i]], 
+       xlab="mr.mash coefficients", ylab="mash coefficients",
+       col="red", cex=2, cex.lab=2, cex.main=2, cex.axis=2)
+  abline(0, 1)
+}
+```
+
+It turns out that *mr.mash* does not seem to give more false pasitives than *mash* -- it is actually the opposite.  
