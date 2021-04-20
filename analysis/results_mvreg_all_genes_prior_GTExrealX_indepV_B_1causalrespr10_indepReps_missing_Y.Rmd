@@ -71,7 +71,7 @@ compute_rrmse <- function(dsc_plot, log10_scale=FALSE){
   for (i in unique(dsc_plot$experiment)) {
     t <- t+1
     rmse_data  <- dsc_plot[which(dsc_plot$experiment == i & dsc_plot$score_metric=="scaled_rmse"), ]
-    mse_mr_mash_consec_em <- rmse_data[which(rmse_data$method=="mr_mash_em_can"), "score_value"]
+    mse_mr_mash_consec_em <- rmse_data[which(rmse_data$method=="mr_mash_em_can_mlasso"), "score_value"]
     if(!log10_scale)
       rmse_data$score_value <- rmse_data$score_value/mse_mr_mash_consec_em
     else
@@ -101,8 +101,8 @@ for(repl in 1:20){
   dsc_out <- dscquery(paste0("output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y/rep", repl), 
                       c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w", 
                         "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"), 
-                      groups="fit: mr_mash_em_can, mr_mash_em_data, mr_mash_em_dataAndcan, mr_mash_em_dataAndcan_dropcomp, mtlasso, enet",
-                      verbose=FALSE)
+                      groups="fit: mr_mash_em_can_enet, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mr_mash_em_dataAndcan_mlasso, mr_mash_em_dataAndcan_dropcomp_mlasso, mtlasso, enet",
+		      verbose=FALSE)
   
   ###Convert from list to data.frame for plotting
   if(repl==1){
@@ -144,7 +144,7 @@ For each replicate:
 
 4. We estimated data-driven covariance matrices using the training set. This was done by computing univariate summary statistics by simple linear regression for each response. These regression coefficients and standard errors were used as input in the *mash* pipeline (from Gao) to compute data-driven covariance matrices (up to the ED step included). In particular, the top variable per gene was used to define a "strong" set and 4 random variables per gene were used to define a "random" set. Covariance matrices were estimated using *flash*, PCA (including the top 3 PCs), and the empirical covariance matrix.
 
-5. We fitted competing methods and *mr.mash* to the training set for the first gene. *mr.mash* was fitted updating V (imposing a diagonal structure) and updating the prior weights using EM updates. The covariances matrices were scaled by a grid of values computed from the univariate summary statistics as in the *mash* paper. The posterior mean of the regression coefficients were initialized to the estimates of the group-LASSO. The mixture weights were initialized with the proportion of zero-coefficients from the group-LASSO estimate as the weight on the spike and the proportion of non-zero-coefficients split equally among the remaining components. Because the *glmnet* implementation of group-LASSO cannot handle missing values in Y, we did one round of imputation based on the same methodology implemented in *mr.mash*. We then ran group-LASSO on the resulting Y. Convergence was declared when the maximum difference in the ELBO between two successive iterations was smaller than 1e-2. Four settings of the mixture prior were used:
+5. We fitted competing methods and *mr.mash* to the training set for the first gene. *mr.mash* was fitted updating V (imposing a diagonal structure) and updating the prior weights using EM updates. The covariances matrices were scaled by a grid of values computed from the univariate summary statistics as in the *mash* paper. The posterior mean of the regression coefficients were initialized to the estimates of the group-LASSO. The mixture weights were initialized with the proportion of zero-coefficients from the group-LASSO estimate as the weight on the spike and the proportion of non-zero-coefficients split equally among the remaining components. Because the *glmnet* implementation of group-LASSO cannot handle missing values in Y, we did one round of imputation based on the same methodology implemented in *mr.mash*. We then ran group-LASSO on the resulting Y. Alternatively, *mr.mash* was initialized using the estimates from the univariate elastic net. Convergence was declared when the maximum difference in the ELBO between two successive iterations was smaller than 1e-2. Four settings of the mixture prior were used:
 
     + canonical matrices corresponding to different settings of effect sharing/specificity (i.e., singletons, independent, low heterogeneity, medium heterogeneity, high heterogeneity, shared) plus the spike. 
 
@@ -174,12 +174,11 @@ dsc_plots <- rbind(dsc_plots, rrmse_dat)
 dsc_plots <- dsc_plots[which(dsc_plots$score_metric!="scaled_rmse" ), ]
 
 ###Create factor version of method
-dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_em_can", "mr_mash_em_data",
-                                                          "mr_mash_em_dataAndcan", "mr_mash_em_dataAndcan_dropcomp", 
-                                                          "mtlasso", "enet"),
-                                                labels=c("mr_mash_can", "mr_mash_data", "mr_mash_both", 
-                                                         "mr_mash_both_drop", "mtlasso", "enet"))
-
+dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_em_can_mlasso", "mr_mash_em_data_mlasso",
+                                                            "mr_mash_em_dataAndcan_mlasso", "mr_mash_em_dataAndcan_dropcomp_mlasso", 
+                                                            "mr_mash_em_can_enet", "mtlasso", "enet"),
+                                 labels=c("mr_mash_can", "mr_mash_data", "mr_mash_both", "mr_mash_both_w0thresh", 
+                                          "mr_mash_can_enet", "mtlasso", "enet"))
 ###Create factor version of response
 dsc_plots$response_fac <- as.factor(dsc_plots$response)
 
