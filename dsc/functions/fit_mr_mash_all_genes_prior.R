@@ -37,7 +37,7 @@ fit_mr_mash_all_genes_prior <- function(X, Y, update_w0, update_w0_method, stand
   ###Load and extract data-driven matrices, if requested
   if(!is.null(data_driven_mats)){
     S0_data <- readRDS(data_driven_mats)
-    S0_data[c("identity", paste0("Y", 1:r), "equal_effects", "simple_het_1", "simple_het_2", "simple_het_3")] <- NULL
+    S0_data[c("identity", colnames(Y), "equal_effects", "simple_het_1", "simple_het_2", "simple_het_3")] <- NULL
     if(canonical_mats){
       S0_raw <- c(S0_raw, S0_data)
     } else {
