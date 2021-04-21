@@ -5,6 +5,7 @@
 #SBATCH --error=mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_pipeline_array.%j.err
 #SBATCH --time=08:00:00
 #SBATCH --partition=caslake
+#SBATCH --account=pi-mstephens
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=6G
@@ -72,7 +73,7 @@ then
   echo "Running ${step} ..."
 
   ###Run dsc to simulate genes and process data for data-driven covariance estimation                                       
-  "${dsc_script}" -o "../${dsc_outdir}/rep${rep}" --target sim_proc --n_dataset "${total_genes}" --randseed "${ranseed}" -c 2 --host ../../midway2.yml \
+  "${dsc_script}" -o "../${dsc_outdir}/rep${rep}" --target sim_proc --n_dataset "${total_genes}" --randseed "${ranseed}" -c 2 --host ../../midway3.yml \
                   --testset_ids "\"../${inter_outdir}/rep${rep}/misc/testset_ids.rds\"" \
                   --data_driven_mats_file "\"../${inter_outdir}/rep${rep}/prior/matrices/${dsc_outname}.EZ.prior.rds\""
 
@@ -89,7 +90,7 @@ then
   echo "Running ${step} ..."
 
   ###Run dsc to simulate genes and process data for data-driven covariance estimation                                       
-  "${dsc_script}" -o "../${dsc_outdir}/rep${rep}" --target sim_proc --n_dataset "${total_genes}" --randseed "${ranseed}" -c 2 --host ../../midway2.yml \
+  "${dsc_script}" -o "../${dsc_outdir}/rep${rep}" --target sim_proc --n_dataset "${total_genes}" --randseed "${ranseed}" -c 2 --host ../../midway3.yml \
                   --testset_ids "\"../${inter_outdir}/rep${rep}/misc/testset_ids.rds\"" \
                   --data_driven_mats_file "\"../${inter_outdir}/rep${rep}/prior/matrices/${dsc_outname}.EZ.prior.rds\"" \
                   -s existing
@@ -114,8 +115,8 @@ then
 
   ###Run GTEx pipeline to compute the prior covariance matrices
   sos run ../../../../gtexresults/workflows/mashr_flashr_workflow.ipynb prior \
-          -c ../../../scripts/midway2_sos.yml \
-          -q midway2 \
+          -c ../../../scripts/midway3_sos.yml \
+          -q midway3 \
           --cwd "../${inter_outdir}/rep${rep}/prior/matrices" \
           --data "../${inter_outdir}/rep${rep}/prior/sumstats/${dsc_outname}_effects_for_ED_prior.rds" \
           --output-prefix "${dsc_outname}"
@@ -133,7 +134,7 @@ then
   echo "Running ${step} ..."
 
   ###Run dsc to fit the models and do prediction
-  "${dsc_script}" -o "../${dsc_outdir}/rep${rep}" --target fit_pred_score -s existing --n_dataset "${pred_genes}" --randseed "${ranseed}" -c 2 --host ../../midway2.yml \
+  "${dsc_script}" -o "../${dsc_outdir}/rep${rep}" --target fit_pred_score -s existing --n_dataset "${pred_genes}" --randseed "${ranseed}" -c 2 --host ../../midway3.yml \
                   --testset_ids "\"../${inter_outdir}/rep${rep}/misc/testset_ids.rds\"" \
                   --data_driven_mats_file "\"../${inter_outdir}/rep${rep}/prior/matrices/${dsc_outname}.EZ.prior.rds\""
 

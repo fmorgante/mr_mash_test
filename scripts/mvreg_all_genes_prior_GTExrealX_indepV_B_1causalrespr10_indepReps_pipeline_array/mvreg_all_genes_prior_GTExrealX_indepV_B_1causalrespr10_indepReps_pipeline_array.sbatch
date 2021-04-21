@@ -114,7 +114,7 @@ then
                                                         --seed "${ranseed}"
 
   ###Run GTEx pipeline to compute the prior covariance matrices
-  sos run ../../../../gtexresults/workflows/mashr_flashr_workflow.ipynb prior \        
+  sos run ../../../../gtexresults/workflows/mashr_flashr_workflow.ipynb prior \
           -c ../../../scripts/midway3_sos.yml \
           -q midway3 \
           --cwd "../${inter_outdir}/rep${rep}/prior/matrices" \
