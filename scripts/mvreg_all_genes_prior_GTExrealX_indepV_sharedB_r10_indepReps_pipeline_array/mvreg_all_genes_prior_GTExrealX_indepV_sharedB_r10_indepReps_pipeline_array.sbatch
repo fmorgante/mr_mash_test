@@ -5,7 +5,7 @@
 #SBATCH --error=mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.%j.err
 #SBATCH --time=08:00:00
 #SBATCH --partition=caslake
-#SBATCH --acount=pi-mstephens
+#SBATCH --account=pi-mstephens
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=6G
