@@ -91,8 +91,8 @@ utmost: fit_utmost_mod.R
   X:                    $X
   Y:                    $Y
   nfolds:               5
-  $B_est:               B_est
-  $time:                elapsed_time
+  $B_est:               out$B_est
+  $time:                out$elapsed_time
 
 ## Score modules
 mse: coeff_mse_mod.R
