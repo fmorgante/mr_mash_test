@@ -41,7 +41,7 @@ fit_mr_mash <- function(X, Y, update_w0, update_w0_method, standardize, update_V
   ###Compute prior covariance and weights
   S0 <- mr.mash.alpha::expand_covs(S0_raw, grid, zeromat=TRUE)
   
-  prop_nonzero_glmnet <- sum(mu1_init[, 1]!=0)/p
+  prop_nonzero_glmnet <- sum(rowSums(abs(mu1_init))>0)/p
   w0 <- c((1-prop_nonzero_glmnet), rep(prop_nonzero_glmnet/(length(S0)-1), (length(S0)-1)))
 
   ###Fit mr.mash
