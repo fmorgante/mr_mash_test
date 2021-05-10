@@ -9,7 +9,9 @@ DSC:
   exec_path: modules
   replicate: 1
   define:
-    simulate: indepX_indepV_sharedB_allr_norm, corrX_indepV_sharedB_allr_norm, highcorrX_indepV_sharedB_allr_norm,
+    simulate: indepX_indepV_sharedB_allr_norm, indepX_indepV_indepB_allr_norm,
+              indepX_indepV_B_1causalr, indepX_indepV_sharedB_2blocksr_diffPVE,
+              indepX_indepV_sharedB_3causalrespr10
     fit:      mr_mash, mtlasso, utmost
     score:    mse
   run: simulate * fit * score
@@ -36,17 +38,30 @@ indepX_indepV_sharedB_allr_norm: simulate_data_mod.R
   $B_true: out$B_true
  
 
-#Correlated predictors, independent residuals, shared effects from a single normal,
+#Independent predictors, independent residuals, independent effects from a single normal,
 #all resposens are causal
-corrX_indepV_sharedB_allr_norm(indepX_indepV_sharedB_allr_norm):
-  B_cor:    1
-  X_cor:    0.5
+indepX_indepV_indepB_allr_norm(indepX_indepV_sharedB_allr_norm):
+  B_cor:    0
 
-#Higly correlated predictors, independent residuals, shared effects from a single normal,
-#all resposens are causal
-highcorrX_indepV_sharedB_allr_norm(indepX_indepV_sharedB_allr_norm):
+#Independent predictors, independent residuals, effects only in tissue 1
+indepX_indepV_B_1causalr(indepX_indepV_sharedB_allr_norm):
+  r_causal: raw(list(1))
+  B_cor:    0
+
+#Independent predictors, independent residuals, 2 blocks of effects, with
+#shared effects within block, no sharing between blocks, and different PVE
+#for each block
+indepX_indepV_sharedB_2blocksr_diffPVE(indepX_indepV_sharedB_allr_norm):
+  r_causal: raw(list(1:3,4:10))
+  B_scale:  (0.8,1)
+  B_cor:    (0.9,0.75)
+  w:        (0.5,0.5)
+  pve:      raw(c(rep(0.2, 3), rep(0.05, 7)))
+
+#Independent predictors, independent residuals, shared effects only in tissue 1-3
+indepX_indepV_sharedB_3causalrespr10(indepX_indepV_sharedB_allr_norm):
+  r_causal: raw(list(1:3))
   B_cor:    1
-  X_cor:    0.8
   
 ## Fit modules
 #EM w0 updates, no drop w0, standardize X, update V (constrained diagonal),
