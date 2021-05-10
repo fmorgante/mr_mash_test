@@ -17,7 +17,7 @@ conda activate py38dsc
 ###Set variables
 export OPENBLAS_NUM_THREADS=1
 export OMP_NUM_THREADS=1
-reps=1
+reps=20
 
 ###Run dsc
 mkdir -p ../output/mvreg_mrmash_vs_mtlasso_vs_utmost
