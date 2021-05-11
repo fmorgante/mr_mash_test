@@ -488,16 +488,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree9e3b05f06f5297fbcbb459b2a09e3d6291267a26targetblank9e3b05fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/9e3b05f06f5297fbcbb459b2a09e3d6291267a26" target="_blank">9e3b05f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree73a39799f15a571a056c7f93f84c86a6569393e8targetblank73a3979a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/73a39799f15a571a056c7f93f84c86a6569393e8" target="_blank">73a3979</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree9e3b05f06f5297fbcbb459b2a09e3d6291267a26targetblank9e3b05fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree73a39799f15a571a056c7f93f84c86a6569393e8targetblank73a3979a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/9e3b05f06f5297fbcbb459b2a09e3d6291267a26" target="_blank">9e3b05f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/73a39799f15a571a056c7f93f84c86a6569393e8" target="_blank">73a3979</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -2707,6 +2707,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/73a39799f15a571a056c7f93f84c86a6569393e8/analysis/mrmash_vs_mtlasso_vs_utmost.Rmd" target="_blank">73a3979</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-05-11
+</td>
+<td>
+Add a few improvements and descriptions
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/2dcb89872f27f3e68bd074864f1b41d965af9c23/docs/mrmash_vs_mtlasso_vs_utmost.html" target="_blank">2dcb898</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-05-11
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/9e3b05f06f5297fbcbb459b2a09e3d6291267a26/analysis/mrmash_vs_mtlasso_vs_utmost.Rmd" target="_blank">9e3b05f</a>
 </td>
 <td>
@@ -2770,7 +2804,7 @@ convert_dsc_to_dataframe &lt;- function(dsc){
 }
 
 colors &lt;- c(&quot;skyblue&quot;, &quot;limegreen&quot;, &quot;red&quot;)</code></pre>
-<p>In all the analyses so far, we have used <a href="https://users.rcc.uchicago.edu/~aksarkar/gtex-pred/lasso.html">Abhishek’s implementation of the sparse multi-task LASSO</a> (called mtlasso here), the method that was used in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6788740/">UTMOST</a>. This is because the <a href="https://github.com/yiminghu/CTIMP">original implementation</a> requires the data in an awkward format. Recently, the Ritchie Lab reimplemented the <a href="https://github.com/RitchieLab/multi_tissue_twas_sim">method</a> using the original code from the UTMOST autors so that it takes is data in the standard format (i.e., Y in matrix form). The caveat is that this reimplementation does not allow for missing values in Y. In this website, we want to compare <em>mr.mash</em> to both the Ritchie Lab’s implementation and Abhishek’s implementation of UTMOST. Because the original UTMOST method only provides the estimated coefficients and does not provide an estimated intercept, we are going to compare the accuracy of the estimated coefficients for the three methods in simulations with independent predictors.</p>
+<p>In all the analyses so far, we have used <a href="https://users.rcc.uchicago.edu/~aksarkar/gtex-pred/lasso.html">Abhishek’s implementation of the sparse multi-task LASSO</a> (called mtlasso here), the method that was used in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6788740/">UTMOST</a>. This is because the <a href="https://github.com/yiminghu/CTIMP">original implementation</a> requires the data in an awkward format. Note that Abhishek’s implementation is not exactly the same as UTMOST. For example, the initialization of the coefficients and the way to choose the grid of values for the tuning parameters are different. Recently, the Ritchie Lab reimplemented the <a href="https://github.com/RitchieLab/multi_tissue_twas_sim">method</a> using the original code from the UTMOST autors so that it takes in data in the standard format (i.e., Y in matrix form). The caveat is that this reimplementation does not allow for missing values in Y. In this website, we want to compare <em>mr.mash</em> to both the Ritchie Lab’s implementation and Abhishek’s implementation of UTMOST. Because the original UTMOST method only provides the estimated coefficients and does not provide an estimated intercept, we are going to compare the accuracy of the estimated coefficients for the three methods in simulations with independent predictors.</p>
 <p>We simulated five scenarios with n=500, p=1000, r=10, PVE=0.2, p_causal=randomly sampled between 1 and 10, independent residuals, and the following structure of effects across conditions:</p>
 <ul>
 <li><p>equal effects.</p></li>
@@ -2780,7 +2814,7 @@ colors &lt;- c(&quot;skyblue&quot;, &quot;limegreen&quot;, &quot;red&quot;)</cod
 <li><p>shared effects in condition 1-3, shared effects in condition 7-10 (with per-condition PVE=0.05), and no sharing between these two groups.</p></li>
 </ul>
 <p><em>mr.mash</em> was fitted with only canonical covariance matrices, updating V (imposing a diagonal structure), and updating the prior weights using EM updates. Because UTMOST only centers the predictors, mtlasso and <em>mr.mash</em> were also run only centering the predictors for consistency.</p>
-<p>Accuracy of the estimated coefficients is measured as the mean squared error (MSE) to the true coefficients.</p>
+<p>The accuracy of the estimated coefficients is measured as the mean squared error (MSE) to the true coefficients.</p>
 <div id="equal-effects-across-conditions" class="section level4">
 <h4>Equal effects across conditions</h4>
 <pre class="r"><code>dsc_out &lt;- dscquery(&quot;output/mvreg_mrmash_vs_mtlasso_vs_utmost&quot;, 
@@ -2789,9 +2823,9 @@ colors &lt;- c(&quot;skyblue&quot;, &quot;limegreen&quot;, &quot;red&quot;)</cod
                       &quot;simulate.X_cor&quot;, &quot;simulate.X_scale&quot;,
                       &quot;simulate.V_cor&quot;, &quot;simulate.prop_testset&quot;,
                       &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
-                    conditions = &quot;$(simulate) == &#39;indepX_indepV_sharedB_allr_norm&#39;&quot;, verbose=FALSE)</code></pre>
-<pre><code>dscquery is returning a list because one or more outputs are complex; consider converting the list to a tibble using the &quot;tibble&quot; package</code></pre>
-<pre class="r"><code>dsc_plots &lt;- convert_dsc_to_dataframe(dsc_out)
+                    conditions = &quot;$(simulate) == &#39;indepX_indepV_sharedB_allr_norm&#39;&quot;, verbose=FALSE)
+
+dsc_plots &lt;- convert_dsc_to_dataframe(dsc_out)
 
 dsc_plots$method_fac &lt;- factor(dsc_plots$method, levels=c(&quot;mr_mash&quot;, &quot;mtlasso&quot;, &quot;utmost&quot;))
 
@@ -2804,6 +2838,43 @@ p &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = &quot;score
 
 print(p)</code></pre>
 <p><img src="figure/mrmash_vs_mtlasso_vs_utmost.Rmd/equal%20effects%20simulations-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-equal-effects-simulations-1">
+Past versions of "equal effects simulations-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-equal-effects-simulations-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/2dcb89872f27f3e68bd074864f1b41d965af9c23/docs/figure/mrmash_vs_mtlasso_vs_utmost.Rmd/equal effects simulations-1.png" target="_blank">2dcb898</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-05-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>###Create plot for run time
 dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1),
                             -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -2820,6 +2891,43 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method&quot;, y = &quot
 
 print(p_time)</code></pre>
 <p><img src="figure/mrmash_vs_mtlasso_vs_utmost.Rmd/equal%20effects%20simulations-2.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-equal-effects-simulations-2">
+Past versions of "equal effects simulations-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-equal-effects-simulations-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/2dcb89872f27f3e68bd074864f1b41d965af9c23/docs/figure/mrmash_vs_mtlasso_vs_utmost.Rmd/equal effects simulations-2.png" target="_blank">2dcb898</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-05-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="independent-effects-across-conditions" class="section level4">
 <h4>Independent effects across conditions</h4>
@@ -2829,9 +2937,9 @@ print(p_time)</code></pre>
                       &quot;simulate.X_cor&quot;, &quot;simulate.X_scale&quot;,
                       &quot;simulate.V_cor&quot;, &quot;simulate.prop_testset&quot;,
                       &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;),
-                    conditions = &quot;$(simulate) == &#39;indepX_indepV_indepB_allr_norm&#39;&quot;, verbose=FALSE)</code></pre>
-<pre><code>dscquery is returning a list because one or more outputs are complex; consider converting the list to a tibble using the &quot;tibble&quot; package</code></pre>
-<pre class="r"><code>dsc_plots &lt;- convert_dsc_to_dataframe(dsc_out)
+                    conditions = &quot;$(simulate) == &#39;indepX_indepV_indepB_allr_norm&#39;&quot;, verbose=FALSE)
+
+dsc_plots &lt;- convert_dsc_to_dataframe(dsc_out)
 
 dsc_plots$method_fac &lt;- factor(dsc_plots$method, levels=c(&quot;mr_mash&quot;, &quot;mtlasso&quot;, &quot;utmost&quot;))
 
@@ -2844,6 +2952,43 @@ p &lt;- ggplot(dsc_plots, aes_string(x = &quot;method_fac&quot;, y = &quot;score
 
 print(p)</code></pre>
 <p><img src="figure/mrmash_vs_mtlasso_vs_utmost.Rmd/independent%20effects%20simulations-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-independent-effects-simulations-1">
+Past versions of "independent effects simulations-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-independent-effects-simulations-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/2dcb89872f27f3e68bd074864f1b41d965af9c23/docs/figure/mrmash_vs_mtlasso_vs_utmost.Rmd/independent effects simulations-1.png" target="_blank">2dcb898</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-05-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>###Create plot for run time
 dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1),
                             -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -2860,6 +3005,43 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method&quot;, y = &quot
 
 print(p_time)</code></pre>
 <p><img src="figure/mrmash_vs_mtlasso_vs_utmost.Rmd/independent%20effects%20simulations-2.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-independent-effects-simulations-2">
+Past versions of "independent effects simulations-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-independent-effects-simulations-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/2dcb89872f27f3e68bd074864f1b41d965af9c23/docs/figure/mrmash_vs_mtlasso_vs_utmost.Rmd/independent effects simulations-2.png" target="_blank">2dcb898</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-05-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="effects-only-in-condition-1" class="section level4">
 <h4>Effects only in condition 1</h4>
@@ -2869,9 +3051,9 @@ print(p_time)</code></pre>
                       &quot;simulate.X_cor&quot;, &quot;simulate.X_scale&quot;,
                       &quot;simulate.V_cor&quot;, &quot;simulate.prop_testset&quot;,
                       &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;),
-                    conditions = &quot;$(simulate) == &#39;indepX_indepV_B_1causalr&#39;&quot;, verbose=FALSE)</code></pre>
-<pre><code>dscquery is returning a list because one or more outputs are complex; consider converting the list to a tibble using the &quot;tibble&quot; package</code></pre>
-<pre class="r"><code>dsc_plots &lt;- convert_dsc_to_dataframe(dsc_out)
+                    conditions = &quot;$(simulate) == &#39;indepX_indepV_B_1causalr&#39;&quot;, verbose=FALSE)
+
+dsc_plots &lt;- convert_dsc_to_dataframe(dsc_out)
 
 dsc_plots$method_fac &lt;- factor(dsc_plots$method, levels=c(&quot;mr_mash&quot;, &quot;mtlasso&quot;, &quot;utmost&quot;))
 dsc_plots$response_fac &lt;- as.factor(dsc_plots$response)
@@ -2884,6 +3066,43 @@ p &lt;- ggplot(dsc_plots, aes_string(x = &quot;response_fac&quot;, y = &quot;sco
 
 print(p)</code></pre>
 <p><img src="figure/mrmash_vs_mtlasso_vs_utmost.Rmd/singleton%20effects%20simulations-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-singleton-effects-simulations-1">
+Past versions of "singleton effects simulations-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-singleton-effects-simulations-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/2dcb89872f27f3e68bd074864f1b41d965af9c23/docs/figure/mrmash_vs_mtlasso_vs_utmost.Rmd/singleton effects simulations-1.png" target="_blank">2dcb898</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-05-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>###Create plot for run time
 dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1),
                             -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -2900,6 +3119,43 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method&quot;, y = &quot
 
 print(p_time)</code></pre>
 <p><img src="figure/mrmash_vs_mtlasso_vs_utmost.Rmd/singleton%20effects%20simulations-2.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-singleton-effects-simulations-2">
+Past versions of "singleton effects simulations-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-singleton-effects-simulations-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/2dcb89872f27f3e68bd074864f1b41d965af9c23/docs/figure/mrmash_vs_mtlasso_vs_utmost.Rmd/singleton effects simulations-2.png" target="_blank">2dcb898</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-05-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="equal-effects-in-condition-1-3" class="section level4">
 <h4>Equal effects in condition 1-3</h4>
@@ -2909,9 +3165,9 @@ print(p_time)</code></pre>
                       &quot;simulate.X_cor&quot;, &quot;simulate.X_scale&quot;,
                       &quot;simulate.V_cor&quot;, &quot;simulate.prop_testset&quot;,
                       &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;),
-                    conditions = &quot;$(simulate) == &#39;indepX_indepV_sharedB_3causalrespr10&#39;&quot;, verbose=FALSE)</code></pre>
-<pre><code>dscquery is returning a list because one or more outputs are complex; consider converting the list to a tibble using the &quot;tibble&quot; package</code></pre>
-<pre class="r"><code>dsc_plots &lt;- convert_dsc_to_dataframe(dsc_out)
+                    conditions = &quot;$(simulate) == &#39;indepX_indepV_sharedB_3causalrespr10&#39;&quot;, verbose=FALSE)
+
+dsc_plots &lt;- convert_dsc_to_dataframe(dsc_out)
 
 dsc_plots$method_fac &lt;- factor(dsc_plots$method, levels=c(&quot;mr_mash&quot;, &quot;mtlasso&quot;, &quot;utmost&quot;))
 dsc_plots$response_fac &lt;- as.factor(dsc_plots$response)
@@ -2924,6 +3180,43 @@ p &lt;- ggplot(dsc_plots, aes_string(x = &quot;response_fac&quot;, y = &quot;sco
 
 print(p)</code></pre>
 <p><img src="figure/mrmash_vs_mtlasso_vs_utmost.Rmd/one%20block%20effects%20simulations-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-one-block-effects-simulations-1">
+Past versions of "one block effects simulations-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-one-block-effects-simulations-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/2dcb89872f27f3e68bd074864f1b41d965af9c23/docs/figure/mrmash_vs_mtlasso_vs_utmost.Rmd/one block effects simulations-1.png" target="_blank">2dcb898</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-05-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>###Create plot for run time
 dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1),
                             -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -2940,6 +3233,43 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method&quot;, y = &quot
 
 print(p_time)</code></pre>
 <p><img src="figure/mrmash_vs_mtlasso_vs_utmost.Rmd/one%20block%20effects%20simulations-2.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-one-block-effects-simulations-2">
+Past versions of "one block effects simulations-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-one-block-effects-simulations-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/2dcb89872f27f3e68bd074864f1b41d965af9c23/docs/figure/mrmash_vs_mtlasso_vs_utmost.Rmd/one block effects simulations-2.png" target="_blank">2dcb898</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-05-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="shared-effects-in-condition-1-3-shared-effects-in-condition-7-10-with-per-condition-pve0.05-and-no-sharing-between-these-two-groups" class="section level4">
 <h4>Shared effects in condition 1-3, shared effects in condition 7-10 (with per-condition PVE=0.05), and no sharing between these two groups</h4>
@@ -2949,9 +3279,9 @@ print(p_time)</code></pre>
                       &quot;simulate.X_cor&quot;, &quot;simulate.X_scale&quot;,
                       &quot;simulate.V_cor&quot;, &quot;simulate.prop_testset&quot;,
                       &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;),
-                    conditions = &quot;$(simulate) == &#39;indepX_indepV_sharedB_2blocksr_diffPVE&#39;&quot;, verbose=FALSE)</code></pre>
-<pre><code>dscquery is returning a list because one or more outputs are complex; consider converting the list to a tibble using the &quot;tibble&quot; package</code></pre>
-<pre class="r"><code>dsc_plots &lt;- convert_dsc_to_dataframe(dsc_out)
+                    conditions = &quot;$(simulate) == &#39;indepX_indepV_sharedB_2blocksr_diffPVE&#39;&quot;, verbose=FALSE)
+
+dsc_plots &lt;- convert_dsc_to_dataframe(dsc_out)
 
 dsc_plots$method_fac &lt;- factor(dsc_plots$method, levels=c(&quot;mr_mash&quot;, &quot;mtlasso&quot;, &quot;utmost&quot;))
 dsc_plots$response_fac &lt;- as.factor(dsc_plots$response)
@@ -2964,6 +3294,43 @@ p &lt;- ggplot(dsc_plots, aes_string(x = &quot;response_fac&quot;, y = &quot;sco
 
 print(p)</code></pre>
 <p><img src="figure/mrmash_vs_mtlasso_vs_utmost.Rmd/two%20blocks%20effects%20simulations-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-two-blocks-effects-simulations-1">
+Past versions of "two blocks effects simulations-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-two-blocks-effects-simulations-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/2dcb89872f27f3e68bd074864f1b41d965af9c23/docs/figure/mrmash_vs_mtlasso_vs_utmost.Rmd/two blocks effects simulations-1.png" target="_blank">2dcb898</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-05-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>###Create plot for run time
 dsc_plots_time &lt;- dsc_plots[which(dsc_plots$response==1),
                             -which(colnames(dsc_plots) %in% c(&quot;score_metric&quot;, &quot;score_value&quot;, &quot;response&quot;))]
@@ -2980,6 +3347,44 @@ p_time &lt;- ggplot(dsc_plots_time, aes_string(x = &quot;method&quot;, y = &quot
 
 print(p_time)</code></pre>
 <p><img src="figure/mrmash_vs_mtlasso_vs_utmost.Rmd/two%20blocks%20effects%20simulations-2.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-two-blocks-effects-simulations-2">
+Past versions of "two blocks effects simulations-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-two-blocks-effects-simulations-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/2dcb89872f27f3e68bd074864f1b41d965af9c23/docs/figure/mrmash_vs_mtlasso_vs_utmost.Rmd/two blocks effects simulations-2.png" target="_blank">2dcb898</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-05-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The results show that <em>mr.mash</em> estimates the coefficients better than both implementations of the sparse multi-task LASSO and is much faster. Abhishek’s implementation produces results that agree with UTMOST in most scenatios, but seems slower (especially since the grid for the tuning parameters has length = 10 while it has length = 100 in UTMOST). That makes sense since the coordinate updates are implemented in C++ in UTMOST.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
