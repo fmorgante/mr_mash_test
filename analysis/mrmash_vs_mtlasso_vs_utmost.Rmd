@@ -56,7 +56,7 @@ convert_dsc_to_dataframe <- function(dsc){
 colors <- c("skyblue", "limegreen", "red")
 ```
 
-In all the analyses so far, we have used [Abhishek's implementation of the sparse multi-task LASSO](https://users.rcc.uchicago.edu/~aksarkar/gtex-pred/lasso.html) (called mtlasso here), the method that was used in [UTMOST](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6788740/). This is because the [original implementation](https://github.com/yiminghu/CTIMP) requires the data in an awkward format. Recently, the Ritchie Lab reimplemented the [method](https://github.com/RitchieLab/multi_tissue_twas_sim) using the original code from the UTMOST autors so that it takes is data in the standard format (i.e., Y in matrix form). The caveat is that this reimplementation does not allow for missing values in Y. In this website, we want to compare *mr.mash* to both the Ritchie Lab's implementation and Abhishek's implementation of UTMOST. Because the original UTMOST method only provides the estimated coefficients and does not provide an estimated intercept, we are going to compare the accuracy of the estimated coefficients for the three methods in simulations with independent predictors.  
+In all the analyses so far, we have used [Abhishek's implementation of the sparse multi-task LASSO](https://users.rcc.uchicago.edu/~aksarkar/gtex-pred/lasso.html) (called mtlasso here), the method that was used in [UTMOST](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6788740/). This is because the [original implementation](https://github.com/yiminghu/CTIMP) requires the data in an awkward format. Note that Abhishek's implementation is not exactly the same as UTMOST. For example, the initialization of the coefficients and the way to choose the grid of values for the tuning parameters are different. Recently, the Ritchie Lab reimplemented the [method](https://github.com/RitchieLab/multi_tissue_twas_sim) using the original code from the UTMOST autors so that it takes in data in the standard format (i.e., Y in matrix form). The caveat is that this reimplementation does not allow for missing values in Y. In this website, we want to compare *mr.mash* to both the Ritchie Lab's implementation and Abhishek's implementation of UTMOST. Because the original UTMOST method only provides the estimated coefficients and does not provide an estimated intercept, we are going to compare the accuracy of the estimated coefficients for the three methods in simulations with independent predictors.  
 
 We simulated five scenarios with n=500, p=1000, r=10, PVE=0.2, p_causal=randomly sampled between 1 and 10, independent residuals, and the following structure of  effects across conditions:
 
@@ -72,11 +72,11 @@ We simulated five scenarios with n=500, p=1000, r=10, PVE=0.2, p_causal=randomly
 
 *mr.mash* was fitted with only canonical covariance matrices, updating V (imposing a diagonal structure), and updating the prior weights using EM updates. Because UTMOST only centers the predictors, mtlasso and *mr.mash* were also run only centering the predictors for consistency. 
 
-Accuracy of the estimated coefficients is measured as the mean squared error (MSE) to the true coefficients.
+The accuracy of the estimated coefficients is measured as the mean squared error (MSE) to the true coefficients.
 
 #### Equal effects across conditions
 
-```{r equal effects simulations, fig.height=12, fig.width=15}
+```{r equal effects simulations, message=FALSE, fig.height=12, fig.width=15}
 dsc_out <- dscquery("output/mvreg_mrmash_vs_mtlasso_vs_utmost", 
 		    c("simulate.n", "simulate.p", "simulate.p_causal", "simulate.r",   
                       "simulate.pve", "simulate.B_cor", "simulate.B_scale",
@@ -117,7 +117,7 @@ print(p_time)
 
 #### Independent effects across conditions
 
-```{r independent effects simulations, fig.height=12, fig.width=15}
+```{r independent effects simulations, message=FALSE, fig.height=12, fig.width=15}
 dsc_out <- dscquery("output/mvreg_mrmash_vs_mtlasso_vs_utmost",
                     c("simulate.n", "simulate.p", "simulate.p_causal", "simulate.r",
                       "simulate.pve", "simulate.B_cor", "simulate.B_scale",
@@ -159,7 +159,7 @@ print(p_time)
 
 #### Effects only in condition 1
 
-```{r singleton effects simulations, fig.height=12, fig.width=15}
+```{r singleton effects simulations, message=FALSE, fig.height=12, fig.width=15}
 dsc_out <- dscquery("output/mvreg_mrmash_vs_mtlasso_vs_utmost",
                     c("simulate.n", "simulate.p", "simulate.p_causal", "simulate.r",
                       "simulate.pve", "simulate.B_cor", "simulate.B_scale",
@@ -200,7 +200,7 @@ print(p_time)
 
 #### Equal effects in condition 1-3
 
-```{r one block effects simulations, fig.height=12, fig.width=15}
+```{r one block effects simulations, message=FALSE, fig.height=12, fig.width=15}
 dsc_out <- dscquery("output/mvreg_mrmash_vs_mtlasso_vs_utmost",
                     c("simulate.n", "simulate.p", "simulate.p_causal", "simulate.r",
                       "simulate.pve", "simulate.B_cor", "simulate.B_scale",
@@ -241,7 +241,7 @@ print(p_time)
 
 #### Shared effects in condition 1-3, shared effects in condition 7-10 (with per-condition PVE=0.05), and no sharing between these two groups
 
-```{r two blocks effects simulations, fig.height=12, fig.width=15}
+```{r two blocks effects simulations, message=FALSE, fig.height=12, fig.width=15}
 dsc_out <- dscquery("output/mvreg_mrmash_vs_mtlasso_vs_utmost",
                     c("simulate.n", "simulate.p", "simulate.p_causal", "simulate.r",
                       "simulate.pve", "simulate.B_cor", "simulate.B_scale",
@@ -279,3 +279,4 @@ p_time <- ggplot(dsc_plots_time, aes_string(x = "method", y = "time", fill = "me
 
 print(p_time)
 ```
+The results show that *mr.mash* estimates the coefficients better than both implementations of the sparse multi-task LASSO and is much faster. Abhishek's implementation produces results that agree with UTMOST in most scenatios, but seems slower (especially since the grid for the tuning parameters has length = 10 while it has length = 100 in UTMOST). That makes sense since the coordinate updates are implemented in C++ in UTMOST. 
