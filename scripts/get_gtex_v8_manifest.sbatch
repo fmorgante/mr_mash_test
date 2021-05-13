@@ -12,3 +12,5 @@
 
 ###Run script
 find ../data/cis_eqtl_analysis_ready/ -maxdepth 1 -type f | grep 'ENSG' > ../data/gtex-v8-manifest.txt
+
+cut -d"/" -f4 ../data/gtex-v8-manifest.txt | cut -d"." -f1-2 > ../data/gtex-v8-manifest-nopath-nosuffix.txt
