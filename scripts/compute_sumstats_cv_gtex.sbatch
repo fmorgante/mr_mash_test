@@ -3,7 +3,7 @@
 #SBATCH --job-name=compute_sumstats_cv_gtex
 #SBATCH --output=compute_sumstats_cv_gtex.%j.out
 #SBATCH --error=compute_sumstats_cv_gtex.%j.err
-#SBATCH --time=12:00:00
+#SBATCH --time=36:00:00
 #SBATCH --partition=caslake
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=2
@@ -19,7 +19,7 @@ export OMP_NUM_THREADS=1
 
 ###Run SoS
 sos run /project/mstephens/fmorgante/bioworkflows/misc/cv_preprocessing.ipynb \
-    --analysis-units ../data/gtex-v8-manifest-nopath-nosuffix-10genes.txt \
+    --analysis-units ../data/gtex-v8-manifest-nopath-nosuffix.txt \
     --sample-partition ../data/gtex-v8-ids-folds.txt \
     --data-dir ../data/cis_eqtl_analysis_ready \
     --data-suffix GTEx_V8.rds \
