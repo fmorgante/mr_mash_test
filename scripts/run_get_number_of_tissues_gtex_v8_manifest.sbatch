@@ -18,7 +18,7 @@ export OPENBLAS_NUM_THREADS=1
 export OMP_NUM_THREADS=1
 
 ###Run script
-Rscript ../code/get_full_X_gtex_v8_manifest.R --n_cores 4
+Rscript ../code/get_number_of_tissues_gtex_v8_manifest.R --n_cores 4
 
 ###Deactivate the environment
 conda deactivate
