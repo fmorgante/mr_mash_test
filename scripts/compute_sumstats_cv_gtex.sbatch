@@ -19,7 +19,7 @@ export OMP_NUM_THREADS=1
 
 ###Run SoS
 sos run /project/mstephens/fmorgante/bioworkflows/misc/cv_preprocessing.ipynb \
-    --analysis-units ../data/gtex-v8-manifest-nopath-nosuffix.txt \
+    --analysis-units ../data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix.txt \
     --sample-partition ../data/gtex-v8-ids-folds.txt \
     --data-dir ../data/cis_eqtl_analysis_ready \
     --data-suffix GTEx_V8.rds \
@@ -30,4 +30,3 @@ sos run /project/mstephens/fmorgante/bioworkflows/misc/cv_preprocessing.ipynb \
     
 ###Deactivate environment
 conda deactivate
-
