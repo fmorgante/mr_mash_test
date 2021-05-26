@@ -22,7 +22,7 @@ cd ../output/gtex_mr_mash_analysis/data_driven_matrices
 
 ###Denoise estimated matrices by UD (ED method)
 sos run ../../../../bioworkflows/multivariate-fine-mapping/mixture_prior.ipynb ud \
-                --datadir ../summary_stats --name fold_1 --eigenvalue-tol 1e-13 \
+                --datadir ../summary_stats --name fold_1 \
                 -c ../../../scripts/midway3_sos.yml -q midway3
 
 ###Deactivate environment
