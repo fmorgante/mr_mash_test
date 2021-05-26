@@ -11,7 +11,7 @@
 
 <meta name="author" content="Fabio Morgante" />
 
-<meta name="date" content="2021-05-11" />
+<meta name="date" content="2021-05-26" />
 
 <title>mr.mash vs mtlasso vs UTMOST</title>
 
@@ -372,7 +372,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">mr.mash vs mtlasso vs UTMOST</h1>
 <h4 class="author">Fabio Morgante</h4>
-<h4 class="date">May 11, 2021</h4>
+<h4 class="date">May 26, 2021</h4>
 
 </div>
 
@@ -397,7 +397,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-05-11
+<strong>Last updated:</strong> 2021-05-26
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -488,16 +488,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree038e1a64644e1b88d22cbe9d0246144a84b163a4targetblank038e1a6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/038e1a64644e1b88d22cbe9d0246144a84b163a4" target="_blank">038e1a6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree1e45cb785fed5ed0d324aa2f7703e854c2d95655targetblank1e45cb7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/1e45cb785fed5ed0d324aa2f7703e854c2d95655" target="_blank">1e45cb7</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree038e1a64644e1b88d22cbe9d0246144a84b163a4targetblank038e1a6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree1e45cb785fed5ed0d324aa2f7703e854c2d95655targetblank1e45cb7a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/038e1a64644e1b88d22cbe9d0246144a84b163a4" target="_blank">038e1a6</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/1e45cb785fed5ed0d324aa2f7703e854c2d95655" target="_blank">1e45cb7</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -514,9 +514,15 @@ Ignored files:
     Ignored:    code/fit_mr_mash.66662433.err
     Ignored:    code/fit_mr_mash.66662433.out
     Ignored:    data/cis_eqtl_analysis_ready
+    Ignored:    data/gtex-v8-ids-folds.txt
     Ignored:    data/gtex-v8-ids.txt
+    Ignored:    data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix.txt
+    Ignored:    data/gtex-v8-manifest-2ormore-tissues.txt
     Ignored:    data/gtex-v8-manifest-full-X-10tissues-missing-rate.txt
     Ignored:    data/gtex-v8-manifest-full-X.txt
+    Ignored:    data/gtex-v8-manifest-nopath-nosuffix-10genes.txt
+    Ignored:    data/gtex-v8-manifest-nopath-nosuffix.txt
+    Ignored:    data/gtex-v8-manifest-tissue-number.txt
     Ignored:    data/gtex-v8-manifest.txt
     Ignored:    data/gtex-v8-missing-rate-by-tissue.txt
     Ignored:    dsc/.dsc/
@@ -741,6 +747,7 @@ Ignored files:
     Ignored:    output/dsc_07_29_20.tar
     Ignored:    output/dsc_OLD.html
     Ignored:    output/dsc_test.html
+    Ignored:    output/gtex_mr_mash_analysis/
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.html
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps.tar
@@ -819,8 +826,22 @@ Ignored files:
     Ignored:    output/test_dense_issue.rds
     Ignored:    output/test_sparse_issue.rds
     Ignored:    scripts/.sos/
+    Ignored:    scripts/compute_sumstats_cv_gtex.1139718.err
+    Ignored:    scripts/compute_sumstats_cv_gtex.1139718.out
+    Ignored:    scripts/compute_sumstats_cv_gtex.1159962.err
+    Ignored:    scripts/compute_sumstats_cv_gtex.1159962.out
+    Ignored:    scripts/compute_sumstats_cv_gtex.1174386.err
+    Ignored:    scripts/compute_sumstats_cv_gtex.1174386.out
+    Ignored:    scripts/compute_sumstats_cv_gtex.1175906.err
+    Ignored:    scripts/compute_sumstats_cv_gtex.1175906.out
+    Ignored:    scripts/extract_analysis_units_for_data-driven_cov_matrices_cv_gtex.1200736.err
+    Ignored:    scripts/extract_analysis_units_for_data-driven_cov_matrices_cv_gtex.1200736.out
+    Ignored:    scripts/extract_effects_for_data-driven_cov_matrices_cv_fold1_gtex.1200742.err
+    Ignored:    scripts/extract_effects_for_data-driven_cov_matrices_cv_fold1_gtex.1200742.out
     Ignored:    scripts/extract_gtex_ids.10523031.err
     Ignored:    scripts/extract_gtex_ids.10523031.out
+    Ignored:    scripts/get_2ormore_tissues_gtex_v8_manifest.1139717.err
+    Ignored:    scripts/get_2ormore_tissues_gtex_v8_manifest.1139717.out
     Ignored:    scripts/get_full_X_gtex_v8_manifest.10520041.err
     Ignored:    scripts/get_full_X_gtex_v8_manifest.10520041.out
     Ignored:    scripts/get_gtex_v8_manifest.10520039.err
@@ -833,6 +854,8 @@ Ignored files:
     Ignored:    scripts/get_missing_Y_rate_by_tissue_gtex_v8_manifest.1024109.out
     Ignored:    scripts/get_non_missing_number_samples_by_tissue_gtex_v8_manifest.1024106.err
     Ignored:    scripts/get_non_missing_number_samples_by_tissue_gtex_v8_manifest.1024106.out
+    Ignored:    scripts/get_number_of_tissues_gtex_v8_manifest.1138137.err
+    Ignored:    scripts/get_number_of_tissues_gtex_v8_manifest.1138137.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.1003674.err
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.1003674.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.1003676.err
@@ -2651,12 +2674,15 @@ Ignored files:
     Ignored:    scripts/mvreg_all_genes_prior_indepX_indepV_sharedB_3causalrespr10_pipeline.5374687.out
     Ignored:    scripts/mvreg_all_genes_prior_indepX_indepV_sharedB_3causalrespr10_pipeline.5374902.err
     Ignored:    scripts/mvreg_all_genes_prior_indepX_indepV_sharedB_3causalrespr10_pipeline.5374902.out
-    Ignored:    scripts/mvreg_mrmash_vs_mtlasso_vs_utmost.1115759.err
-    Ignored:    scripts/mvreg_mrmash_vs_mtlasso_vs_utmost.1115759.out
+    Ignored:    scripts/mvreg_mrmash_vs_mtlasso_vs_utmost.1188834.err
+    Ignored:    scripts/mvreg_mrmash_vs_mtlasso_vs_utmost.1188834.out
+    Ignored:    scripts/outfiles/
     Ignored:    scripts/pred_HHB_imputed.6496220.err
     Ignored:    scripts/pred_HHB_imputed.6496220.out
     Ignored:    scripts/pred_fullV_HHB_imputed.6503400.err
     Ignored:    scripts/pred_fullV_HHB_imputed.6503400.out
+    Ignored:    scripts/split_folds_gtex_ids.1122504.err
+    Ignored:    scripts/split_folds_gtex_ids.1122504.out
 
 Untracked files:
     Untracked:  analysis/dense_issue_investigation2/
@@ -2702,6 +2728,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/fd715fa6b1b7f7d4edd91cad3b3cba9bfb7e345a/docs/mrmash_vs_mtlasso_vs_utmost.html" target="_blank">fd715fa</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-05-11
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
