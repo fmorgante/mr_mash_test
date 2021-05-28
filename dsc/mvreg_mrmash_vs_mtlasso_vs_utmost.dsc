@@ -13,6 +13,7 @@ DSC:
               indepX_indepV_B_1causalr, indepX_indepV_sharedB_2blocksr_diffPVE,
               indepX_indepV_sharedB_3causalrespr10
     fit:      mr_mash, mtlasso, utmost
+    predict:  predict_linear
     score:    scaled_rmse, r2
   run: simulate * fit * score
 
