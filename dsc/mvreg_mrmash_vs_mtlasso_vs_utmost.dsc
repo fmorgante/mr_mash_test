@@ -15,7 +15,7 @@ DSC:
     fit:      mr_mash, mtlasso, utmost
     predict:  predict_linear
     score:    scaled_rmse, r2
-  run: simulate * fit * score
+  run: simulate * fit * predict * score
 
 ## Simulate modules
 #Independent predictors, independent residuals, shared effects from a single normal,
