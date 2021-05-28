@@ -32,9 +32,11 @@ indepX_indepV_sharedB_allr_norm: simulate_data_mod.R
   X_cor:    0
   X_scale:  1
   V_cor:    0
-  prop_testset: 0
-  $X: out$X
-  $Y: out$Y
+  prop_testset: 0.2
+  $Xtrain: out$Xtrain
+  $Ytrain: out$Ytrain
+  $Xtest: out$Xtest
+  $Ytest: out$Ytest
   $B_true: out$B_true
  
 
@@ -67,8 +69,8 @@ indepX_indepV_sharedB_3causalrespr10(indepX_indepV_sharedB_allr_norm):
 #EM w0 updates, no drop w0, standardize X, update V (constrained diagonal),
 #singletons, no data-driven matrices
 mr_mash: fit_mr_mash_mod.R
-  X:                      $X
-  Y:                      $Y
+  X:                      $Xtrain
+  Y:                      $Ytrain
   update_w0:              TRUE
   update_w0_method:       "EM"
   w0_threshold:           0
@@ -90,8 +92,8 @@ mr_mash: fit_mr_mash_mod.R
   
 #Sparse multi-task lasso  
 mtlasso: fit_mtlasso_mod.py
-  X:                    $X
-  Y:                    $Y
+  X:                    $Xtrain
+  Y:                    $Ytrain
   standardize:          False
   nfolds:               5
   B_init:               None
@@ -103,14 +105,37 @@ mtlasso: fit_mtlasso_mod.py
 
 #UTMOST
 utmost: fit_utmost_mod.R
-  X:                    $X
-  Y:                    $Y
+  X:                    $Xtrain
+  Y:                    $Ytrain
   nfolds:               5
   $B_est:               out$B_est
+  $intercept_est:       out$intercept_est
   $time:                out$elapsed_time
 
+
+## Predict module
+predict_linear: predict_mod.R
+  B:         $B_est
+  intercept: $intercept_est
+  X:         $Xtest
+  $Yhattest: Yhattest
+
+
 ## Score modules
-mse: coeff_mse_mod.R
-  B:                    $B_true
-  Bhat:                 $B_est
-  $err:                 err
+#r^2
+r2: r2_mod.R
+  Y:    $Ytest
+  Yhat: $Yhattest 
+  $err: err
+
+#RMSE scaled by sd(y)
+scaled_rmse: scaled_rmse_mod.R
+  Y:    $Ytest
+  Yhat: $Yhattest 
+  $err: err
+
+#Slope of y~yhat  
+bias: bias_mod.R
+  Y:    $Ytest
+  Yhat: $Yhattest 
+  $err: err
