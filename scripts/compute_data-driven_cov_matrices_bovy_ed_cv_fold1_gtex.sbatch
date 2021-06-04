@@ -22,7 +22,8 @@ cd ../output/gtex_mr_mash_analysis/data_driven_matrices
 
 ###Denoise estimated matrices by ED (Bovy method)
 sos run ../../../../bioworkflows/multivariate-fine-mapping/mixture_prior.ipynb ed \
-                --datadir ../summary_stats --name fold_1 --ed-tol 0.1 \
+                --datadir ../summary_stats --name fold_1 --ed-tol 1e-3 \
+		--mixture-components flash flash_nonneg pca \
                 -c ../../../scripts/midway3_sos.yml -q midway3
 
 ###Deactivate environment
