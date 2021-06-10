@@ -53,12 +53,37 @@ convert_dsc_to_dataframe <- function(dsc){
   return(dsc_df)
 }
 
+###Function to compute rmse (relative to mr_mash_consec_em)
+compute_rrmse <- function(dsc_plot, log10_scale=FALSE){
+  dsc_plot <- transform(dsc_plot, experiment=paste(rep, response, scenario, sep="-"))
+  t <- 0
+  for (i in unique(dsc_plot$experiment)) {
+    t <- t+1
+    rmse_data  <- dsc_plot[which(dsc_plot$experiment == i & dsc_plot$score_metric=="scaled_rmse"), ]
+    mse_mr_mash_consec_em <- rmse_data[which(rmse_data$method=="mr_mash"), "score_value"]
+    if(!log10_scale)
+      rmse_data$score_value <- rmse_data$score_value/mse_mr_mash_consec_em
+    else
+      rmse_data$score_value <- log10(rmse_data$score_value/mse_mr_mash_consec_em)
+    rmse_data$score_metric <- "scaled_rrmse"
+    if(t>1){
+      rmse_data_tot <- rbind(rmse_data_tot, rmse_data)
+    } else if(t==1){
+      rmse_data_tot <- rmse_data
+    }
+  }
+  
+  rmse_data_tot$experiment <- NULL
+  
+  return(rmse_data_tot)
+}
+
 colors <- c("skyblue", "limegreen", "red")
 ```
 
-In all the analyses so far, we have used [Abhishek's implementation of the sparse multi-task LASSO](https://users.rcc.uchicago.edu/~aksarkar/gtex-pred/lasso.html) (called mtlasso here), the method that was used in [UTMOST](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6788740/). This is because the [original implementation](https://github.com/yiminghu/CTIMP) requires the data in an awkward format. Note that Abhishek's implementation is not exactly the same as UTMOST. For example, the initialization of the coefficients and the way to choose the grid of values for the tuning parameters are different. Recently, the Ritchie Lab reimplemented the [method](https://github.com/RitchieLab/multi_tissue_twas_sim) using the original code from the UTMOST autors so that it takes in data in the standard format (i.e., Y in matrix form). The caveat is that this reimplementation does not allow for missing values in Y. In this website, we want to compare *mr.mash* to both the Ritchie Lab's implementation and Abhishek's implementation of UTMOST. Because the original UTMOST method only provides the estimated coefficients and does not provide an estimated intercept, we are going to compare the accuracy of the estimated coefficients for the three methods in simulations with independent predictors.  
+In all the analyses so far, we have used [Abhishek's implementation of the sparse multi-task LASSO](https://users.rcc.uchicago.edu/~aksarkar/gtex-pred/lasso.html) (called mtlasso here), the method that was used in [UTMOST](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6788740/). This is because the [original implementation](https://github.com/yiminghu/CTIMP) requires the data in an awkward format. Note that Abhishek's implementation is not exactly the same as UTMOST. For example, the initialization of the coefficients and the way to choose the grid of values for the tuning parameters are different. Recently, the Ritchie Lab reimplemented the [method](https://github.com/RitchieLab/multi_tissue_twas_sim) using the original code from the UTMOST autors so that it takes in data in the standard format (i.e., Y in matrix form). The caveat is that this reimplementation does not allow for missing values in Y. In this website, we want to compare *mr.mash* to both the Ritchie Lab's implementation and Abhishek's implementation of UTMOST. 
 
-We simulated five scenarios with n=500, p=1000, r=10, PVE=0.2, p_causal=randomly sampled between 1 and 10, independent residuals, and the following structure of  effects across conditions:
+We simulated five scenarios with n=500, p=1000, r=10, PVE=0.2, p_causal=randomly sampled between 1 and 10, independent predictors, independent residuals, and the following structure of  effects across conditions:
 
 * equal effects.
 
@@ -72,7 +97,7 @@ We simulated five scenarios with n=500, p=1000, r=10, PVE=0.2, p_causal=randomly
 
 *mr.mash* was fitted with only canonical covariance matrices, updating V (imposing a diagonal structure), and updating the prior weights using EM updates. Because UTMOST only centers the predictors, mtlasso and *mr.mash* were also run only centering the predictors for consistency. 
 
-The accuracy of the estimated coefficients is measured as the mean squared error (MSE) to the true coefficients.
+The accuracy of prediction is measured as the root mean squared error (RMSE) scaled by the standard deviation of Y.
 
 ### Equal effects across conditions
 
@@ -86,20 +111,22 @@ dsc_out <- dscquery("output/mvreg_mrmash_vs_mtlasso_vs_utmost",
                     conditions = "$(simulate) == 'indepX_indepV_sharedB_allr_norm'", verbose=FALSE)
 
 dsc_plots <- convert_dsc_to_dataframe(dsc_out)
+rrmse_dat <- compute_rrmse(dsc_plots)
+dsc_plots <- rbind(dsc_plots, rrmse_dat)
 
 dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash", "mtlasso", "utmost"))
 
-p <- ggplot(dsc_plots, aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
+p <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
   	geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   	scale_fill_manual(values = colors) +
-  	labs(x = "", y = "MSE", fill="Method") +
+  	labs(x = "", y = "Scaled RRMSE", fill="Method") +
   	theme_cowplot(font_size = 20) +
   	theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
 
 print(p)
 
 ###Create plot for run time
-dsc_plots_time <- dsc_plots[which(dsc_plots$response==1),
+dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="scaled_rrmse"),
                             -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))]
 
 p_time <- ggplot(dsc_plots_time, aes_string(x = "method", y = "time", fill = "method")) +
@@ -127,20 +154,22 @@ dsc_out <- dscquery("output/mvreg_mrmash_vs_mtlasso_vs_utmost",
                     conditions = "$(simulate) == 'indepX_indepV_indepB_allr_norm'", verbose=FALSE)
 
 dsc_plots <- convert_dsc_to_dataframe(dsc_out)
+rrmse_dat <- compute_rrmse(dsc_plots)
+dsc_plots <- rbind(dsc_plots, rrmse_dat)
 
 dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash", "mtlasso", "utmost"))
 
-p <- ggplot(dsc_plots, aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
+p <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "method_fac", y = "score_value", fill = "method_fac")) +
         geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
         scale_fill_manual(values = colors) +
-        labs(x = "", y = "MSE", fill="Method") +
+        labs(x = "", y = "Scaled RRMSE", fill="Method") +
         theme_cowplot(font_size = 20) +
         theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank())
 
 print(p)
 
 ###Create plot for run time
-dsc_plots_time <- dsc_plots[which(dsc_plots$response==1),
+dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="scaled_rrmse"),
                             -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))]
 
 p_time <- ggplot(dsc_plots_time, aes_string(x = "method", y = "time", fill = "method")) +
@@ -168,20 +197,22 @@ dsc_out <- dscquery("output/mvreg_mrmash_vs_mtlasso_vs_utmost",
                     conditions = "$(simulate) == 'indepX_indepV_B_1causalr'", verbose=FALSE)
 
 dsc_plots <- convert_dsc_to_dataframe(dsc_out)
+rrmse_dat <- compute_rrmse(dsc_plots)
+dsc_plots <- rbind(dsc_plots, rrmse_dat)
 
 dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash", "mtlasso", "utmost"))
 dsc_plots$response_fac <- as.factor(dsc_plots$response)
 
-p <- ggplot(dsc_plots, aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
+p <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
         geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
         scale_fill_manual(values = colors) +
-        labs(x = "Condition", y = "MSE", fill="Method") +
+        labs(x = "Condition", y = "Scaled RRMSE", fill="Method") +
         theme_cowplot(font_size = 20)
 
 print(p)
 
 ###Create plot for run time
-dsc_plots_time <- dsc_plots[which(dsc_plots$response==1),
+dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="scaled_rrmse"),
                             -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))]
 
 p_time <- ggplot(dsc_plots_time, aes_string(x = "method", y = "time", fill = "method")) +
@@ -209,20 +240,22 @@ dsc_out <- dscquery("output/mvreg_mrmash_vs_mtlasso_vs_utmost",
                     conditions = "$(simulate) == 'indepX_indepV_sharedB_3causalrespr10'", verbose=FALSE)
 
 dsc_plots <- convert_dsc_to_dataframe(dsc_out)
+rrmse_dat <- compute_rrmse(dsc_plots)
+dsc_plots <- rbind(dsc_plots, rrmse_dat)
 
 dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash", "mtlasso", "utmost"))
 dsc_plots$response_fac <- as.factor(dsc_plots$response)
 
-p <- ggplot(dsc_plots, aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
+p <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
         geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
         scale_fill_manual(values = colors) +
-        labs(x = "Condition", y = "MSE", fill="Method") +
+        labs(x = "Condition", y = "Scaled RRMSE", fill="Method") +
         theme_cowplot(font_size = 20)
 
 print(p)
 
 ###Create plot for run time
-dsc_plots_time <- dsc_plots[which(dsc_plots$response==1),
+dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="scaled_rrmse"),
                             -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))]
 
 p_time <- ggplot(dsc_plots_time, aes_string(x = "method", y = "time", fill = "method")) +
@@ -250,20 +283,22 @@ dsc_out <- dscquery("output/mvreg_mrmash_vs_mtlasso_vs_utmost",
                     conditions = "$(simulate) == 'indepX_indepV_sharedB_2blocksr_diffPVE'", verbose=FALSE)
 
 dsc_plots <- convert_dsc_to_dataframe(dsc_out)
+rrmse_dat <- compute_rrmse(dsc_plots)
+dsc_plots <- rbind(dsc_plots, rrmse_dat)
 
 dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash", "mtlasso", "utmost"))
 dsc_plots$response_fac <- as.factor(dsc_plots$response)
 
-p <- ggplot(dsc_plots, aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
+p <- ggplot(dsc_plots[which(dsc_plots$score_metric=="scaled_rrmse"), ], aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
         geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
         scale_fill_manual(values = colors) +
-        labs(x = "Condition", y = "MSE", fill="Method") +
+        labs(x = "Condition", y = "Scaled RRMSE", fill="Method") +
         theme_cowplot(font_size = 20)
 
 print(p)
 
 ###Create plot for run time
-dsc_plots_time <- dsc_plots[which(dsc_plots$response==1),
+dsc_plots_time <- dsc_plots[which(dsc_plots$response==1 & dsc_plots$score_metric=="scaled_rrmse"),
                             -which(colnames(dsc_plots) %in% c("score_metric", "score_value", "response"))]
 
 p_time <- ggplot(dsc_plots_time, aes_string(x = "method", y = "time", fill = "method")) +
