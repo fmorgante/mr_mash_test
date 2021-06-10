@@ -97,7 +97,7 @@ We simulated five scenarios with n=500, p=1000, r=10, PVE=0.2, p_causal=randomly
 
 *mr.mash* was fitted with only canonical covariance matrices, updating V (imposing a diagonal structure), and updating the prior weights using EM updates. Because UTMOST only centers the predictors, mtlasso and *mr.mash* were also run only centering the predictors for consistency. 
 
-The accuracy of prediction is measured as the root mean squared error (RMSE) scaled by the standard deviation of Y.
+The accuracy of prediction is measured as the root mean squared error (RMSE) scaled by the standard deviation of Y. In the plots, the values are relative to *mr.mash*.
 
 ### Equal effects across conditions
 
@@ -313,4 +313,4 @@ p_time <- ggplot(dsc_plots_time, aes_string(x = "method", y = "time", fill = "me
 
 print(p_time)
 ```
-The results show that *mr.mash* estimates the coefficients better than both implementations of the sparse multi-task LASSO and is much faster. Abhishek's implementation produces results that agree with UTMOST in most scenatios, but seems slower (especially since the grid for the tuning parameters has length = 10 while it has length = 100 in UTMOST). That makes sense since the coordinate updates are implemented in C++ in UTMOST. 
+The results show that *mr.mash* has better prediction accuracy than both implementations of the sparse multi-task LASSO for the majority of scenarios (*mr.mash* needs the right covariance matrix in the scenario with equal effects in condition 1-3) and is much faster. Abhishek's implementation produces results that agree with UTMOST in most scenatios, but seems slower (especially since the grid for the tuning parameters has length = 10 while it has length = 100 in UTMOST). That makes sense since the coordinate updates are implemented in C++ in UTMOST. 
