@@ -69,7 +69,7 @@ Results for meeting on 03/29/2021 (updated on 04/20/2021 after fixing seed issue
 + [Two blocks of responses (shared effects within block), independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_indepReps_missing_Y.html)
 + [Shared effects, independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y.html)
 + [Indpendent effects, independent residuals.](results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y.html)
-
++ [Table summarizing results above.](results_mvreg_all_genes_prior_GTExrealX_indepReps_missing_Y_summary.html)
 
 
 Other investigations:
