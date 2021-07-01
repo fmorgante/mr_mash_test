@@ -24,12 +24,11 @@ sos run /project/mstephens/fmorgante/bioworkflows/multivariate-prediction/mrmash
     --data-suffix GTEx_V8.rds \
     --name fold_1_mrmash \
     --wd ../output/gtex_mr_mash_analysis/prediction \
-    --sumstats-dir ../output/gtex_mr_mash_analysis/summary_stats \
-    --prior ../output/gtex_mr_mash_analysis/data_driven_matrices/output/fold_1.ted_unconstrained.rds \
+    --prior-grid ../output/gtex_mr_mash_analysis/grid/fold_1_grid.rds \
+    --prior-matrices ../output/gtex_mr_mash_analysis/data_driven_matrices/output/fold_1.ted_unconstrained.rds \
     --sample-partition ../data/gtex-v8-ids-folds.txt \
     --fold 1 \
     --nthreads 2 \
-    --w0-init NULL \
     --update-w0 TRUE \
     --w0-threshold 1e-8 \
     --save-model TRUE \
