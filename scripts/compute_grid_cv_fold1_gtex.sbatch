@@ -3,7 +3,7 @@
 #SBATCH --job-name=compute_grid_cv_fold1_gtex
 #SBATCH --output=compute_grid_cv_fold1_gtex.%j.out
 #SBATCH --error=compute_grid_cv_fold1_gtex.%j.err
-#SBATCH --time=27:00:00
+#SBATCH --time=07:00:00
 #SBATCH --partition=caslake
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
