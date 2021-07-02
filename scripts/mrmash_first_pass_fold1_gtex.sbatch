@@ -18,11 +18,11 @@ export OPENBLAS_NUM_THREADS=1
 export OMP_NUM_THREADS=1
 
 ###Run SoS
-sos run /project/mstephens/fmorgante/bioworkflows/multivariate-prediction/mrmash.ipynb complete_data_analysis \
+sos run /project/mstephens/fmorgante/bioworkflows/multivariate-prediction/mrmash.ipynb data_analysis_first_pass \
     --analysis-units ../data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix-test.txt \
     --data-dir ../data/cis_eqtl_analysis_ready  \
     --data-suffix GTEx_V8.rds \
-    --name fold_1_mrmash \
+    --name fold_1 \
     --wd ../output/gtex_mr_mash_analysis/prediction \
     --prior-grid ../output/gtex_mr_mash_analysis/grid/fold_1_grid.rds \
     --prior-matrices ../output/gtex_mr_mash_analysis/data_driven_matrices/output/fold_1.ted_unconstrained.rds \
@@ -31,8 +31,8 @@ sos run /project/mstephens/fmorgante/bioworkflows/multivariate-prediction/mrmash
     --nthreads 2 \
     --update-w0 TRUE \
     --w0-threshold 1e-8 \
-    --save-model TRUE \
-    --glmnet-pred TRUE \
+    --save-model FALSE \
+    --glmnet-pred FALSE \
     -c midway3_sos.yml -q midway3
 
 ###Deactivate environment
