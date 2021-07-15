@@ -32,7 +32,7 @@ sos run /project/mstephens/fmorgante/bioworkflows/multivariate-prediction/mrmash
     --update-w0 TRUE \
     --w0-threshold 1e-8 \
     --save-model FALSE \
-    --glmnet-pred TRUE \
+    --glmnet-pred FALSE \
     -c midway3_sos.yml -q midway3
 
 ###Deactivate environment
