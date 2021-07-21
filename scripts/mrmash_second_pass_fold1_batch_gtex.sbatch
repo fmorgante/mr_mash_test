@@ -14,7 +14,7 @@ conda activate py38dsc
 export OPENBLAS_NUM_THREADS=1
 export OMP_NUM_THREADS=1
 
-btch=${1}
+btc=${1}
 
 ###Run SoS
 sos run /project/mstephens/fmorgante/bioworkflows/multivariate-prediction/mrmash.ipynb mr_mash \
