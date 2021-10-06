@@ -14,19 +14,18 @@ conda activate py38dsc
 export OPENBLAS_NUM_THREADS=1
 export OMP_NUM_THREADS=1
 
-btc=${1}
-
 ###Run SoS
 sos run /project/mstephens/fmorgante/bioworkflows/multivariate-prediction/mtlasso.ipynb mtlasso \
     --analysis-units "../data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix-test.txt" \
     --data-dir ../data/cis_eqtl_analysis_ready \
     --data-suffix GTEx_V8.rds \
-    --name "fold_4_batch_${btc}" \
+    --name "fold_4" \
     --wd ../output/gtex_mr_mash_analysis \
     --sample-partition ../data/gtex-v8-ids-folds.txt \
     --fold 4 \
     --mtlasso-script ../code/fit_mtlasso_missing_Y.py \
     --conda-env py38dsc \
+    --grid-length 50 \
     -c midway3_sos.yml -q midway3
 
 ###Deactivate environment
