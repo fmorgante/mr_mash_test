@@ -30,7 +30,7 @@ sos run /project/mstephens/fmorgante/bioworkflows/multivariate-prediction/mrmash
     --nthreads 2 \
     --update-w0 TRUE \
     --w0-threshold 1e-8 \
-    --save-model FALSE \
+    --save-model TRUE \
     --glmnet-pred TRUE \
     -c midway3_sos.yml -q midway3
 
