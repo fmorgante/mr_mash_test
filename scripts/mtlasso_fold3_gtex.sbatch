@@ -16,7 +16,7 @@ export OMP_NUM_THREADS=1
 
 ###Run SoS
 sos run /project/mstephens/fmorgante/bioworkflows/multivariate-prediction/mtlasso.ipynb mtlasso \
-    --analysis-units "../data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix-test.txt" \
+    --analysis-units "../data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix-mtlasso.txt" \
     --data-dir ../data/cis_eqtl_analysis_ready \
     --data-suffix GTEx_V8.rds \
     --name "fold_3" \
