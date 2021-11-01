@@ -10,4 +10,4 @@
 #SBATCH --mem=1G
 #SBATCH --account=pi-mstephens
 
-head -n 1000 ../data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix.txt > ../data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix-batch1.txt
+grep -v -E 'ENSG00000090971.4|ENSG00000168765.16' ../mr_mash_test/data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix-batch1.txt | head -n 1000 > ../data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix-batch1.txt
