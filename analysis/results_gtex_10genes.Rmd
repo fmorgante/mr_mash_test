@@ -1,5 +1,5 @@
 ---
-title: "mr.mash vs mtlasso vs UTMOST"
+title: "Analysis of 10 GTEx genes"
 author: "Fabio Morgante"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
@@ -49,7 +49,15 @@ genes <- c("ENSG00000083812.11", "ENSG00000156413.13", "ENSG00000171119.2",
 thresh <- 100
 ```
 
-In all the analyses so far, we have used [Abhishek's implementation of the sparse multi-task LASSO](https://users.rcc.uchicago.edu/~aksarkar/gtex-pred/lasso.html) (called mtlasso here), the method that was used in [UTMOST](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6788740/). This is because the [original implementation](https://github.com/yiminghu/CTIMP) requires the data in an awkward format. Note that Abhishek's implementation is not exactly the same as UTMOST. For example, the initialization of the coefficients and the way to choose the grid of values for the tuning parameters are different. Recently, the Ritchie Lab reimplemented the [method](https://github.com/RitchieLab/multi_tissue_twas_sim) using the original code from the UTMOST autors so that it takes in data in the standard format (i.e., Y in matrix form). The caveat is that this reimplementation does not allow for missing values in Y. In this website, we want to compare *mr.mash* to both the Ritchie Lab's implementation and Abhishek's implementation of UTMOST. 
+Here, we compare the prediction performance of *mr.mash*, [Abhishek's implementation of the sparse multi-task LASSO](https://github.com/aksarkar/mtlasso), and the univariate elastic net. The analysis was performed on 10 randomly sampled GTEx v8 genes using the following pipelines: 
+
+* [univariate summary statistics computation](https://github.com/cumc/bioworkflows/blob/master/multivariate-prediction/cv_preprocessing.ipynb)
+* [data-driven covariance matrices computation](https://github.com/cumc/bioworkflows/blob/master/multivariate-fine-mapping/mixture_prior.ipynb)
+* [prior grid computation](https://github.com/cumc/bioworkflows/blob/master/multivariate-prediction/prior_grid.ipynb)
+* [*mr.mash* model fitting](https://github.com/cumc/bioworkflows/blob/master/multivariate-prediction/mrmash.ipynb)
+* [sparse multi-task LASSO model fitting](https://github.com/cumc/bioworkflows/blob/master/multivariate-prediction/mtlasso.ipynb) 
+
+Briefly, we used a 5-fold cross validation scheme, whereby all the steps but the computation of prediction performance were done on the training set. Only data-driven covariance matrices were used and computed using *flash* (unconstrained and non-negative factors only) and PCA, denoised using the TED method in the [udr R package](https://github.com/stephenslab/udr). A common grid of scaling factors for all the genes was computed from their univariate summary statistics. These two steps used all the GTEx genes expressed in all the 49 tissues. Regression coefficients and prior weights were initialized using the univariate elastic net. Prior weights were updated in a gene specific manner, as was the residual covariance V with no diagonal constrain. We also tested a "second pass" version of *mr.mash* where we combined the responsibilities from the "first pass" across genes and performed a joint weights update. The jointly updated weights were fixed for all the genes. Prediction performance was evaluated as the Root Mean Squared Error (RMSE) scaled by the variance of true expression in the test set. The plots below show the mean RMSE across folds for each tissue for pairs of methods.     
 
 ```{r process results}
 p_mrmash_sec <- vector("list", length(genes))
@@ -203,19 +211,19 @@ for(gene in genes){
     min_lim <- min(c(mean_scaled_rmse[, "mrmash_first"], mean_scaled_rmse[, "mrmash_sec"]))
     max_lim <- max(c(mean_scaled_rmse[, "mrmash_first"], mean_scaled_rmse[, "mrmash_sec"]))
     p_mrmash_sec[[t]] <- ggplot(as.data.frame(mean_scaled_rmse), aes(x=mrmash_sec, y=mrmash_first)) + geom_point(shape=1) + xlim(min_lim, max_lim) + ylim(min_lim, max_lim) +
-                                labs(x = "mr.mash (second)", y = "mr.mash (first)", title=paste0(gene, "\nRMSE")) + geom_abline(intercept = 0, slope = 1) + theme_cowplot() +
+                                labs(x = "mr.mash (second)", y = "mr.mash (first)", title=gene) + geom_abline(intercept = 0, slope = 1) + theme_cowplot() +
                                 theme(plot.title = element_text(hjust = 0.5))    
 
     min_lim <- min(c(mean_scaled_rmse[, "mrmash_first"], mean_scaled_rmse[, "enet"]))
     max_lim <- max(c(mean_scaled_rmse[, "mrmash_first"], mean_scaled_rmse[, "enet"]))
     p_enet[[t]] <- ggplot(as.data.frame(mean_scaled_rmse), aes(x=enet, y=mrmash_first)) + geom_point(shape=1) + xlim(min_lim, max_lim) + ylim(min_lim, max_lim) +
-                    labs(x = "e-net", y = "mr.mash", title=paste0(gene, "\nRMSE")) + geom_abline(intercept = 0, slope = 1) + theme_cowplot() +
+                    labs(x = "e-net", y = "mr.mash", title=gene) + geom_abline(intercept = 0, slope = 1) + theme_cowplot() +
                     theme(plot.title = element_text(hjust = 0.5))    
 
     min_lim <- min(c(mean_scaled_rmse[, "mrmash_first"], mean_scaled_rmse[, "mtlasso"]))
     max_lim <- max(c(mean_scaled_rmse[, "mrmash_first"], mean_scaled_rmse[, "mtlasso"]))
     p_mtlasso[[t]] <- ggplot(as.data.frame(mean_scaled_rmse), aes(x=mtlasso, y=mrmash_first)) + geom_point(shape=1) + xlim(min_lim, max_lim) + ylim(min_lim, max_lim) +
-                        labs(x = "smt-lasso", y = "mr.mash", title=paste0(gene, "\nRMSE")) + geom_abline(intercept = 0, slope = 1) + theme_cowplot() +
+                        labs(x = "smt-lasso", y = "mr.mash", title=gene) + geom_abline(intercept = 0, slope = 1) + theme_cowplot() +
                         theme(plot.title = element_text(hjust = 0.5))    
 }
 ```
@@ -229,6 +237,8 @@ plot_grid(p_mrmash_sec[[1]], p_mrmash_sec[[2]], p_mrmash_sec[[3]], p_mrmash_sec[
           ncol = 3)
 ```
 
+The results comparing the two versions of *mr.mash* show that the second pass does not improve the performance. Since it is also computationally demanding to perform the second pass, there is no reason to do it. 
+
 ### *mr.mash* first pass vs elastic net
 
 ```{r mr.mash first vs enet, message=FALSE, fig.height=15, fig.width=15}
@@ -238,6 +248,8 @@ plot_grid(p_enet[[1]], p_enet[[2]], p_enet[[3]], p_enet[[4]], p_enet[[5]],
           ncol = 3)
 ```
 
+The results comparing *mr.mash* and univariate elastic net show that, as expected, *mr.mash* achieves a lower RMSE for the majority of tissue/gene combinations. And even in the cases where the elastic net achieves a lower RMSE, *mr.mash*'s performance is very close.  
+
 ### *mr.mash* first pass vs sparse multi-task LASSO
 
 ```{r mr.mash first vs mtlasso, message=FALSE, fig.height=15, fig.width=15}
@@ -246,3 +258,6 @@ plot_grid(p_mtlasso[[1]], p_mtlasso[[2]], p_mtlasso[[3]], p_mtlasso[[4]], p_mtla
           p_mtlasso[[10]], NULL,
           ncol = 3)
 ```
+The results comparing *mr.mash* and sparse multi-task LASSO show that *mr.mash* performs better for five out of ten genes, and about the same in the remaining genes.
+
+Overall, *mr.mash* seems to work well.
