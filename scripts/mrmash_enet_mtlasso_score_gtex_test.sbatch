@@ -23,7 +23,7 @@ sos run /project/mstephens/fmorgante/mr_mash_test/code/prediction_score.ipynb \
     --data-dir /project/mstephens/fmorgante/mr_mash_test/data/cis_eqtl_analysis_ready \
     --mrmash-model /project/mstephens/fmorgante/mr_mash_test/output/gtex_mr_mash_analysis/prediction \
     --mtlasso-model /project/mstephens/fmorgante/mr_mash_test/output/gtex_mr_mash_analysis/mtlasso \
-    --analysis-stage second_pass \
+    --analysis-stage first_pass \
     --data-suffix GTEx_V8 \
     --wd /project/mstephens/fmorgante/mr_mash_test/output/gtex_mr_mash_analysis/prediction_score \
     -c midway3_sos.yml -q midway3
