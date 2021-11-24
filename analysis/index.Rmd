@@ -73,7 +73,8 @@ Results for meeting on 03/29/2021 (updated on 04/20/2021 after fixing seed issue
 
 Results of GTEx v8 data analysis:
 
- + [10 randomly sampled genes](results_gtex_10genes.html)
++ [10 randomly sampled genes](results_gtex_10genes.html)
++ [1000 randomly sampled genes](results_gtex_1000genes.html)
 
 Other investigations:
 
