@@ -17,9 +17,9 @@ library(ggplot2)
 library(cowplot)
 library(dplyr)
 
-dir <- "/project/mstephens/fmorgante/mr_mash_test/output/gtex_mr_mash_analysis/prediction_score"
+dir <- "output/gtex_mr_mash_analysis/prediction_score"
 suffix <- "GTEx_V8_score"
-manifest <- read.table("/project/mstephens/fmorgante/mr_mash_test/data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix-batch1.txt", header=FALSE)
+manifest <- read.table("data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix-batch1.txt", header=FALSE)
 ```
 
 Here, we compare the prediction performance of *mr.mash* and the univariate elastic net. The analysis was performed on 1000 randomly sampled GTEx v8 genes using the following pipelines: 
@@ -31,7 +31,7 @@ Here, we compare the prediction performance of *mr.mash* and the univariate elas
 
 Briefly, we used a 5-fold cross validation scheme, whereby all the steps but the computation of prediction performance were done on the training set. Only data-driven covariance matrices were used and computed using *flash* (unconstrained and non-negative factors only) and PCA, denoised using the TED method in the [udr R package](https://github.com/stephenslab/udr). A common grid of scaling factors for all the genes was computed from their univariate summary statistics. These two steps used all the GTEx genes expressed in all the 49 tissues. Regression coefficients and prior weights were initialized using the univariate elastic net. Prior weights were updated in a gene specific manner, as was the residual covariance V with no diagonal constrain. We also tested a "second pass" version of *mr.mash* where we combined the responsibilities from the "first pass" across genes and performed a joint weights update. The jointly updated weights were fixed for all the genes. Prediction performance was evaluated as the Root Mean Squared Error (RMSE) of the predictions of the two methods scaled by the RMSE of using the mean of the true expression in the training set as a naive predictor. The histograms below show the difference in this metric between *mr.mash* and elastic net -- thus, negative values indicate that *mr.mash* performs better. 
 
-```{r process results}
+```{r process results, message=FALSE}
 ###Create data frames to store the results
 rmse_enet <- data.frame()
 rmse_mrmash <- data.frame()
@@ -65,6 +65,7 @@ rmse_diff_pooled <- data.frame(RMSE_diff=c(rmse_diff))
 
 ```{r pooled tissuess, message=FALSE, fig.height=15, fig.width=15}
 p_pooled <- ggplot(rmse_diff_pooled, aes(x=RMSE_diff)) + geom_histogram() + labs(x = "Difference in error between mr.mash and enet") + theme_cowplot()
+p_pooled
 ```
 
 ### By tissue
