@@ -488,16 +488,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree6c6d4b4e1e1440e522c3cbfd5d287808e9637463targetblank6c6d4b4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/6c6d4b4e1e1440e522c3cbfd5d287808e9637463" target="_blank">6c6d4b4</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeadf3f6732a8977f65e9b37a9066c5af5fd56d2d4targetblankadf3f67a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/adf3f6732a8977f65e9b37a9066c5af5fd56d2d4" target="_blank">adf3f67</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree6c6d4b4e1e1440e522c3cbfd5d287808e9637463targetblank6c6d4b4a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeadf3f6732a8977f65e9b37a9066c5af5fd56d2d4targetblankadf3f67a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/6c6d4b4e1e1440e522c3cbfd5d287808e9637463" target="_blank">6c6d4b4</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/adf3f6732a8977f65e9b37a9066c5af5fd56d2d4" target="_blank">adf3f67</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -2886,6 +2886,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/adf3f6732a8977f65e9b37a9066c5af5fd56d2d4/analysis/results_gtex_1000genes.Rmd" target="_blank">adf3f67</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-11-24
+</td>
+<td>
+A couple of improvements
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/38c5a01210a9c2d650c6e9f1243893cd016b49fb/docs/results_gtex_1000genes.html" target="_blank">38c5a01</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-11-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/6c6d4b4e1e1440e522c3cbfd5d287808e9637463/analysis/results_gtex_1000genes.Rmd" target="_blank">6c6d4b4</a>
 </td>
 <td>
@@ -2986,10 +3020,56 @@ rmse_diff &lt;- as.matrix(rmse_mrmash) - as.matrix(rmse_enet)
 rmse_diff_pooled &lt;- data.frame(RMSE_diff=c(rmse_diff))</code></pre>
 <div id="pooled-across-tissues" class="section level3">
 <h3>Pooled across tissues</h3>
-<pre class="r"><code>p_pooled &lt;- ggplot(rmse_diff_pooled, aes(x=RMSE_diff)) + geom_histogram() + labs(x = &quot;Difference in error between mr.mash and enet&quot;) + theme_cowplot()
+<pre class="r"><code>p_pooled &lt;- ggplot(rmse_diff_pooled, aes(x=RMSE_diff)) + geom_histogram() + labs(x = &quot;Difference in error between mr.mash and enet&quot;) + theme_cowplot(font_size = 20)
 p_pooled</code></pre>
 <pre><code>Warning: Removed 12823 rows containing non-finite values (stat_bin).</code></pre>
 <p><img src="figure/results_gtex_1000genes.Rmd/pooled%20tissuess-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-pooled-tissuess-1">
+Past versions of "pooled tissuess-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-pooled-tissuess-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/38c5a01210a9c2d650c6e9f1243893cd016b49fb/docs/figure/results_gtex_1000genes.Rmd/pooled tissuess-1.png" target="_blank">38c5a01</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-11-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>summary(rmse_diff_pooled)</code></pre>
+<pre><code>   RMSE_diff     
+ Min.   :-0.203  
+ 1st Qu.:-0.017  
+ Median :-0.006  
+ Mean   :-0.010  
+ 3rd Qu.: 0.000  
+ Max.   : 0.103  
+ NA&#39;s   :12823   </code></pre>
 </div>
 <div id="by-tissue" class="section level3">
 <h3>By tissue</h3>
