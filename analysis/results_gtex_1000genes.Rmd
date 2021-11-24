@@ -64,8 +64,9 @@ rmse_diff_pooled <- data.frame(RMSE_diff=c(rmse_diff))
 ### Pooled across tissues
 
 ```{r pooled tissuess, message=FALSE, fig.height=15, fig.width=15}
-p_pooled <- ggplot(rmse_diff_pooled, aes(x=RMSE_diff)) + geom_histogram() + labs(x = "Difference in error between mr.mash and enet") + theme_cowplot()
+p_pooled <- ggplot(rmse_diff_pooled, aes(x=RMSE_diff)) + geom_histogram() + labs(x = "Difference in error between mr.mash and enet") + theme_cowplot(font_size = 20)
 p_pooled
+summary(rmse_diff_pooled)
 ```
 
 ### By tissue
