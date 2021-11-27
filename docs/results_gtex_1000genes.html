@@ -488,16 +488,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeb3d3a6cf17d88bf8764a83ce245c68daaaa3e9c1targetblankb3d3a6ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/b3d3a6cf17d88bf8764a83ce245c68daaaa3e9c1" target="_blank">b3d3a6c</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree5bc4936278ad8941cb4cb222130a031eb7b6b875targetblank5bc4936a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/5bc4936278ad8941cb4cb222130a031eb7b6b875" target="_blank">5bc4936</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeb3d3a6cf17d88bf8764a83ce245c68daaaa3e9c1targetblankb3d3a6ca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree5bc4936278ad8941cb4cb222130a031eb7b6b875targetblank5bc4936a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/b3d3a6cf17d88bf8764a83ce245c68daaaa3e9c1" target="_blank">b3d3a6c</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/5bc4936278ad8941cb4cb222130a031eb7b6b875" target="_blank">5bc4936</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -2886,6 +2886,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/5bc4936278ad8941cb4cb222130a031eb7b6b875/analysis/results_gtex_1000genes.Rmd" target="_blank">5bc4936</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-11-27
+</td>
+<td>
+A few improvements
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/ef0d723e7fa429d9dc7f0b11957de8959e2b0542/docs/results_gtex_1000genes.html" target="_blank">ef0d723</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-11-27
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/b3d3a6cf17d88bf8764a83ce245c68daaaa3e9c1/analysis/results_gtex_1000genes.Rmd" target="_blank">b3d3a6c</a>
 </td>
 <td>
@@ -3091,6 +3125,43 @@ rmse_diff_pooled &lt;- data.frame(RMSE_diff=c(rmse_diff))</code></pre>
 <pre class="r"><code>p_pooled &lt;- ggplot(rmse_diff_pooled, aes(x=RMSE_diff)) + geom_histogram() + labs(x = &quot;Difference in error between mr.mash and enet&quot;) + theme_cowplot(font_size = 20)
 p_pooled</code></pre>
 <p><img src="figure/results_gtex_1000genes.Rmd/pooled%20tissues-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-pooled-tissues-1">
+Past versions of "pooled tissues-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-pooled-tissues-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/ef0d723e7fa429d9dc7f0b11957de8959e2b0542/docs/figure/results_gtex_1000genes.Rmd/pooled tissues-1.png" target="_blank">ef0d723</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-11-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>summary(rmse_diff_pooled[, 1])</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
  -0.203  -0.017  -0.006  -0.010   0.000   0.103   12823 </code></pre>
@@ -3102,12 +3173,19 @@ sumstats &lt;- c()
 for(j in 1:ncol(rmse_diff)){
     rmse_diff_j &lt;- data.frame(RMSE_diff=rmse_diff[, j])
     p_single[[j]] &lt;- ggplot(rmse_diff_j, aes(x=RMSE_diff)) + geom_histogram() + labs(x = &quot;Difference in error between mr.mash and enet&quot;, title=colnames(rmse_diff)[j]) + theme_cowplot()
-    sumstats&lt;- rbind(sumstats, summary(rmse_diff[, j]))
+    sumstats &lt;- rbind(sumstats, summary(rmse_diff[, j]))
 }
 
 plot_grid(p_single[[1]], p_single[[2]], p_single[[3]], p_single[[4]], p_single[[5]],
-          p_single[[6]], p_single[[7]], p_single[[8]], p_single[[9]], NULL,
-          p_single[[10]], NULL,
+          p_single[[6]], p_single[[7]], p_single[[8]], p_single[[9]],p_single[[10]],
+          p_single[[11]], p_single[[12]], p_single[[13]], p_single[[14]], p_single[[15]],
+          p_single[[16]], p_single[[17]], p_single[[18]], p_single[[19]], p_single[[20]], 
+          p_single[[21]], p_single[[22]], p_single[[23]], p_single[[24]], p_single[[25]],
+          p_single[[26]], p_single[[27]], p_single[[28]], p_single[[29]], p_single[[30]], 
+          p_single[[31]], p_single[[32]], p_single[[33]], p_single[[34]], p_single[[35]],
+          p_single[[36]], p_single[[37]], p_single[[38]], p_single[[39]], p_single[[40]], 
+          p_single[[41]], p_single[[42]], p_single[[43]], p_single[[44]], p_single[[45]],
+          p_single[[46]], p_single[[47]], NULL, p_single[[48]], NULL,
           ncol = 3)</code></pre>
 <p><img src="figure/results_gtex_1000genes.Rmd/by%20tissue-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>
@@ -3134,6 +3212,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/ef0d723e7fa429d9dc7f0b11957de8959e2b0542/docs/figure/results_gtex_1000genes.Rmd/by tissue-1.png" target="_blank">ef0d723</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-11-27
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/9db563c97be601ed43a1a7be2fb8e6172e9726d4/docs/figure/results_gtex_1000genes.Rmd/by tissue-1.png" target="_blank">9db563c</a>
 </td>
 <td>
@@ -3147,272 +3236,155 @@ Fabio Morgante
 </table>
 </div>
 </div>
-<pre class="r"><code>plot_grid(p_single[[11]], p_single[[12]], p_single[[13]], p_single[[14]], p_single[[15]],
-          p_single[[16]], p_single[[17]], p_single[[18]], p_single[[19]], NULL,
-          p_single[[20]], NULL,
-          ncol = 3)</code></pre>
-<p><img src="figure/results_gtex_1000genes.Rmd/by%20tissue-2.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-by-tissue-2">
-Past versions of "by tissue-2.png"
-</button>
-</p>
-<div id="fig-no-spaces-by-tissue-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/9db563c97be601ed43a1a7be2fb8e6172e9726d4/docs/figure/results_gtex_1000genes.Rmd/by tissue-2.png" target="_blank">9db563c</a>
-</td>
-<td>
-Fabio Morgante
-</td>
-<td>
-2021-11-27
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>plot_grid(p_single[[21]], p_single[[22]], p_single[[23]], p_single[[24]], p_single[[25]],
-          p_single[[26]], p_single[[27]], p_single[[28]], p_single[[29]], NULL,
-          p_single[[30]], NULL,
-          ncol = 3)</code></pre>
-<p><img src="figure/results_gtex_1000genes.Rmd/by%20tissue-3.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-by-tissue-3">
-Past versions of "by tissue-3.png"
-</button>
-</p>
-<div id="fig-no-spaces-by-tissue-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/9db563c97be601ed43a1a7be2fb8e6172e9726d4/docs/figure/results_gtex_1000genes.Rmd/by tissue-3.png" target="_blank">9db563c</a>
-</td>
-<td>
-Fabio Morgante
-</td>
-<td>
-2021-11-27
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>plot_grid(p_single[[31]], p_single[[32]], p_single[[33]], p_single[[34]], p_single[[35]],
-          p_single[[36]], p_single[[37]], p_single[[38]], p_single[[39]], NULL,
-          p_single[[40]], NULL,
-          ncol = 3)</code></pre>
-<p><img src="figure/results_gtex_1000genes.Rmd/by%20tissue-4.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-by-tissue-4">
-Past versions of "by tissue-4.png"
-</button>
-</p>
-<div id="fig-no-spaces-by-tissue-4" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/9db563c97be601ed43a1a7be2fb8e6172e9726d4/docs/figure/results_gtex_1000genes.Rmd/by tissue-4.png" target="_blank">9db563c</a>
-</td>
-<td>
-Fabio Morgante
-</td>
-<td>
-2021-11-27
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>plot_grid(p_single[[41]], p_single[[42]], p_single[[43]], p_single[[44]], p_single[[45]],
-          p_single[[46]], p_single[[47]], NULL, p_single[[48]],
-          ncol = 3)</code></pre>
-<p><img src="figure/results_gtex_1000genes.Rmd/by%20tissue-5.png" width="1440" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-by-tissue-5">
-Past versions of "by tissue-5.png"
-</button>
-</p>
-<div id="fig-no-spaces-by-tissue-5" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/9db563c97be601ed43a1a7be2fb8e6172e9726d4/docs/figure/results_gtex_1000genes.Rmd/by tissue-5.png" target="_blank">9db563c</a>
-</td>
-<td>
-Fabio Morgante
-</td>
-<td>
-2021-11-27
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>sumstats</code></pre>
-<pre><code>             Min.      1st Qu.       Median         Mean       3rd Qu.
- [1,] -0.03453803 -0.010015927 -0.004782696 -0.005614178 -6.855818e-04
- [2,] -0.07130170 -0.012975634 -0.005943071 -0.007416829 -7.754565e-04
- [3,] -0.09114687 -0.018710859 -0.007188985 -0.009970637 -3.957321e-04
- [4,] -0.05404732 -0.014308542 -0.006276417 -0.008040668 -7.413325e-04
- [5,] -0.09690506 -0.020783338 -0.008853875 -0.012568935 -1.361599e-03
- [6,] -0.03728780 -0.009272438 -0.003112077 -0.004471307  6.729192e-05
- [7,] -0.20284448 -0.029688504 -0.010318339 -0.017350780 -2.833030e-04
- [8,] -0.12794522 -0.027845902 -0.011814591 -0.016489758 -1.553557e-03
- [9,] -0.08585325 -0.022983813 -0.009002455 -0.013109627 -4.987411e-04
-[10,] -0.14742185 -0.026488357 -0.009778317 -0.014376983 -5.495054e-04
-[11,] -0.07400049 -0.019245940 -0.007096140 -0.010134073  2.379602e-05
-[12,] -0.09110438 -0.022517652 -0.007941995 -0.012786639 -1.311226e-03
-[13,] -0.14883782 -0.028901602 -0.010287525 -0.016829609 -1.422388e-03
-[14,] -0.13972088 -0.026744788 -0.010683825 -0.016328135 -2.009282e-03
-[15,] -0.12245087 -0.024990827 -0.010065690 -0.014779082 -1.326882e-03
-[16,] -0.12570534 -0.021532862 -0.009156264 -0.012428545 -1.392470e-03
-[17,] -0.13356774 -0.025615459 -0.010812042 -0.015386312 -9.501789e-04
-[18,] -0.12132183 -0.028927116 -0.010674921 -0.016334080 -5.634839e-04
-[19,] -0.19352177 -0.033506696 -0.011915971 -0.019225260 -4.210160e-06
-[20,] -0.07075928 -0.015310204 -0.006671924 -0.008744568 -8.838698e-04
-[21,] -0.04299217 -0.009710696 -0.003273027 -0.003981283  4.169507e-04
-[22,] -0.14226301 -0.018932027 -0.007288006 -0.010882514  2.460266e-04
-[23,] -0.07788665 -0.017074759 -0.006843974 -0.009780317 -1.247054e-03
-[24,] -0.07212045 -0.015128014 -0.006524545 -0.008553447 -8.084706e-04
-[25,] -0.05896111 -0.017501162 -0.007594497 -0.009961891 -1.504868e-03
-[26,] -0.04681240 -0.011291700 -0.003870692 -0.005211735  1.564278e-04
-[27,] -0.04988346 -0.012854308 -0.005790168 -0.007220124 -4.546049e-04
-[28,] -0.05173208 -0.016065840 -0.006289127 -0.008419654 -9.766566e-04
-[29,] -0.04815291 -0.013789318 -0.005826798 -0.007740458 -7.605024e-04
-[30,] -0.07620929 -0.014349373 -0.004630923 -0.007467138  7.568326e-04
-[31,] -0.03473919 -0.010946585 -0.004099860 -0.005570794 -2.198154e-04
-[32,] -0.18296890 -0.024645791 -0.009823764 -0.014318314 -8.122610e-04
-[33,] -0.02358072 -0.007457137 -0.002660360 -0.003290228  1.428035e-04
-[34,] -0.04105405 -0.011007684 -0.003953968 -0.005223766 -1.818634e-04
-[35,] -0.14693362 -0.024409154 -0.009229744 -0.013795137 -2.511859e-04
-[36,] -0.05640683 -0.014332053 -0.005086783 -0.007604632 -2.229871e-04
-[37,] -0.08897530 -0.017624242 -0.005967239 -0.009074207 -1.558135e-04
-[38,] -0.09576228 -0.021998402 -0.008028011 -0.012263691 -1.301369e-03
-[39,] -0.04497306 -0.011808785 -0.005425292 -0.006927679 -1.061534e-03
-[40,] -0.03848212 -0.009477090 -0.003591834 -0.004922708 -2.753449e-04
-[41,] -0.10434229 -0.026706912 -0.011426729 -0.015540079 -1.586642e-03
-[42,] -0.10774435 -0.017527956 -0.007467263 -0.010211532 -4.263634e-04
-[43,] -0.06630646 -0.016283034 -0.006580407 -0.010058982 -1.255954e-03
-[44,] -0.05532841 -0.011228618 -0.002380533 -0.003134782  3.356504e-03
-[45,] -0.05691660 -0.009055295 -0.002982558 -0.003693764  3.726713e-04
-[46,] -0.18773312 -0.026970941 -0.011986099 -0.017142800 -2.125576e-03
-[47,] -0.19021513 -0.026430970 -0.009330066 -0.015439186 -8.362865e-04
-[48,] -0.03622241 -0.006117779 -0.001652829 -0.002128761  7.416007e-04
-            Max. NA&#39;s
- [1,] 0.06643376  264
- [2,] 0.03214816  264
- [3,] 0.06638181  281
- [4,] 0.02836028  281
- [5,] 0.05457727  265
- [6,] 0.05587884  296
- [7,] 0.08005610  288
- [8,] 0.10255587  278
- [9,] 0.05039573  272
-[10,] 0.08426775  248
-[11,] 0.05413213  247
-[12,] 0.07183928  271
-[13,] 0.05740487  274
-[14,] 0.04256553  282
-[15,] 0.04508524  252
-[16,] 0.04935880  266
-[17,] 0.06968285  298
-[18,] 0.06298668  261
-[19,] 0.05846099  287
-[20,] 0.06928465  233
-[21,] 0.07008614  335
-[22,] 0.10236197  305
-[23,] 0.04561543  271
-[24,] 0.02881984  254
-[25,] 0.02300569  272
-[26,] 0.05796842  285
-[27,] 0.03384951  279
-[28,] 0.04737967  307
-[29,] 0.03080717  363
-[30,] 0.07327033  330
-[31,] 0.04993001  234
-[32,] 0.06226891  243
-[33,] 0.06260407  371
-[34,] 0.04225253  235
-[35,] 0.04520676  235
-[36,] 0.04007339  303
-[37,] 0.07286998  193
-[38,] 0.07404888  212
-[39,] 0.02835287  253
-[40,] 0.03907960  251
-[41,] 0.02853394  233
-[42,] 0.05456632  251
-[43,] 0.04360007  258
-[44,] 0.07271869   82
-[45,] 0.05374151  215
-[46,] 0.07155467  243
-[47,] 0.03988717  228
-[48,] 0.08931692  374</code></pre>
+<pre class="r"><code>rownames(sumstats) &lt;- colnames(rmse_diff)
+sumstats</code></pre>
+<pre><code>                                             Min.      1st Qu.       Median
+Adipose_Subcutaneous                  -0.03453803 -0.010015927 -0.004782696
+Adipose_Visceral_Omentum              -0.07130170 -0.012975634 -0.005943071
+Adrenal_Gland                         -0.09114687 -0.018710859 -0.007188985
+Artery_Aorta                          -0.05404732 -0.014308542 -0.006276417
+Artery_Coronary                       -0.09690506 -0.020783338 -0.008853875
+Artery_Tibial                         -0.03728780 -0.009272438 -0.003112077
+Brain_Amygdala                        -0.20284448 -0.029688504 -0.010318339
+Brain_Anterior_cingulate_cortex_BA24  -0.12794522 -0.027845902 -0.011814591
+Brain_Caudate_basal_ganglia           -0.08585325 -0.022983813 -0.009002455
+Brain_Cerebellar_Hemisphere           -0.14742185 -0.026488357 -0.009778317
+Brain_Cerebellum                      -0.07400049 -0.019245940 -0.007096140
+Brain_Cortex                          -0.09110438 -0.022517652 -0.007941995
+Brain_Frontal_Cortex_BA9              -0.14883782 -0.028901602 -0.010287525
+Brain_Hippocampus                     -0.13972088 -0.026744788 -0.010683825
+Brain_Hypothalamus                    -0.12245087 -0.024990827 -0.010065690
+Brain_Nucleus_accumbens_basal_ganglia -0.12570534 -0.021532862 -0.009156264
+Brain_Putamen_basal_ganglia           -0.13356774 -0.025615459 -0.010812042
+Brain_Spinal_cord_cervical_c-1        -0.12132183 -0.028927116 -0.010674921
+Brain_Substantia_nigra                -0.19352177 -0.033506696 -0.011915971
+Breast_Mammary_Tissue                 -0.07075928 -0.015310204 -0.006671924
+Cells_Cultured_fibroblasts            -0.04299217 -0.009710696 -0.003273027
+Cells_EBV-transformed_lymphocytes     -0.14226301 -0.018932027 -0.007288006
+Colon_Sigmoid                         -0.07788665 -0.017074759 -0.006843974
+Colon_Transverse                      -0.07212045 -0.015128014 -0.006524545
+Esophagus_Gastroesophageal_Junction   -0.05896111 -0.017501162 -0.007594497
+Esophagus_Mucosa                      -0.04681240 -0.011291700 -0.003870692
+Esophagus_Muscularis                  -0.04988346 -0.012854308 -0.005790168
+Heart_Atrial_Appendage                -0.05173208 -0.016065840 -0.006289127
+Heart_Left_Ventricle                  -0.04815291 -0.013789318 -0.005826798
+Liver                                 -0.07620929 -0.014349373 -0.004630923
+Lung                                  -0.03473919 -0.010946585 -0.004099860
+Minor_Salivary_Gland                  -0.18296890 -0.024645791 -0.009823764
+Muscle_Skeletal                       -0.02358072 -0.007457137 -0.002660360
+Nerve_Tibial                          -0.04105405 -0.011007684 -0.003953968
+Ovary                                 -0.14693362 -0.024409154 -0.009229744
+Pancreas                              -0.05640683 -0.014332053 -0.005086783
+Pituitary                             -0.08897530 -0.017624242 -0.005967239
+Prostate                              -0.09576228 -0.021998402 -0.008028011
+Skin_Not_Sun_Exposed_Suprapubic       -0.04497306 -0.011808785 -0.005425292
+Skin_Sun_Exposed_Lower_leg            -0.03848212 -0.009477090 -0.003591834
+Small_Intestine_Terminal_Ileum        -0.10434229 -0.026706912 -0.011426729
+Spleen                                -0.10774435 -0.017527956 -0.007467263
+Stomach                               -0.06630646 -0.016283034 -0.006580407
+Testis                                -0.05532841 -0.011228618 -0.002380533
+Thyroid                               -0.05691660 -0.009055295 -0.002982558
+Uterus                                -0.18773312 -0.026970941 -0.011986099
+Vagina                                -0.19021513 -0.026430970 -0.009330066
+Whole_Blood                           -0.03622241 -0.006117779 -0.001652829
+                                              Mean       3rd Qu.       Max.
+Adipose_Subcutaneous                  -0.005614178 -6.855818e-04 0.06643376
+Adipose_Visceral_Omentum              -0.007416829 -7.754565e-04 0.03214816
+Adrenal_Gland                         -0.009970637 -3.957321e-04 0.06638181
+Artery_Aorta                          -0.008040668 -7.413325e-04 0.02836028
+Artery_Coronary                       -0.012568935 -1.361599e-03 0.05457727
+Artery_Tibial                         -0.004471307  6.729192e-05 0.05587884
+Brain_Amygdala                        -0.017350780 -2.833030e-04 0.08005610
+Brain_Anterior_cingulate_cortex_BA24  -0.016489758 -1.553557e-03 0.10255587
+Brain_Caudate_basal_ganglia           -0.013109627 -4.987411e-04 0.05039573
+Brain_Cerebellar_Hemisphere           -0.014376983 -5.495054e-04 0.08426775
+Brain_Cerebellum                      -0.010134073  2.379602e-05 0.05413213
+Brain_Cortex                          -0.012786639 -1.311226e-03 0.07183928
+Brain_Frontal_Cortex_BA9              -0.016829609 -1.422388e-03 0.05740487
+Brain_Hippocampus                     -0.016328135 -2.009282e-03 0.04256553
+Brain_Hypothalamus                    -0.014779082 -1.326882e-03 0.04508524
+Brain_Nucleus_accumbens_basal_ganglia -0.012428545 -1.392470e-03 0.04935880
+Brain_Putamen_basal_ganglia           -0.015386312 -9.501789e-04 0.06968285
+Brain_Spinal_cord_cervical_c-1        -0.016334080 -5.634839e-04 0.06298668
+Brain_Substantia_nigra                -0.019225260 -4.210160e-06 0.05846099
+Breast_Mammary_Tissue                 -0.008744568 -8.838698e-04 0.06928465
+Cells_Cultured_fibroblasts            -0.003981283  4.169507e-04 0.07008614
+Cells_EBV-transformed_lymphocytes     -0.010882514  2.460266e-04 0.10236197
+Colon_Sigmoid                         -0.009780317 -1.247054e-03 0.04561543
+Colon_Transverse                      -0.008553447 -8.084706e-04 0.02881984
+Esophagus_Gastroesophageal_Junction   -0.009961891 -1.504868e-03 0.02300569
+Esophagus_Mucosa                      -0.005211735  1.564278e-04 0.05796842
+Esophagus_Muscularis                  -0.007220124 -4.546049e-04 0.03384951
+Heart_Atrial_Appendage                -0.008419654 -9.766566e-04 0.04737967
+Heart_Left_Ventricle                  -0.007740458 -7.605024e-04 0.03080717
+Liver                                 -0.007467138  7.568326e-04 0.07327033
+Lung                                  -0.005570794 -2.198154e-04 0.04993001
+Minor_Salivary_Gland                  -0.014318314 -8.122610e-04 0.06226891
+Muscle_Skeletal                       -0.003290228  1.428035e-04 0.06260407
+Nerve_Tibial                          -0.005223766 -1.818634e-04 0.04225253
+Ovary                                 -0.013795137 -2.511859e-04 0.04520676
+Pancreas                              -0.007604632 -2.229871e-04 0.04007339
+Pituitary                             -0.009074207 -1.558135e-04 0.07286998
+Prostate                              -0.012263691 -1.301369e-03 0.07404888
+Skin_Not_Sun_Exposed_Suprapubic       -0.006927679 -1.061534e-03 0.02835287
+Skin_Sun_Exposed_Lower_leg            -0.004922708 -2.753449e-04 0.03907960
+Small_Intestine_Terminal_Ileum        -0.015540079 -1.586642e-03 0.02853394
+Spleen                                -0.010211532 -4.263634e-04 0.05456632
+Stomach                               -0.010058982 -1.255954e-03 0.04360007
+Testis                                -0.003134782  3.356504e-03 0.07271869
+Thyroid                               -0.003693764  3.726713e-04 0.05374151
+Uterus                                -0.017142800 -2.125576e-03 0.07155467
+Vagina                                -0.015439186 -8.362865e-04 0.03988717
+Whole_Blood                           -0.002128761  7.416007e-04 0.08931692
+                                      NA&#39;s
+Adipose_Subcutaneous                   264
+Adipose_Visceral_Omentum               264
+Adrenal_Gland                          281
+Artery_Aorta                           281
+Artery_Coronary                        265
+Artery_Tibial                          296
+Brain_Amygdala                         288
+Brain_Anterior_cingulate_cortex_BA24   278
+Brain_Caudate_basal_ganglia            272
+Brain_Cerebellar_Hemisphere            248
+Brain_Cerebellum                       247
+Brain_Cortex                           271
+Brain_Frontal_Cortex_BA9               274
+Brain_Hippocampus                      282
+Brain_Hypothalamus                     252
+Brain_Nucleus_accumbens_basal_ganglia  266
+Brain_Putamen_basal_ganglia            298
+Brain_Spinal_cord_cervical_c-1         261
+Brain_Substantia_nigra                 287
+Breast_Mammary_Tissue                  233
+Cells_Cultured_fibroblasts             335
+Cells_EBV-transformed_lymphocytes      305
+Colon_Sigmoid                          271
+Colon_Transverse                       254
+Esophagus_Gastroesophageal_Junction    272
+Esophagus_Mucosa                       285
+Esophagus_Muscularis                   279
+Heart_Atrial_Appendage                 307
+Heart_Left_Ventricle                   363
+Liver                                  330
+Lung                                   234
+Minor_Salivary_Gland                   243
+Muscle_Skeletal                        371
+Nerve_Tibial                           235
+Ovary                                  235
+Pancreas                               303
+Pituitary                              193
+Prostate                               212
+Skin_Not_Sun_Exposed_Suprapubic        253
+Skin_Sun_Exposed_Lower_leg             251
+Small_Intestine_Terminal_Ileum         233
+Spleen                                 251
+Stomach                                258
+Testis                                  82
+Thyroid                                215
+Uterus                                 243
+Vagina                                 228
+Whole_Blood                            374</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
