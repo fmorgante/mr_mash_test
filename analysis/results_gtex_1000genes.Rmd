@@ -63,7 +63,7 @@ rmse_diff_pooled <- data.frame(RMSE_diff=c(rmse_diff))
 
 ### Pooled across tissues
 
-```{r pooled tissuess, message=FALSE, fig.height=15, fig.width=15}
+```{r pooled tissues, warning=FALSE, message=FALSE, fig.height=15, fig.width=15}
 p_pooled <- ggplot(rmse_diff_pooled, aes(x=RMSE_diff)) + geom_histogram() + labs(x = "Difference in error between mr.mash and enet") + theme_cowplot(font_size = 20)
 p_pooled
 summary(rmse_diff_pooled[, 1])
@@ -71,13 +71,13 @@ summary(rmse_diff_pooled[, 1])
 
 ### By tissue
 
-```{r by tissue, message=FALSE, fig.height=15, fig.width=15}
+```{r by tissue, warning=FALSE, message=FALSE, fig.height=15, fig.width=15}
 p_single <- vector("list", ncol(rmse_diff))
 sumstats <- c()
 for(j in 1:ncol(rmse_diff)){
     rmse_diff_j <- data.frame(RMSE_diff=rmse_diff[, j])
-    p_single[[j]] <- ggplot(rmse_diff_pooled, aes(x=RMSE_diff)) + geom_histogram() + labs(x = "Difference in error between mr.mash and enet", title=colnames(rmse_diff)[j]) + theme_cowplot()
-    sumstats<- cbind(sumstats, summary(rmse_diff[, j]))
+    p_single[[j]] <- ggplot(rmse_diff_j, aes(x=RMSE_diff)) + geom_histogram() + labs(x = "Difference in error between mr.mash and enet", title=colnames(rmse_diff)[j]) + theme_cowplot()
+    sumstats<- rbind(sumstats, summary(rmse_diff[, j]))
 }
 
 plot_grid(p_single[[1]], p_single[[2]], p_single[[3]], p_single[[4]], p_single[[5]],
