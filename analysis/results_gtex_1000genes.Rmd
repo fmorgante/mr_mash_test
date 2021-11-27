@@ -66,14 +66,47 @@ rmse_diff_pooled <- data.frame(RMSE_diff=c(rmse_diff))
 ```{r pooled tissuess, message=FALSE, fig.height=15, fig.width=15}
 p_pooled <- ggplot(rmse_diff_pooled, aes(x=RMSE_diff)) + geom_histogram() + labs(x = "Difference in error between mr.mash and enet") + theme_cowplot(font_size = 20)
 p_pooled
-summary(rmse_diff_pooled)
+summary(rmse_diff_pooled[, 1])
 ```
 
 ### By tissue
 
 ```{r by tissue, message=FALSE, fig.height=15, fig.width=15}
-# plot_grid(p_enet[[1]], p_enet[[2]], p_enet[[3]], p_enet[[4]], p_enet[[5]],
-#           p_enet[[6]], p_enet[[7]], p_enet[[8]], p_enet[[9]], NULL,
-#           p_enet[[10]], NULL,
-#           ncol = 3)
+p_single <- vector("list", ncol(rmse_diff))
+sumstats <- c()
+for(j in 1:ncol(rmse_diff)){
+    rmse_diff_j <- data.frame(RMSE_diff=rmse_diff[, j])
+    p_single[[j]] <- ggplot(rmse_diff_pooled, aes(x=RMSE_diff)) + geom_histogram() + labs(x = "Difference in error between mr.mash and enet", title=colnames(rmse_diff)[j]) + theme_cowplot()
+    sumstats<- cbind(sumstats, summary(rmse_diff[, j]))
+}
+
+plot_grid(p_single[[1]], p_single[[2]], p_single[[3]], p_single[[4]], p_single[[5]],
+          p_single[[6]], p_single[[7]], p_single[[8]], p_single[[9]], NULL,
+          p_single[[10]], NULL,
+          ncol = 3)
+
+
+plot_grid(p_single[[11]], p_single[[12]], p_single[[13]], p_single[[14]], p_single[[15]],
+          p_single[[16]], p_single[[17]], p_single[[18]], p_single[[19]], NULL,
+          p_single[[20]], NULL,
+          ncol = 3)
+
+
+plot_grid(p_single[[21]], p_single[[22]], p_single[[23]], p_single[[24]], p_single[[25]],
+          p_single[[26]], p_single[[27]], p_single[[28]], p_single[[29]], NULL,
+          p_single[[30]], NULL,
+          ncol = 3)
+
+
+plot_grid(p_single[[31]], p_single[[32]], p_single[[33]], p_single[[34]], p_single[[35]],
+          p_single[[36]], p_single[[37]], p_single[[38]], p_single[[39]], NULL,
+          p_single[[40]], NULL,
+          ncol = 3)
+
+
+plot_grid(p_single[[41]], p_single[[42]], p_single[[43]], p_single[[44]], p_single[[45]],
+          p_single[[46]], p_single[[47]], NULL, p_single[[48]],
+          ncol = 3)
+
+sumstats
 ```
