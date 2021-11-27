@@ -81,15 +81,27 @@ for(j in 1:ncol(rmse_diff)){
 }
 
 plot_grid(p_single[[1]], p_single[[2]], p_single[[3]], p_single[[4]], p_single[[5]],
-          p_single[[6]], p_single[[7]], p_single[[8]], p_single[[9]],p_single[[10]],
-          p_single[[11]], p_single[[12]], p_single[[13]], p_single[[14]], p_single[[15]],
-          p_single[[16]], p_single[[17]], p_single[[18]], p_single[[19]], p_single[[20]], 
-          p_single[[21]], p_single[[22]], p_single[[23]], p_single[[24]], p_single[[25]],
-          p_single[[26]], p_single[[27]], p_single[[28]], p_single[[29]], p_single[[30]], 
-          p_single[[31]], p_single[[32]], p_single[[33]], p_single[[34]], p_single[[35]],
-          p_single[[36]], p_single[[37]], p_single[[38]], p_single[[39]], p_single[[40]], 
-          p_single[[41]], p_single[[42]], p_single[[43]], p_single[[44]], p_single[[45]],
-          p_single[[46]], p_single[[47]], NULL, p_single[[48]], NULL,
+          p_single[[6]], p_single[[7]], p_single[[8]], p_single[[9]], NULL, 
+          p_single[[10]], NULL,
+          ncol = 3)
+
+plot_grid(p_single[[11]], p_single[[12]], p_single[[13]], p_single[[14]], p_single[[15]],
+          p_single[[16]], p_single[[17]], p_single[[18]], p_single[[19]], NULL,
+          p_single[[20]], NULL,
+          ncol = 3)
+
+plot_grid(p_single[[21]], p_single[[22]], p_single[[23]], p_single[[24]], p_single[[25]],
+          p_single[[26]], p_single[[27]], p_single[[28]], p_single[[29]], NULL, 
+          p_single[[30]], NULL,
+          ncol = 3)
+
+plot_grid(p_single[[31]], p_single[[32]], p_single[[33]], p_single[[34]], p_single[[35]],
+          p_single[[36]], p_single[[37]], p_single[[38]], p_single[[39]], NULL,
+          p_single[[40]], NULL,
+          ncol = 3)
+
+plot_grid(p_single[[41]], p_single[[42]], p_single[[43]], p_single[[44]], p_single[[45]],
+          p_single[[46]], p_single[[47]], NULL, p_single[[48]],
           ncol = 3)
 
 rownames(sumstats) <- colnames(rmse_diff)
