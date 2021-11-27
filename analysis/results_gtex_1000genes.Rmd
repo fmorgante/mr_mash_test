@@ -76,7 +76,7 @@ p_single <- vector("list", ncol(rmse_diff))
 sumstats <- c()
 for(j in 1:ncol(rmse_diff)){
     rmse_diff_j <- data.frame(RMSE_diff=rmse_diff[, j])
-    p_single[[j]] <- ggplot(rmse_diff_j, aes(x=RMSE_diff)) + geom_histogram() + labs(x = "Difference in error between mr.mash and enet", title=colnames(rmse_diff)[j]) + theme_cowplot()
+    p_single[[j]] <- ggplot(rmse_diff_j, aes(x=RMSE_diff)) + geom_histogram() + labs(x = "Difference in error between mr.mash and enet", title=colnames(rmse_diff)[j]) + theme_cowplot() + theme(plot.title = element_text(hjust = 0.5))
     sumstats <- rbind(sumstats, summary(rmse_diff[, j]))
 }
 
