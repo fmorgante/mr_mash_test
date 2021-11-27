@@ -488,16 +488,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeaa729d67d33ea68de6feb336c29f0614b08b1f7atargetblankaa729d6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/aa729d67d33ea68de6feb336c29f0614b08b1f7a" target="_blank">aa729d6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeb3d3a6cf17d88bf8764a83ce245c68daaaa3e9c1targetblankb3d3a6ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/b3d3a6cf17d88bf8764a83ce245c68daaaa3e9c1" target="_blank">b3d3a6c</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeaa729d67d33ea68de6feb336c29f0614b08b1f7atargetblankaa729d6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeb3d3a6cf17d88bf8764a83ce245c68daaaa3e9c1targetblankb3d3a6ca" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/aa729d67d33ea68de6feb336c29f0614b08b1f7a" target="_blank">aa729d6</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/b3d3a6cf17d88bf8764a83ce245c68daaaa3e9c1" target="_blank">b3d3a6c</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -2886,6 +2886,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/b3d3a6cf17d88bf8764a83ce245c68daaaa3e9c1/analysis/results_gtex_1000genes.Rmd" target="_blank">b3d3a6c</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-11-27
+</td>
+<td>
+Fix bugs
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/9db563c97be601ed43a1a7be2fb8e6172e9726d4/docs/results_gtex_1000genes.html" target="_blank">9db563c</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-11-27
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/aa729d67d33ea68de6feb336c29f0614b08b1f7a/analysis/results_gtex_1000genes.Rmd" target="_blank">aa729d6</a>
 </td>
 <td>
@@ -3056,14 +3090,32 @@ rmse_diff_pooled &lt;- data.frame(RMSE_diff=c(rmse_diff))</code></pre>
 <h3>Pooled across tissues</h3>
 <pre class="r"><code>p_pooled &lt;- ggplot(rmse_diff_pooled, aes(x=RMSE_diff)) + geom_histogram() + labs(x = &quot;Difference in error between mr.mash and enet&quot;) + theme_cowplot(font_size = 20)
 p_pooled</code></pre>
-<pre><code>Warning: Removed 12823 rows containing non-finite values (stat_bin).</code></pre>
-<p><img src="figure/results_gtex_1000genes.Rmd/pooled%20tissuess-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p><img src="figure/results_gtex_1000genes.Rmd/pooled%20tissues-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>summary(rmse_diff_pooled[, 1])</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+ -0.203  -0.017  -0.006  -0.010   0.000   0.103   12823 </code></pre>
+</div>
+<div id="by-tissue" class="section level3">
+<h3>By tissue</h3>
+<pre class="r"><code>p_single &lt;- vector(&quot;list&quot;, ncol(rmse_diff))
+sumstats &lt;- c()
+for(j in 1:ncol(rmse_diff)){
+    rmse_diff_j &lt;- data.frame(RMSE_diff=rmse_diff[, j])
+    p_single[[j]] &lt;- ggplot(rmse_diff_j, aes(x=RMSE_diff)) + geom_histogram() + labs(x = &quot;Difference in error between mr.mash and enet&quot;, title=colnames(rmse_diff)[j]) + theme_cowplot()
+    sumstats&lt;- rbind(sumstats, summary(rmse_diff[, j]))
+}
+
+plot_grid(p_single[[1]], p_single[[2]], p_single[[3]], p_single[[4]], p_single[[5]],
+          p_single[[6]], p_single[[7]], p_single[[8]], p_single[[9]], NULL,
+          p_single[[10]], NULL,
+          ncol = 3)</code></pre>
+<p><img src="figure/results_gtex_1000genes.Rmd/by%20tissue-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-pooled-tissuess-1">
-Past versions of "pooled tissuess-1.png"
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-by-tissue-1">
+Past versions of "by tissue-1.png"
 </button>
 </p>
-<div id="fig-no-spaces-pooled-tissuess-1" class="collapse">
+<div id="fig-no-spaces-by-tissue-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -3082,240 +3134,285 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/b382d6d79dd1a117b7899b174c4302c7a7d303a9/docs/figure/results_gtex_1000genes.Rmd/pooled tissuess-1.png" target="_blank">b382d6d</a>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/9db563c97be601ed43a1a7be2fb8e6172e9726d4/docs/figure/results_gtex_1000genes.Rmd/by tissue-1.png" target="_blank">9db563c</a>
 </td>
 <td>
 Fabio Morgante
 </td>
 <td>
-2021-11-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/fmorgante/mr_mash_test/blob/38c5a01210a9c2d650c6e9f1243893cd016b49fb/docs/figure/results_gtex_1000genes.Rmd/pooled tissuess-1.png" target="_blank">38c5a01</a>
-</td>
-<td>
-Fabio Morgante
-</td>
-<td>
-2021-11-24
+2021-11-27
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<pre class="r"><code>summary(rmse_diff_pooled[, 1])</code></pre>
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
- -0.203  -0.017  -0.006  -0.010   0.000   0.103   12823 </code></pre>
-</div>
-<div id="by-tissue" class="section level3">
-<h3>By tissue</h3>
-<pre class="r"><code>p_single &lt;- vector(&quot;list&quot;, ncol(rmse_diff))
-sumstats &lt;- c()
-for(j in 1:ncol(rmse_diff)){
-    rmse_diff_j &lt;- data.frame(RMSE_diff=rmse_diff[, j])
-    p_single[[j]] &lt;- ggplot(rmse_diff_pooled, aes(x=RMSE_diff)) + geom_histogram() + labs(x = &quot;Difference in error between mr.mash and enet&quot;, title=colnames(rmse_diff)[j]) + theme_cowplot()
-    sumstats&lt;- cbind(sumstats, summary(rmse_diff[, j]))
-}
-
-plot_grid(p_single[[1]], p_single[[2]], p_single[[3]], p_single[[4]], p_single[[5]],
-          p_single[[6]], p_single[[7]], p_single[[8]], p_single[[9]], NULL,
-          p_single[[10]], NULL,
-          ncol = 3)</code></pre>
-<pre><code>Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).</code></pre>
-<p><img src="figure/results_gtex_1000genes.Rmd/by%20tissue-1.png" width="1440" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>plot_grid(p_single[[11]], p_single[[12]], p_single[[13]], p_single[[14]], p_single[[15]],
           p_single[[16]], p_single[[17]], p_single[[18]], p_single[[19]], NULL,
           p_single[[20]], NULL,
           ncol = 3)</code></pre>
-<pre><code>Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).</code></pre>
 <p><img src="figure/results_gtex_1000genes.Rmd/by%20tissue-2.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-by-tissue-2">
+Past versions of "by tissue-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-by-tissue-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/9db563c97be601ed43a1a7be2fb8e6172e9726d4/docs/figure/results_gtex_1000genes.Rmd/by tissue-2.png" target="_blank">9db563c</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-11-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_grid(p_single[[21]], p_single[[22]], p_single[[23]], p_single[[24]], p_single[[25]],
           p_single[[26]], p_single[[27]], p_single[[28]], p_single[[29]], NULL,
           p_single[[30]], NULL,
           ncol = 3)</code></pre>
-<pre><code>Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).</code></pre>
 <p><img src="figure/results_gtex_1000genes.Rmd/by%20tissue-3.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-by-tissue-3">
+Past versions of "by tissue-3.png"
+</button>
+</p>
+<div id="fig-no-spaces-by-tissue-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/9db563c97be601ed43a1a7be2fb8e6172e9726d4/docs/figure/results_gtex_1000genes.Rmd/by tissue-3.png" target="_blank">9db563c</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-11-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_grid(p_single[[31]], p_single[[32]], p_single[[33]], p_single[[34]], p_single[[35]],
           p_single[[36]], p_single[[37]], p_single[[38]], p_single[[39]], NULL,
           p_single[[40]], NULL,
           ncol = 3)</code></pre>
-<pre><code>Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).</code></pre>
 <p><img src="figure/results_gtex_1000genes.Rmd/by%20tissue-4.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-by-tissue-4">
+Past versions of "by tissue-4.png"
+</button>
+</p>
+<div id="fig-no-spaces-by-tissue-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/9db563c97be601ed43a1a7be2fb8e6172e9726d4/docs/figure/results_gtex_1000genes.Rmd/by tissue-4.png" target="_blank">9db563c</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-11-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_grid(p_single[[41]], p_single[[42]], p_single[[43]], p_single[[44]], p_single[[45]],
           p_single[[46]], p_single[[47]], NULL, p_single[[48]],
           ncol = 3)</code></pre>
-<pre><code>Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).
-
-Warning: Removed 12823 rows containing non-finite values (stat_bin).</code></pre>
 <p><img src="figure/results_gtex_1000genes.Rmd/by%20tissue-5.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-by-tissue-5">
+Past versions of "by tissue-5.png"
+</button>
+</p>
+<div id="fig-no-spaces-by-tissue-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/9db563c97be601ed43a1a7be2fb8e6172e9726d4/docs/figure/results_gtex_1000genes.Rmd/by tissue-5.png" target="_blank">9db563c</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-11-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>sumstats</code></pre>
-<pre><code>                 [,1]          [,2]          [,3]          [,4]          [,5]
-Min.    -3.453803e-02 -7.130170e-02 -9.114687e-02 -5.404732e-02  -0.096905062
-1st Qu. -1.001593e-02 -1.297563e-02 -1.871086e-02 -1.430854e-02  -0.020783338
-Median  -4.782696e-03 -5.943071e-03 -7.188985e-03 -6.276417e-03  -0.008853875
-Mean    -5.614178e-03 -7.416829e-03 -9.970637e-03 -8.040668e-03  -0.012568935
-3rd Qu. -6.855818e-04 -7.754565e-04 -3.957321e-04 -7.413325e-04  -0.001361599
-Max.     6.643376e-02  3.214816e-02  6.638181e-02  2.836028e-02   0.054577267
-NA&#39;s     2.640000e+02  2.640000e+02  2.810000e+02  2.810000e+02 265.000000000
-                 [,6]          [,7]          [,8]          [,9]         [,10]
-Min.    -3.728780e-02  -0.202844478  -0.127945220 -8.585325e-02 -1.474218e-01
-1st Qu. -9.272438e-03  -0.029688504  -0.027845902 -2.298381e-02 -2.648836e-02
-Median  -3.112077e-03  -0.010318339  -0.011814591 -9.002455e-03 -9.778317e-03
-Mean    -4.471307e-03  -0.017350780  -0.016489758 -1.310963e-02 -1.437698e-02
-3rd Qu.  6.729192e-05  -0.000283303  -0.001553557 -4.987411e-04 -5.495054e-04
-Max.     5.587884e-02   0.080056102   0.102555872  5.039573e-02  8.426775e-02
-NA&#39;s     2.960000e+02 288.000000000 278.000000000  2.720000e+02  2.480000e+02
-                [,11]         [,12]         [,13]         [,14]         [,15]
-Min.    -7.400049e-02  -0.091104382  -0.148837822  -0.139720882  -0.122450872
-1st Qu. -1.924594e-02  -0.022517652  -0.028901602  -0.026744788  -0.024990827
-Median  -7.096140e-03  -0.007941995  -0.010287525  -0.010683825  -0.010065690
-Mean    -1.013407e-02  -0.012786639  -0.016829609  -0.016328135  -0.014779082
-3rd Qu.  2.379602e-05  -0.001311226  -0.001422388  -0.002009282  -0.001326882
-Max.     5.413213e-02   0.071839284   0.057404872   0.042565533   0.045085244
-NA&#39;s     2.470000e+02 271.000000000 274.000000000 282.000000000 252.000000000
-                [,16]         [,17]         [,18]         [,19]         [,20]
-Min.     -0.125705341 -1.335677e-01 -1.213218e-01 -1.935218e-01 -7.075928e-02
-1st Qu.  -0.021532862 -2.561546e-02 -2.892712e-02 -3.350670e-02 -1.531020e-02
-Median   -0.009156264 -1.081204e-02 -1.067492e-02 -1.191597e-02 -6.671924e-03
-Mean     -0.012428545 -1.538631e-02 -1.633408e-02 -1.922526e-02 -8.744568e-03
-3rd Qu.  -0.001392470 -9.501789e-04 -5.634839e-04 -4.210160e-06 -8.838698e-04
-Max.      0.049358795  6.968285e-02  6.298668e-02  5.846099e-02  6.928465e-02
-NA&#39;s    266.000000000  2.980000e+02  2.610000e+02  2.870000e+02  2.330000e+02
-                [,21]         [,22]         [,23]         [,24]         [,25]
-Min.    -4.299217e-02 -1.422630e-01  -0.077886646 -7.212045e-02  -0.058961114
-1st Qu. -9.710696e-03 -1.893203e-02  -0.017074759 -1.512801e-02  -0.017501162
-Median  -3.273027e-03 -7.288006e-03  -0.006843974 -6.524545e-03  -0.007594497
-Mean    -3.981283e-03 -1.088251e-02  -0.009780317 -8.553447e-03  -0.009961891
-3rd Qu.  4.169507e-04  2.460266e-04  -0.001247054 -8.084706e-04  -0.001504868
-Max.     7.008614e-02  1.023620e-01   0.045615435  2.881984e-02   0.023005690
-NA&#39;s     3.350000e+02  3.050000e+02 271.000000000  2.540000e+02 272.000000000
-                [,26]         [,27]         [,28]         [,29]         [,30]
-Min.    -4.681240e-02 -4.988346e-02 -5.173208e-02 -4.815291e-02 -7.620929e-02
-1st Qu. -1.129170e-02 -1.285431e-02 -1.606584e-02 -1.378932e-02 -1.434937e-02
-Median  -3.870692e-03 -5.790168e-03 -6.289127e-03 -5.826798e-03 -4.630923e-03
-Mean    -5.211735e-03 -7.220124e-03 -8.419654e-03 -7.740458e-03 -7.467138e-03
-3rd Qu.  1.564278e-04 -4.546049e-04 -9.766566e-04 -7.605024e-04  7.568326e-04
-Max.     5.796842e-02  3.384951e-02  4.737967e-02  3.080717e-02  7.327033e-02
-NA&#39;s     2.850000e+02  2.790000e+02  3.070000e+02  3.630000e+02  3.300000e+02
-                [,31]         [,32]         [,33]         [,34]         [,35]
-Min.    -3.473919e-02  -0.182968898 -2.358072e-02 -4.105405e-02 -1.469336e-01
-1st Qu. -1.094659e-02  -0.024645791 -7.457137e-03 -1.100768e-02 -2.440915e-02
-Median  -4.099860e-03  -0.009823764 -2.660360e-03 -3.953968e-03 -9.229744e-03
-Mean    -5.570794e-03  -0.014318314 -3.290228e-03 -5.223766e-03 -1.379514e-02
-3rd Qu. -2.198154e-04  -0.000812261  1.428035e-04 -1.818634e-04 -2.511859e-04
-Max.     4.993001e-02   0.062268909  6.260407e-02  4.225253e-02  4.520676e-02
-NA&#39;s     2.340000e+02 243.000000000  3.710000e+02  2.350000e+02  2.350000e+02
-                [,36]         [,37]         [,38]         [,39]         [,40]
-Min.    -5.640683e-02 -8.897530e-02  -0.095762282  -0.044973062 -3.848212e-02
-1st Qu. -1.433205e-02 -1.762424e-02  -0.021998402  -0.011808785 -9.477090e-03
-Median  -5.086783e-03 -5.967239e-03  -0.008028011  -0.005425292 -3.591834e-03
-Mean    -7.604632e-03 -9.074207e-03  -0.012263691  -0.006927679 -4.922708e-03
-3rd Qu. -2.229871e-04 -1.558135e-04  -0.001301369  -0.001061534 -2.753449e-04
-Max.     4.007339e-02  7.286998e-02   0.074048883   0.028352868  3.907960e-02
-NA&#39;s     3.030000e+02  1.930000e+02 212.000000000 253.000000000  2.510000e+02
-                [,41]         [,42]         [,43]        [,44]         [,45]
-Min.     -0.104342288 -1.077443e-01  -0.066306459 -0.055328412 -5.691660e-02
-1st Qu.  -0.026706912 -1.752796e-02  -0.016283034 -0.011228618 -9.055295e-03
-Median   -0.011426729 -7.467263e-03  -0.006580407 -0.002380533 -2.982558e-03
-Mean     -0.015540079 -1.021153e-02  -0.010058982 -0.003134782 -3.693764e-03
-3rd Qu.  -0.001586642 -4.263634e-04  -0.001255954  0.003356504  3.726713e-04
-Max.      0.028533938  5.456632e-02   0.043600072  0.072718688  5.374151e-02
-NA&#39;s    233.000000000  2.510000e+02 258.000000000 82.000000000  2.150000e+02
-                [,46]         [,47]         [,48]
-Min.     -0.187733116 -1.902151e-01 -3.622241e-02
-1st Qu.  -0.026970941 -2.643097e-02 -6.117779e-03
-Median   -0.011986099 -9.330066e-03 -1.652829e-03
-Mean     -0.017142800 -1.543919e-02 -2.128761e-03
-3rd Qu.  -0.002125576 -8.362865e-04  7.416007e-04
-Max.      0.071554673  3.988717e-02  8.931692e-02
-NA&#39;s    243.000000000  2.280000e+02  3.740000e+02</code></pre>
+<pre><code>             Min.      1st Qu.       Median         Mean       3rd Qu.
+ [1,] -0.03453803 -0.010015927 -0.004782696 -0.005614178 -6.855818e-04
+ [2,] -0.07130170 -0.012975634 -0.005943071 -0.007416829 -7.754565e-04
+ [3,] -0.09114687 -0.018710859 -0.007188985 -0.009970637 -3.957321e-04
+ [4,] -0.05404732 -0.014308542 -0.006276417 -0.008040668 -7.413325e-04
+ [5,] -0.09690506 -0.020783338 -0.008853875 -0.012568935 -1.361599e-03
+ [6,] -0.03728780 -0.009272438 -0.003112077 -0.004471307  6.729192e-05
+ [7,] -0.20284448 -0.029688504 -0.010318339 -0.017350780 -2.833030e-04
+ [8,] -0.12794522 -0.027845902 -0.011814591 -0.016489758 -1.553557e-03
+ [9,] -0.08585325 -0.022983813 -0.009002455 -0.013109627 -4.987411e-04
+[10,] -0.14742185 -0.026488357 -0.009778317 -0.014376983 -5.495054e-04
+[11,] -0.07400049 -0.019245940 -0.007096140 -0.010134073  2.379602e-05
+[12,] -0.09110438 -0.022517652 -0.007941995 -0.012786639 -1.311226e-03
+[13,] -0.14883782 -0.028901602 -0.010287525 -0.016829609 -1.422388e-03
+[14,] -0.13972088 -0.026744788 -0.010683825 -0.016328135 -2.009282e-03
+[15,] -0.12245087 -0.024990827 -0.010065690 -0.014779082 -1.326882e-03
+[16,] -0.12570534 -0.021532862 -0.009156264 -0.012428545 -1.392470e-03
+[17,] -0.13356774 -0.025615459 -0.010812042 -0.015386312 -9.501789e-04
+[18,] -0.12132183 -0.028927116 -0.010674921 -0.016334080 -5.634839e-04
+[19,] -0.19352177 -0.033506696 -0.011915971 -0.019225260 -4.210160e-06
+[20,] -0.07075928 -0.015310204 -0.006671924 -0.008744568 -8.838698e-04
+[21,] -0.04299217 -0.009710696 -0.003273027 -0.003981283  4.169507e-04
+[22,] -0.14226301 -0.018932027 -0.007288006 -0.010882514  2.460266e-04
+[23,] -0.07788665 -0.017074759 -0.006843974 -0.009780317 -1.247054e-03
+[24,] -0.07212045 -0.015128014 -0.006524545 -0.008553447 -8.084706e-04
+[25,] -0.05896111 -0.017501162 -0.007594497 -0.009961891 -1.504868e-03
+[26,] -0.04681240 -0.011291700 -0.003870692 -0.005211735  1.564278e-04
+[27,] -0.04988346 -0.012854308 -0.005790168 -0.007220124 -4.546049e-04
+[28,] -0.05173208 -0.016065840 -0.006289127 -0.008419654 -9.766566e-04
+[29,] -0.04815291 -0.013789318 -0.005826798 -0.007740458 -7.605024e-04
+[30,] -0.07620929 -0.014349373 -0.004630923 -0.007467138  7.568326e-04
+[31,] -0.03473919 -0.010946585 -0.004099860 -0.005570794 -2.198154e-04
+[32,] -0.18296890 -0.024645791 -0.009823764 -0.014318314 -8.122610e-04
+[33,] -0.02358072 -0.007457137 -0.002660360 -0.003290228  1.428035e-04
+[34,] -0.04105405 -0.011007684 -0.003953968 -0.005223766 -1.818634e-04
+[35,] -0.14693362 -0.024409154 -0.009229744 -0.013795137 -2.511859e-04
+[36,] -0.05640683 -0.014332053 -0.005086783 -0.007604632 -2.229871e-04
+[37,] -0.08897530 -0.017624242 -0.005967239 -0.009074207 -1.558135e-04
+[38,] -0.09576228 -0.021998402 -0.008028011 -0.012263691 -1.301369e-03
+[39,] -0.04497306 -0.011808785 -0.005425292 -0.006927679 -1.061534e-03
+[40,] -0.03848212 -0.009477090 -0.003591834 -0.004922708 -2.753449e-04
+[41,] -0.10434229 -0.026706912 -0.011426729 -0.015540079 -1.586642e-03
+[42,] -0.10774435 -0.017527956 -0.007467263 -0.010211532 -4.263634e-04
+[43,] -0.06630646 -0.016283034 -0.006580407 -0.010058982 -1.255954e-03
+[44,] -0.05532841 -0.011228618 -0.002380533 -0.003134782  3.356504e-03
+[45,] -0.05691660 -0.009055295 -0.002982558 -0.003693764  3.726713e-04
+[46,] -0.18773312 -0.026970941 -0.011986099 -0.017142800 -2.125576e-03
+[47,] -0.19021513 -0.026430970 -0.009330066 -0.015439186 -8.362865e-04
+[48,] -0.03622241 -0.006117779 -0.001652829 -0.002128761  7.416007e-04
+            Max. NA&#39;s
+ [1,] 0.06643376  264
+ [2,] 0.03214816  264
+ [3,] 0.06638181  281
+ [4,] 0.02836028  281
+ [5,] 0.05457727  265
+ [6,] 0.05587884  296
+ [7,] 0.08005610  288
+ [8,] 0.10255587  278
+ [9,] 0.05039573  272
+[10,] 0.08426775  248
+[11,] 0.05413213  247
+[12,] 0.07183928  271
+[13,] 0.05740487  274
+[14,] 0.04256553  282
+[15,] 0.04508524  252
+[16,] 0.04935880  266
+[17,] 0.06968285  298
+[18,] 0.06298668  261
+[19,] 0.05846099  287
+[20,] 0.06928465  233
+[21,] 0.07008614  335
+[22,] 0.10236197  305
+[23,] 0.04561543  271
+[24,] 0.02881984  254
+[25,] 0.02300569  272
+[26,] 0.05796842  285
+[27,] 0.03384951  279
+[28,] 0.04737967  307
+[29,] 0.03080717  363
+[30,] 0.07327033  330
+[31,] 0.04993001  234
+[32,] 0.06226891  243
+[33,] 0.06260407  371
+[34,] 0.04225253  235
+[35,] 0.04520676  235
+[36,] 0.04007339  303
+[37,] 0.07286998  193
+[38,] 0.07404888  212
+[39,] 0.02835287  253
+[40,] 0.03907960  251
+[41,] 0.02853394  233
+[42,] 0.05456632  251
+[43,] 0.04360007  258
+[44,] 0.07271869   82
+[45,] 0.05374151  215
+[46,] 0.07155467  243
+[47,] 0.03988717  228
+[48,] 0.08931692  374</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
