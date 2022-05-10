@@ -488,16 +488,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeed3f0abe476049db22cc307491b834197d6949a7targetblanked3f0aba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/ed3f0abe476049db22cc307491b834197d6949a7" target="_blank">ed3f0ab</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeca2b0584f22846c4b380d72dc8ade80aa2f171f1targetblankca2b058a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/ca2b0584f22846c4b380d72dc8ade80aa2f171f1" target="_blank">ca2b058</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeed3f0abe476049db22cc307491b834197d6949a7targetblanked3f0aba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreeca2b0584f22846c4b380d72dc8ade80aa2f171f1targetblankca2b058a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/ed3f0abe476049db22cc307491b834197d6949a7" target="_blank">ed3f0ab</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/ca2b0584f22846c4b380d72dc8ade80aa2f171f1" target="_blank">ca2b058</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -2886,6 +2886,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/ca2b0584f22846c4b380d72dc8ade80aa2f171f1/analysis/results_gtex_1000genes.Rmd" target="_blank">ca2b058</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2022-05-10
+</td>
+<td>
+Fix plotting area
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/76f4680cb6e66775b1f15f6b1066965fc9ade121/docs/results_gtex_1000genes.html" target="_blank">76f4680</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2022-05-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/ed3f0abe476049db22cc307491b834197d6949a7/analysis/results_gtex_1000genes.Rmd" target="_blank">ed3f0ab</a>
 </td>
 <td>
@@ -3265,6 +3299,43 @@ rmse_diff_pooled &lt;- data.frame(RMSE_diff=c(rmse_diff))</code></pre>
 <pre class="r"><code>p_pooled &lt;- ggplot(rmse_diff_pooled, aes(x=RMSE_diff)) + geom_histogram() + labs(x = &quot;Difference in error between mr.mash and enet&quot;) + theme_cowplot(font_size = 20)
 p_pooled</code></pre>
 <p><img src="figure/results_gtex_1000genes.Rmd/hist%20pooled%20tissues-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-hist-pooled-tissues-1">
+Past versions of "hist pooled tissues-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-hist-pooled-tissues-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/76f4680cb6e66775b1f15f6b1066965fc9ade121/docs/figure/results_gtex_1000genes.Rmd/hist pooled tissues-1.png" target="_blank">76f4680</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>summary(rmse_diff_pooled[, 1])</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
  -0.203  -0.017  -0.006  -0.010   0.000   0.103   12823 </code></pre>
@@ -3284,25 +3355,210 @@ plot_grid(p_single[[1]], p_single[[2]], p_single[[3]], p_single[[4]], p_single[[
           p_single[[10]], NULL,
           ncol = 3)</code></pre>
 <p><img src="figure/results_gtex_1000genes.Rmd/hist%20by%20tissue-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-hist-by-tissue-1">
+Past versions of "hist by tissue-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-hist-by-tissue-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/76f4680cb6e66775b1f15f6b1066965fc9ade121/docs/figure/results_gtex_1000genes.Rmd/hist by tissue-1.png" target="_blank">76f4680</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_grid(p_single[[11]], p_single[[12]], p_single[[13]], p_single[[14]], p_single[[15]],
           p_single[[16]], p_single[[17]], p_single[[18]], p_single[[19]], NULL,
           p_single[[20]], NULL,
           ncol = 3)</code></pre>
 <p><img src="figure/results_gtex_1000genes.Rmd/hist%20by%20tissue-2.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-hist-by-tissue-2">
+Past versions of "hist by tissue-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-hist-by-tissue-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/76f4680cb6e66775b1f15f6b1066965fc9ade121/docs/figure/results_gtex_1000genes.Rmd/hist by tissue-2.png" target="_blank">76f4680</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_grid(p_single[[21]], p_single[[22]], p_single[[23]], p_single[[24]], p_single[[25]],
           p_single[[26]], p_single[[27]], p_single[[28]], p_single[[29]], NULL, 
           p_single[[30]], NULL,
           ncol = 3)</code></pre>
 <p><img src="figure/results_gtex_1000genes.Rmd/hist%20by%20tissue-3.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-hist-by-tissue-3">
+Past versions of "hist by tissue-3.png"
+</button>
+</p>
+<div id="fig-no-spaces-hist-by-tissue-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/76f4680cb6e66775b1f15f6b1066965fc9ade121/docs/figure/results_gtex_1000genes.Rmd/hist by tissue-3.png" target="_blank">76f4680</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_grid(p_single[[31]], p_single[[32]], p_single[[33]], p_single[[34]], p_single[[35]],
           p_single[[36]], p_single[[37]], p_single[[38]], p_single[[39]], NULL,
           p_single[[40]], NULL,
           ncol = 3)</code></pre>
 <p><img src="figure/results_gtex_1000genes.Rmd/hist%20by%20tissue-4.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-hist-by-tissue-4">
+Past versions of "hist by tissue-4.png"
+</button>
+</p>
+<div id="fig-no-spaces-hist-by-tissue-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/76f4680cb6e66775b1f15f6b1066965fc9ade121/docs/figure/results_gtex_1000genes.Rmd/hist by tissue-4.png" target="_blank">76f4680</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_grid(p_single[[41]], p_single[[42]], p_single[[43]], p_single[[44]], p_single[[45]],
           p_single[[46]], p_single[[47]], NULL, p_single[[48]],
           ncol = 3)</code></pre>
 <p><img src="figure/results_gtex_1000genes.Rmd/hist%20by%20tissue-5.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-hist-by-tissue-5">
+Past versions of "hist by tissue-5.png"
+</button>
+</p>
+<div id="fig-no-spaces-hist-by-tissue-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/76f4680cb6e66775b1f15f6b1066965fc9ade121/docs/figure/results_gtex_1000genes.Rmd/hist by tissue-5.png" target="_blank">76f4680</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>rownames(sumstats) &lt;- colnames(rmse_diff)
 sumstats</code></pre>
 <pre><code>                                             Min.      1st Qu.       Median
@@ -3469,7 +3725,7 @@ means &lt;- tapply(rmse_diff_melt$RMSE_diff, rmse_diff_melt$Tissue, mean, na.rm=
 n_group &lt;- ncol(rmse_diff)
 
 ###Plot
-#par(mar = c(13.1,5.4,4,2) + 0.1)
+par(mar = c(13.1,5.4,4,2) + 0.1)
 boxplot(RMSE_diff~Tissue, data=rmse_diff_melt, xlab=&quot;&quot;, ylab=&quot;mr.mash RMSE - e-net RMSE&quot;, #ylab=&quot;(mr.mash RMSE - e-net RMSE)/e-net RMSE&quot;, 
          cex.lab=1.5, xaxt = &quot;n&quot;, col = &quot;blue&quot;, bty = &quot;n&quot;, main=&quot;All signals&quot;)
 points(means,col=&quot;black&quot;,pch=18)
@@ -3480,6 +3736,43 @@ text(x = 1:n_group,
      labels = levels(rmse_diff_melt$Tissue), srt = 45, xpd = TRUE, adj = 1,
      cex = 1.1)</code></pre>
 <p><img src="figure/results_gtex_1000genes.Rmd/box%20by%20tissue-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-box-by-tissue-1">
+Past versions of "box by tissue-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-box-by-tissue-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/76f4680cb6e66775b1f15f6b1066965fc9ade121/docs/figure/results_gtex_1000genes.Rmd/box by tissue-1.png" target="_blank">76f4680</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2022-05-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The boxplot confirms the observations made in the histograms, perhaps in a more clear and concise way.</p>
 <br>
 <p>
