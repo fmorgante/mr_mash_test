@@ -129,7 +129,7 @@ means <- tapply(rmse_diff_melt$RMSE_diff, rmse_diff_melt$Tissue, mean, na.rm=TRU
 n_group <- ncol(rmse_diff)
 
 ###Plot
-par(mar = c(13.1,5.4,4,2) + 0.1)
+par(mar = c(15,5.4,4,2) + 0.1)
 boxplot(RMSE_diff~Tissue, data=rmse_diff_melt, xlab="", ylab="mr.mash RMSE - e-net RMSE", #ylab="(mr.mash RMSE - e-net RMSE)/e-net RMSE", 
          cex.lab=1.5, xaxt = "n", col = "blue", bty = "n", main="All signals")
 points(means,col="black",pch=18)
