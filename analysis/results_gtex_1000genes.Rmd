@@ -116,7 +116,7 @@ The histograms and summary statistics above show that *mr.mash* does better than
 
 ### Boxplots
 
-```{r box by tissue, warning=FALSE, message=FALSE, fig.height=15, fig.width=15, out.height='\\textwidth'}
+```{r box by tissue, warning=FALSE, message=FALSE, fig.height=15, fig.width=15, out.height='\\textwidth', out.width='\\textwidth'}
 ###Compute difference in RMSE between mr.mash and enet
 rmse_diff <- (as.matrix(rmse_mrmash) - as.matrix(rmse_enet)) #/as.matrix(rmse_enet)
 medians <- colMedians(rmse_diff, na.rm=TRUE)
