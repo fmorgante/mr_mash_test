@@ -138,8 +138,8 @@ metric_chosen <- "scaled_rrmse"
 p_methods <- ggplot(dsc_plots[which(dsc_plots$score_metric==metric_chosen & dsc_plots$method_fac %in% methods_chosen), ], 
                   aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors, labels = c("g-lasso", "smt-lasso", "e-net")) +
-  labs(x = "Tissue", y = "RMSE relative to mr.mash", fill="Method") +
+  scale_fill_manual(values = colors[c(3,7,12)], labels = c("g-lasso", "smt-lasso", "e-net")) +
+  labs(x = "Tissue", y = expression(paste("RMSE relative to ", italic("mr.mash"))), fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1) +
   theme_cowplot(font_size = 20) +
   theme(plot.title = element_text(hjust = 0.5))
