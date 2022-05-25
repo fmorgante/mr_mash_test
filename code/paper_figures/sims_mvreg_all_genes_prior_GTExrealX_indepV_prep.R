@@ -98,8 +98,8 @@ for(repl in 1:20){
   }
 }
 
-###Compute rmse score (relative to mr_mash_can) and add it to the data
-rrmse_dat <- compute_rrmse(dsc_plots, baseline="mr_mash_em_dataAndcan_dropcomp")
+###Compute rmse score and add it to the data
+rrmse_dat <- compute_rrmse(dsc_plots, baseline="mr_mash_em_data")
 dsc_plots <- rbind(dsc_plots, rrmse_dat)
 
 ###Remove mse from scores and keep only methods wanted
