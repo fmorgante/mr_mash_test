@@ -255,3 +255,88 @@ p_priors_all <- plot_grid(p_priors_shared, p_priors_indep, p_priors_2blocks,
 		  	  leg_priors, labels = c('A', 'B', 'C', 'D', 'E'))
 
 ggsave("test1.pdf", plot=p_priors_all, device="pdf", units="in", height=10, width=15)
+
+
+###Time
+methods_chosen <- c("mr_mash_em_data", "mr_mash_em_can", "mr_mash_em_dataAndcan")
+metric_chosen <- "scaled_rrmse"
+
+#Filter data
+dsc_plots_1causalresp_priors_time <- dsc_plots_1causalresp[which(dsc_plots_1causalresp$response==1 & dsc_plots_1causalresp$score_metric==metric_chosen &
+                                                          dsc_plots_1causalresp$method %in% methods_chosen), ]
+ 
+dsc_plots_indep_priors_time <- dsc_plots_indep[which(dsc_plots_indep$response==1 & dsc_plots_indep$score_metric==metric_chosen &
+                                                          dsc_plots_indep$method %in% methods_chosen), ]
+
+dsc_plots_shared_priors_time <- dsc_plots_shared[which(dsc_plots_shared$response==1 & dsc_plots_shared$score_metric==metric_chosen &
+                                                          dsc_plots_shared$method %in% methods_chosen), ]
+
+dsc_plots_2blocks_priors_time <- dsc_plots_2blocks[which(dsc_plots_2blocks$response==1 & dsc_plots_2blocks$score_metric==metric_chosen &
+                                                          dsc_plots_2blocks$method %in% methods_chosen), ]
+
+dsc_plots_3causalresp_priors_time <- dsc_plots_3causalresp[which(dsc_plots_3causalresp$response==1 & dsc_plots_3causalresp$score_metric==metric_chosen &
+                                                          dsc_plots_3causalresp$method %in% methods_chosen), ]
+
+                                       
+p_priors_time_1causalresp <- ggplot(dsc_plots_1causalresp_priors_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
+  geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
+  scale_fill_manual(values = colors[c(1,7,10)], labels = c("canonical", "data-driven", "both")) +
+  scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x))) +
+  labs(x = "", y = "Elapsed time (seconds) in log2 scale", fill="Method") +
+  theme_cowplot(font_size = 16) +
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        legend.position="none")
+        
+p_priors_time_indep <- ggplot(dsc_plots_indep_priors_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
+  geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
+  scale_fill_manual(values = colors[c(1,7,10)], labels = c("canonical", "data-driven", "both")) +
+  scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x))) +
+  labs(x = "", y = "Elapsed time (seconds) in log2 scale", fill="Method") +
+  theme_cowplot(font_size = 16) +
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        legend.position="none")
+
+p_priors_time_shared <- ggplot(dsc_plots_shared_priors_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
+  geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
+  scale_fill_manual(values = colors[c(1,7,10)], labels = c("canonical", "data-driven", "both")) +
+  scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x))) +
+  labs(x = "", y = "Elapsed time (seconds) in log2 scale", fill="Method") +
+  theme_cowplot(font_size = 16) +
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        legend.position="none")
+
+p_priors_time_2blocks_inter <- ggplot(dsc_plots_2blocks_priors_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
+  geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
+  scale_fill_manual(values = colors[c(1,7,10)], labels = c("canonical", "data-driven", "both")) +
+  scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x))) +
+  labs(x = "", y = "Elapsed time (seconds) in log2 scale", fill="Method") +
+  theme_cowplot(font_size = 16) +
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        legend.text.align = 0)
+        
+p_priors_time_2blocks <- p_priors_time_2blocks_inter + theme(legend.position="none")
+
+p_priors_time_3causalresp <- ggplot(dsc_plots_3causalresp_priors_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
+  geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
+  scale_fill_manual(values = colors[c(1,7,10)], labels = c("canonical", "data-driven", "both")) +
+  scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x))) +
+  labs(x = "", y = "Elapsed time (seconds) in log2 scale", fill="Method") +
+  theme_cowplot(font_size = 16) +
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        legend.position="none")
+
+
+#Extract legend
+leg_priors_time <- get_legend(p_priors_time_2blocks_inter)
+
+#Make the multi panel plot 
+p_priors_time_all <- plot_grid(p_priors_time_shared, p_priors_time_indep, p_priors_time_2blocks,
+				p_priors_time_1causalresp, p_priors_time_3causalresp, 
+		  		leg_priors_time, labels = c('A', 'B', 'C', 'D', 'E'))
+
+ggsave("test3.pdf", plot=p_priors_time_all, device="pdf", units="in", height=10, width=15)
