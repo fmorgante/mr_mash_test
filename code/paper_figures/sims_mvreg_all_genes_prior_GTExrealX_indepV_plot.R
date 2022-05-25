@@ -188,7 +188,7 @@ ggsave("test2.pdf", plot=p_methods_time_all, device="pdf", units="in", height=10
 
 ###mr.mash -- different priors
 ##Create plot
-methods_chosen <- c("mr_mash_can", "mr_mash_data", "mr_mash_both")
+methods_chosen <- c("mr_mash_can", "mr_mash_both")
 metric_chosen <- "scaled_rrmse"
 
 #Filter data
@@ -202,8 +202,8 @@ dsc_plots_priors_3causalresp_filt <- dsc_plots_3causalresp[which(dsc_plots_3caus
 p_priors_1causalresp <- ggplot(dsc_plots_priors_1causalresp_filt, 
                   aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors[7:9], labels = c("canonical", "data-driven", "both")) +
-  labs(x = "Tissue", y = "RMSE relative to both-drop", fill="Method") +
+  scale_fill_manual(values = colors[7:9], labels = c("canonical", "both")) +
+  labs(x = "Tissue", y = "RMSE relative to data-driven", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1) +
   theme_cowplot(font_size = 20) +
   theme(plot.title = element_text(hjust = 0.5), legend.position="none") 
@@ -211,8 +211,8 @@ p_priors_1causalresp <- ggplot(dsc_plots_priors_1causalresp_filt,
 p_priors_indep <- ggplot(dsc_plots_priors_indep_filt, 
                   aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors[7:9], labels = c("canonical", "data-driven", "both")) +
-  labs(x = "Tissue", y = "RMSE relative to both-drop", fill="Method") +
+  scale_fill_manual(values = colors[7:9], labels = c("canonical", "both")) +
+  labs(x = "Tissue", y = "RMSE relative to data-driven", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1) +
   theme_cowplot(font_size = 20) +
   theme(plot.title = element_text(hjust = 0.5), legend.position="none")
@@ -220,8 +220,8 @@ p_priors_indep <- ggplot(dsc_plots_priors_indep_filt,
 p_priors_shared <- ggplot(dsc_plots_priors_shared_filt, 
                   aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors[7:9], labels = c("canonical", "data-driven", "both")) +
-  labs(x = "Tissue", y = "RMSE relative to both-drop", fill="Method") +
+  scale_fill_manual(values = colors[7:9], labels = c("canonical", "both")) +
+  labs(x = "Tissue", y = "RMSE relative to data-driven", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1) +
   theme_cowplot(font_size = 20) +
   theme(plot.title = element_text(hjust = 0.5), legend.position="none")
@@ -229,8 +229,8 @@ p_priors_shared <- ggplot(dsc_plots_priors_shared_filt,
 p_priors_2blocks_inter <- ggplot(dsc_plots_priors_2blocks_filt, 
                   aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors[7:9], labels = c("canonical", "data-driven", "both")) +
-  labs(x = "Tissue", y = "RMSE relative to both-drop", fill="Method") +
+  scale_fill_manual(values = colors[7:9], labels = c("canonical", "both")) +
+  labs(x = "Tissue", y = "RMSE relative to data-driven", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1) +
   theme_cowplot(font_size = 20) +
   theme(plot.title = element_text(hjust = 0.5))
@@ -240,8 +240,8 @@ p_priors_2blocks <- p_priors_2blocks_inter + theme(legend.position="none")
 p_priors_3causalresp <- ggplot(dsc_plots_priors_3causalresp_filt, 
                   aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors[7:9], labels = c("canonical", "data-driven", "both")) +
-  labs(x = "Tissue", y = "RMSE relative to both-drop", fill="Method") +
+  scale_fill_manual(values = colors[7:9], labels = c("canonical", "both")) +
+  labs(x = "Tissue", y = "RMSE relative to data-driven", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1) +
   theme_cowplot(font_size = 20) +
   theme(plot.title = element_text(hjust = 0.5), legend.position="none")
