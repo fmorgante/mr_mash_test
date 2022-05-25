@@ -94,15 +94,15 @@ p_methods_3causalresp <- ggplot(dsc_plots_methods_3causalresp_filt,
 leg_methods <- get_legend(p_methods_2blocks_inter)
 
 #Make the multi panel plot 
-p_methods_all <- plot_grid(p_methods_shared, p_methods_indep,
-		  				   p_methods_1causalresp, p_methods_3causalresp, 
-		  				   p_methods_2blocks, leg_methods, labels = c('A', 'B', 'C', 'D', 'E'))
+p_methods_all <- plot_grid(p_methods_shared, p_methods_indep, p_methods_2blocks,
+			   p_methods_1causalresp, p_methods_3causalresp, 
+			   leg_methods, labels = c('A', 'B', 'C', 'D', 'E'))
 
 ggsave("test.pdf", plot=p_methods_all, device="pdf", units="in", height=10, width=15)
 
 
 ###Time
-methods_chosen <- c("mr_mash_em_dataAndcan_dropcomp", "mlasso", "mtlasso", "enet")
+methods_chosen <- c("mr_mash_em_data", "mlasso", "mtlasso", "enet")
 metric_chosen <- "scaled_rrmse"
 
 #Filter data
@@ -124,7 +124,7 @@ dsc_plots_3causalresp_methods_time <- dsc_plots_3causalresp[which(dsc_plots_3cau
                                        
 p_methods_time_1causalresp <- ggplot(dsc_plots_1causalresp_methods_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors, labels = c(expression(italic("mr.mash")), "g-lasso", "smt-lasso", "e-net")) +
+  scale_fill_manual(values = colors[c(9,3,7,12)], labels = c(expression(italic("mr.mash")), "g-lasso", "smt-lasso", "e-net")) +
   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x))) +
   labs(x = "", y = "Elapsed time (seconds) in log2 scale", fill="Method") +
@@ -134,7 +134,7 @@ p_methods_time_1causalresp <- ggplot(dsc_plots_1causalresp_methods_time, aes_str
         
 p_methods_time_indep <- ggplot(dsc_plots_indep_methods_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors, labels = c(expression(italic("mr.mash")), "g-lasso", "smt-lasso", "e-net")) +
+  scale_fill_manual(values = colors[c(9,3,7,12)], labels = c(expression(italic("mr.mash")), "g-lasso", "smt-lasso", "e-net")) +
   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x))) +
   labs(x = "", y = "Elapsed time (seconds) in log2 scale", fill="Method") +
@@ -144,7 +144,7 @@ p_methods_time_indep <- ggplot(dsc_plots_indep_methods_time, aes_string(x = "met
 
 p_methods_time_shared <- ggplot(dsc_plots_shared_methods_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors, labels = c(expression(italic("mr.mash")), "g-lasso", "smt-lasso", "e-net")) +
+  scale_fill_manual(values = colors[c(9,3,7,12)], labels = c(expression(italic("mr.mash")), "g-lasso", "smt-lasso", "e-net")) +
   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x))) +
   labs(x = "", y = "Elapsed time (seconds) in log2 scale", fill="Method") +
@@ -154,7 +154,7 @@ p_methods_time_shared <- ggplot(dsc_plots_shared_methods_time, aes_string(x = "m
 
 p_methods_time_2blocks_inter <- ggplot(dsc_plots_2blocks_methods_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors, labels = c(expression(italic("mr.mash")), "g-lasso", "smt-lasso", "e-net")) +
+  scale_fill_manual(values = colors[c(9,3,7,12)], labels = c(expression(italic("mr.mash")), "g-lasso", "smt-lasso", "e-net")) +
   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x))) +
   labs(x = "", y = "Elapsed time (seconds) in log2 scale", fill="Method") +
@@ -166,7 +166,7 @@ p_methods_time_2blocks <- p_methods_time_2blocks_inter + theme(legend.position="
 
 p_methods_time_3causalresp <- ggplot(dsc_plots_3causalresp_methods_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors, labels = c(expression(italic("mr.mash")), "g-lasso", "smt-lasso", "e-net")) +
+  scale_fill_manual(values = colors[c(9,3,7,12)], labels = c(expression(italic("mr.mash")), "g-lasso", "smt-lasso", "e-net")) +
   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x))) +
   labs(x = "", y = "Elapsed time (seconds) in log2 scale", fill="Method") +
@@ -179,16 +179,16 @@ p_methods_time_3causalresp <- ggplot(dsc_plots_3causalresp_methods_time, aes_str
 leg_methods_time <- get_legend(p_methods_time_2blocks_inter)
 
 #Make the multi panel plot 
-p_methods_time_all <- plot_grid(p_methods_time_shared, p_methods_time_indep,
-		  				   p_methods_time_1causalresp, p_methods_time_3causalresp, 
-		  				   p_methods_time_2blocks, leg_methods_time, labels = c('A', 'B', 'C', 'D', 'E'))
+p_methods_time_all <- plot_grid(p_methods_time_shared, p_methods_time_indep, p_methods_time_2blocks,
+				p_methods_time_1causalresp, p_methods_time_3causalresp, 
+		  		leg_methods_time, labels = c('A', 'B', 'C', 'D', 'E'))
 
 ggsave("test2.pdf", plot=p_methods_time_all, device="pdf", units="in", height=10, width=15)
 
 
 ###mr.mash -- different priors
 ##Create plot
-methods_chosen <- c("mr_mash_can", "mr_mash_both")
+methods_chosen <- c("mr_mash_em_can", "mr_mash_em_dataAndcan")
 metric_chosen <- "scaled_rrmse"
 
 #Filter data
@@ -202,7 +202,7 @@ dsc_plots_priors_3causalresp_filt <- dsc_plots_3causalresp[which(dsc_plots_3caus
 p_priors_1causalresp <- ggplot(dsc_plots_priors_1causalresp_filt, 
                   aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors[7:9], labels = c("canonical", "both")) +
+  scale_fill_manual(values = colors[c(1,10)], labels = c("canonical", "both")) +
   labs(x = "Tissue", y = "RMSE relative to data-driven", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1) +
   theme_cowplot(font_size = 20) +
@@ -211,7 +211,7 @@ p_priors_1causalresp <- ggplot(dsc_plots_priors_1causalresp_filt,
 p_priors_indep <- ggplot(dsc_plots_priors_indep_filt, 
                   aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors[7:9], labels = c("canonical", "both")) +
+  scale_fill_manual(values = colors[c(1,10)], labels = c("canonical", "both")) +
   labs(x = "Tissue", y = "RMSE relative to data-driven", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1) +
   theme_cowplot(font_size = 20) +
@@ -220,7 +220,7 @@ p_priors_indep <- ggplot(dsc_plots_priors_indep_filt,
 p_priors_shared <- ggplot(dsc_plots_priors_shared_filt, 
                   aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors[7:9], labels = c("canonical", "both")) +
+  scale_fill_manual(values = colors[c(1,10)], labels = c("canonical", "both")) +
   labs(x = "Tissue", y = "RMSE relative to data-driven", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1) +
   theme_cowplot(font_size = 20) +
@@ -229,7 +229,7 @@ p_priors_shared <- ggplot(dsc_plots_priors_shared_filt,
 p_priors_2blocks_inter <- ggplot(dsc_plots_priors_2blocks_filt, 
                   aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors[7:9], labels = c("canonical", "both")) +
+  scale_fill_manual(values = colors[c(1,10)], labels = c("canonical", "both")) +
   labs(x = "Tissue", y = "RMSE relative to data-driven", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1) +
   theme_cowplot(font_size = 20) +
@@ -240,7 +240,7 @@ p_priors_2blocks <- p_priors_2blocks_inter + theme(legend.position="none")
 p_priors_3causalresp <- ggplot(dsc_plots_priors_3causalresp_filt, 
                   aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
-  scale_fill_manual(values = colors[7:9], labels = c("canonical", "both")) +
+  scale_fill_manual(values = colors[c(1,10)], labels = c("canonical", "both")) +
   labs(x = "Tissue", y = "RMSE relative to data-driven", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1) +
   theme_cowplot(font_size = 20) +
@@ -250,8 +250,8 @@ p_priors_3causalresp <- ggplot(dsc_plots_priors_3causalresp_filt,
 leg_priors <- get_legend(p_priors_2blocks_inter)
 
 #Make the multi panel plot 
-p_priors_all <- plot_grid(p_priors_shared, p_priors_indep,
-		  				   p_priors_1causalresp, p_priors_3causalresp, 
-		  				   p_priors_2blocks, leg_priors, labels = c('A', 'B', 'C', 'D', 'E'))
+p_priors_all <- plot_grid(p_priors_shared, p_priors_indep, p_priors_2blocks,
+			  p_priors_1causalresp, p_priors_3causalresp, 
+		  	  leg_priors, labels = c('A', 'B', 'C', 'D', 'E'))
 
 ggsave("test1.pdf", plot=p_priors_all, device="pdf", units="in", height=10, width=15)
