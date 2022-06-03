@@ -11,7 +11,7 @@
 
 <meta name="author" content="Fabio Morgante" />
 
-<meta name="date" content="2021-04-25" />
+<meta name="date" content="2022-06-03" />
 
 <title>Simulations with GTEx genotypes and independent effects – independent replicates and missing values in Y</title>
 
@@ -372,7 +372,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Simulations with GTEx genotypes and independent effects – independent replicates and missing values in Y</h1>
 <h4 class="author">Fabio Morgante</h4>
-<h4 class="date">April 25, 2021</h4>
+<h4 class="date">June 03, 2022</h4>
 
 </div>
 
@@ -397,7 +397,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-25
+<strong>Last updated:</strong> 2022-06-03
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -488,16 +488,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree7862952e1dff812deaa1b8a2b52ae449c8790994targetblank7862952a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/7862952e1dff812deaa1b8a2b52ae449c8790994" target="_blank">7862952</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreee4b4e25e5a0879b5594985671a86f0b2d225aa4atargetblanke4b4e25a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/fmorgante/mr_mash_test/tree/e4b4e25e5a0879b5594985671a86f0b2d225aa4a" target="_blank">e4b4e25</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttree7862952e1dff812deaa1b8a2b52ae449c8790994targetblank7862952a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomfmorgantemrmashtesttreee4b4e25e5a0879b5594985671a86f0b2d225aa4atargetblanke4b4e25a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/7862952e1dff812deaa1b8a2b52ae449c8790994" target="_blank">7862952</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/fmorgante/mr_mash_test/tree/e4b4e25e5a0879b5594985671a86f0b2d225aa4a" target="_blank">e4b4e25</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -514,11 +514,21 @@ Ignored files:
     Ignored:    code/fit_mr_mash.66662433.err
     Ignored:    code/fit_mr_mash.66662433.out
     Ignored:    data/cis_eqtl_analysis_ready
+    Ignored:    data/gtex-v8-ids-folds.txt
     Ignored:    data/gtex-v8-ids.txt
+    Ignored:    data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix-batch1.txt
+    Ignored:    data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix-mtlasso.txt
+    Ignored:    data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix-test.txt
+    Ignored:    data/gtex-v8-manifest-2ormore-tissues-nopath-nosuffix.txt
+    Ignored:    data/gtex-v8-manifest-2ormore-tissues.txt
     Ignored:    data/gtex-v8-manifest-full-X-10tissues-missing-rate.txt
     Ignored:    data/gtex-v8-manifest-full-X.txt
+    Ignored:    data/gtex-v8-manifest-nopath-nosuffix-10genes.txt
+    Ignored:    data/gtex-v8-manifest-nopath-nosuffix.txt
+    Ignored:    data/gtex-v8-manifest-tissue-number.txt
     Ignored:    data/gtex-v8-manifest.txt
     Ignored:    data/gtex-v8-missing-rate-by-tissue.txt
+    Ignored:    dsc/.dsc/
     Ignored:    dsc/.sos/
     Ignored:    dsc/dsc_mvreg_07_29_20.3339807.err
     Ignored:    dsc/dsc_mvreg_07_29_20.3339807.out
@@ -616,7 +626,12 @@ Ignored files:
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps/rep13/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps/rep14/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps/rep15/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps/rep16/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps/rep17/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps/rep18/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps/rep19/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps/rep2/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps/rep20/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps/rep3/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps/rep4/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps/rep5/
@@ -644,6 +659,26 @@ Ignored files:
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_missing_Y/rep7/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_missing_Y/rep8/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_missing_Y/rep9/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep1/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep10/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep11/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep12/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep13/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep14/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep15/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep16/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep17/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep18/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep19/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep2/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep20/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep3/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep4/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep5/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep6/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep7/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep8/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps/rep9/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y/rep1/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y/rep10/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y/rep11/
@@ -664,6 +699,26 @@ Ignored files:
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y/rep7/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y/rep8/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y/rep9/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep1/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep10/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep11/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep12/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep13/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep14/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep15/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep16/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep17/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep18/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep19/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep2/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep20/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep3/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep4/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep5/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep6/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep7/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep8/
+    Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps/rep9/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y/rep1/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y/rep10/
     Ignored:    dsc/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y/rep11/
@@ -695,23 +750,24 @@ Ignored files:
     Ignored:    output/dsc_07_29_20.tar
     Ignored:    output/dsc_OLD.html
     Ignored:    output/dsc_test.html
+    Ignored:    output/gtex_mr_mash_analysis/
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.html
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10.tar
-    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps/
-    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_inter/
+    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps.tar
+    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_inter.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y.tar
+    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y/
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_inter.tar
+    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_inter/
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_inter.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_lowPVE.html
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_lowPVE.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_lowPVE_inter.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10.html
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10.tar
-    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps/
-    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_inter/
-    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y.tar
+    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps.tar
+    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_inter.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y/
-    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_inter.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_inter/
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_inter.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_lowPVE.html
@@ -722,9 +778,10 @@ Ignored files:
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE.html
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE.tar
-    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps/
-    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_inter/
+    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps.tar
+    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_inter.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_missing_Y.tar
+    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_missing_Y/
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_missing_Y_inter.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_inter.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_inter.tar
@@ -733,6 +790,8 @@ Ignored files:
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_lowPVE_inter.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.html
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10.tar
+    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps.tar
+    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_inter.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y_inter.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_inter.tar
@@ -741,6 +800,8 @@ Ignored files:
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_lowPVE_inter.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10.html
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10.tar
+    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps.tar
+    Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_inter.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y_inter.tar
     Ignored:    output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_inter.tar
@@ -766,13 +827,82 @@ Ignored files:
     Ignored:    output/mvreg_all_genes_prior_indepX_indepV_sharedB_3causalrespr10.html
     Ignored:    output/mvreg_all_genes_prior_indepX_indepV_sharedB_3causalrespr10.tar
     Ignored:    output/mvreg_all_genes_prior_indepX_indepV_sharedB_3causalrespr10_inter.tar
+    Ignored:    output/mvreg_mrmash_vs_mtlasso_vs_utmost.html
+    Ignored:    output/mvreg_mrmash_vs_mtlasso_vs_utmost/
+    Ignored:    output/sims_paper_figures_inter/
     Ignored:    output/test_dense_issue.rds
     Ignored:    output/test_sparse_issue.rds
     Ignored:    scripts/.sos/
+    Ignored:    scripts/compute_data-driven_cov_matrices_bovy_ed_cv_fold1_gtex.1405556.err
+    Ignored:    scripts/compute_data-driven_cov_matrices_bovy_ed_cv_fold1_gtex.1405556.out
+    Ignored:    scripts/compute_data-driven_cov_matrices_bovy_ed_cv_fold2_gtex.1440090.err
+    Ignored:    scripts/compute_data-driven_cov_matrices_bovy_ed_cv_fold2_gtex.1440090.out
+    Ignored:    scripts/compute_data-driven_cov_matrices_bovy_ed_cv_fold3_gtex.1440682.err
+    Ignored:    scripts/compute_data-driven_cov_matrices_bovy_ed_cv_fold3_gtex.1440682.out
+    Ignored:    scripts/compute_data-driven_cov_matrices_bovy_ed_cv_fold4_gtex.1440824.err
+    Ignored:    scripts/compute_data-driven_cov_matrices_bovy_ed_cv_fold4_gtex.1440824.out
+    Ignored:    scripts/compute_data-driven_cov_matrices_bovy_ed_cv_fold5_gtex.1442743.err
+    Ignored:    scripts/compute_data-driven_cov_matrices_bovy_ed_cv_fold5_gtex.1442743.out
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ed_cv_fold1_gtex.1405493.err
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ed_cv_fold1_gtex.1405493.out
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ed_cv_fold2_gtex.1440022.err
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ed_cv_fold2_gtex.1440022.out
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ed_cv_fold3_gtex.1440544.err
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ed_cv_fold3_gtex.1440544.out
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ed_cv_fold4_gtex.1440757.err
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ed_cv_fold4_gtex.1440757.out
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ed_cv_fold5_gtex.1440885.err
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ed_cv_fold5_gtex.1440885.out
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ted_cv_fold1_gtex.1405530.err
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ted_cv_fold1_gtex.1405530.out
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ted_cv_fold2_gtex.1440088.err
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ted_cv_fold2_gtex.1440088.out
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ted_cv_fold3_gtex.1440684.err
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ted_cv_fold3_gtex.1440684.out
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ted_cv_fold4_gtex.1440822.err
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ted_cv_fold4_gtex.1440822.out
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ted_cv_fold5_gtex.1442742.err
+    Ignored:    scripts/compute_data-driven_cov_matrices_ud_ted_cv_fold5_gtex.1442742.out
+    Ignored:    scripts/compute_grid_cv_fold1_gtex.1456147.err
+    Ignored:    scripts/compute_grid_cv_fold1_gtex.1456147.out
+    Ignored:    scripts/compute_grid_cv_fold2_gtex.1457666.err
+    Ignored:    scripts/compute_grid_cv_fold2_gtex.1457666.out
+    Ignored:    scripts/compute_grid_cv_fold3_gtex.1457667.err
+    Ignored:    scripts/compute_grid_cv_fold3_gtex.1457667.out
+    Ignored:    scripts/compute_grid_cv_fold4_gtex.1457668.err
+    Ignored:    scripts/compute_grid_cv_fold4_gtex.1457668.out
+    Ignored:    scripts/compute_grid_cv_fold5_gtex.1457670.err
+    Ignored:    scripts/compute_grid_cv_fold5_gtex.1457670.out
+    Ignored:    scripts/compute_sumstats_cv_gtex.1383004.err
+    Ignored:    scripts/compute_sumstats_cv_gtex.1383004.out
+    Ignored:    scripts/compute_sumstats_cv_gtex.1403027.err
+    Ignored:    scripts/compute_sumstats_cv_gtex.1403027.out
+    Ignored:    scripts/extract_analysis_units_for_data-driven_cov_matrices_cv_gtex.1403356.err
+    Ignored:    scripts/extract_analysis_units_for_data-driven_cov_matrices_cv_gtex.1403356.out
+    Ignored:    scripts/extract_effects_for_data-driven_cov_matrices_cv_fold1_gtex.1403366.err
+    Ignored:    scripts/extract_effects_for_data-driven_cov_matrices_cv_fold1_gtex.1403366.out
+    Ignored:    scripts/extract_effects_for_data-driven_cov_matrices_cv_fold2_gtex.1439243.err
+    Ignored:    scripts/extract_effects_for_data-driven_cov_matrices_cv_fold2_gtex.1439243.out
+    Ignored:    scripts/extract_effects_for_data-driven_cov_matrices_cv_fold3_gtex.1440492.err
+    Ignored:    scripts/extract_effects_for_data-driven_cov_matrices_cv_fold3_gtex.1440492.out
+    Ignored:    scripts/extract_effects_for_data-driven_cov_matrices_cv_fold4_gtex.1440686.err
+    Ignored:    scripts/extract_effects_for_data-driven_cov_matrices_cv_fold4_gtex.1440686.out
+    Ignored:    scripts/extract_effects_for_data-driven_cov_matrices_cv_fold5_gtex.1440832.err
+    Ignored:    scripts/extract_effects_for_data-driven_cov_matrices_cv_fold5_gtex.1440832.out
     Ignored:    scripts/extract_gtex_ids.10523031.err
     Ignored:    scripts/extract_gtex_ids.10523031.out
+    Ignored:    scripts/get_2ormore_tissues_gtex_v8_manifest.1139717.err
+    Ignored:    scripts/get_2ormore_tissues_gtex_v8_manifest.1139717.out
     Ignored:    scripts/get_full_X_gtex_v8_manifest.10520041.err
     Ignored:    scripts/get_full_X_gtex_v8_manifest.10520041.out
+    Ignored:    scripts/get_gtex_batch1_mrmash.2602723.err
+    Ignored:    scripts/get_gtex_batch1_mrmash.2602723.out
+    Ignored:    scripts/get_gtex_batch1_mrmash.2602726.err
+    Ignored:    scripts/get_gtex_batch1_mrmash.2602726.out
+    Ignored:    scripts/get_gtex_batch1_mrmash.2602728.err
+    Ignored:    scripts/get_gtex_batch1_mrmash.2602728.out
+    Ignored:    scripts/get_gtex_mtlasso.2602756.err
+    Ignored:    scripts/get_gtex_mtlasso.2602756.out
     Ignored:    scripts/get_gtex_v8_manifest.10520039.err
     Ignored:    scripts/get_gtex_v8_manifest.10520039.out
     Ignored:    scripts/get_missing_Y_rate_10tissues_full_X_gtex_v8_manifest.6515875.err
@@ -783,6 +913,58 @@ Ignored files:
     Ignored:    scripts/get_missing_Y_rate_by_tissue_gtex_v8_manifest.1024109.out
     Ignored:    scripts/get_non_missing_number_samples_by_tissue_gtex_v8_manifest.1024106.err
     Ignored:    scripts/get_non_missing_number_samples_by_tissue_gtex_v8_manifest.1024106.out
+    Ignored:    scripts/get_number_of_tissues_gtex_v8_manifest.1138137.err
+    Ignored:    scripts/get_number_of_tissues_gtex_v8_manifest.1138137.out
+    Ignored:    scripts/mrmash_enet_mtlasso_score_gtex_test.2692299.err
+    Ignored:    scripts/mrmash_enet_mtlasso_score_gtex_test.2692299.out
+    Ignored:    scripts/mrmash_enet_score_batch1_gtex.2855527.err
+    Ignored:    scripts/mrmash_enet_score_batch1_gtex.2855527.out
+    Ignored:    scripts/mrmash_first_pass_fold1_batch1_gtex.2602758.err
+    Ignored:    scripts/mrmash_first_pass_fold1_batch1_gtex.2602758.out
+    Ignored:    scripts/mrmash_first_pass_fold2_batch1_gtex.2611324.err
+    Ignored:    scripts/mrmash_first_pass_fold2_batch1_gtex.2611324.out
+    Ignored:    scripts/mrmash_first_pass_fold3_batch1_gtex.2613008.err
+    Ignored:    scripts/mrmash_first_pass_fold3_batch1_gtex.2613008.out
+    Ignored:    scripts/mrmash_first_pass_fold4_batch1_gtex.2620460.err
+    Ignored:    scripts/mrmash_first_pass_fold4_batch1_gtex.2620460.out
+    Ignored:    scripts/mrmash_first_pass_fold5_batch1_gtex.2627284.err
+    Ignored:    scripts/mrmash_first_pass_fold5_batch1_gtex.2627284.out
+    Ignored:    scripts/mrmash_first_pass_fold5_batch1_gtex.2640974.err
+    Ignored:    scripts/mrmash_first_pass_fold5_batch1_gtex.2640974.out
+    Ignored:    scripts/mrmash_second_pass_fold1_mtlasso_genes_gtex.2641323.err
+    Ignored:    scripts/mrmash_second_pass_fold1_mtlasso_genes_gtex.2641323.out
+    Ignored:    scripts/mrmash_second_pass_fold1_mtlasso_genes_gtex.2646067.err
+    Ignored:    scripts/mrmash_second_pass_fold1_mtlasso_genes_gtex.2646067.out
+    Ignored:    scripts/mrmash_second_pass_fold2_mtlasso_genes_gtex.2648289.err
+    Ignored:    scripts/mrmash_second_pass_fold2_mtlasso_genes_gtex.2648289.out
+    Ignored:    scripts/mrmash_second_pass_fold3_mtlasso_genes_gtex.2648293.err
+    Ignored:    scripts/mrmash_second_pass_fold3_mtlasso_genes_gtex.2648293.out
+    Ignored:    scripts/mrmash_second_pass_fold3_mtlasso_genes_gtex.2650013.err
+    Ignored:    scripts/mrmash_second_pass_fold3_mtlasso_genes_gtex.2650013.out
+    Ignored:    scripts/mrmash_second_pass_fold4_mtlasso_genes_gtex.2648297.err
+    Ignored:    scripts/mrmash_second_pass_fold4_mtlasso_genes_gtex.2648297.out
+    Ignored:    scripts/mrmash_second_pass_fold5_mtlasso_genes_gtex.2648301.err
+    Ignored:    scripts/mrmash_second_pass_fold5_mtlasso_genes_gtex.2648301.out
+    Ignored:    scripts/mrmash_weights_update_fold1_batch1_gtex.2641224.err
+    Ignored:    scripts/mrmash_weights_update_fold1_batch1_gtex.2641224.out
+    Ignored:    scripts/mrmash_weights_update_fold2_batch1_gtex.2641235.err
+    Ignored:    scripts/mrmash_weights_update_fold2_batch1_gtex.2641235.out
+    Ignored:    scripts/mrmash_weights_update_fold3_batch1_gtex.2641237.err
+    Ignored:    scripts/mrmash_weights_update_fold3_batch1_gtex.2641237.out
+    Ignored:    scripts/mrmash_weights_update_fold4_batch1_gtex.2641238.err
+    Ignored:    scripts/mrmash_weights_update_fold4_batch1_gtex.2641238.out
+    Ignored:    scripts/mrmash_weights_update_fold5_batch1_gtex.2641239.err
+    Ignored:    scripts/mrmash_weights_update_fold5_batch1_gtex.2641239.out
+    Ignored:    scripts/mtlasso_fold1_batch1_gtex.2602790.err
+    Ignored:    scripts/mtlasso_fold1_batch1_gtex.2602790.out
+    Ignored:    scripts/mtlasso_fold2_batch1_gtex.2611376.err
+    Ignored:    scripts/mtlasso_fold2_batch1_gtex.2611376.out
+    Ignored:    scripts/mtlasso_fold3_batch1_gtex.2613037.err
+    Ignored:    scripts/mtlasso_fold3_batch1_gtex.2613037.out
+    Ignored:    scripts/mtlasso_fold4_batch1_gtex.2620489.err
+    Ignored:    scripts/mtlasso_fold4_batch1_gtex.2620489.out
+    Ignored:    scripts/mtlasso_fold5_batch1_gtex.2627313.err
+    Ignored:    scripts/mtlasso_fold5_batch1_gtex.2627313.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.1003674.err
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.1003674.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.1003676.err
@@ -953,6 +1135,46 @@ Ignored files:
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.1005557.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.1005558.err
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.1005558.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071437.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071437.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071457.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071457.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071458.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071458.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071459.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071459.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071460.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071460.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071461.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071461.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071462.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071462.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071463.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071463.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071464.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071464.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071465.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071465.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071466.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071466.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071467.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071467.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071468.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071468.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071469.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071469.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071470.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071470.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071471.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071471.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071472.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071472.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071473.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071473.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071474.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071474.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071475.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y_pipeline_array.4071475.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sB_1causalrespr10_indepReps_pipeline_array.1014880.err
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sB_1causalrespr10_indepReps_pipeline_array.1014880.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sB_1causalrespr10_indepReps_pipeline_array.1014881.err
@@ -1295,6 +1517,46 @@ Ignored files:
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.1028306.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.1028307.err
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.1028307.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4071999.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4071999.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072000.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072000.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072001.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072001.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072002.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072002.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072003.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072003.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072004.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072004.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072005.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072005.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072006.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072006.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072007.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072007.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072008.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072008.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072009.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072009.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072010.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072010.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072011.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072011.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072012.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072012.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072013.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072013.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072014.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072014.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072015.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072015.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072016.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072016.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072017.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072017.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072018.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y_pipeline_array.4072018.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_pipeline_array.1021443.err
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_pipeline_array.1021443.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_pipeline_array.1021444.err
@@ -1747,6 +2009,82 @@ Ignored files:
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1025678.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1025679.err
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1025679.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029376.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029376.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029377.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029377.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029378.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029378.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029379.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029379.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029380.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029380.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029622.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029622.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029623.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029623.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029624.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029624.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029625.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029625.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029626.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029626.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029627.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029627.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029648.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029648.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029649.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029649.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029650.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029650.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029651.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029651.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029652.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029652.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029849.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029849.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029850.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1029850.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030325.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030325.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030326.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030326.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030327.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030327.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030328.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030328.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030329.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030329.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030330.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030330.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030331.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030331.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030332.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030332.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030333.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030333.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030334.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030334.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030635.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030635.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030636.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030636.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030637.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030637.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030638.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030638.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030639.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030639.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030660.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030660.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030661.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030661.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030662.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030662.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030663.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030663.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030664.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_pipeline_array.1030664.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_pipeline.6295843.err
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_pipeline.6295843.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_lowPVE_pipeline.6400836.err
@@ -1925,6 +2263,168 @@ Ignored files:
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y_pipeline_array.1011905.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y_pipeline_array.1011906.err
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y_pipeline_array.1011906.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031255.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031255.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031256.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031256.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031257.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031257.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031258.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031258.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031259.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031259.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031260.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031260.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031261.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031261.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031262.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031262.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031263.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031263.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031264.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031264.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031573.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031573.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031574.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031574.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031575.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031575.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031576.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031576.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031577.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031577.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031653.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031653.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031654.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031654.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031655.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031655.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031656.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031656.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031657.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1031657.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032021.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032021.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032022.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032022.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032023.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032023.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032024.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032024.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032025.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032025.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032026.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032026.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032027.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032027.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032028.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032028.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032029.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032029.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032030.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032030.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032331.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032331.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032332.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032332.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032333.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032333.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032334.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032334.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032335.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032335.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032756.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032756.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032757.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032757.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032758.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032758.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032759.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032759.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032760.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1032760.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1033689.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1033689.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034797.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034797.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034798.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034798.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034799.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034799.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034800.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034800.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034801.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034801.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034802.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034802.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034803.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034803.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034804.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034804.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034805.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034805.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034806.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1034806.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035251.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035251.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035252.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035252.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035253.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035253.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035254.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035254.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035255.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035255.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035279.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035279.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035280.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035280.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035281.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035281.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035282.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035282.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035283.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035283.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035693.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035693.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035694.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035694.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035695.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035695.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035696.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035696.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035697.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035697.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035698.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035698.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035699.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035699.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035700.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035700.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035701.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035701.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035702.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1035702.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036013.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036013.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036014.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036014.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036015.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036015.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036016.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036016.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036017.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036017.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036040.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036040.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036041.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036041.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036042.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036042.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036043.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036043.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036044.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_pipeline_array.1036044.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_lowPVE_pipeline.6342504.err
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_lowPVE_pipeline.6342504.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_lowPVE_pipeline.6342513.err
@@ -2103,6 +2603,186 @@ Ignored files:
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y_pipeline_array.1014494.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y_pipeline_array.1014495.err
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y_pipeline_array.1014495.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036253.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036253.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036254.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036254.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036255.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036255.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036256.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036256.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036257.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036257.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036259.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036259.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036260.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036260.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036261.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036261.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036262.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036262.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036263.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1036263.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039255.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039255.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039256.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039256.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039257.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039257.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039258.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039258.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039259.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039259.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039282.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039282.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039283.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039283.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039284.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039284.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039285.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039285.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039286.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039286.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039464.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039464.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039465.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039465.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039466.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039466.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039467.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039467.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039468.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039468.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039469.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039469.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039470.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039470.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039471.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039471.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039472.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039472.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039473.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039473.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039932.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039932.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039933.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039933.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039934.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039934.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039935.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039935.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039936.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039936.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039959.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039959.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039960.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039960.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039961.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039961.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039962.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039962.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039963.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1039963.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040610.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040610.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040611.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040611.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040612.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040612.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040613.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040613.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040614.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040614.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040615.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040615.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040616.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040616.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040617.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040617.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040618.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040618.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040619.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040619.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040620.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040620.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040621.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040621.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040622.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040622.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040623.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040623.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040624.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040624.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040625.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040625.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040626.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040626.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040627.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040627.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040628.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040628.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040629.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1040629.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041231.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041231.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041232.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041232.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041233.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041233.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041234.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041234.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041235.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041235.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041236.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041236.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041237.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041237.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041238.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041238.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041239.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041239.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041240.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041240.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041264.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041264.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041265.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041265.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041266.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041266.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041267.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041267.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041268.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041268.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041269.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041269.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041270.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041270.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041271.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041271.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041272.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041272.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041273.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041273.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041314.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041314.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041315.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041315.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041316.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041316.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041317.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041317.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041318.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041318.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041319.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041319.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041320.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041320.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041321.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041321.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041322.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041322.out
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041323.err
+    Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_pipeline_array.1041323.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_lowPVE_pipeline.6372840.err
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_lowPVE_pipeline.6372840.out
     Ignored:    scripts/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_lowPVE_pipeline.6372856.err
@@ -2183,17 +2863,75 @@ Ignored files:
     Ignored:    scripts/mvreg_all_genes_prior_indepX_indepV_sharedB_3causalrespr10_pipeline.5374687.out
     Ignored:    scripts/mvreg_all_genes_prior_indepX_indepV_sharedB_3causalrespr10_pipeline.5374902.err
     Ignored:    scripts/mvreg_all_genes_prior_indepX_indepV_sharedB_3causalrespr10_pipeline.5374902.out
+    Ignored:    scripts/mvreg_mrmash_vs_mtlasso_vs_utmost.1216694.err
+    Ignored:    scripts/mvreg_mrmash_vs_mtlasso_vs_utmost.1216694.out
+    Ignored:    scripts/outfiles/
+    Ignored:    scripts/paper_figures/make_sims_plots.4062588.err
+    Ignored:    scripts/paper_figures/make_sims_plots.4062588.out
+    Ignored:    scripts/paper_figures/prepare_sims_intermediate_files.4048873.err
+    Ignored:    scripts/paper_figures/prepare_sims_intermediate_files.4048873.out
+    Ignored:    scripts/plot_data-driven_cov_matrices_bovy_ed_cv_fold1_gtex.1442796.err
+    Ignored:    scripts/plot_data-driven_cov_matrices_bovy_ed_cv_fold1_gtex.1442796.out
+    Ignored:    scripts/plot_data-driven_cov_matrices_bovy_ed_cv_fold2_gtex.1442797.err
+    Ignored:    scripts/plot_data-driven_cov_matrices_bovy_ed_cv_fold2_gtex.1442797.out
+    Ignored:    scripts/plot_data-driven_cov_matrices_bovy_ed_cv_fold3_gtex.1442799.err
+    Ignored:    scripts/plot_data-driven_cov_matrices_bovy_ed_cv_fold3_gtex.1442799.out
+    Ignored:    scripts/plot_data-driven_cov_matrices_bovy_ed_cv_fold4_gtex.1442805.err
+    Ignored:    scripts/plot_data-driven_cov_matrices_bovy_ed_cv_fold4_gtex.1442805.out
+    Ignored:    scripts/plot_data-driven_cov_matrices_bovy_ed_cv_fold5_gtex.1442806.err
+    Ignored:    scripts/plot_data-driven_cov_matrices_bovy_ed_cv_fold5_gtex.1442806.out
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ed_cv_fold1_gtex.1442815.err
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ed_cv_fold1_gtex.1442815.out
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ed_cv_fold2_gtex.1442816.err
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ed_cv_fold2_gtex.1442816.out
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ed_cv_fold3_gtex.1442817.err
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ed_cv_fold3_gtex.1442817.out
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ed_cv_fold4_gtex.1442818.err
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ed_cv_fold4_gtex.1442818.out
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ed_cv_fold5_gtex.1442820.err
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ed_cv_fold5_gtex.1442820.out
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ted_cv_fold1_gtex.1442821.err
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ted_cv_fold1_gtex.1442821.out
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ted_cv_fold2_gtex.1442827.err
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ted_cv_fold2_gtex.1442827.out
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ted_cv_fold3_gtex.1442828.err
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ted_cv_fold3_gtex.1442828.out
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ted_cv_fold4_gtex.1442829.err
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ted_cv_fold4_gtex.1442829.out
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ted_cv_fold5_gtex.1442830.err
+    Ignored:    scripts/plot_data-driven_cov_matrices_ud_ted_cv_fold5_gtex.1442830.out
     Ignored:    scripts/pred_HHB_imputed.6496220.err
     Ignored:    scripts/pred_HHB_imputed.6496220.out
     Ignored:    scripts/pred_fullV_HHB_imputed.6503400.err
     Ignored:    scripts/pred_fullV_HHB_imputed.6503400.out
+    Ignored:    scripts/predict_mrmash_by_fold_test.1435144.err
+    Ignored:    scripts/predict_mrmash_by_fold_test.1435144.out
+    Ignored:    scripts/predict_mrmash_by_fold_test_2threads.1435151.err
+    Ignored:    scripts/predict_mrmash_by_fold_test_2threads.1435151.out
+    Ignored:    scripts/predict_mrmash_by_fold_test_4threads.1435152.err
+    Ignored:    scripts/predict_mrmash_by_fold_test_4threads.1435152.out
+    Ignored:    scripts/predict_mrmash_by_fold_test_8threads.1435153.err
+    Ignored:    scripts/predict_mrmash_by_fold_test_8threads.1435153.out
+    Ignored:    scripts/split_folds_gtex_ids.1122504.err
+    Ignored:    scripts/split_folds_gtex_ids.1122504.out
+    Ignored:    scripts/test.2471609.err
+    Ignored:    scripts/test.2471609.out
 
 Untracked files:
     Untracked:  analysis/dense_issue_investigation2/
+    Untracked:  analysis/paper_figures/
     Untracked:  code/20200502_Prepare_ED_prior.ipynb
     Untracked:  code/plot_test.R
     Untracked:  code/pred_fullV_LNP1.R
+    Untracked:  code/predict_mrmash_by_fold_test.R
+    Untracked:  code/predict_mrmash_by_fold_test_2threads.R
+    Untracked:  code/predict_mrmash_by_fold_test_4threads.R
+    Untracked:  code/predict_mrmash_by_fold_test_8threads.R
     Untracked:  dsc/mvreg_all_genes_prior_09_11_20_COPY.dsc
+    Untracked:  scripts/run_predict_mrmash_by_fold_test.sbatch
+    Untracked:  scripts/run_predict_mrmash_by_fold_test_2threads.sbatch
+    Untracked:  scripts/run_predict_mrmash_by_fold_test_4threads.sbatch
+    Untracked:  scripts/run_predict_mrmash_by_fold_test_8threads.sbatch
 
 </code></pre>
 <p>
@@ -2232,6 +2970,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/e4b4e25e5a0879b5594985671a86f0b2d225aa4a/analysis/results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y.Rmd" target="_blank">e4b4e25</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2022-06-03
+</td>
+<td>
+Add enet initialization with data-driven mats
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/fmorgante/mr_mash_test/4291f6b417fae035b8679aef379738b155614108/docs/results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y.html" target="_blank">4291f6b</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-04-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -2395,7 +3167,7 @@ colors &lt;- c(&quot;cyan&quot;, &quot;skyblue&quot;, &quot;dodgerblue&quot;, &q
   dsc_out &lt;- dscquery(paste0(&quot;output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y/rep&quot;, repl), 
                       c(&quot;simulate.p_causal&quot;, &quot;simulate.r&quot;, &quot;simulate.r_causal&quot;, &quot;simulate.pve&quot;, &quot;simulate.B_cor&quot;, &quot;simulate.w&quot;, 
                         &quot;simulate.B_scale&quot;, &quot;simulate.V_cor&quot;, &quot;simulate&quot;, &quot;fit&quot;, &quot;score&quot;, &quot;score.err&quot;, &quot;fit.time&quot;), 
-                      groups=&quot;fit: mr_mash_em_can_enet, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mr_mash_em_dataAndcan_mlasso, mr_mash_em_dataAndcan_dropcomp_mlasso, mtlasso, enet&quot;,
+                      groups=&quot;fit: mr_mash_em_data_enet, mr_mash_em_can_enet, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mr_mash_em_dataAndcan_mlasso, mr_mash_em_dataAndcan_dropcomp_mlasso, mtlasso, enet&quot;,
               verbose=FALSE)
   
   ###Convert from list to data.frame for plotting
@@ -2455,9 +3227,9 @@ dsc_plots &lt;- dsc_plots[which(dsc_plots$score_metric!=&quot;scaled_rmse&quot; 
 ###Create factor version of method
 dsc_plots$method_fac &lt;- factor(dsc_plots$method, levels=c(&quot;mr_mash_em_can_mlasso&quot;, &quot;mr_mash_em_data_mlasso&quot;,
                                                             &quot;mr_mash_em_dataAndcan_mlasso&quot;, &quot;mr_mash_em_dataAndcan_dropcomp_mlasso&quot;, 
-                                                            &quot;mr_mash_em_can_enet&quot;, &quot;mtlasso&quot;, &quot;enet&quot;),
+                                                            &quot;mr_mash_em_can_enet&quot;, &quot;mr_mash_em_data_enet&quot;, &quot;mtlasso&quot;, &quot;enet&quot;),
                                  labels=c(&quot;mr_mash_can&quot;, &quot;mr_mash_data&quot;, &quot;mr_mash_both&quot;, &quot;mr_mash_both_w0thresh&quot;, 
-                                          &quot;mr_mash_can_enet&quot;, &quot;mtlasso&quot;, &quot;enet&quot;))
+                                          &quot;mr_mash_can_enet&quot;, &quot;mr_mash_data_enet&quot;, &quot;mtlasso&quot;, &quot;enet&quot;))
 
 ###Create plots
 p_rrmse &lt;- ggplot(dsc_plots[which(dsc_plots$score_metric==&quot;scaled_rrmse&quot;), ], aes_string(x = &quot;method_fac&quot;, y = &quot;score_value&quot;, fill = &quot;method_fac&quot;)) +
@@ -2617,6 +3389,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/fmorgante/mr_mash_test/blob/4291f6b417fae035b8679aef379738b155614108/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y.Rmd/run time-1.png" target="_blank">4291f6b</a>
+</td>
+<td>
+Fabio Morgante
+</td>
+<td>
+2021-04-25
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/fmorgante/mr_mash_test/blob/b8d714775a84013df41543e28132895409b9c93c/docs/figure/results_mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y.Rmd/run time-1.png" target="_blank">b8d7147</a>
 </td>
 <td>
@@ -2651,7 +3434,7 @@ fmorgante
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>R version 4.0.3 (2020-10-10)
 Platform: x86_64-conda-linux-gnu (64-bit)
-Running under: CentOS Linux 8 (Core)
+Running under: CentOS Linux 8
 
 Matrix products: default
 BLAS/LAPACK: /scratch/midway3/fmorgante/miniconda3/envs/py38dsc/lib/libopenblasp-r0.3.12.so
