@@ -127,7 +127,7 @@ mr_mash_em_dataAndcan_dropcomp_mlasso(mr_mash_em_dataAndcan_mlasso):
   w0_threshold:           1e-08
 
 #EM w0 updates, standardize X, update V (constrained diagonal),
-#data-driven matrices, enet initialization
+#canonical matrices, enet initialization
 mr_mash_em_can_enet(mr_mash_em_can):
   mu1_init:               $B_est_init
 
