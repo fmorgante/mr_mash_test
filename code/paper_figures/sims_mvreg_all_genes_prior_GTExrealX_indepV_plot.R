@@ -98,7 +98,7 @@ p_methods_all <- plot_grid(p_methods_shared, p_methods_indep, p_methods_2blocks,
 			   p_methods_1causalresp, p_methods_3causalresp, 
 			   leg_methods, labels = c('A', 'B', 'C', 'D', 'E'))
 
-ggsave("test.pdf", plot=p_methods_all, device="pdf", units="in", height=10, width=15)
+ggsave("../../analysis/paper_figures/mvreg_all_genes_prior_GTExrealX_indepV_mrmash_vs_others_rmse.pdf", plot=p_methods_all, device="pdf", units="in", height=8, width=11)
 
 
 ###Time
@@ -183,7 +183,7 @@ p_methods_time_all <- plot_grid(p_methods_time_shared, p_methods_time_indep, p_m
 				p_methods_time_1causalresp, p_methods_time_3causalresp, 
 		  		leg_methods_time, labels = c('A', 'B', 'C', 'D', 'E'))
 
-ggsave("test2.pdf", plot=p_methods_time_all, device="pdf", units="in", height=10, width=15)
+ggsave("../../analysis/paper_figures/mvreg_all_genes_prior_GTExrealX_indepV_mrmash_vs_others_runtime.pdf", plot=p_methods_time_all, device="pdf", units="in", height=8, width=11)
 
 
 ###mr.mash -- different priors
@@ -204,8 +204,8 @@ p_priors_1causalresp <- ggplot(dsc_plots_priors_1causalresp_filt,
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors[c(1,10)], labels = c("canonical", "both")) +
   labs(x = "Tissue", y = "RMSE relative to data-driven", fill="Method") +
-  geom_hline(yintercept=1, linetype="dotted", size=1) +
-  theme_cowplot(font_size = 20) +
+  geom_hline(yintercept=1, linetype="dotted", size=1, color = "red") +
+  theme_cowplot(font_size = 16) +
   theme(plot.title = element_text(hjust = 0.5), legend.position="none") 
   
 p_priors_indep <- ggplot(dsc_plots_priors_indep_filt, 
@@ -213,8 +213,8 @@ p_priors_indep <- ggplot(dsc_plots_priors_indep_filt,
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors[c(1,10)], labels = c("canonical", "both")) +
   labs(x = "Tissue", y = "RMSE relative to data-driven", fill="Method") +
-  geom_hline(yintercept=1, linetype="dotted", size=1) +
-  theme_cowplot(font_size = 20) +
+  geom_hline(yintercept=1, linetype="dotted", size=1, color = "red") +
+  theme_cowplot(font_size = 16) +
   theme(plot.title = element_text(hjust = 0.5), legend.position="none")
   
 p_priors_shared <- ggplot(dsc_plots_priors_shared_filt, 
@@ -222,8 +222,8 @@ p_priors_shared <- ggplot(dsc_plots_priors_shared_filt,
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors[c(1,10)], labels = c("canonical", "both")) +
   labs(x = "Tissue", y = "RMSE relative to data-driven", fill="Method") +
-  geom_hline(yintercept=1, linetype="dotted", size=1) +
-  theme_cowplot(font_size = 20) +
+  geom_hline(yintercept=1, linetype="dotted", size=1, color = "red") +
+  theme_cowplot(font_size = 16) +
   theme(plot.title = element_text(hjust = 0.5), legend.position="none")
 
 p_priors_2blocks_inter <- ggplot(dsc_plots_priors_2blocks_filt, 
@@ -231,8 +231,8 @@ p_priors_2blocks_inter <- ggplot(dsc_plots_priors_2blocks_filt,
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors[c(1,10)], labels = c("canonical", "both")) +
   labs(x = "Tissue", y = "RMSE relative to data-driven", fill="Method") +
-  geom_hline(yintercept=1, linetype="dotted", size=1) +
-  theme_cowplot(font_size = 20) +
+  geom_hline(yintercept=1, linetype="dotted", size=1, color = "red") +
+  theme_cowplot(font_size = 16) +
   theme(plot.title = element_text(hjust = 0.5))
   
 p_priors_2blocks <- p_priors_2blocks_inter + theme(legend.position="none")
@@ -242,8 +242,8 @@ p_priors_3causalresp <- ggplot(dsc_plots_priors_3causalresp_filt,
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors[c(1,10)], labels = c("canonical", "both")) +
   labs(x = "Tissue", y = "RMSE relative to data-driven", fill="Method") +
-  geom_hline(yintercept=1, linetype="dotted", size=1) +
-  theme_cowplot(font_size = 20) +
+  geom_hline(yintercept=1, linetype="dotted", size=1, color = "red") +
+  theme_cowplot(font_size = 16) +
   theme(plot.title = element_text(hjust = 0.5), legend.position="none")
 
 #Extract legend
@@ -254,7 +254,7 @@ p_priors_all <- plot_grid(p_priors_shared, p_priors_indep, p_priors_2blocks,
 			  p_priors_1causalresp, p_priors_3causalresp, 
 		  	  leg_priors, labels = c('A', 'B', 'C', 'D', 'E'))
 
-ggsave("test1.pdf", plot=p_priors_all, device="pdf", units="in", height=10, width=15)
+ggsave("../../analysis/paper_figures/mvreg_all_genes_prior_GTExrealX_indepV_mrmash_different_priors_rmse.pdf", plot=p_priors_all, device="pdf", units="in", height=8, width=11)
 
 
 ###Time
@@ -339,4 +339,4 @@ p_priors_time_all <- plot_grid(p_priors_time_shared, p_priors_time_indep, p_prio
 				p_priors_time_1causalresp, p_priors_time_3causalresp, 
 		  		leg_priors_time, labels = c('A', 'B', 'C', 'D', 'E'))
 
-ggsave("test3.pdf", plot=p_priors_time_all, device="pdf", units="in", height=10, width=15)
+ggsave("../../analysis/paper_figures/mvreg_all_genes_prior_GTExrealX_indepV_mrmash_different_priors_runtime.pdf", plot=p_priors_time_all, device="pdf", units="in", height=8, width=11)
