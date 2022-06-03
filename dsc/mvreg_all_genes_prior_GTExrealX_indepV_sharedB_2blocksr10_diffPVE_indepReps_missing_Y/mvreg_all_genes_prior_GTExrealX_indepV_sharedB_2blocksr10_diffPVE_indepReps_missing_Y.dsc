@@ -22,10 +22,11 @@ DSC:
     mr_mash_em_dataAndcan_mlasso_out: mlasso_init * mr_mash_em_dataAndcan_mlasso
     mr_mash_em_dataAndcan_dropcomp_mlasso_out: mlasso_init * mr_mash_em_dataAndcan_dropcomp_mlasso
     mr_mash_em_can_enet_out: enet_init * mr_mash_em_can_enet
+    mr_mash_em_data_enet_out: enet_init * mr_mash_em_data_enet
     enet_out: enet_init * enet
     fit: mr_mash_em_dataAndcan_dropcomp_mlasso_out, mr_mash_em_dataAndcan_mlasso_out, 
          mr_mash_em_can_mlasso_out, mr_mash_em_can_enet_out, mr_mash_em_data_mlasso_out, 
-         mtlasso, enet_out
+         mr_mash_em_data_enet_out, mtlasso, enet_out
     predict: predict_linear
     score: scaled_rmse
   run: 
@@ -126,8 +127,15 @@ mr_mash_em_dataAndcan_dropcomp_mlasso(mr_mash_em_dataAndcan_mlasso):
   w0_threshold:           1e-08
 
 #EM w0 updates, standardize X, update V (constrained diagonal),
-#data-driven matrices, enet initialization
+#canonical matrices, enet initialization
 mr_mash_em_can_enet(mr_mash_em_can):
+  mu1_init:               $B_est_init
+
+#EM w0 updates, standardize X, update V (constrained diagonal),
+#data-driven matrices, enet initialization
+mr_mash_em_data_enet(mr_mash_em_can):
+  canonical_mats:         FALSE
+  data_driven_mats:       ${data_driven_mats_file}
   mu1_init:               $B_est_init
 
 #Multivariate LASSO estimates  
