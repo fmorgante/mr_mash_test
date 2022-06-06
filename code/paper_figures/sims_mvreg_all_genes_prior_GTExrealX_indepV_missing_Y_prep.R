@@ -116,5 +116,5 @@ dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_em_can_mlasso
 ###Create factor version of response
 dsc_plots$response_fac <- as.factor(dsc_plots$response)
 
-saveRDS(dsc_plots, paste0("../../output/sims_paper_figures_inter/", input, "_missing_Y_for_plotting.rds"))
+saveRDS(dsc_plots, paste0("../../output/sims_paper_figures_inter/", input, "_for_plotting.rds"))
 
