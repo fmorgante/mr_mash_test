@@ -76,10 +76,10 @@ We will now summarize the scaled RMSE from the following scenarios:
 ```{r equal effects simulations, message=FALSE}
 for(repl in 1:20){
   ###Load the dsc results
-  dsc_out <- dscquery(paste0("output/tmp/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y/rep", repl), 
+  dsc_out <- dscquery(paste0("output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_r10_indepReps_missing_Y/rep", repl), 
                       c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w", 
                         "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"), 
-                      groups="fit: mr_mash_em_can_enet, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mr_mash_em_dataAndcan_mlasso, mr_mash_em_dataAndcan_dropcomp_mlasso, mtlasso, enet",
+                      groups="fit: mr_mash_em_data_enet, mr_mash_em_can_enet, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mr_mash_em_dataAndcan_mlasso, mr_mash_em_dataAndcan_dropcomp_mlasso, mtlasso, enet",
 		      verbose=FALSE)
   
   ###Convert from list to data.frame for plotting
@@ -107,10 +107,10 @@ summ_shared <- dsc_plots %>%
 ```{r independent effects simulations, message=FALSE}
 for(repl in 1:20){
   ###Load the dsc results
-  dsc_out <- dscquery(paste0("output/tmp/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y/rep", repl),
+  dsc_out <- dscquery(paste0("output/mvreg_all_genes_prior_GTExrealX_indepV_indepB_r10_indepReps_missing_Y/rep", repl),
                       c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w",
                         "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"),
-                      groups="fit: mr_mash_em_can_enet, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mr_mash_em_dataAndcan_mlasso, mr_mash_em_dataAndcan_dropcomp_mlasso, mtlasso, enet",
+                      groups="fit: mr_mash_em_data_enet, mr_mash_em_can_enet, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mr_mash_em_dataAndcan_mlasso, mr_mash_em_dataAndcan_dropcomp_mlasso, mtlasso, enet",
                       verbose=FALSE)
 
   ###Convert from list to data.frame for plotting
@@ -138,10 +138,10 @@ summ_indep <- dsc_plots %>%
 ```{r singleton effects simulations, message=FALSE}
 for(repl in 1:20){
   ###Load the dsc results
-  dsc_out <- dscquery(paste0("output/tmp/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y/rep", repl),
+  dsc_out <- dscquery(paste0("output/mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepReps_missing_Y/rep", repl),
                       c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w",
                         "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"),
-                      groups="fit: mr_mash_em_can_enet, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mr_mash_em_dataAndcan_mlasso, mr_mash_em_dataAndcan_dropcomp_mlasso, mtlasso, enet",
+                      groups="fit: mr_mash_em_data_enet, mr_mash_em_can_enet, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mr_mash_em_dataAndcan_mlasso, mr_mash_em_dataAndcan_dropcomp_mlasso, mtlasso, enet",
                       verbose=FALSE)
 
   ###Convert from list to data.frame for plotting
@@ -176,10 +176,10 @@ summ_singleton_resp <- dsc_plots %>%
 ```{r one block effects simulations, message=FALSE}
 for(repl in 1:20){
   ###Load the dsc results
-  dsc_out <- dscquery(paste0("output/tmp/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y/rep", repl),
+  dsc_out <- dscquery(paste0("output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_3causalrespr10_indepReps_missing_Y/rep", repl),
                       c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w",
                         "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"),
-                      groups="fit: mr_mash_em_can_enet, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mr_mash_em_dataAndcan_mlasso, mr_mash_em_dataAndcan_dropcomp_mlasso, mtlasso, enet",
+                      groups="fit: mr_mash_em_data_enet, mr_mash_em_can_enet, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mr_mash_em_dataAndcan_mlasso, mr_mash_em_dataAndcan_dropcomp_mlasso, mtlasso, enet",
                       verbose=FALSE)
 
   ###Convert from list to data.frame for plotting
@@ -214,10 +214,10 @@ summ_3shared_resp <- dsc_plots %>%
 ```{r two blocks effects simulations, message=FALSE}
 for(repl in 1:20){
   ###Load the dsc results
-  dsc_out <- dscquery(paste0("output/tmp/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_missing_Y/rep", repl),
+  dsc_out <- dscquery(paste0("output/mvreg_all_genes_prior_GTExrealX_indepV_sharedB_2blocksr10_diffPVE_indepReps_missing_Y/rep", repl),
                       c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w",
                         "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"),
-                      groups="fit: mr_mash_em_can_enet, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mr_mash_em_dataAndcan_mlasso, mr_mash_em_dataAndcan_dropcomp_mlasso, mtlasso, enet",
+                      groups="fit: mr_mash_em_data_enet, mr_mash_em_can_enet, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mr_mash_em_dataAndcan_mlasso, mr_mash_em_dataAndcan_dropcomp_mlasso, mtlasso, enet",
                       verbose=FALSE)
 
   ###Convert from list to data.frame for plotting
@@ -253,7 +253,7 @@ summ_2blocks_resp <- dsc_plots %>%
 
 ```{r table pooled, message=FALSE}
 dat <- rbind(summ_shared, summ_indep, summ_singleton, summ_3shared, summ_2blocks)
-dat$scenario <- rep(c("equal", "independent", "singleton", "shared_1to3", "two_blocks"), each=7)
+dat$scenario <- rep(c("equal", "independent", "singleton", "shared_1to3", "two_blocks"), each=8)
 kable(dat[which(dat$method != "mr_mash_em_dataAndcan_dropcomp_mlasso"), 4:9])
 ```
 
@@ -261,13 +261,7 @@ kable(dat[which(dat$method != "mr_mash_em_dataAndcan_dropcomp_mlasso"), 4:9])
 
 ```{r table split, message=FALSE}
 dat_resp <- rbind(summ_singleton_resp, summ_3shared_resp, summ_2blocks_resp)
-dat_resp$scenario <- rep(c("singleton", "shared_1to3", "two_blocks"), each=7*10)
+dat_resp$scenario <- rep(c("singleton", "shared_1to3", "two_blocks"), each=8*10)
 kable(dat_resp[which(dat_resp$method != "mr_mash_em_dataAndcan_dropcomp_mlasso"), 4:10])
 ```
-
-
-
-
-
-
 
