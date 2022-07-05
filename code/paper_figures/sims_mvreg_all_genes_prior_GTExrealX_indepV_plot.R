@@ -73,7 +73,7 @@ p_methods_2blocks_inter <- ggplot(dsc_plots_methods_2blocks_filt,
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
 #  ylim(ymin, ymax) +
   scale_fill_manual(values = colors[c(3,7,12)], labels = c("g-lasso", "smt-lasso", "e-net")) +
-  labs(x = "Tissue", y = expression(paste("RMSE relative to ", italic("mr.mash"))), title = "Sharing within subgroups", fill="Method") +
+  labs(x = "Tissue", y = expression(paste("RMSE relative to ", italic("mr.mash"))), title = "Shared effects in subgroups", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1, color = "red") +
   theme_cowplot(font_size = 16) +
   theme(plot.title = element_text(hjust = 0.5, size=14))
@@ -85,7 +85,7 @@ p_methods_3causalresp <- ggplot(dsc_plots_methods_3causalresp_filt,
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
 #  ylim(ymin, ymax) +
   scale_fill_manual(values = colors[c(3,7,12)], labels = c("g-lasso", "smt-lasso", "e-net")) +
-  labs(x = "Tissue", y = expression(paste("RMSE relative to ", italic("mr.mash"))), title = "Partly null", fill="Method") +
+  labs(x = "Tissue", y = expression(paste("RMSE relative to ", italic("mr.mash"))), title = "Equal effects +  null", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1, color = "red") +
   theme_cowplot(font_size = 16) +
   theme(plot.title = element_text(hjust = 0.5, size=14), legend.position="none")
@@ -127,7 +127,7 @@ p_methods_time_1causalresp <- ggplot(dsc_plots_1causalresp_methods_time, aes_str
   scale_fill_manual(values = colors[c(9,3,7,12)], labels = c(expression(italic("mr.mash")), "g-lasso", "smt-lasso", "e-net")) +
   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x))) +
-  labs(x = "", y = bquote(Elapsed ~time ~(log[2](seconds))), title = "Mostly null", fill="Method") +
+  labs(x = "", y = "Elapsed time (seconds)", title = "Mostly null", fill="Method") +
   theme_cowplot(font_size = 16) +
   theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         legend.position="none", plot.title = element_text(hjust = 0.5, size=14))
@@ -137,7 +137,7 @@ p_methods_time_indep <- ggplot(dsc_plots_indep_methods_time, aes_string(x = "met
   scale_fill_manual(values = colors[c(9,3,7,12)], labels = c(expression(italic("mr.mash")), "g-lasso", "smt-lasso", "e-net")) +
   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x))) +
-  labs(x = "", y = bquote(Elapsed ~time ~(log[2](seconds))), title = "Independent effects", fill="Method") +
+  labs(x = "", y = "Elapsed time (seconds)", title = "Independent effects", fill="Method") +
   theme_cowplot(font_size = 16) +
   theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         legend.position="none", plot.title = element_text(hjust = 0.5, size=14))
@@ -147,7 +147,7 @@ p_methods_time_shared <- ggplot(dsc_plots_shared_methods_time, aes_string(x = "m
   scale_fill_manual(values = colors[c(9,3,7,12)], labels = c(expression(italic("mr.mash")), "g-lasso", "smt-lasso", "e-net")) +
   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x))) +
-  labs(x = "", y = bquote(Elapsed ~time ~(log[2](seconds))), title = "Equal effects", fill="Method") +  
+  labs(x = "", y = "Elapsed time (seconds)", title = "Equal effects", fill="Method") +  
   theme_cowplot(font_size = 16) +
   theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         legend.position="none", plot.title = element_text(hjust = 0.5, size=14))
@@ -157,7 +157,7 @@ p_methods_time_2blocks_inter <- ggplot(dsc_plots_2blocks_methods_time, aes_strin
   scale_fill_manual(values = colors[c(9,3,7,12)], labels = c(expression(italic("mr.mash")), "g-lasso", "smt-lasso", "e-net")) +
   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x))) +
-  labs(x = "", y = bquote(Elapsed ~time ~(log[2](seconds))), title = "Sharing within subgroups", fill="Method") +
+  labs(x = "", y = "Elapsed time (seconds)", title = "Shared effects in subgroups", fill="Method") +
   theme_cowplot(font_size = 16) +
   theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         legend.text.align = 0)
@@ -169,7 +169,7 @@ p_methods_time_3causalresp <- ggplot(dsc_plots_3causalresp_methods_time, aes_str
   scale_fill_manual(values = colors[c(9,3,7,12)], labels = c(expression(italic("mr.mash")), "g-lasso", "smt-lasso", "e-net")) +
   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x))) +
-  labs(x = "", y = bquote(Elapsed ~time ~(log[2](seconds))), title = "Partly null", fill="Method") +
+  labs(x = "", y = "Elapsed time (seconds)", title = "Equal effects + null", fill="Method") +
   theme_cowplot(font_size = 16) +
   theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         legend.position="none", plot.title = element_text(hjust = 0.5, size=14))
@@ -230,7 +230,7 @@ p_priors_2blocks_inter <- ggplot(dsc_plots_priors_2blocks_filt,
                   aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors[c(1,10)], labels = c("canonical", "both")) +
-  labs(x = "Tissue", y = "RMSE relative to data-driven", title = "Sharing within subgroups", fill="Method") +
+  labs(x = "Tissue", y = "RMSE relative to data-driven", title = "Shared effects in subgroups", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1, color = "red") +
   theme_cowplot(font_size = 16) +
   theme(plot.title = element_text(hjust = 0.5, size=14))
@@ -241,7 +241,7 @@ p_priors_3causalresp <- ggplot(dsc_plots_priors_3causalresp_filt,
                   aes_string(x = "response_fac", y = "score_value", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors[c(1,10)], labels = c("canonical", "both")) +
-  labs(x = "Tissue", y = "RMSE relative to data-driven", title = "Partly null", fill="Method") +
+  labs(x = "Tissue", y = "RMSE relative to data-driven", title = "Equal effects + null", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1, color = "red") +
   theme_cowplot(font_size = 16) +
   theme(plot.title = element_text(hjust = 0.5, size=14), legend.position="none")
@@ -283,7 +283,7 @@ p_priors_time_1causalresp <- ggplot(dsc_plots_1causalresp_priors_time, aes_strin
   scale_fill_manual(values = colors[c(1,7,10)], labels = c("canonical", "data-driven", "both")) +
   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x))) +
-  labs(x = "", y = bquote(Elapsed ~time ~(log[2](seconds))), title = "Mostly null", fill="Method") +
+  labs(x = "", y = "Elapsed time (seconds)", title = "Mostly null", fill="Method") +
   theme_cowplot(font_size = 16) +
   theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         legend.position="none", plot.title = element_text(hjust = 0.5, size=14))
@@ -293,7 +293,7 @@ p_priors_time_indep <- ggplot(dsc_plots_indep_priors_time, aes_string(x = "metho
   scale_fill_manual(values = colors[c(1,7,10)], labels = c("canonical", "data-driven", "both")) +
   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x))) +
-  labs(x = "", y = bquote(Elapsed ~time ~(log[2](seconds))), title = "Independent effects", fill="Method") +
+  labs(x = "", y = "Elapsed time (seconds)", title = "Independent effects", fill="Method") +
   theme_cowplot(font_size = 16) +
   theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         legend.position="none", plot.title = element_text(hjust = 0.5, size=14))
@@ -303,7 +303,7 @@ p_priors_time_shared <- ggplot(dsc_plots_shared_priors_time, aes_string(x = "met
   scale_fill_manual(values = colors[c(1,7,10)], labels = c("canonical", "data-driven", "both")) +
   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x))) +
-  labs(x = "", y = bquote(Elapsed ~time ~(log[2](seconds))), title = "Equal effects", fill="Method") +
+  labs(x = "", y = "Elapsed time (seconds)", title = "Equal effects", fill="Method") +
   theme_cowplot(font_size = 16) +
   theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         legend.position="none", plot.title = element_text(hjust = 0.5, size=14))
@@ -313,7 +313,7 @@ p_priors_time_2blocks_inter <- ggplot(dsc_plots_2blocks_priors_time, aes_string(
   scale_fill_manual(values = colors[c(1,7,10)], labels = c("canonical", "data-driven", "both")) +
   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x))) +
-  labs(x = "", y = bquote(Elapsed ~time ~(log[2](seconds))), title = "Sharing within subgroups", fill="Method") +
+  labs(x = "", y = "Elapsed time (seconds)", title = "Shared effects in subgroups", fill="Method") +
   theme_cowplot(font_size = 16) +
   theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         legend.text.align = 0)
@@ -325,7 +325,7 @@ p_priors_time_3causalresp <- ggplot(dsc_plots_3causalresp_priors_time, aes_strin
   scale_fill_manual(values = colors[c(1,7,10)], labels = c("canonical", "data-driven", "both")) +
   scale_y_continuous(trans="log2", breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x))) +
-  labs(x = "", y = bquote(Elapsed ~time ~(log[2](seconds))), title = "Partly null", fill="Method") +
+  labs(x = "", y = "Elapsed time (seconds)", title = "Equal effects + null", fill="Method") +
   theme_cowplot(font_size = 16) +
   theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         legend.position="none", plot.title = element_text(hjust = 0.5, size=14))
