@@ -46,7 +46,7 @@ levels(dat$y) <- tissues[r:1]
 
 ###Plot
 p <- ggplot(dat,aes(x = x,y = y,fill = u)) +
-  geom_raster() +
+  geom_tile() +
   scale_fill_manual(values = colors, na.translate = FALSE) +
   labs(x = "",y = "") +
   theme_cowplot(font_size = 7) +
@@ -54,6 +54,7 @@ p <- ggplot(dat,aes(x = x,y = y,fill = u)) +
   guides(fill=guide_legend(title=""))
 
 
-ggsave("../../analysis/paper_figures/gtex_tPCA_heatmap_fold_1.pdf", plot=p, device="pdf", units="in", height=8, width=8)
+ggsave("../../analysis/paper_figures/gtex_tPCA_heatmap_fold_1.pdf",p,
+       height = 7.2,width = 8)
 
 
