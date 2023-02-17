@@ -1,6 +1,6 @@
-fit_mr_mash_all_genes_prior <- function(X, Y, update_w0, update_w0_method, standardize, update_V, update_V_method, ca_update_order,
-                                        w0_threshold, convergence_criterion, tol, canonical_mats, singletons, hetgrid, data_driven_mats, sumstats, 
-                                        nthreads, mu1_init){
+fit_mr_mash_all_genes_prior_mean_impute <- function(X, Y, update_w0, update_w0_method, standardize, update_V, update_V_method, ca_update_order,
+                                                    w0_threshold, convergence_criterion, tol, canonical_mats, singletons, hetgrid, data_driven_mats, sumstats, 
+                                                    nthreads, mu1_init){
   
   ###Get number of responses and number of variables
   r <- ncol(Y)
