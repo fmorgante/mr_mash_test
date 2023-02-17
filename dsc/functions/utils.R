@@ -173,3 +173,18 @@ assign_NAs_random <- function(Y, prop){
   
   return(t(Yna))
 }
+
+###Function to impute missing values with the column mean
+col_mean_impute <- function(mat){
+  
+  means <- colMeans(mat, na.rm=TRUE)
+  r <- ncol(mat)
+  
+  for(i in 1:r){
+    whichNa <- which(is.na(mat[,i]))
+    mat[whichNa, i] <- means[i]
+  }
+  
+  return(mat)
+}
+
