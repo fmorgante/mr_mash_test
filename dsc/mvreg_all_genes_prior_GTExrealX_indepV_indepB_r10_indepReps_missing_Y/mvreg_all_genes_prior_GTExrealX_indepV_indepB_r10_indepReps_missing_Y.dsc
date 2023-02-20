@@ -23,10 +23,11 @@ DSC:
     mr_mash_em_dataAndcan_dropcomp_mlasso_out: mlasso_init * mr_mash_em_dataAndcan_dropcomp_mlasso
     mr_mash_em_can_enet_out: enet_init * mr_mash_em_can_enet
     mr_mash_em_data_enet_out: enet_init * mr_mash_em_data_enet
+    mr_mash_em_data_mean_impute_enet_out: enet_init * mr_mash_em_data_mean_impute_enet
     enet_out: enet_init * enet
     fit: mr_mash_em_dataAndcan_dropcomp_mlasso_out, mr_mash_em_dataAndcan_mlasso_out, 
          mr_mash_em_can_mlasso_out, mr_mash_em_can_enet_out, mr_mash_em_data_mlasso_out, 
-         mr_mash_em_data_enet_out, mtlasso, enet_out
+         mr_mash_em_data_enet_out, mr_mash_em_data_mean_impute_enet_out, mtlasso, enet_out
     predict: predict_linear
     score: scaled_rmse
   run: 
@@ -134,6 +135,39 @@ mr_mash_em_can_enet(mr_mash_em_can):
 #EM w0 updates, standardize X, update V (constrained diagonal),
 #data-driven matrices, enet initialization
 mr_mash_em_data_enet(mr_mash_em_can):
+  canonical_mats:         FALSE
+  data_driven_mats:       ${data_driven_mats_file}
+  mu1_init:               $B_est_init
+
+#EM w0 updates, no drop w0, standardize X, update V (constrained diagonal),
+#canonical matrices, mean impute Y
+mr_mash_em_can_mean_impute: fit_mr_mash_all_genes_prior_mean_impute_mod.R
+  X:                      $Xtrain
+  Y:                      $Ytrain
+  update_w0:              TRUE
+  update_w0_method:       "EM"
+  w0_threshold:           0
+  standardize:            TRUE
+  update_V:               TRUE
+  update_V_method:        "diagonal"
+  ca_update_order:        "consecutive"
+  convergence_criterion:  "ELBO"
+  tol:                    1e-2
+  canonical_mats:         TRUE
+  singletons:             TRUE
+  hetgrid:                (0, 0.25, 0.5, 0.75, 1)
+  sumstats:               $sumstats
+  data_driven_mats:       NULL
+  nthreads:               1
+  mu1_init:               NULL
+  $fit_obj:               out$fit
+  $B_est:                 out$B_est
+  $intercept_est:         out$intercept_est
+  $time:                  out$elapsed_time
+
+#EM w0 updates, standardize X, update V (constrained diagonal),
+#data-driven matrices, mean imputed Y enet initialization
+mr_mash_em_data_mean_impute_enet(mr_mash_em_can_mean_impute):
   canonical_mats:         FALSE
   data_driven_mats:       ${data_driven_mats_file}
   mu1_init:               $B_est_init
