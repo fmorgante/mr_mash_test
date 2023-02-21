@@ -23,8 +23,8 @@ declare -a arr=("mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepRe
 for elem in "${arr[@]}"
 do
   ###Decompress results files
-  tar -xkf ../../output/"$elem"_inter.tar --directory ../../output/
-  tar -xkf ../../output/"$elem".tar --directory ../../output/
+  tar -xf ../../output/"$elem"_inter.tar --directory ../../output/
+  tar -xf ../../output/"$elem".tar --directory ../../output/
 
   ###Process the results
   Rscript ../../code/paper_figures/sims_mvreg_all_genes_prior_GTExrealX_indepV_missing_Y_prep.R --input "$elem"
