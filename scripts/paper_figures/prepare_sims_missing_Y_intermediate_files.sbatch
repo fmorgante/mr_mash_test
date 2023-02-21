@@ -3,7 +3,7 @@
 #SBATCH --job-name=prepare_sims_missing_Y_intermediate_files
 #SBATCH --output=prepare_sims_missing_Y_intermediate_files.%j.out
 #SBATCH --error=prepare_sims_missing_Y_intermediate_files.%j.err
-#SBATCH --time=04:00:00
+#SBATCH --time=24:00:00
 #SBATCH --partition=caslake
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
