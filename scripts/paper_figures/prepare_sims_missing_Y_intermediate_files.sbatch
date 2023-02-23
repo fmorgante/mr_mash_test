@@ -23,15 +23,15 @@ declare -a arr=("mvreg_all_genes_prior_GTExrealX_indepV_B_1causalrespr10_indepRe
 for elem in "${arr[@]}"
 do
   ###Decompress results files
-  tar -xf ../../output/"$elem"_inter.tar --directory ../../output/
-  tar -xf ../../output/"$elem".tar --directory ../../output/
+  tar -xf ../../output/"$elem"_inter.tar --directory /scratch/midway3/fmorgante/
+  tar -xf ../../output/"$elem".tar --directory /scratch/midway3/fmorgante/
 
   ###Process the results
-  Rscript ../../code/paper_figures/sims_mvreg_all_genes_prior_GTExrealX_indepV_missing_Y_prep.R --input "$elem"
+  Rscript ../../code/paper_figures/sims_mvreg_all_genes_prior_GTExrealX_indepV_missing_Y_prep.R --input /scratch/midway3/fmorgante/"$elem" --output ../../output/sims_paper_figures_inter/"$elem"
 
   ###Delete decompressed directories
-  rm -rf ../../output/"$elem"_inter
-  rm -rf ../../output/"$elem"
+  rm -rf /scratch/midway3/fmorgante/"$elem"_inter
+  rm -rf /scratch/midway3/fmorgante/"$elem"
 done
 
 ###Deactivate environment

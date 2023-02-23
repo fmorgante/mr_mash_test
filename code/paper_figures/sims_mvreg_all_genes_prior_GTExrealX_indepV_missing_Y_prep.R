@@ -75,13 +75,15 @@ compute_rrmse <- function(dsc_plot, baseline){
 ###Parse arguments
 parser <- OptionParser()
 parser <- add_option(parser, c("--input"), type="character")
+parser <- add_option(parser, c("--output"), type="character")
 outparse <- parse_args(parser)
 input <- outparse$input
+output <- outparse$output
 
 ###Loop over replicates
 for(repl in 1:20){
   ###Load the dsc results
-  dsc_out <- dscquery(paste0("../../output/", input, "/rep", repl), 
+  dsc_out <- dscquery(paste0(input, "/rep", repl), 
                        c("simulate.p_causal", "simulate.r", "simulate.r_causal", "simulate.pve", "simulate.B_cor", "simulate.w", 
                         "simulate.B_scale", "simulate.V_cor", "simulate", "fit", "score", "score.err", "fit.time"), 
                       groups="fit: mr_mash_em_data_mean_impute_enet, mr_mash_em_data_enet, mr_mash_em_can_enet, mr_mash_em_can_mlasso, mr_mash_em_data_mlasso, mr_mash_em_dataAndcan_mlasso, mr_mash_em_dataAndcan_dropcomp_mlasso, mtlasso, enet",
@@ -116,5 +118,5 @@ dsc_plots$method_fac <- factor(dsc_plots$method, levels=c("mr_mash_em_can_mlasso
 ###Create factor version of response
 dsc_plots$response_fac <- as.factor(dsc_plots$response)
 
-saveRDS(dsc_plots, paste0("../../output/sims_paper_figures_inter/", input, "_for_plotting.rds"))
+saveRDS(dsc_plots, paste0(output, "_for_plotting.rds"))
 

@@ -18,7 +18,7 @@ colors <- c("cyan", "skyblue", "dodgerblue", "mediumblue", "limegreen", "green",
 ####mr.mash vs other methods
 ###Error
 ##Create plot
-methods_chosen <- c("mr_mash_data_mean_imp_enet", "mtlasso", "enet")
+methods_chosen <- c("mr_mash_em_data_mean_impute_enet", "mtlasso", "enet")
 metric_chosen <- "scaled_rrmse"
 
 #Filter data
@@ -76,7 +76,8 @@ p_methods_2blocks_inter <- ggplot(dsc_plots_methods_2blocks_filt,
   labs(x = "Tissue", y = expression(paste("RMSE relative to ", italic("mr.mash"))), title = "Shared effects in subgroups", fill="Method") +
   geom_hline(yintercept=1, linetype="dotted", size=1, color = "red") +
   theme_cowplot(font_size = 16) +
-  theme(plot.title = element_text(hjust = 0.5, size=14))
+  theme(plot.title = element_text(hjust = 0.5, size=14),
+        legend.text.align = 0)
   
 p_methods_2blocks <- p_methods_2blocks_inter + theme(legend.position="none")
 
@@ -102,7 +103,7 @@ ggsave("../../analysis/paper_figures/mvreg_all_genes_prior_GTExrealX_indepV_miss
 
 
 ###Time
-methods_chosen <- c("mr_mash_em_data_enet", "mtlasso", "enet")
+methods_chosen <- c("mr_mash_em_data_enet", "mr_mash_em_data_mean_impute_enet", "mtlasso", "enet")
 metric_chosen <- "scaled_rrmse"
 
 #Filter data
