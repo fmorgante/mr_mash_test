@@ -122,11 +122,19 @@ dsc_plots_2blocks_methods_time <- dsc_plots_2blocks[which(dsc_plots_2blocks$resp
 dsc_plots_3causalresp_methods_time <- dsc_plots_3causalresp[which(dsc_plots_3causalresp$response==1 & dsc_plots_3causalresp$score_metric==metric_chosen &
                                                           dsc_plots_3causalresp$method %in% methods_chosen), ]
 
+#Extract y-axis limits
+ymin <- min(min(dsc_plots_1causalresp_methods_time$time), min(dsc_plots_indep_methods_time$time),
+                      min(dsc_plots_shared_methods_time$time), min(dsc_plots_2blocks_methods_time$time),
+                      min(dsc_plots_3causalresp_methods_time$time))
+
+ymax <- max(max(dsc_plots_1causalresp_methods_time$time), max(dsc_plots_indep_methods_time$time),
+                      max(dsc_plots_shared_methods_time$time), max(dsc_plots_2blocks_methods_time$time),
+                      max(dsc_plots_3causalresp_methods_time$time))
                                        
 p_methods_time_1causalresp <- ggplot(dsc_plots_1causalresp_methods_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors[c(9,5,7,12)], labels = c(expression(italic("mr.mash")), expression(paste(italic("mr.mash"), "(mean impute)")), "smt-lasso", "e-net")) +
-  scale_y_continuous(trans="log10", breaks = trans_breaks("log10", function(x) 10^x),
+  scale_y_continuous(limits=c(ymin,ymax), trans="log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) +
   labs(x = "", y = "Elapsed time (seconds)", title = "Mostly null", fill="Method") +
   theme_cowplot(font_size = 16) +
@@ -136,7 +144,7 @@ p_methods_time_1causalresp <- ggplot(dsc_plots_1causalresp_methods_time, aes_str
 p_methods_time_indep <- ggplot(dsc_plots_indep_methods_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors[c(9,5,7,12)], labels = c(expression(italic("mr.mash")), expression(paste(italic("mr.mash"), "(mean impute)")), "smt-lasso", "e-net")) +
-  scale_y_continuous(trans="log10", breaks = trans_breaks("log10", function(x) 10^x),
+  scale_y_continuous(limits=c(ymin,ymax), trans="log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) +
   labs(x = "", y = "Elapsed time (seconds)", title = "Independent effects", fill="Method") +
   theme_cowplot(font_size = 16) +
@@ -146,7 +154,7 @@ p_methods_time_indep <- ggplot(dsc_plots_indep_methods_time, aes_string(x = "met
 p_methods_time_shared <- ggplot(dsc_plots_shared_methods_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors[c(9,5,7,12)], labels = c(expression(italic("mr.mash")), expression(paste(italic("mr.mash"), "(mean impute)")), "smt-lasso", "e-net")) +
-  scale_y_continuous(trans="log10", breaks = trans_breaks("log10", function(x) 10^x),
+  scale_y_continuous(limits=c(ymin,ymax), trans="log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) +
   labs(x = "", y = "Elapsed time (seconds)", title = "Equal effects", fill="Method") +  
   theme_cowplot(font_size = 16) +
@@ -156,7 +164,7 @@ p_methods_time_shared <- ggplot(dsc_plots_shared_methods_time, aes_string(x = "m
 p_methods_time_2blocks_inter <- ggplot(dsc_plots_2blocks_methods_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors[c(9,5,7,12)], labels = c(expression(italic("mr.mash")), expression(paste(italic("mr.mash"), "(mean impute)")), "smt-lasso", "e-net")) +
-  scale_y_continuous(trans="log10", breaks = trans_breaks("log10", function(x) 10^x),
+  scale_y_continuous(limits=c(ymin,ymax), trans="log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) +
   labs(x = "", y = "Elapsed time (seconds)", title = "Shared effects in subgroups", fill="Method") +
   theme_cowplot(font_size = 16) +
@@ -168,7 +176,7 @@ p_methods_time_2blocks <- p_methods_time_2blocks_inter + theme(legend.position="
 p_methods_time_3causalresp <- ggplot(dsc_plots_3causalresp_methods_time, aes_string(x = "method_fac", y = "time", fill = "method_fac")) +
   geom_boxplot(color = "black", outlier.size = 1, width = 0.85) +
   scale_fill_manual(values = colors[c(9,5,7,12)], labels = c(expression(italic("mr.mash")), expression(paste(italic("mr.mash"), "(mean impute)")), "smt-lasso", "e-net")) +
-  scale_y_continuous(trans="log10", breaks = trans_breaks("log10", function(x) 10^x),
+  scale_y_continuous(limits=c(ymin,ymax), trans="log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) +
   labs(x = "", y = "Elapsed time (seconds)", title = "Equal effects + null", fill="Method") +
   theme_cowplot(font_size = 16) +
