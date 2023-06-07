@@ -9,6 +9,8 @@ analysis/*png
 analysis/*html
 analysis/*_cache
 analysis/site_libs
+analysis/dense_issue_investigation2/*
+analysis/paper_figures/*
 code/*.out
 code/*.err
 dsc/outfiles
@@ -20,6 +22,8 @@ scripts/**/*.out
 output/*
 data/*.txt
 data/*.csv
+data/*.RData
+data/*.rds
 data/cis_eqtl_analysis_ready
 dsc/functions/__pycache__/
 **/.sos
