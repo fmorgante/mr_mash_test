@@ -1,6 +1,6 @@
 # mr_mash_test
 
-[![DOI](https://zenodo.org/badge/251066330.svg)][zenodo-badge]
+[![DOI](https://zenodo.org/badge/251066330.svg)](https://zenodo.org/badge/latestdoi/251066330)
 
 This repository contains code and data resources to accompany our research paper:
 
